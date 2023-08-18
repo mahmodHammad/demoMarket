@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ThemeRegistry from "@/ThemeRegistry/ThemeRegistry";
+import { Button } from "@/common";
 
 export const metadata = {
   title: "Next.js App Router + Material UI v5",
@@ -23,21 +24,32 @@ export default function RootLayout({
       <body>
         <ThemeRegistry>
           <AppBar position="fixed" sx={{ zIndex: 2000 }}>
-            <Toolbar sx={{ backgroundColor: "background.paper" }}>
-              <Typography variant="h6" noWrap component="div" color="black">
-                Next.js App Router
+            <Toolbar
+              sx={{
+                backgroundColor: "background.primary",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="h6" noWrap component="div" color="white">
+                Logo
               </Typography>
+
+              <Box>
+                <Button sx={{ color: "#fff" }} size="large">
+                  Login
+                </Button>
+                <Button size="large" variant="outlined" whiteborder>
+                  Signup
+                </Button>
+              </Box>
             </Toolbar>
           </AppBar>
 
           <Box
             component="main"
             sx={{
-              flexGrow: 1,
-              bgcolor: "background.default",
-              ml: `${DRAWER_WIDTH}px`,
-              mt: ["48px", "56px", "64px"],
-              p: 3,
+              pt: "80px",
+              pl:"20px"
             }}
           >
             {children}
