@@ -119,9 +119,10 @@ const theme = responsiveFontSizes(
           {
             props: { variant: "body" },
             style: {
+              display:"block",
               fontSize: "16px",
               [initTheme.breakpoints.down("md")]: {
-                fontSize: "16px",
+                fontSize: "14px",
               },
             },
           },
