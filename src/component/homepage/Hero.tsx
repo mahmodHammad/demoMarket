@@ -22,7 +22,7 @@ export default function Hero() {
         priority
         alt="houses and properties for rent"
         src={heroBG}
-        quality={1}
+        quality={100}
         placeholder="blur"
       />
 
