@@ -37,7 +37,7 @@ const theme = responsiveFontSizes(
       MuiButton: {
         styleOverrides: {
           root: ({ ownerState, theme }) => ({
-            textTransform:"capitalize",
+            textTransform: "capitalize",
             borderRadius: "8px",
             ...(ownerState.size === "small" && {
               fontSize: "12px",
@@ -46,7 +46,7 @@ const theme = responsiveFontSizes(
             ...(ownerState.size === "medium" && {
               // color: "green",
               fontSize: "14px",
-              padding: "10px 20px",
+              padding: "8px 20px",
             }),
             ...(ownerState.size === "large" && {
               fontSize: "16px",
