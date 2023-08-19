@@ -19,15 +19,7 @@ export default function RootLayout({
       <body>
         <ThemeRegistry>
           <Navbar />
-          <Box
-            component="main"
-            sx={{
-              pt: "80px",
-              pl: "20px",
-            }}
-          >
-            {children}
-          </Box>
+          <Box component="main">{children}</Box>
           <Footer />
         </ThemeRegistry>
       </body>
