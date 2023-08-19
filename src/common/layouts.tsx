@@ -1,4 +1,3 @@
-
 import {
   Button as MUIButton,
   Box as MUIBox,
@@ -12,6 +11,13 @@ import { ReactNode } from "react";
 
 interface Box extends BoxProps {
   sx?: any;
+  center?: boolean;
+  ycenter?: boolean;
+  xcenter?: boolean;
+  row?: boolean;
+  column?: boolean;
+  xstart?: boolean;
+  xend?: boolean;
   component?: React.ElementType;
   children: ReactNode;
 }
@@ -52,23 +58,6 @@ const setLayoutSXProps = (props: any) => {
     ...(props.xend && {
       display: "flex",
       justifyContent: "flex-end",
-    }),
-    ...(props.warning && {
-      color: "#232425",
-      backgroundColor: "#FCEDC7",
-      borderRadius: "8px",
-      display: "flex",
-      justifyContent: "space-between",
-    }),
-
-    ...(props.hoverBorder && {
-      transition: "all 0.4s ease-in-out",
-      border: (theme: any) =>
-        `1px solid ${
-          props?.selected
-            ? theme?.palette?.primary?.main
-            : "rgba(31, 68, 139, 0.08)"
-        }`,
     }),
 
     ...props.sx,
