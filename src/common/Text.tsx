@@ -1,14 +1,13 @@
-import { Typography as MUITypography, TypographyTypeMap } from "@mui/material";
+import { Typography as MUITypography, TypographyProps } from "@mui/material";
 import { ReactNode } from "react";
 
-interface Text {
+interface Text extends TypographyProps {
   s?: number;
   gray?: string;
   bold?: boolean;
   light?: boolean;
   color?: string;
   sx?: any;
-  variant?: TypographyTypeMap["props"]["variant"];
   component?: React.ElementType;
   children: ReactNode;
 }

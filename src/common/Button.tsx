@@ -1,12 +1,11 @@
-import { Button as MUIButton, ButtonTypeMap } from "@mui/material";
-import { ReactNode } from "react";
+import { Button as MUIButton, ButtonProps } from "@mui/material";
+import { MouseEventHandler, ReactNode } from "react";
 
-interface Button {
+interface Button extends ButtonProps {
   whiteborder?: boolean;
   sx?: any;
-  size?: ButtonTypeMap["props"]["size"];
-  variant?: ButtonTypeMap["props"]["variant"];
   component?: React.ElementType;
+  onClick?: MouseEventHandler;
   children: ReactNode;
 }
 const setButtonLayoutSXProps = (props: any) => {
