@@ -116,19 +116,21 @@ export default function Footer() {
                 </Box>
               </Box>
             </Grid>
-            {columns.map((column) => (
-              <Grid item xs={6} sm={3}>
+            {columns.map((column, index) => (
+              <Grid item xs={6} sm={3} key={index}>
                 <Text variant="label" color="inherit" gutterBottom>
                   {column.title}
                 </Text>
-                {column.resources.map((item) => (
+                {column.resources.map((item, index) => (
                   <Link
                     href={item.link}
                     color="inherit"
+                    key={index}
                     sx={{ textDecoration: "none" }}
                   >
                     {" "}
                     <Text
+                      key={index}
                       variant="small"
                       light
                       color="inherit"
@@ -141,16 +143,16 @@ export default function Footer() {
               </Grid>
             ))}
             <Grid item xs={12} sm={3}>
-              <Text variant="label" color="inherit" gutterBottom>
+              <Text variant="label" color="inherit" sx={{ display: "block" }}>
                 Contact Us
               </Text>
-              <Text variant="body2" color="inherit">
+              <Text variant="small" color="inherit" sx={{ display: "block" }}>
                 +234- 70-1449-8006
               </Text>
-              <Text variant="body2" color="inherit">
-                Makeen@gmail.com
+              <Text variant="small" color="inherit" sx={{ display: "block" }}>
+                Atar@gmail.com
               </Text>
-              <Text variant="body2" color="inherit">
+              <Text variant="small" color="inherit">
                 4112 Al Narjis - Anas Bin Malik Road - Central Province - Riyadh
                 13327
               </Text>
