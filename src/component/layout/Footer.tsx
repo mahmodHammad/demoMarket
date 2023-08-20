@@ -48,21 +48,19 @@ export default function Footer() {
         },
       ],
     },
-    // {
-    //   title: "Contact Us",
-    //   resources: [
-    //     {
-    //       name: "+234- 70-1449-8006",
-    //     },
-    //     {
-    //       name: "Makeen@gmail.com",
-    //     },
-    //     {
-    //       name: "4112 Al Narjis - Anas Bin Malik Road - Central Province - Riyadh 13327",
-    //       link: ".",
-    //     },
-    //   ],
-    // },
+  ];
+
+  const contactUs = [
+    {
+      name: "+234- 70-1449-8006",
+    },
+    {
+      name: "atarcloud@gmail.com",
+    },
+    {
+      name: "4112 Al Narjis - Anas Bin Malik Road - Central Province - Riyadh 13327",
+      link: ".",
+    },
   ];
 
   const logos = [
@@ -84,32 +82,48 @@ export default function Footer() {
     <Box
       sx={{
         color: "#fff",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.dark,
       }}
     >
       <Box
         component="footer"
         sx={{
-          p: 3,
+          py: { xs: "32px", md: "50px" },
         }}
       >
         <Container maxWidth="lg">
           <Grid container spacing={5}>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} md={4.8}>
               <Box column>
-                {" "}
                 <AtarWhiteLogo
                   sx={{
                     height: "40px",
                     width: "95px",
                   }}
                 />
-                <Text s={14} sx={{ color: "#fff", mt: 2 }}>
+                <Text
+                  s={14}
+                  bold
+                  sx={{
+                    color: "#fff",
+                    mt: { xs: "12px", md: "40px" },
+                    width: { xs: "220px", md: "227px" },
+                  }}
+                >
                   {description}
                 </Text>{" "}
-                <Box row gap={1} sx={{ mt: 2 }}>
-                  {logos.map((item) => (
-                    <Link href={item.link} color="inherit">
+                <Box
+                  row
+                  gap={1}
+                  sx={{ mt: "24px", display: { xs: "none", md: "flex" } }}
+                >
+                  {logos.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.link}
+                      color="inherit"
+                      sx={{ mr: "10px" }}
+                    >
                       {item.icon}
                     </Link>
                   ))}
@@ -117,8 +131,12 @@ export default function Footer() {
               </Box>
             </Grid>
             {columns.map((column, index) => (
-              <Grid item xs={6} sm={3} key={index}>
-                <Text variant="label" color="inherit" gutterBottom>
+              <Grid item xs={5} md={1.9} key={index}>
+                <Text
+                  variant="label"
+                  color="inherit"
+                  sx={{ mb: "16px", fontSize: "18px" }}
+                >
                   {column.title}
                 </Text>
                 {column.resources.map((item, index) => (
@@ -126,15 +144,16 @@ export default function Footer() {
                     href={item.link}
                     color="inherit"
                     key={index}
-                    sx={{ textDecoration: "none" }}
+                    sx={{
+                      textDecoration: "none",
+                    }}
                   >
-                    {" "}
                     <Text
                       key={index}
                       variant="small"
                       light
                       color="inherit"
-                      sx={{ display: "block" }}
+                      sx={{ display: "block", mb: { xs: "12px", md: "16px" } }}
                     >
                       {item.name}
                     </Text>
@@ -142,37 +161,62 @@ export default function Footer() {
                 ))}
               </Grid>
             ))}
-            <Grid item xs={12} sm={3}>
-              <Text variant="label" color="inherit" sx={{ display: "block" }}>
+            <Grid item xs={10} md={3.4}>
+              <Text
+                variant="label"
+                color="inherit"
+                sx={{ mb: "16px", fontSize: "18px" }}
+              >
                 Contact Us
               </Text>
-              <Text variant="small" color="inherit" sx={{ display: "block" }}>
-                +234- 70-1449-8006
-              </Text>
-              <Text variant="small" color="inherit" sx={{ display: "block" }}>
-                Atar@gmail.com
-              </Text>
-              <Text variant="small" color="inherit">
-                4112 Al Narjis - Anas Bin Malik Road - Central Province - Riyadh
-                13327
-              </Text>
+              {contactUs.map((item, index) => (
+                <Text
+                  key={item?.name}
+                  variant="small"
+                  color="inherit"
+                  sx={{ mb: { xs: "12px", md: "16px" } }}
+                >
+                  {item?.name}
+                </Text>
+              ))}
             </Grid>
           </Grid>
         </Container>
       </Box>
-      <Divider
-        variant="fullWidth"
-        sx={{ backgroundColor: "#CACACA", height: 1, mt: 2 }}
-      />
-      <Box mt={2}>
-        <Text variant="body2" color="#fff" align="center">
-          {"Copyright © "}
-          <Link color="inherit" href="https://www.atarcloud.com/">
-            Atar
-          </Link>
-          {new Date().getFullYear()}
-          {"."}
-        </Text>
+      <Divider variant="fullWidth" sx={{ backgroundColor: "#CACACA" }} />
+      <Box sx={{ py: "24px" }}>
+        <Box>
+          <Text variant="body2" color="#fff" align="center">
+            {"©  "}
+            <Link
+              color="inherit"
+              href="https://www.atarcloud.com/"
+              sx={{ textDecoration: "none" }}
+            >
+              Atarcloud
+            </Link>{" "}
+            . All Right Reserved {new Date().getFullYear()}
+          </Text>
+        </Box>
+        <Box
+          row
+          xcenter
+          gap={1}
+          sx={{ mt: "20px", display: { xs: "flex", md: "none" } }}
+        >
+          {logos.map((item, index) => (
+            <Link
+              key={index}
+              href={item.link}
+              color="inherit"
+              sx={{
+                mr: "10px",
+              }}
+            >
+              {item.icon}
+            </Link>
+          ))}
+        </Box>
       </Box>
     </Box>
   );
