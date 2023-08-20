@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <Box
       sx={{
-        height: { xs: "calc(100vh - 220px)", md: "calc(100vh - 100px)" },
+        height: { xs: "calc(100vh - 120px)", md: "calc(100vh - 100px)" },
         position: "relative",
       }}
     >
@@ -58,15 +58,15 @@ export default function Hero() {
 
         <Box
           sx={{
-            mt: { md: "100px", xs: "50px" },
-            width: { xs: "90%", lg: "900px" },
-            height: "102px",
+            mt: { md: "90px", xs: "50px" },
+            width: { xs: "85%", lg: "900px" },
+            height: {xs:"70px",lg:"102px"},
             borderRadius: "20px 20px 20px 20px",
             background: "rgba(255, 255, 255, 0.70)",
             boxShadow: "0px 30px 60px -15px rgba(143, 144, 188, 0.15)",
             backdropFilter: "blur(10px)",
           }}
-        ></Box>
+        >.</Box>
       </Box>
     </Box>
   );
