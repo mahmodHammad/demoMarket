@@ -10,7 +10,7 @@ export default function Home() {
     <Box>
       <Button variant="contained" size="small">
         small s
-      </Button> 
+      </Button>
       <br />
       <br />
       <Button variant="contained" size="medium">

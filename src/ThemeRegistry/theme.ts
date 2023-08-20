@@ -14,6 +14,7 @@ const theme = responsiveFontSizes(
       primary: {
         main: "#008EA5",
         light: "#008EA5",
+        dark:"#00697A"
       },
       secondary: {
         main: "#002A37",
@@ -119,7 +120,7 @@ const theme = responsiveFontSizes(
           {
             props: { variant: "body" },
             style: {
-              display:"block",
+              display: "block",
               fontSize: "16px",
               [initTheme.breakpoints.down("md")]: {
                 fontSize: "14px",
@@ -128,11 +129,19 @@ const theme = responsiveFontSizes(
           },
           {
             props: { variant: "label" },
-            style: { fontSize: "16px", fontWeight: "bold" },
+            style: {
+              display: "block",
+              fontSize: "16px",
+              fontWeight: "bold",
+              [initTheme.breakpoints.down("md")]: {
+                fontSize: "14px",
+              },
+            },
           },
           {
             props: { variant: "small" },
             style: {
+              display: "block",
               fontSize: "14px",
               [initTheme.breakpoints.down("md")]: {
                 fontSize: "12px",
@@ -143,6 +152,7 @@ const theme = responsiveFontSizes(
             props: { variant: "caption" },
             style: {
               color: "#525451",
+              display: "block",
               fontSize: "12px",
               [initTheme.breakpoints.down("md")]: {
                 fontSize: "10px",
