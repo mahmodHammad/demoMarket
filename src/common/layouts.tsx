@@ -19,13 +19,20 @@ interface Box extends BoxProps {
   xstart?: boolean;
   xend?: boolean;
   component?: React.ElementType;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 interface Grid extends GridProps {
-  sx?: any;
-  component?: React.ElementType;
-  children: ReactNode;
+    sx?: any;
+    center?: boolean;
+    ycenter?: boolean;
+    xcenter?: boolean;
+    row?: boolean;
+    column?: boolean;
+    xstart?: boolean;
+    xend?: boolean;
+    component?: React.ElementType;
+    children?: ReactNode;
 }
 const setLayoutSXProps = (props: any) => {
   return {
