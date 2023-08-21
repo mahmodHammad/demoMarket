@@ -1,4 +1,4 @@
-import { Box, Text } from "@/common";
+import { Box, Text } from "@/wrappers";
 import React from "react";
 import Image from "next/image";
 import heroBG from "@/assets/images/herobg.png";
@@ -56,18 +56,19 @@ export default function Hero() {
           </Text>
         </Box>
 
-        <Box
-          sx={{
-            mt: { md: "90px", xs: "50px" },
-            width: { xs: "85%", lg: "900px" },
-            height: {xs:"70px",lg:"102px"},
-            borderRadius: "20px 20px 20px 20px",
-            background: "rgba(255, 255, 255, 0.70)",
-            boxShadow: "0px 30px 60px -15px rgba(143, 144, 188, 0.15)",
-            backdropFilter: "blur(10px)",
-          }}
-        >.</Box>
+    
       </Box>
     </Box>
   );
 }
+    // <Box
+        //   sx={{
+        //     mt: { md: "90px", xs: "50px" },
+        //     width: { xs: "85%", lg: "900px" },
+        //     height: {xs:"70px",lg:"102px"},
+        //     borderRadius: "20px 20px 20px 20px",
+        //     background: "rgba(255, 255, 255, 0.70)",
+        //     boxShadow: "0px 30px 60px -15px rgba(143, 144, 188, 0.15)",
+        //     backdropFilter: "blur(10px)",
+        //   }}
+        // >.</Box>

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface Text extends TypographyProps {
   s?: number;
-  gray?: string;
+  gray?: boolean;
   bold?: boolean;
   light?: boolean;
   color?: string;

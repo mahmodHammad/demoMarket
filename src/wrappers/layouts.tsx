@@ -9,8 +9,7 @@ import {
 
 import { ReactNode } from "react";
 
-interface Box extends BoxProps {
-  sx?: any;
+interface common {
   center?: boolean;
   ycenter?: boolean;
   xcenter?: boolean;
@@ -18,22 +17,17 @@ interface Box extends BoxProps {
   column?: boolean;
   xstart?: boolean;
   xend?: boolean;
+  xbetween?: boolean;
+  ystart?: boolean;
+  yend?: boolean;
+  ybetween?: boolean;
   component?: React.ElementType;
   children?: ReactNode;
 }
+interface Box extends BoxProps, common {}
 
-interface Grid extends GridProps {
-    sx?: any;
-    center?: boolean;
-    ycenter?: boolean;
-    xcenter?: boolean;
-    row?: boolean;
-    column?: boolean;
-    xstart?: boolean;
-    xend?: boolean;
-    component?: React.ElementType;
-    children?: ReactNode;
-}
+interface Grid extends GridProps, common {}
+
 const setLayoutSXProps = (props: any) => {
   return {
     ...(props.ycenter && {
@@ -65,6 +59,22 @@ const setLayoutSXProps = (props: any) => {
     ...(props.xend && {
       display: "flex",
       justifyContent: "flex-end",
+    }),
+    ...(props.xbetween && {
+      display: "flex",
+      justifyContent: "space-between",
+    }),
+    ...(props.ystart && {
+      display: "flex",
+      alignItems: "flex-start",
+    }),
+    ...(props.yend && {
+      display: "flex",
+      alignItems: "flex-end",
+    }),
+    ...(props.ybetween && {
+      display: "flex",
+      alignItems: "space-between",
     }),
 
     ...props.sx,
