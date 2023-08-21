@@ -1,0 +1,66 @@
+"use client";
+import { Box, Container, Item } from "@/wrappers";
+import React from "react";
+
+import HomeTitleBody from "./HomeTitleBody";
+import NeighbourhoodCard from "@/component/cards/NeighbourhoodCard";
+import UnitsCard from "@/component/cards/UnitsCard";
+import neigbourhoodCover from "@/assets/images/neigbourhoodCover.png";
+import neibourhoodcover2 from "@/assets/images/neibourhoodcover2.png";
+import Carousel from "@/component/Carousel";
+
+interface datatyle {
+  title: string;
+  img: string;
+  link: string;
+}
+
+interface types {
+  title: string;
+  body: string;
+  link: string;
+  data: any;
+  hasneighbourhoods?: boolean;
+}
+
+export default function HomeCardsContainer({
+  title,
+  body,
+  link,
+  data,
+  hasneighbourhoods,
+}: types) {
+  return (
+    <Box
+      sx={{
+        mt: { md: "200px", xs: "80px" },
+      }}
+    >
+      <HomeTitleBody title={title} body={body} link={link} />
+      <Box
+        sx={{
+          mt: { md: "34px", xs: "22px" },
+        }}
+      >
+        <Carousel
+          items={data.map((d: any, index: number) => (
+            <Box
+              key={index}
+              sx={{
+                pr: "20px",
+                display: "flex",
+                width: { xs: "230px", md: "400px" },
+              }}
+            >
+              {hasneighbourhoods ? (
+                <NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
+              ) : (
+                <UnitsCard title={d.title} img={d.img} link={d.link} />
+              )}
+            </Box>
+          ))}
+        />
+      </Box>
+    </Box>
+  );
+}

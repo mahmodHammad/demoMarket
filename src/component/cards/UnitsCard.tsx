@@ -39,7 +39,7 @@ export default function NeighbourhoodCard({ img, title, link }: proptypes) {
           position:"absolute"
         }}
       >
-        {title}
+        This is units card
       </Text>
     </Box>
   );
