@@ -25,7 +25,7 @@ export default function Neighbourhoods() {
       data={data}
       title="Neighbourhoods"
       body="There is something everyday"
-      link="/"
+      link="/neighbourhoods"
       hasneighbourhoods
     />
   );
