@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Box>
       <Hero />
-      <Container maxWidth="xl" sx={{ pb: "164px" }}>
+      <Container maxWidth="xl" sx={{ pb: { xs: "90px", md: "164px" } }}>
         <Neighbourhoods />
         <RecentlyAdded />
         <MostViewed />
