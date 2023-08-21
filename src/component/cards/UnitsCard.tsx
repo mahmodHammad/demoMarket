@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Text } from "@/wrappers";
+import { Box, Button, Text } from "@/wrappers";
 import Image from "next/image";
-import { Button, Link } from "@mui/material";
 import { ThreeD } from "@/assets";
 import Hart from "@/assets/icons/hart";
 
@@ -69,7 +68,7 @@ export default function NeighbourhoodCard({
       >
         <Box
           row
-          justifyContent={"space-between"}
+          xbetween
           sx={{
             width: "100%",
             height: { xs: "90px", md: "80px" },
@@ -82,7 +81,6 @@ export default function NeighbourhoodCard({
                 fontSize: { xs: "14px", md: "24px" },
               }}
             >
-              {" "}
               {title}
             </Text>
 
@@ -93,7 +91,6 @@ export default function NeighbourhoodCard({
                 fontSize: { xs: "8px", md: "14px" },
               }}
             >
-              {" "}
               {title}
             </Text>
           </Box>
@@ -108,7 +105,7 @@ export default function NeighbourhoodCard({
             }}
           >
             <Text
-              variant="body1"
+              variant="body"
               s={16}
               sx={{
                 fontSize: { xs: "8px", md: "16px" },
@@ -120,25 +117,17 @@ export default function NeighbourhoodCard({
           </Box>
         </Box>
 
-        <Box row justifyContent={"space-between"} mt={"16px"}>
+        <Box row xbetween mt={"16px"}>
           <Text
             variant="h5"
             sx={{
               fontSize: { xs: "14px", md: "24px" },
             }}
           >
-            {" "}
             {price}
             $25,000
           </Text>
-          <Box
-            row
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Box row center>
             <ThreeD
               sx={{ mr: "8px", fontSize: { xs: "16px", md: "30px" } }}
             ></ThreeD>
@@ -149,7 +138,6 @@ export default function NeighbourhoodCard({
                 fontSize: { xs: "12px", md: "16px" },
               }}
             >
-              {" "}
               3D view
             </Text>
           </Box>
