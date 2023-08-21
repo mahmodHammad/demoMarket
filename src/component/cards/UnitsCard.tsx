@@ -36,7 +36,9 @@ export default function NeighbourhoodCard({ img, title, link }: proptypes) {
           color: "#fff",
           bottom: "20px",
           left: "20px",
-          position:"absolute"
+          position:"absolute",
+          fontSize: { xs: "14px", md: "24px" },
+
         }}
       >
         This is units card

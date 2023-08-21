@@ -70,7 +70,7 @@ const Carousel = ({ items }: Props) => {
         onSlideChanged={syncThumbs}
         touchTracking={!mainAnimation}
         autoPlay
-        autoPlayInterval={5000}
+        autoPlayInterval={6000}
         items={items}
       />
 
