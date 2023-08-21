@@ -3,7 +3,7 @@ import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { Box } from "@mui/material";
-import { Text, Button } from "@/common";
+import { Text, Button } from "@/wrappers";
 
 export default function Home() {
   return (

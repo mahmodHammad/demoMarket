@@ -1,6 +1,6 @@
 "use client";
 import { AtarWhiteLogo, Menu as MenuIcon } from "@/assets";
-import { Button, Text } from "@/common";
+import { Button, Text } from "@/wrappers";
 
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";

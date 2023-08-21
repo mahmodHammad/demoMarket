@@ -1,6 +1,6 @@
 import * as React from "react";
 import ThemeRegistry from "@/ThemeRegistry/ThemeRegistry";
-import { Box } from "@/common";
+import { Box } from "@/wrappers";
 import { Footer, Navbar } from "@/component";
 
 export const metadata = {
