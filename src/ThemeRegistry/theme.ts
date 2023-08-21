@@ -14,11 +14,12 @@ const theme = responsiveFontSizes(
       primary: {
         main: "#008EA5",
         light: "#008EA5",
-        dark:"#00697A"
+        dark: "#00697A",
       },
       secondary: {
         main: "#002A37",
         light: "#002A37",
+        dark: "#002A37",
       },
     },
     typography: {
