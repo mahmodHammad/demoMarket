@@ -39,8 +39,8 @@ export default function NeighbourhoodCard({
           position: "absolute",
           top: "10px",
           left: "10px",
-          width: { xs: "340px", md: "36px" },
-          height: { xs: "340px", md: "36px" },
+          width: { xs: "25px", md: "36px" },
+          height: { xs: "25px", md: "36px" },
           backgroundColor: "rgba(52, 52, 52, 0.2)",
           borderRadius: 100,
         }}
