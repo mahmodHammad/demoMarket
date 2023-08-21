@@ -12,6 +12,7 @@ export default function HomeTitleBody({ title, body, link }: HomeTitleBody) {
     <Box>
       <Text
         variant="h3"
+        component="h2"
         color="secondary.dark"
         sx={{
           fontSize: { xs: "24px", md: "52px" },
