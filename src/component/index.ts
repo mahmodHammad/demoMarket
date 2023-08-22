@@ -5,5 +5,6 @@ export { default as Neighbourhoods } from "./pages/homepage/Neighbourhoods";
 export { default as Viewmore } from "./Viewmore";
 export { default as NeighbourhoodCard } from "./cards/NeighbourhoodCard";
 export { default as OwnerCard } from "./unitDetails/OwnerCard";
-
+export { default as BuildingSchemeIcons } from "./unitDetails/BuildingSchemeIcons";
+export { default as FeaturesAndAmenities } from "./unitDetails/FeaturesAndAmenities";
 // export { default as Carousel } from "./Carousel";

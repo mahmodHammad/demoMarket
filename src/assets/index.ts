@@ -8,3 +8,4 @@ export { default as Rightrounded } from "./icons/Rightrounded";
 export { default as RightIcon } from "./icons/RightIcon";
 export { default as LeftIcon } from "./icons/LeftIcon";
 export { default as ThreeD } from "./icons/3D";
+export { default as Room } from "./icons/Room";

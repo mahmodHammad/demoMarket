@@ -1,4 +1,8 @@
-import { OwnerCard } from "@/component";
+import {
+  BuildingSchemeIcons,
+  FeaturesAndAmenities,
+  OwnerCard,
+} from "@/component";
 import { Container } from "@mui/material";
 import React from "react";
 
@@ -11,6 +15,14 @@ export default function page() {
         title={"name"}
         body={"Property Name / Location"}
       ></OwnerCard>
+      <BuildingSchemeIcons title={"3 Rooms"} />
+      <BuildingSchemeIcons title={"3 Rooms"} />
+      <BuildingSchemeIcons title={"3 Rooms"} />
+      <BuildingSchemeIcons title={"3 Rooms"} />
+      <FeaturesAndAmenities title={"Pool"} />
+      <FeaturesAndAmenities title={"Pool"} />
+      <FeaturesAndAmenities title={"Pool"} />
+      <FeaturesAndAmenities title={"Pool"} />
     </Container>
   );
 }
