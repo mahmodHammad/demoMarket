@@ -41,7 +41,7 @@ export default function NeighbourhoodCard({
           height: { xs: "26px", md: "36px" },
 
           backgroundColor: "rgba(52, 52, 52, 0.2)",
-          borderRadius: 99,
+          borderRadius: 100,
         }}
       ></Box>
       <Box
