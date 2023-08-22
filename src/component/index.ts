@@ -4,4 +4,6 @@ export { default as Hero } from "./pages/homepage/Hero";
 export { default as Neighbourhoods } from "./pages/homepage/Neighbourhoods";
 export { default as Viewmore } from "./Viewmore";
 export { default as NeighbourhoodCard } from "./cards/NeighbourhoodCard";
+export { default as OwnerCard } from "./unitDetails/OwnerCard";
+
 // export { default as Carousel } from "./Carousel";

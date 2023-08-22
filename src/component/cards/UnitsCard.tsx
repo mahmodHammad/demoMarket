@@ -23,7 +23,7 @@ export default function NeighbourhoodCard({
     <Box
       sx={{
         width: "100%",
-        height: { xs: "315px", md: "447px" },
+        height: { xs: "300px", md: "447px" },
         // position: "relative",
         // overflow: "hidden",
         borderRadius: "16px",
@@ -44,7 +44,6 @@ export default function NeighbourhoodCard({
           borderRadius: 100,
         }}
       ></Box>
-
       <Box
         sx={{
           width: "100%",
@@ -59,50 +58,84 @@ export default function NeighbourhoodCard({
         column
         sx={{
           width: "100%",
-          height: { xs: "150px", md: "210px" },
-          p: "16px",
+          height: { xs: "80px", md: "136px" },
+          py: "12px",
+          px: "16px",
         }}
       >
-        <Box
-          row
-          xbetween
-          sx={{
-            width: "100%",
-            height: { xs: "90px", md: "80px" },
-          }}
-        >
-          <Box column>
-            <Text
-              variant="h5"
-              sx={{
-                fontSize: { xs: "14px", md: "24px" },
-              }}
-            >
-              {title}
-            </Text>
-
-            <Text
-              variant="caption"
-              mt={"4px"}
-              sx={{
-                fontSize: { xs: "8px", md: "14px" },
-              }}
-            >
-              {title}
-            </Text>
-          </Box>
-        </Box>
-
-        <Box row xbetween mt={"16px"}>
+        <Box column>
           <Text
             variant="h5"
             sx={{
-              fontSize: { xs: "14px", md: "24px" },
+              fontSize: { xs: "14px", md: "18px" },
             }}
           >
-            {price}
-            $25,000
+            {title}
           </Text>
+          <Text
+            variant="small"
+            sx={{
+              // fontSize: { xs: "14px", md: "18px" },
+              display: { xs: "flex", md: "none" },
+            }}
+          >
+            location
+            {location}
+          </Text>
+        </Box>
+
+        <Box
+          column
+          sx={{
+            mt: { xs: "15px", md: "22px" },
+            display: { xs: "none", md: "flex" },
+          }}
+        >
+          <Text
+            variant="caption"
+            sx={{
+              fontSize: { xs: "8px", md: "10px" },
+            }}
+          >
+            Location
+          </Text>
+          <Text
+            variant="label"
+            sx={
+              {
+                // fontSize: { xs: "14px", md: "14px" },
+              }
+            }
+          >
+            {location}
+            Location
+          </Text>
+        </Box>
+        <Box row center xbetween sx={{ mt: { xs: "8px", md: "12px" } }}>
+          <Box column>
+            <Text
+              variant="caption"
+              sx={{
+                fontSize: { xs: "8px", md: "10px" },
+                display: { xs: "none", md: "flex" },
+              }}
+            >
+              Price
+            </Text>
+            <Text
+              variant="small"
+              bold
+              sx={
+                {
+                  // fontSize: { xs: "14px", md: "24px" },
+                }
+              }
+            >
+              {price}
+              SAR 25,000.00
+            </Text>
+          </Box>
+
           {/* <Box row center>
             <ThreeD
               sx={{ mr: "8px", fontSize: { xs: "16px", md: "30px" } }}
@@ -118,39 +151,43 @@ export default function NeighbourhoodCard({
             </Text>
           </Box> */}
           <Box
+            center
             sx={{
               backgroundColor: "rgba(42, 43, 45, 0.08) ",
-              borderRadius: "8px",
+              borderRadius: "32px",
               height: "26px",
-              py: "4px",
-              px: "8px",
+              py: "8px",
+              px: "12px",
             }}
           >
             <Text
+              center
               variant="body"
               s={16}
               sx={{
-                fontSize: { xs: "8px", md: "16px" },
+                fontSize: { xs: "10px", md: "16px" },
               }}
             >
-              360 Sqm Living Area
               {area}
+              23 Sqm
             </Text>
           </Box>
         </Box>
-
+      </Box>
+      <Box sx={{ py: "16px", px: "24px" }}>
+        {" "}
         <Button
           variant="outlined"
           sx={{
-            display: "flex",
-            height: "52px",
-            padding: "12px 24px",
+            display: "dlex",
+            height: "20px",
+            padding: "16px 24px",
             justifyContent: " center",
             alignItems: "center",
-            mt: "16px",
+
             fontSize: { xs: "12px", md: "16px" },
           }}
-          href={link}
+          href={"/unitdetails"}
         >
           View Details
         </Button>

@@ -12,7 +12,7 @@ export default function Viewmore({ link }: Viewmore) {
       component={Link}
       href={link}
       size="small"
-      endIcon={<Rightrounded  />}
+      endIcon={<Rightrounded />}
       sx={{
         fontWeight: { xs: "400", md: "700" },
         fontSize: { xs: "12px", md: "14px" },
