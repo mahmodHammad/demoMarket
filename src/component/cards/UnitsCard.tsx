@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Button, Text } from "@/wrappers";
 import Image from "next/image";
 import { ThreeD } from "@/assets";
-import Hart from "@/assets/icons/hart";
 
 interface proptypes {
   img: string;
@@ -24,7 +23,7 @@ export default function NeighbourhoodCard({
     <Box
       sx={{
         width: "100%",
-        height: { xs: "340px", md: "447px" },
+        height: { xs: "315px", md: "447px" },
         // position: "relative",
         // overflow: "hidden",
         borderRadius: "16px",
@@ -44,9 +43,7 @@ export default function NeighbourhoodCard({
           backgroundColor: "rgba(52, 52, 52, 0.2)",
           borderRadius: 100,
         }}
-      >
-        <Hart></Hart>
-      </Box>
+      ></Box>
 
       <Box
         sx={{
@@ -94,7 +91,32 @@ export default function NeighbourhoodCard({
               {title}
             </Text>
           </Box>
+        </Box>
 
+        <Box row xbetween mt={"16px"}>
+          <Text
+            variant="h5"
+            sx={{
+              fontSize: { xs: "14px", md: "24px" },
+            }}
+          >
+            {price}
+            $25,000
+          </Text>
+          {/* <Box row center>
+            <ThreeD
+              sx={{ mr: "8px", fontSize: { xs: "16px", md: "30px" } }}
+            ></ThreeD>
+
+            <Text
+              variant="label"
+              sx={{
+                fontSize: { xs: "12px", md: "16px" },
+              }}
+            >
+              3D view
+            </Text>
+          </Box> */}
           <Box
             sx={{
               backgroundColor: "rgba(42, 43, 45, 0.08) ",
@@ -113,32 +135,6 @@ export default function NeighbourhoodCard({
             >
               360 Sqm Living Area
               {area}
-            </Text>
-          </Box>
-        </Box>
-
-        <Box row xbetween mt={"16px"}>
-          <Text
-            variant="h5"
-            sx={{
-              fontSize: { xs: "14px", md: "24px" },
-            }}
-          >
-            {price}
-            $25,000
-          </Text>
-          <Box row center>
-            <ThreeD
-              sx={{ mr: "8px", fontSize: { xs: "16px", md: "30px" } }}
-            ></ThreeD>
-
-            <Text
-              variant="label"
-              sx={{
-                fontSize: { xs: "12px", md: "16px" },
-              }}
-            >
-              3D view
             </Text>
           </Box>
         </Box>
