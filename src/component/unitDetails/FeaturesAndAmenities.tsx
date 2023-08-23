@@ -15,8 +15,8 @@ export default function FeaturesAndAmenities({ icon, title }: Props) {
       sx={{
         mt: { xs: "5px", md: "16px" },
         mr: { xs: "5px", md: "16px" },
-        height: { xs: "5px", md: "96px" },
-        width: { xs: "5px", md: "96px" },
+        height: { xs: "72px", md: "96px" },
+        width: { xs: "72px", md: "96px" },
         borderRadius: "8px",
         backgroundColor: "rgba(0, 142, 165, 0.08)",
       }}
