@@ -14,7 +14,7 @@ interface Text extends TypographyProps {
 const setTypographyLayoutSXProps = (props: Text) => {
   return {
     ...(props.gray && { color: `#525451 !important` }),
-    ...(props.s && { fontSize: `${props.s}px ` }),
+    ...(props.s && { fontSize: `${props.s}px !important ` }),
     ...(props.light && { fontWeight: 400 }),
     ...(props.bold && { fontWeight: `bold` }),
     ...props.sx,

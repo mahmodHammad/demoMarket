@@ -4,10 +4,9 @@ import React from "react";
 
 import HomeTitleBody from "./HomeTitleBody";
 import NeighbourhoodCard from "@/component/cards/NeighbourhoodCard";
-import UnitsCard from "@/component/cards/UnitsCard";
-import neigbourhoodCover from "@/assets/images/neigbourhoodCover.png";
-import neibourhoodcover2 from "@/assets/images/neibourhoodcover2.png";
+
 import Carousel from "@/component/Carousel";
+import { UnitsCard } from "@/component";
 
 interface datatyle {
   title: string;

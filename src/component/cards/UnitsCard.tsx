@@ -11,7 +11,7 @@ interface proptypes {
   area: string;
   location: string;
 }
-export default function NeighbourhoodCard({
+export default function UnitsCard({
   img,
   title,
   link,
@@ -175,7 +175,6 @@ export default function NeighbourhoodCard({
         </Box>
       </Box>
       <Box sx={{ py: "16px", px: "24px" }}>
-        {" "}
         <Button
           variant="outlined"
           sx={{

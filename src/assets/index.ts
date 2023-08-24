@@ -9,3 +9,6 @@ export { default as LeftIcon } from "./icons/LeftIcon";
 export { default as ThreeD } from "./icons/3D";
 export { default as Room } from "./icons/Room";
 export { default as BuyNowIcon } from "./icons/BuyNowIcon";
+export { default as Share } from "./icons/Share";
+export { default as Favorite } from "./icons/Favorite";
+export { default as AtarColoredLogo } from "./icons/AtarColoredLogo";
