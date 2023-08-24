@@ -31,7 +31,7 @@ export default function page() {
               <Grid item xs={12} md={8}>
                 <Item
                   sx={{
-                    backgroundColor: "red",
+                    backgroundColor: "#faa3",
                     height: "100%",
                     borderRadius: "8px",
                   }}

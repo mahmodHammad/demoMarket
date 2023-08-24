@@ -9,3 +9,5 @@ export { default as BuildingSchemeIcons } from "./unitDetails/BuildingSchemeIcon
 export { default as FeaturesAndAmenities } from "./unitDetails/FeaturesAndAmenities";
 // export { default as Carousel } from "./Carousel";
 export { default as BuyNowCard } from "./cards/BuyNowCard";
+
+export { default as Phoneinput } from "./forms/Phoneinput";
