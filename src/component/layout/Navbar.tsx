@@ -72,12 +72,17 @@ function ResponsiveAppBar() {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Box>
               <Button
+                component={Link}
+                href="/login"
+                onClick={handleCloseNavMenu}
                 sx={{ color: "#fff", fontSize: "20px", mr: "12px" }}
                 size="medium"
               >
                 Login
               </Button>
               <Button
+                component={Link}
+                href="/signup"
                 onClick={handleCloseNavMenu}
                 size="medium"
                 variant="outlined"

@@ -49,13 +49,21 @@ export default function HomeCardsContainer({
               sx={{
                 pr: "20px",
                 display: "flex",
-                width: { xs: "230px", md: "400px" },
+                width: { xs: "235px", md: "373px" },
+                height: { xs: "330px", md: "460px" },
               }}
             >
               {hasneighbourhoods ? (
                 <NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
               ) : (
-                <UnitsCard title={d.title} img={d.img} link={d.link} />
+                <UnitsCard
+                  title={d.title}
+                  img={d.img}
+                  link={d.link}
+                  price={""}
+                  area={""}
+                  location={""}
+                />
               )}
             </Box>
           ))}

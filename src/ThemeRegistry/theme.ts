@@ -149,6 +149,7 @@ const theme = responsiveFontSizes(
               },
             },
           },
+
           {
             props: { variant: "caption" },
             style: {
