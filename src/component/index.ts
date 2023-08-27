@@ -18,7 +18,6 @@ export { default as Features } from "./unitDetails/Features";
 
 export { default as UnitMap } from "./unitDetails/UnitMap";
 
-export { default as BuyNowCard } from "./cards/BuyNowCard";
 
 export { default as Phoneinput } from "./forms/Phoneinput";
 
