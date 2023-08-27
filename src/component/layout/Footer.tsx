@@ -111,7 +111,7 @@ export default function Footer() {
                   }}
                 >
                   {description}
-                </Text>{" "}
+                </Text>
                 <Box
                   row
                   gap={1}
@@ -194,7 +194,7 @@ export default function Footer() {
               sx={{ textDecoration: "none" }}
             >
               Atarcloud
-            </Link>{" "}
+            </Link>
             . All Right Reserved {new Date().getFullYear()}
           </Text>
         </Box>

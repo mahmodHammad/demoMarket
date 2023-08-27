@@ -1,8 +1,14 @@
+import { AtarColoredLogo } from "@/assets";
 import {
+  AboutUnit,
   BuildingSchemeIcons,
   BuyNowCard,
+  ConstructionStatus,
+  Features,
   FeaturesAndAmenities,
   OwnerCard,
+  UnitHeader,
+  UnitMap,
 } from "@/component";
 import { Box, Button, Item } from "@/wrappers";
 import { Container, Grid } from "@mui/material";
@@ -36,10 +42,10 @@ export default function page() {
                     borderRadius: "8px",
                   }}
                 >
-                  photos
+                  photos 1
                 </Item>
               </Grid>
-              <Grid container item xs={12} md={4} height={"500px"} spacing={3}>
+              <Grid container item xs={12} md={4} height={"500px"} spacing={2}>
                 <Grid item xs={12} md={12}>
                   <Box
                     sx={{
@@ -48,7 +54,7 @@ export default function page() {
                       borderRadius: "8px",
                     }}
                   >
-                    photos
+                    photos 2
                   </Box>
                 </Grid>
                 <Grid item xs={12} md={12}>
@@ -59,7 +65,7 @@ export default function page() {
                       borderRadius: "8px",
                     }}
                   >
-                    photos
+                    photos 3
                   </Item>
                 </Grid>
               </Grid>
@@ -67,28 +73,40 @@ export default function page() {
           </Grid>
 
           <Grid item xs={12} md={8} height={"100hv"}>
-            <Item sx={{ backgroundColor: "red", height: "100%" }}>555</Item>
+            <UnitHeader
+              logo={<AtarColoredLogo />}
+              title={"Property Name"}
+              location={"Location"}
+            />
+            <ConstructionStatus
+              logo={<AtarColoredLogo />}
+              title={""}
+              status={"Ready To Move"}
+              managedBy={"Atar"}
+            />
+            <AboutUnit
+              description={
+                "Check out that Custom Backyard Entertaining space! 3237sqft, 4 Bedrooms, 2 Bathrooms house on a Lake Villa  street in the Palm Harbor neighborhood of Texas. Well cared for with tons of upgrades! Newer stainless steel appliances will stay with the unit, including dishwasher, fridge, stove, microwave, and washer and dryer. Tenant pays electricity and gas bills. Water, Sewer, and Trash are covered by Landlord. Tenant is responsible for lawncare and snow removal. Landlord provides lawn mower. Minimum one year lease."
+              }
+            />
+            <Features Feature={""} />
+            <OwnerCard
+              avatar={"t"}
+              title={"name"}
+              body={"Property Name / Location"}
+            ></OwnerCard>
+            <UnitMap location={undefined} />
+
+            <BuildingSchemeIcons title={"3 Rooms"} />
+            <BuildingSchemeIcons title={"3 Rooms"} />
+            <BuildingSchemeIcons title={"3 Rooms"} />
+            <BuildingSchemeIcons title={"3 Rooms"} />
           </Grid>
+
           <Grid item xs={12} md={4} height={"518px"}>
-            <Item sx={{ height: "100%" }}>
-              <BuyNowCard price={"SAR 50000"} PriceType={"monthly"} />
-            </Item>
+            <BuyNowCard price={"SAR 50000"} PriceType={"monthly"} />
           </Grid>
         </Grid>
-        user details page user details page
-        <OwnerCard
-          avatar={"t"}
-          title={"name"}
-          body={"Property Name / Location"}
-        ></OwnerCard>
-        <BuildingSchemeIcons title={"3 Rooms"} />
-        <BuildingSchemeIcons title={"3 Rooms"} />
-        <BuildingSchemeIcons title={"3 Rooms"} />
-        <BuildingSchemeIcons title={"3 Rooms"} />
-        <FeaturesAndAmenities title={"Pool"} />
-        <FeaturesAndAmenities title={"Pool"} />
-        <FeaturesAndAmenities title={"Pool"} />
-        <FeaturesAndAmenities title={"Pool"} />
       </Container>
     </>
   );

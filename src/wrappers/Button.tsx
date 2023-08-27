@@ -3,6 +3,7 @@ import { MouseEventHandler, ReactNode } from "react";
 
 interface Button extends ButtonProps {
   whiteborder?: boolean;
+
   sx?: any;
   component?: React.ElementType;
   onClick?: MouseEventHandler;
