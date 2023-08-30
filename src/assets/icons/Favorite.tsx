@@ -1,18 +1,20 @@
 import { SvgIcon } from "@mui/material";
-
-export default function Favorite(props: any) {
+interface Props {
+  color: string;
+}
+export default function Favorite({ props, color }: any) {
   return (
     <SvgIcon {...props} inheritViewBox>
       <svg
-        width="16"
-        height="17"
-        viewBox="0 0 16 17"
+        width="20"
+        height="18"
+        viewBox="0 0 15 15"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M2.87869 4.04276C2.60011 4.32133 2.37913 4.65205 2.22836 5.01603C2.0776 5.38001 2 5.77012 2 6.16409C2 6.55806 2.0776 6.94817 2.22836 7.31215C2.37913 7.67613 2.60011 8.00685 2.87869 8.28542L8.00003 13.4068L13.1214 8.28542C13.684 7.72281 14 6.95974 14 6.16409C14 5.36843 13.684 4.60537 13.1214 4.04276C12.5587 3.48014 11.7957 3.16407 11 3.16407C10.2044 3.16407 9.4413 3.48014 8.87869 4.04276L8.00003 4.92142L7.12136 4.04276C6.84278 3.76418 6.51206 3.54319 6.14808 3.39243C5.78411 3.24166 5.39399 3.16406 5.00003 3.16406C4.60606 3.16406 4.21595 3.24166 3.85197 3.39243C3.48799 3.54319 3.15727 3.76418 2.87869 4.04276V4.04276Z"
-          stroke="#002A37"
+          stroke={color}
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"

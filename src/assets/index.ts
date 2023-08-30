@@ -12,3 +12,5 @@ export { default as BuyNowIcon } from "./icons/BuyNowIcon";
 export { default as Share } from "./icons/Share";
 export { default as Favorite } from "./icons/Favorite";
 export { default as AtarColoredLogo } from "./icons/AtarColoredLogo";
+export { default as FrontSide } from "./icons/FrontSide";
+export { default as GroundFloor } from "./icons/GroundFloor";

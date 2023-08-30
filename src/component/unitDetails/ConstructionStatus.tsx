@@ -39,8 +39,9 @@ export default function ({ logo, title, managedBy, status }: Props) {
         <Text variant="small" fontSize={"12px"} gray>
           Managed By
         </Text>
-        <Box row gap={1}>
+        <Box center row gap={1}>
           {logo}
+
           <Text variant="h5" s={24}>
             {managedBy}
           </Text>

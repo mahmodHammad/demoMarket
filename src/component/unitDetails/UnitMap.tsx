@@ -4,10 +4,9 @@ import Image from "next/image";
 import { ThreeD } from "@/assets";
 import { Grid, Link } from "@mui/material";
 import FeaturesAndAmenities from "./FeaturesAndAmenities";
-import { Map } from "@googlemaps/react-wrapper";
 
 interface proptypes {
-  location: any;
+  location?: any;
 }
 export default function UnitMap({ location }: proptypes) {
   return (
