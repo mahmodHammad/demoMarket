@@ -1,7 +1,9 @@
+"use client";
 import { FrontSide, GroundFloor, Room } from "@/assets";
 import { Box, Text } from "@/wrappers";
 import FloorCard from "../unitDetails/FloorCard";
 import floor from "@/assets/images/floor.png";
+import Carousel from "../Carousel";
 
 const floorFeatures = [
   { icon: <Room />, title: "3 room" },
@@ -16,7 +18,27 @@ const data = [
       <FloorCard
         img={floor}
         name={"property name "}
+        area={"33"}
+        floorFeatures={floorFeatures}
+      />
+    ),
+  },
+  {
+    item: (
+      <FloorCard
+        img={floor}
+        name={"property name "}
         area={"222"}
+        floorFeatures={floorFeatures}
+      />
+    ),
+  },
+  {
+    item: (
+      <FloorCard
+        img={floor}
+        name={"property name "}
+        area={"111"}
         floorFeatures={floorFeatures}
       />
     ),
@@ -40,18 +62,28 @@ export default function FloorPlans() {
           backgroundColor: "#1F448B14",
           my: "24px",
 
-          width: "min-content",
+          maxWidth: "800px",
         }}
       >
-        {data.map((d: any, index: any) => (
+        {/* {data.map((d: any, index: any) => (
           <Box key={index}>{d.item}</Box>
-        ))}
+        ))} */}
 
-        {/* <Carousel
+        <Carousel
           items={data.map((d: any, index: any) => (
-            <Box key={index}>{d.item}</Box>
+            <Box
+              key={index}
+              sx={{
+                pr: "20px",
+                display: "flex",
+                width: { xs: "235px", md: "373px" },
+                height: { xs: "330px", md: "460px" },
+              }}
+            >
+              <Box key={index}>{d.item}</Box>
+            </Box>
           ))}
-        /> */}
+        />
       </Box>
     </>
   );

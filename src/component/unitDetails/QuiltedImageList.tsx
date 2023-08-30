@@ -1,7 +1,7 @@
 import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-
+import photo1 from "@/assets/images/photo1.png";
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -38,13 +38,13 @@ export default function QuiltedImageList() {
 
 const itemData = [
   {
-    img: "@/assets/images/photo1.png",
+    img: photo1,
 
     rows: 4,
     cols: 8,
   },
   {
-    img: "@/assets/images/photo2.png",
+    img: photo1,
 
     rows: 2,
     cols: 4,
