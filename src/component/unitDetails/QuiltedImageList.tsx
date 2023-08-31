@@ -2,19 +2,13 @@ import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import photo1 from "@/assets/images/photo1.png";
-function srcset(image: string, size: number, rows = 1, cols = 1) {
-  return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
-  };
-}
+import Image from "next/image";
+import { Box } from "@/wrappers";
 
 export default function QuiltedImageList() {
   return (
     <ImageList
-      sx={{ width: "100%", height: 500 }}
+      sx={{ width: "100%" }}
       variant="quilted"
       cols={12}
       rowHeight={121}
@@ -24,11 +18,20 @@ export default function QuiltedImageList() {
           key={item.img}
           cols={item.cols || 1}
           rows={item.rows || 1}
+          sx={{
+            p: "10px",
+          }}
         >
-          <img
-            {...srcset(item.img, 121, item.rows, item.cols)}
+          <Box
+            component={Image}
+            src={item.img}
+            sx={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "8px",
+              objectFit: "cover",
+            }}
             alt={item.title}
-            loading="lazy"
           />
         </ImageListItem>
       ))}
@@ -50,7 +53,7 @@ const itemData = [
     cols: 4,
   },
   {
-    img: "@/assets/images/photo3.png",
+    img: photo1,
 
     rows: 2,
     cols: 4,
