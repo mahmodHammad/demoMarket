@@ -21,6 +21,7 @@ export default function FloorCard({ name, img, area, floorFeatures }: Props) {
           //maxWidth: "372px",
           color: "red",
           p: "24px",
+          mr:"15px"
         }}
       >
         <Box center>
