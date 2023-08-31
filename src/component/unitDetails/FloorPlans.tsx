@@ -23,12 +23,13 @@ const data = [
       />
     ),
   },
+  
   {
     item: (
       <FloorCard
         img={floor}
         name={"property name "}
-        area={"222"}
+        area={"111"}
         floorFeatures={floorFeatures}
       />
     ),
@@ -47,44 +48,36 @@ const data = [
 
 export default function FloorPlans() {
   return (
-    <>
+    <Box>
       <Text variant="h5" mt={"40px"}>
         Floor Plans & Pricing (Units)
       </Text>
 
       <Box
-        row
-        center
         p={"18px"}
         gap={"18px"}
         sx={{
           borderRadius: "16px",
           backgroundColor: "#1F448B14",
           my: "24px",
-
-          maxWidth: "800px",
         }}
       >
-        {/* {data.map((d: any, index: any) => (
-          <Box key={index}>{d.item}</Box>
-        ))} */}
-
-        <Carousel
-          items={data.map((d: any, index: any) => (
-            <Box
-              key={index}
-              sx={{
-                pr: "20px",
-                display: "flex",
-                width: { xs: "235px", md: "373px" },
-                height: { xs: "330px", md: "460px" },
-              }}
-            >
+        {data?.length >2? (
+          <Carousel
+            items={data.map((d: any, index: number) => (
+              <Box key={index} sx={{ display: "inline-block" }}>
+                {d.item}
+              </Box>
+            ))}
+          />
+        ) : (
+          <Box row>
+            {data.map((d: any, index: any) => (
               <Box key={index}>{d.item}</Box>
-            </Box>
-          ))}
-        />
+            ))}
+          </Box>
+        )}
       </Box>
-    </>
+    </Box>
   );
 }
