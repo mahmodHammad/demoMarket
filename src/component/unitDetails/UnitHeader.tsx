@@ -15,36 +15,46 @@ export default function UnitHeader({ logo, title, location }: Props) {
       <Box center row gap={"6px"}>
         <Box center>{logo}</Box>
         <Box column xcenter>
-          <Text variant="h4">{title}</Text>
+          <Text
+            bold
+            sx={{ fontSize: { xs: "16px !important", md: "36px !important" } }}
+          >
+            {title}
+          </Text>
           <Text variant="small" gray>
             {location}
           </Text>
         </Box>
       </Box>
 
-      <Box gap={"7px"} row>
+      <Box row ycenter gap="12px">
         <IconButton
           color="primary"
           aria-label="delete"
           sx={{
-            display: { xs: "flexs", md: "none" },
+            display: { xs: "block", md: "none" },
             height: "30px",
             width: "30px",
+            mt:"-8px"
           }}
-          size="small"
+          // size="small"
         >
           <Share color={"#008EA5D6"} />
         </IconButton>
         <IconButton
           color="primary"
           sx={{
-            display: { xs: "flexs", md: "none" },
+            display: { xs: "block", md: "none" },
             height: "30px",
             width: "30px",
+            mt:"-10px"
+
           }}
-          size="small"
+          size="large"
         >
-          <Favorite color={"#008EA5D6"} />
+          <Favorite
+            color={"#008EA5D6"}
+          />
         </IconButton>
         <Button
           variant="outlined"
