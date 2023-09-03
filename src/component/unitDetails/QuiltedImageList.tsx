@@ -66,8 +66,8 @@ export default function QuiltedImageList() {
           ))}
         </ImageList>
       </Grid>
-       
-      <Box   sx={{ width: "100vw",display: { xs: "block", md: "none" }}}>
+
+      <Box sx={{ width: "100vw", display: { xs: "block", md: "none" } }}>
         <Carousel
           items={itemData.map((d: any, index: number) => (
             <Box
@@ -100,4 +100,5 @@ export default function QuiltedImageList() {
         />
       </Box>
     </>
-  )
+  );
+}
