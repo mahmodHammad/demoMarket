@@ -73,7 +73,7 @@ export default function page({
   return (
     <>
       <Container maxWidth="xl">
-        <Box sx={{ mt: "30px" }}>
+        {/* <Box sx={{ mt: "30px" }}>
           <Button
             component={Link}
             href="/"
@@ -84,23 +84,10 @@ export default function page({
           >
             Back
           </Button>
-        </Box>
-        <Grid container spacing={3} sx={{ mt: "5px" }}>
-          <Grid item container xs={12} md={12}>
-            <Grid
-              container
-              item
-              xs={12}
-              md={12}
-              height={"520px"}
-              mb={1}
-              spacing={3}
-            >
-              <Grid item xs={12} md={12}>
-                <QuiltedImageList />
-              </Grid>
-            </Grid>
-          </Grid>
+        </Box> */}
+
+        <Grid container spacing={3} sx={{ mt: "5px",pt:"26px" }} mb={1}>
+          <QuiltedImageList />
 
           <Grid item xs={12} md={8} height={"100hv"}>
             <UnitHeader
@@ -108,7 +95,7 @@ export default function page({
                 <AtarColoredLogo
                   sx={{
                     height: "52px",
-                    width: "121px",
+                    width: { xs: "75px", md: "121px" },
                   }}
                 />
               }
