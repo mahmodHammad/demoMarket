@@ -6,57 +6,57 @@ export default function Share({ props, color }: any) {
   return (
     <SvgIcon {...props} inheritViewBox>
       <svg
-        width="17"
-        height="17"
-        viewBox="0 0 17 17"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_27756_113511)">
+        <g clip-path="url(#clip0_26914_268296)">
           <path
-            d="M4 10.5C5.10457 10.5 6 9.60457 6 8.5C6 7.39543 5.10457 6.5 4 6.5C2.89543 6.5 2 7.39543 2 8.5C2 9.60457 2.89543 10.5 4 10.5Z"
-            stroke={color}
-            stroke-width="1.5"
+            d="M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z"
+            stroke="#008EA5"
+            stroke-opacity="0.84"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
           <path
-            d="M12 6.5C13.1046 6.5 14 5.60457 14 4.5C14 3.39543 13.1046 2.5 12 2.5C10.8954 2.5 10 3.39543 10 4.5C10 5.60457 10.8954 6.5 12 6.5Z"
-            stroke={color}
-            stroke-width="1.5"
+            d="M18 9C19.6569 9 21 7.65685 21 6C21 4.34315 19.6569 3 18 3C16.3431 3 15 4.34315 15 6C15 7.65685 16.3431 9 18 9Z"
+            stroke="#008EA5"
+            stroke-opacity="0.84"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
           <path
-            d="M12 14.5C13.1046 14.5 14 13.6046 14 12.5C14 11.3954 13.1046 10.5 12 10.5C10.8954 10.5 10 11.3954 10 12.5C10 13.6046 10.8954 14.5 12 14.5Z"
-            stroke={color}
-            stroke-width="1.5"
+            d="M18 21C19.6569 21 21 19.6569 21 18C21 16.3431 19.6569 15 18 15C16.3431 15 15 16.3431 15 18C15 19.6569 16.3431 21 18 21Z"
+            stroke="#008EA5"
+            stroke-opacity="0.84"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
           <path
-            d="M5.7998 7.63385L10.1998 5.36719"
-            stroke={color}
-            stroke-width="1.5"
+            d="M8.7002 10.6969L15.3002 7.29688"
+            stroke="#008EA5"
+            stroke-opacity="0.84"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
           <path
-            d="M5.7998 9.36719L10.1998 11.6339"
-            stroke={color}
-            stroke-width="1.5"
+            d="M8.7002 13.2969L15.3002 16.6969"
+            stroke="#008EA5"
+            stroke-opacity="0.84"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
         </g>
         <defs>
-          <clipPath id="clip0_27756_113511">
-            <rect
-              width="16"
-              height="16"
-              fill="white"
-              transform="translate(0 0.5)"
-            />
+          <clipPath id="clip0_26914_268296">
+            <rect width="24" height="24" fill="white" />
           </clipPath>
         </defs>
       </svg>
