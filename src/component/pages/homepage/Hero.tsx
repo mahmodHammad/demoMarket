@@ -2,6 +2,7 @@ import { Box, Text } from "@/wrappers";
 import React from "react";
 import Image from "next/image";
 import heroBG from "@/assets/images/herobg.png";
+import SearchBar from "./SearchBar";
 export default function Hero() {
   return (
     <Box
@@ -59,7 +60,8 @@ export default function Hero() {
             dolor sit amet consectetur. Neque augue dictum nullam sollicitudin
             morbi mauris ornare bibendum condimentum.
           </Text>
-        </Box>
+        </Box>{" "}
+        <SearchBar />
       </Box>
     </Box>
   );
