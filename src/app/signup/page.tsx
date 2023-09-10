@@ -22,7 +22,6 @@ const Signup = (props: Props) => {
   return (
     <Container sx={{ height: "calc(100vh - 100px)" }}>
       <Item md={6}>
-        {" "}
         <Box
           sx={{
             width: "100%",
@@ -51,17 +50,34 @@ const Signup = (props: Props) => {
             <FormLabel sx={{ display: "flex", fontSize: "12px", mb: "6px" }}>
               Full Name
             </FormLabel>
-            <Input variant="outlined" fullWidth placeholder="Enter your Full name"  variant="outlined"/>
+            <Input
+              variant="outlined"
+              fullWidth
+              placeholder="Enter your Full name"
+              variant="outlined"
+            />
 
-            <FormLabel sx={{ display: "flex", fontSize: "12px", mb: "6px" ,mt:"18px"}}>
+            <FormLabel
+              sx={{ display: "flex", fontSize: "12px", mb: "6px", mt: "18px" }}
+            >
               National ID / Residence Permit No.
             </FormLabel>
-            <Input variant="outlined" fullWidth placeholder="Enter your national ID/residence Permit No." />
+            <Input
+              variant="outlined"
+              fullWidth
+              placeholder="Enter your national ID/residence Permit No."
+            />
 
-            <FormLabel sx={{ display: "flex", fontSize: "12px", mb: "6px", mt:"18px" }}>
+            <FormLabel
+              sx={{ display: "flex", fontSize: "12px", mb: "6px", mt: "18px" }}
+            >
               Phone Number
             </FormLabel>
-            <Input variant="outlined" fullWidth placeholder="Enter your phone number" />
+            <Input
+              variant="outlined"
+              fullWidth
+              placeholder="Enter your phone number"
+            />
           </Box>
           {/* <Phoneinput control={form.control}/> */}
 
@@ -80,7 +96,6 @@ const Signup = (props: Props) => {
           <Text mt="24px">
             Already have an account?{" "}
             <Text sx={{ display: "inline" }} color="primary" bold>
-              {" "}
               Sign in{" "}
             </Text>
           </Text>

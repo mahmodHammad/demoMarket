@@ -51,6 +51,7 @@ export default function UnitsCard({
           borderRadius: "16px 16px 0 0",
         }}
         component={Image}
+        placeholder="blur"
         alt="houses and properties for rent"
         src={img}
       />

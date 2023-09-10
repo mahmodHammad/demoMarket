@@ -25,7 +25,10 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
     >
       <Text variant="caption">Rent price</Text>
       <Text variant="h5">
-        {price} <Text variant="caption">/{PriceType}</Text>
+        {price}{" "}
+        <Text variant="caption" display={"inline"}>
+          /{PriceType}
+        </Text>
       </Text>
 
       <Button

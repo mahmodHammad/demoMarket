@@ -16,3 +16,7 @@ export { default as Close } from "./icons/Close";
 export { default as ErrorInfoIcon } from "./icons/ErrorInfoIcon";
 export { default as InfoIcon } from "./icons/InfoIcon";
 export { default as SuccessInfoIcon } from "./icons/SuccessInfoIcon";
+export { default as FrontSide } from "./icons/FrontSide";
+export { default as GroundFloor } from "./icons/GroundFloor";
+export { default as Search } from "./icons/Search";
+export { default as Location } from "./icons/Location";
