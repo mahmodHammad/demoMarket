@@ -66,11 +66,15 @@ export default function Home() {
         </Box>
         <GridContainer
           xstart
-          spacing={4}
-          sx={{ pb: { xs: "90px", md: "164px" }, mt: "53px" }}
+          spacing={{ xs: 2, md: 4 }}
+          sx={{
+            pb: { xs: "90px", md: "164px" },
+            mt: { md: "53px", xs: "22px" },
+            px: { md: "0px", xs: "12px" },
+          }}
         >
           {data.map((d, index) => (
-            <Item xs={4} key={index}>
+            <Item md={4} xs={6} key={index}>
               <NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
             </Item>
           ))}
