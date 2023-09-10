@@ -1,7 +1,4 @@
-import { Favorite, Share } from "@/assets";
 import { Box, Button, Text } from "@/wrappers";
-import { Avatar } from "@mui/material";
-import Link from "next/link";
 
 interface Props {
   logo: any;
@@ -10,7 +7,7 @@ interface Props {
   managedBy: string;
 }
 
-export default function ({ logo, title, managedBy, status }: Props) {
+function ConstructionStatus({ logo, managedBy, status }: Props) {
   return (
     <Box
       row
@@ -39,8 +36,9 @@ export default function ({ logo, title, managedBy, status }: Props) {
         <Text variant="small" fontSize={"12px"} gray>
           Managed By
         </Text>
-        <Box row gap={1}>
+        <Box center row gap={1}>
           {logo}
+
           <Text variant="h5" s={24}>
             {managedBy}
           </Text>
@@ -49,3 +47,4 @@ export default function ({ logo, title, managedBy, status }: Props) {
     </Box>
   );
 }
+export default ConstructionStatus;
