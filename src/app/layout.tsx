@@ -1,6 +1,4 @@
-// 'use client';
-
-import React, { useState } from 'react';
+import * as React from "react";
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import { Box } from '@/wrappers';
 import { Footer, Navbar, LoginModal } from '@/component';
