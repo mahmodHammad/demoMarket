@@ -36,7 +36,7 @@ const Signup = (props: Props) => {
       <Item md={6} center column>
         <Box maxWidth="370px" sx={{ textAlign: "center" }} column>
           <Text variant="h4">
-            Welcome to{" "}
+            Welcome to
             <Text variant="h4" color="primary" sx={{ display: "inline" }}>
               Atar
             </Text>
@@ -82,7 +82,7 @@ const Signup = (props: Props) => {
           {/* <Phoneinput control={form.control}/> */}
 
           <Text variant="small" gray align="left" mt="18px">
-            By proceeding to create your account, you are agreeing to{" "}
+            By proceeding to create your account, you are agreeing to
             <b>our Terms of Use </b> and <b>Privacy Policy</b>
           </Text>
           <Button
@@ -94,9 +94,9 @@ const Signup = (props: Props) => {
             sign up
           </Button>
           <Text mt="24px">
-            Already have an account?{" "}
+            Already have an account?
             <Text sx={{ display: "inline" }} color="primary" bold>
-              Sign in{" "}
+              Sign in
             </Text>
           </Text>
         </Box>

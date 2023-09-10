@@ -90,8 +90,8 @@ const SearchBar = () => {
           <Box
             center
             sx={{
-              width: { xs: "40px", md: "102px" },
-              height: { xs: "20px", md: "39px" },
+              width: { xs: "50px", md: "102px" },
+              height: { xs: "25px", md: "39px" },
 
               backgroundColor: isRent ? null : "#FFFFFF",
               borderRadius: {
@@ -110,8 +110,8 @@ const SearchBar = () => {
           <Box
             center
             sx={{
-              width: { xs: "40px", md: "102px" },
-              height: { xs: "20px", md: "39px" },
+              width: { xs: "50px", md: "102px" },
+              height: { xs: "25px", md: "39px" },
               backgroundColor: isRent ? "#FFFFFF" : null,
               borderRadius: {
                 xs: "8px 8px 0px 0px",
@@ -129,89 +129,131 @@ const SearchBar = () => {
         xbetween
         row
         sx={{
-          width: { xs: "370px", md: "918px" },
-          height: { xs: "60px", md: "102px" },
+          width: { xs: "450px", md: "918px" },
+          height: { xs: "70px", md: "102px" },
           top: "347px",
           borderRadius: " 0px 20px 20px 20px",
           boxShadow: " 0px 30px 60px -15px #8F90BC26",
           backgroundColor: "#FFFFFFCC",
           backdropFilter: "blur(10px)",
-          p: { xs: "5px", md: "24px" },
+          p: { xs: "10px", md: "24px" },
         }}
       >
         <Box xbetween width={"100%"}>
-          <FormControl sx={{ minWidth: "100px" }} size="small">
-            <InputLabel id="demo-simple-select-autowidth-label">
-              Location
-            </InputLabel>
-            <Select
-              sx={{
-                "& fieldset": { border: "none" },
-              }}
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={age}
-              onChange={handleChange}
-              autoWidth
-              label="Age"
-              placeholder="kk"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Twenty</MenuItem>
-              <MenuItem value={21}>Twenty one</MenuItem>
-              <MenuItem value={22}>Twenty one and a half</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{ minWidth: "100px" }} size="small">
-            <InputLabel id="demo-simple-select-autowidth-label">
-              Property Type
-            </InputLabel>
-            <Select
-              sx={{
-                "& fieldset": { border: "none" },
-              }}
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={age}
-              onChange={handleChange}
-              autoWidth
-              label="Age"
-              placeholder="kk"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Twenty</MenuItem>
-              <MenuItem value={21}>Twenty one</MenuItem>
-              <MenuItem value={22}>Twenty one and a half</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{ minWidth: "100px" }} size="small">
-            <InputLabel id="demo-simple-select-autowidth-label">
-              Price Range
-            </InputLabel>
-            <Select
-              sx={{
-                "& fieldset": { border: "none" },
-              }}
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={age}
-              onChange={handleChange}
-              autoWidth
-              label="Age"
-              placeholder="kk"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Twenty</MenuItem>
-              <MenuItem value={21}>Twenty one</MenuItem>
-              <MenuItem value={22}>Twenty one and a half</MenuItem>
-            </Select>
-          </FormControl>
+          <Box
+            center
+            width={"100%"}
+            sx={{ display: { xs: "flex", md: "none" } }}
+          >
+            <Box column width={"100%"} mr={"10px"}>
+              <Autocomplete
+                {...defaultProps}
+                id="disable-close-on-select"
+                disableCloseOnSelect
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    InputProps={{
+                      ...params.InputProps,
+                      disableUnderline: true,
+                    }}
+                    variant="standard"
+                    placeholder="Location"
+                    sx={{
+                      input: {
+                        "&::placeholder": {
+                          textOverflow: "ellipsis !important",
+                          color: "#232425",
+                          opacity: 1,
+                          fontSize: "13px",
+                        },
+                      },
+                    }}
+                  />
+                )}
+              />
+            </Box>
+            {/* <FormControl sx={{ minWidth: "100px" }} size="small">
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Property Type
+              </InputLabel>
+              <Select
+                sx={{
+                  "& fieldset": { border: "none" },
+                }}
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={age}
+                onChange={handleChange}
+                autoWidth
+                label="Age"
+                placeholder="kk"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Twenty</MenuItem>
+                <MenuItem value={21}>Twenty one</MenuItem>
+                <MenuItem value={22}>Twenty one and a half</MenuItem>
+              </Select>
+            </FormControl> */}
+            <Box column width={"100%"} mr={"10px"}>
+              <Autocomplete
+                {...defaultProps}
+                id="disable-close-on-select"
+                disableCloseOnSelect
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    InputProps={{
+                      ...params.InputProps,
+                      disableUnderline: true,
+                    }}
+                    variant="standard"
+                    placeholder="Property Type"
+                    sx={{
+                      input: {
+                        "&::placeholder": {
+                          textOverflow: "ellipsis !important",
+                          color: "#232425",
+                          opacity: 1,
+                          fontSize: "13px",
+                        },
+                      },
+                    }}
+                  />
+                )}
+              />
+            </Box>
+            <Box column width={"100%"} mr={"10px"}>
+              <Autocomplete
+                {...defaultProps}
+                id="disable-close-on-select"
+                disableCloseOnSelect
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    InputProps={{
+                      ...params.InputProps,
+                      disableUnderline: true,
+                    }}
+                    sx={{
+                      input: {
+                        "&::placeholder": {
+                          textOverflow: "ellipsis !important",
+                          color: "#232425",
+                          opacity: 1,
+                          fontSize: "13px",
+                        },
+                      },
+                    }}
+                    variant="standard"
+                    placeholder="Price Range"
+                  />
+                )}
+              />
+            </Box>
+          </Box>
 
           <Box
             row
@@ -229,9 +271,10 @@ const SearchBar = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    // InputProps={{
-                    //   disableUnderline: true,
-                    // }}
+                    InputProps={{
+                      ...params.InputProps,
+                      disableUnderline: true,
+                    }}
                     variant="standard"
                     placeholder="Select Your City"
                   />
@@ -275,7 +318,9 @@ const SearchBar = () => {
                 input={<OutlinedInput />}
                 renderValue={(selected) => {
                   if (selected.length === 0) {
-                    return <Text>Choose Property Type</Text>;
+                    return (
+                      <Text sx={{ opacity: 0.5 }}> Choose Property Type</Text>
+                    );
                   }
 
                   return selected.join(", ");
@@ -289,23 +334,7 @@ const SearchBar = () => {
                   </MenuItem>
                 ))}
               </Select>
-
-              {/* <Autocomplete
-                {...defaultProps}
-                id="disable-close-on-select"
-                disableCloseOnSelect
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="standard"
-                    placeholder="Choose Property Type "
-                    InputProps={{
-                      disableUnderline: true,
-                    }}
-                  />
-                )}
-              /> */}
-            </Box>{" "}
+            </Box>
             <Box center mr={"35px"}>
               <Divider
                 orientation="vertical"
@@ -324,7 +353,7 @@ const SearchBar = () => {
             width={"100%"}
             sx={{ display: { xs: "none", md: "flex" } }}
           >
-            <Box column width={"100%"} pr={"70px"}>
+            <Box column width={"100%"}>
               <Text variant="label">Price Range</Text>
               <Autocomplete
                 popupIcon={null}
@@ -334,23 +363,15 @@ const SearchBar = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    // InputProps={{
-                    //   disableUnderline: true,
-                    // }}
+                    InputProps={{
+                      ...params.InputProps,
+                      disableUnderline: true,
+                    }}
                     variant="standard"
                     placeholder="Choose Price Range"
                   />
                 )}
               />
-              {/* <Box sx={{ width: 100 }}>
-                <Slider
-                  getAriaLabel={() => "Temperature range"}
-                  value={values}
-                  onChange={handleChanges}
-                  valueLabelDisplay="auto"
-                  getAriaValueText={valuetext}
-                />
-              </Box> */}
             </Box>
           </Box>
         </Box>
