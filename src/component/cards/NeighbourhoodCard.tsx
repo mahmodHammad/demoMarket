@@ -12,7 +12,7 @@ export default function NeighbourhoodCard({ img, title, link }: proptypes) {
     <Box
       sx={{
         width: "100%",
-        height: { xs: "157px", md: "273px" },
+        height: { xs: "150px", md: "273px" },
         position: "relative",
         overflow: "hidden",
         borderRadius: "16px",
@@ -29,6 +29,7 @@ export default function NeighbourhoodCard({ img, title, link }: proptypes) {
         component={Image}
         alt="houses and properties for rent"
         src={img}
+        placeholder="blur"
       />
       <Text
         variant="h5"

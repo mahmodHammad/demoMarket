@@ -49,7 +49,6 @@ export default function HomeCardsContainer({
                 pr: "20px",
                 display: "flex",
                 width: { xs: "235px", md: "373px" },
-                height: { xs: "330px", md: "460px" },
               }}
             >
               {hasneighbourhoods ? (

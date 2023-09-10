@@ -20,6 +20,8 @@ export { default as FloorPlans } from "./unitDetails/FloorPlans";
 export { default as UnitMap } from "./unitDetails/UnitMap";
 
 export { default as Phoneinput } from "./forms/Phoneinput";
+
+export { default as LoginModal } from "./modals/LoginModal";
 export { default as QuiltedImageList } from "./unitDetails/QuiltedImageList";
 export { default as FloorCard } from "./unitDetails/FloorCard";
 export { default as SearchBar } from "./pages/homepage/SearchBar";
