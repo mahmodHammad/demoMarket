@@ -12,3 +12,7 @@ export { default as BuyNowIcon } from "./icons/BuyNowIcon";
 export { default as Share } from "./icons/Share";
 export { default as Favorite } from "./icons/Favorite";
 export { default as AtarColoredLogo } from "./icons/AtarColoredLogo";
+export { default as Close } from "./icons/Close";
+export { default as ErrorInfoIcon } from "./icons/ErrorInfoIcon";
+export { default as InfoIcon } from "./icons/InfoIcon";
+export { default as SuccessInfoIcon } from "./icons/SuccessInfoIcon";

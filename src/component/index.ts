@@ -21,3 +21,5 @@ export { default as UnitMap } from "./unitDetails/UnitMap";
 
 export { default as Phoneinput } from "./forms/Phoneinput";
 
+
+export { default as LoginModal } from "./modals/LoginModal";
