@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import React, { useState } from 'react';
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
@@ -16,17 +16,18 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const [loginModalOpen, setLoginModalOpen] = useState(false);
+	// const [loginModalOpen, setLoginModalOpen] = useState(false);
 
 	return (
 		<html lang='en'>
 			<body>
 				<ThemeRegistry>
-					<Navbar setLoginModalOpen={setLoginModalOpen} />
+					<Navbar setLoginModalOpen={() => null} />
 					<Box component='main'>{children}</Box>
 					<Footer />
 
-					<LoginModal loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} />
+					{/* // TODO: move the login modal, and create Context API to mange its state away from layout because we can't handle state management here  */}
+					{/* <LoginModal loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} /> */}
 				</ThemeRegistry>
 			</body>
 		</html>
