@@ -60,7 +60,7 @@ export default function Hero() {
             dolor sit amet consectetur. Neque augue dictum nullam sollicitudin
             morbi mauris ornare bibendum condimentum.
           </Text>
-        </Box>{" "}
+        </Box>
         <SearchBar />
       </Box>
     </Box>

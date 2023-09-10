@@ -20,28 +20,28 @@ export default function Features({ Feature }: proptypes) {
         </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
         <Grid item>
           <FeaturesAndAmenities title={"Pool"} />
-        </Grid>{" "}
+        </Grid>
       </Grid>
     </>
   );

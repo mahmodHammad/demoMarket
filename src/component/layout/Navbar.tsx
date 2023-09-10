@@ -15,7 +15,11 @@ import Link from "next/link";
 
 const pages = ["Login", "Signup"];
 
-function ResponsiveAppBar() {
+type PropsTypes = {
+  // setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function ResponsiveAppBar(props: PropsTypes) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -74,7 +78,10 @@ function ResponsiveAppBar() {
               <Button
                 component={Link}
                 href="/login"
-                onClick={handleCloseNavMenu}
+                onClick={() => {
+                  // setLoginModalOpen(true);
+                  handleCloseNavMenu()
+                }}
                 sx={{ color: "#fff", fontSize: "20px", mr: "12px" }}
                 size="medium"
               >
