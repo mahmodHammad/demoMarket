@@ -12,7 +12,7 @@ export default function NeighbourhoodCard({ img, title, link }: proptypes) {
     <Box
       sx={{
         width: "100%",
-        height: { xs: "157px", md: "273px" },
+        height: { xs: "150px", md: "273px" },
         position: "relative",
         overflow: "hidden",
         borderRadius: "16px",
