@@ -29,6 +29,7 @@ export default function NeighbourhoodCard({ img, title, link }: proptypes) {
         component={Image}
         alt="houses and properties for rent"
         src={img}
+        placeholder="blur"
       />
       <Text
         variant="h5"
