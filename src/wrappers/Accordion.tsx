@@ -4,8 +4,8 @@ import {
 	AccordionSummary,
 	AccordionDetails,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Text } from '@/wrappers';
+import { AccordionIcon } from '@/assets';
 
 interface Accordion {
 	header: string;
@@ -35,7 +35,7 @@ export default function Accordion({ header, Content, ...props }: Accordion) {
 				sx={{
 					p: 0,
 				}}
-				expandIcon={<ExpandMoreIcon style={{ color: '#232425' }} />}
+				expandIcon={<AccordionIcon />}
 				aria-controls='panel1a-content'
 				id='panel1a-header'
 			>
