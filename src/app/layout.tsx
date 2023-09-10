@@ -20,7 +20,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body>
 				<ThemeRegistry>
-					<Navbar setLoginModalOpen={() => null} />
+					<Navbar/>
 					<Box component='main'>{children}</Box>
 					<Footer />
 
