@@ -129,7 +129,7 @@ const SearchBar = () => {
         xbetween
         row
         sx={{
-          width: { xs: "450px", md: "918px" },
+          width: { xs: "400px", md: "918px" },
           height: { xs: "70px", md: "102px" },
           top: "347px",
           borderRadius: " 0px 20px 20px 20px",
