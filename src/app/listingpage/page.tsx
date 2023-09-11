@@ -41,7 +41,7 @@ export default function page(props: Props) {
         <Grid container spacing={3} sx={{ mt: "5px", pt: "26px" }} mb={15}>
           {/* Abdulrahman */}
 
-          <Grid item xs={12} md={4} display={{ xs: "none", md: "flex" }}>
+          <Grid item xs={12} md={4} display={{ xs: "none", md: "flex", height:"fit-content" }}>
             <PropertyFilters />
           </Grid>
 

@@ -16,6 +16,8 @@ interface Accordion {
 
 const setAccordionLayoutSXProps = (props: any) => ({
 	boxShadow: 0,
+	m: 0,
+	width: '100%',
 	'&::before': {
 		height: 0,
 	},
@@ -28,6 +30,7 @@ const setAccordionLayoutSXProps = (props: any) => ({
 export default function Accordion({ header, Content, ...props }: Accordion) {
 	return (
 		<MUIAccordion
+			disableGutters
 			{...props}
 			sx={setAccordionLayoutSXProps(props)}
 		>
