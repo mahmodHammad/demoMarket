@@ -20,3 +20,4 @@ export { default as FrontSide } from "./icons/FrontSide";
 export { default as GroundFloor } from "./icons/GroundFloor";
 export { default as Search } from "./icons/Search";
 export { default as Location } from "./icons/Location";
+export { default as AccordionIcon } from "./icons/AccordionIcon";

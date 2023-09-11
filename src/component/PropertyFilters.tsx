@@ -28,6 +28,7 @@ const PropertyFilters = (props: Props) => {
 			gap={'16px'}
 			sx={{
 				width: '100%',
+				minHeight: '400px', // TODO: remove it
 				p: '16px',
 				bgcolor: '#FFF',
 				borderRadius: '16px',
