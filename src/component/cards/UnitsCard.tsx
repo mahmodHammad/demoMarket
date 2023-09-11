@@ -31,7 +31,7 @@ export default function UnitsCard({
         boxShadow: "0px 6px 12px 0px rgba(28, 39, 49, 0.05)",
       }}
     >
-      <Box
+      {/* <Box
         center
         sx={{
           position: "absolute",
@@ -43,7 +43,9 @@ export default function UnitsCard({
           backgroundColor: "rgba(52, 52, 52, 0.2)",
           borderRadius: 100,
         }}
-      ></Box>
+      >
+        Hart Icon
+      </Box> */}
       <Box
         sx={{
           width: "100%",
