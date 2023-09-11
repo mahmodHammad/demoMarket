@@ -21,13 +21,13 @@ const theme = {
 	},
 };
 
-type PropsTypes = {
+type Props = {
 	type?: 'info' | 'success' | 'error';
 	title?: string;
 	description: string;
 };
 
-const InfoBox = ({ type = 'success', title, description }: PropsTypes) => {
+const InfoBox = ({ type = 'success', title, description }: Props) => {
 	return (
 		<Box
 			row
