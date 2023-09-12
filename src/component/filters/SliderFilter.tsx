@@ -5,8 +5,8 @@ import { Box } from '@/wrappers';
 
 type Props = {
   label: string;
-  sliderValues: number | number[];
-  handleSliderChange: (event: Event, newValue: number | number[]) => void;
+  sliderValues: number[];
+  handleSliderChange: (event: Event | null, newValue: number | number[]) => void;
 };
 
 const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
@@ -21,8 +21,22 @@ const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
         onChange={handleSliderChange}
       />
       <Box row xbetween ycenter gap={'18px'} sx={{ width: '100%' }}>
-        <TextInput placeholder={`Min ${label}`} />
-        <TextInput placeholder={`Max ${label}`} />
+        <TextInput
+          type="number"
+          value={sliderValues[0]}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            handleSliderChange(null, [+event.target.value, sliderValues[1]])
+          }
+          placeholder={`Min ${label}`}
+        />
+        <TextInput
+          type="number"
+          value={sliderValues[1]}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            handleSliderChange(null, [sliderValues[0], +event.target.value])
+          }
+          placeholder={`Max ${label}`}
+        />
       </Box>
     </Box>
   );
