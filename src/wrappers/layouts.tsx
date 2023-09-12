@@ -21,6 +21,7 @@ interface common {
   ystart?: boolean;
   yend?: boolean;
   ybetween?: boolean;
+  fullWidth?: boolean;
   component?: React.ElementType;
   children?: ReactNode;
 }
@@ -75,6 +76,9 @@ const setLayoutSXProps = (props: any) => {
     ...(props.ybetween && {
       display: "flex",
       alignItems: "space-between",
+    }),
+    ...(props.fullWidth && {
+        width: 1
     }),
 
     ...props.sx,
