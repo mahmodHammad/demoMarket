@@ -40,7 +40,7 @@ export default function AboutUnit({ description }: proptypes) {
         <Text
           onClick={toggleReadMore}
           className="read-or-hide"
-          color="primary"
+          primary
           sx={{
             cursor: 'pointer',
             display: { xs: 'inline', md: 'none' },
