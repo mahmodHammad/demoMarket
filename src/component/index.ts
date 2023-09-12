@@ -21,6 +21,7 @@ export { default as UnitMap } from "./unitDetails/UnitMap";
 
 export { default as Phoneinput } from "./forms/Phoneinput";
 export { default as TextInput } from "./forms/TextInput";
+export { default as CheckBox } from "./forms/Checkbox";
 
 export { default as LoginModal } from "./modals/LoginModal";
 
