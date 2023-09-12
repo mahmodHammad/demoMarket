@@ -1,7 +1,7 @@
-"use client";
-import { Box, Button, Text } from "@/wrappers";
-import React, { useState } from "react";
-import Link from "next/link";
+'use client';
+import { Box, Button, Text } from '@/wrappers';
+import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   Autocomplete,
   ButtonBase,
@@ -17,8 +17,9 @@ import {
   SelectChangeEvent,
   Slider,
   TextField,
-} from "@mui/material";
-import { Location, Search } from "@/assets";
+} from '@mui/material';
+import { Location, Search } from '@/assets';
+import theme from '@/ThemeRegistry/theme';
 
 function valuetext(value: number) {
   return `${value}°C`;
@@ -35,14 +36,10 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Residential Apartment",
-  "Residential Land",
-  "Independent House/Villa",
-];
+const names = ['Residential Apartment', 'Residential Land', 'Independent House/Villa'];
 
 const SearchBar = () => {
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = React.useState('');
 
   const handleChangee = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -61,7 +58,7 @@ const SearchBar = () => {
     } = event;
     setPersonName(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      typeof value === 'string' ? value.split(',') : value,
     );
   };
 
@@ -85,23 +82,22 @@ const SearchBar = () => {
   };
 
   return (
-    <Box sx={{ mt: { xs: "20px ", md: "60px" } }}>
+    <Box sx={{ mt: { xs: '20px ', md: '60px' } }}>
       <Box row>
         <ButtonBase onClick={handleClick}>
           <Box
             center
             sx={{
-              width: { xs: "50px", md: "102px" },
-              height: { xs: "25px", md: "39px" },
+              width: { xs: '50px', md: '102px' },
+              height: { xs: '25px', md: '39px' },
 
-              backgroundColor: isRent ? null : "#FFFFFF",
+              backgroundColor: isRent ? null : '#FFFFFF',
               borderRadius: {
-                xs: "8px 8px 0px 0px",
-                md: "15px 15px 0px 0px",
+                xs: '8px 8px 0px 0px',
+                md: '15px 15px 0px 0px',
               },
-            }}
-          >
-            <Text variant="small" sx={{ color: isRent ? "#FFFFFF" : null }}>
+            }}>
+            <Text variant="small" sx={{ color: isRent ? '#FFFFFF' : null }}>
               Buy
             </Text>
           </Box>
@@ -111,16 +107,15 @@ const SearchBar = () => {
           <Box
             center
             sx={{
-              width: { xs: "50px", md: "102px" },
-              height: { xs: "25px", md: "39px" },
-              backgroundColor: isRent ? "#FFFFFF" : null,
+              width: { xs: '50px', md: '102px' },
+              height: { xs: '25px', md: '39px' },
+              backgroundColor: isRent ? '#FFFFFF' : null,
               borderRadius: {
-                xs: "8px 8px 0px 0px",
-                md: "15px 15px 0px 0px",
+                xs: '8px 8px 0px 0px',
+                md: '15px 15px 0px 0px',
               },
-            }}
-          >
-            <Text variant="small" sx={{ color: isRent ? null : "#FFFFFF" }}>
+            }}>
+            <Text variant="small" sx={{ color: isRent ? null : '#FFFFFF' }}>
               Rent
             </Text>
           </Box>
@@ -130,23 +125,18 @@ const SearchBar = () => {
         xbetween
         row
         sx={{
-          width: { xs: "400px", md: "918px" },
-          height: { xs: "70px", md: "102px" },
-          top: "347px",
-          borderRadius: " 0px 20px 20px 20px",
-          boxShadow: " 0px 30px 60px -15px #8F90BC26",
-          backgroundColor: "#FFFFFFCC",
-          backdropFilter: "blur(10px)",
-          p: { xs: "10px", md: "24px" },
-        }}
-      >
-        <Box xbetween width={"100%"}>
-          <Box
-            center
-            width={"100%"}
-            sx={{ display: { xs: "flex", md: "none" } }}
-          >
-            <Box column width={"100%"} mr={"10px"}>
+          width: { xs: '400px', md: '918px' },
+          height: { xs: '70px', md: '102px' },
+          top: '347px',
+          borderRadius: ' 0px 20px 20px 20px',
+          boxShadow: ' 0px 30px 60px -15px #8F90BC26',
+          backgroundColor: '#FFFFFFCC',
+          backdropFilter: 'blur(10px)',
+          p: { xs: '10px', md: '24px' },
+        }}>
+        <Box xbetween width={'100%'}>
+          <Box center width={'100%'} sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Box column width={'100%'} mr={'10px'}>
               <Autocomplete
                 {...defaultProps}
                 id="disable-close-on-select"
@@ -162,11 +152,11 @@ const SearchBar = () => {
                     placeholder="Location"
                     sx={{
                       input: {
-                        "&::placeholder": {
-                          textOverflow: "ellipsis !important",
-                          color: "#232425",
+                        '&::placeholder': {
+                          textOverflow: 'ellipsis !important',
+                          color: '#232425',
                           opacity: 1,
-                          fontSize: "13px",
+                          fontSize: '13px',
                         },
                       },
                     }}
@@ -175,7 +165,7 @@ const SearchBar = () => {
               />
             </Box>
 
-            <Box column width={"100%"} mr={"10px"}>
+            <Box column width={'100%'} mr={'10px'}>
               <Autocomplete
                 {...defaultProps}
                 id="disable-close-on-select"
@@ -191,11 +181,11 @@ const SearchBar = () => {
                     placeholder="Property Type"
                     sx={{
                       input: {
-                        "&::placeholder": {
-                          textOverflow: "ellipsis !important",
-                          color: "#232425",
+                        '&::placeholder': {
+                          textOverflow: 'ellipsis !important',
+                          color: '#232425',
                           opacity: 1,
-                          fontSize: "13px",
+                          fontSize: '13px',
                         },
                       },
                     }}
@@ -203,7 +193,7 @@ const SearchBar = () => {
                 )}
               />
             </Box>
-            <Box column width={"100%"} mr={"10px"}>
+            <Box column width={'100%'} mr={'10px'}>
               <Autocomplete
                 {...defaultProps}
                 id="disable-close-on-select"
@@ -217,11 +207,11 @@ const SearchBar = () => {
                     }}
                     sx={{
                       input: {
-                        "&::placeholder": {
-                          textOverflow: "ellipsis !important",
-                          color: "#232425",
+                        '&::placeholder': {
+                          textOverflow: 'ellipsis !important',
+                          color: '#232425',
                           opacity: 1,
-                          fontSize: "13px",
+                          fontSize: '13px',
                         },
                       },
                     }}
@@ -233,13 +223,8 @@ const SearchBar = () => {
             </Box>
           </Box>
 
-          <Box
-            row
-            yend
-            width={"100%"}
-            sx={{ display: { xs: "none", md: "flex" } }}
-          >
-            <Box column mr={"30px"} width={"100%"}>
+          <Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box column mr={'30px'} width={'100%'}>
               <Text variant="label">Location</Text>
               <Autocomplete
                 popupIcon={null}
@@ -260,31 +245,26 @@ const SearchBar = () => {
               />
             </Box>
             <Location />
-            <Box center ml={"10px"} mr={"35px"}>
+            <Box center ml={'10px'} mr={'35px'}>
               <Divider
                 orientation="vertical"
                 sx={{
-                  width: "2px",
-                  background: "rgba(255, 66, 66, 0.08)",
-                  border: "0px",
-                  height: "46px",
+                  width: '2px',
+                  background: 'rgba(255, 66, 66, 0.08)',
+                  border: '0px',
+                  height: '46px',
                 }}
               />
             </Box>
           </Box>
-          <Box
-            row
-            yend
-            width={"100%"}
-            sx={{ display: { xs: "none", md: "flex" } }}
-          >
-            <Box column mr={"20px"} width={"100%"}>
+          <Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box column mr={'20px'} width={'100%'}>
               <Text variant="label">Property Type</Text>
 
               <Select
                 sx={{
-                  "& fieldset": { border: "none" },
-                  height: "32px",
+                  '& fieldset': { border: 'none' },
+                  height: '32px',
                 }}
                 labelId="demo-multiple-checkbox-label"
                 placeholder="Choose Property Type"
@@ -296,17 +276,14 @@ const SearchBar = () => {
                 input={<OutlinedInput />}
                 renderValue={(selected) => {
                   if (selected.length === 0) {
-                    return (
-                      <Text sx={{ opacity: 0.5 }}> Choose Property Type</Text>
-                    );
+                    return <Text sx={{ opacity: 0.5 }}> Choose Property Type</Text>;
                   }
                   if (selected.length > 1) {
-                    return selected.at(0) + "...";
+                    return selected.at(0) + '...';
                   }
                   return selected;
                 }}
-                MenuProps={MenuProps}
-              >
+                MenuProps={MenuProps}>
                 {names.map((name) => (
                   <MenuItem key={name} value={name}>
                     <Checkbox checked={personName.indexOf(name) > -1} />
@@ -315,25 +292,20 @@ const SearchBar = () => {
                 ))}
               </Select>
             </Box>
-            <Box center mr={"35px"}>
+            <Box center mr={'35px'}>
               <Divider
                 orientation="vertical"
                 sx={{
-                  width: "2px",
-                  background: "rgba(255, 66, 66, 0.08)",
-                  border: "0px",
-                  height: "46px",
+                  width: '2px',
+                  background: 'rgba(255, 66, 66, 0.08)',
+                  border: '0px',
+                  height: '46px',
                 }}
               />
             </Box>
           </Box>
-          <Box
-            row
-            yend
-            width={"100%"}
-            sx={{ display: { xs: "none", md: "flex" } }}
-          >
-            <Box column width={"100%"}>
+          <Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box column width={'100%'}>
               <Text variant="label">Price Range</Text>
               <Autocomplete
                 popupIcon={null}
@@ -357,18 +329,12 @@ const SearchBar = () => {
         </Box>
 
         <Box
-          width={{ md: "54px" }}
-          height={{ md: "54px" }}
-          bgcolor={"#008EA5"}
-          borderRadius={"20px"}
-          center
-        >
-          <IconButton
-            component={Link}
-            aria-label="delete"
-            size="large"
-            href="/listingpage"
-          >
+          width={{ md: '54px' }}
+          height={{ md: '54px' }}
+          bgcolor={theme.palette.primary.main}
+          borderRadius={'20px'}
+          center>
+          <IconButton component={Link} aria-label="delete" size="large" href="/listingpage">
             <Search />
           </IconButton>
         </Box>
@@ -385,7 +351,7 @@ interface FilmOptionType {
 }
 
 const Locations = [
-  { title: "Ryiadh", year: 1994 },
-  { title: "Khobar", year: 1972 },
-  { title: "Mecca", year: 1974 },
+  { title: 'Ryiadh', year: 1994 },
+  { title: 'Khobar', year: 1972 },
+  { title: 'Mecca', year: 1974 },
 ];

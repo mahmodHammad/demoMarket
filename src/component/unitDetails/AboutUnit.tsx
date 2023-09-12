@@ -1,8 +1,8 @@
-"use client";
-import React, { useState } from "react";
-import { Box, Button, Text } from "@/wrappers";
-import Image from "next/image";
-import { ThreeD } from "@/assets";
+'use client';
+import React, { useState } from 'react';
+import { Box, Button, Text } from '@/wrappers';
+import Image from 'next/image';
+import { ThreeD } from '@/assets';
 
 interface proptypes {
   description: string;
@@ -17,39 +17,35 @@ export default function AboutUnit({ description }: proptypes) {
     <Box
       column
       sx={{
-        width: "100%",
-        mt: "40px",
-        gap: "20px",
-      }}
-    >
+        width: '100%',
+        mt: '40px',
+        gap: '20px',
+      }}>
       <Text variant="h4" s={24}>
         About this home
       </Text>
       <Text
         variant="body"
         sx={{
-          display: { xs: "none", md: "inline" },
-        }}
-      >
+          display: { xs: 'none', md: 'inline' },
+        }}>
         {description}
       </Text>
       <Text
         variant="body"
         sx={{
-          display: { xs: "inline", md: "none" },
-        }}
-      >
+          display: { xs: 'inline', md: 'none' },
+        }}>
         {isReadMore ? description.slice(0, 150) : description}
         <Text
           onClick={toggleReadMore}
           className="read-or-hide"
-          color="#008EA5"
+          color="primary"
           sx={{
-            cursor: "pointer",
-            display: { xs: "inline", md: "none" },
-          }}
-        >
-          {isReadMore ? "...read more" : " show less"}
+            cursor: 'pointer',
+            display: { xs: 'inline', md: 'none' },
+          }}>
+          {isReadMore ? '...read more' : ' show less'}
         </Text>
       </Text>
     </Box>
