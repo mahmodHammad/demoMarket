@@ -19,18 +19,25 @@ const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
   };
 
   return (
-    <Box mt={5} column gap={'12px'} ycenter>
+    <Box mt={4} column gap={'12px'} ycenter>
       <Slider
         disableSwap
         size="medium"
-        sx={{ width: 0.91 }}
+        sx={{
+          width: 0.91,
+          '& .MuiSlider-valueLabel': {
+            backgroundColor: 'primary.main',
+            borderRadius: '4px',
+            width: '35px',
+          },
+        }}
         value={value}
         getAriaLabel={() => `${label} range`}
         onChange={handleChange}
         onChangeCommitted={(event: React.SyntheticEvent | Event, value: number | number[]) =>
           handleSliderChange(value as number[])
         }
-        valueLabelDisplay="auto"
+        valueLabelDisplay="on"
       />
 
       <Box row xbetween ycenter gap={'18px'} sx={{ width: '100%' }}>
