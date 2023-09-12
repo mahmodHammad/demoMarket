@@ -3,7 +3,7 @@ import { Box, Text } from "@/wrappers";
 import { Avatar, Icon } from "@mui/material";
 
 interface Props {
-  icon?: string;
+  icon: any;
   title: string;
 }
 export default function FeaturesAndAmenities({ icon, title }: Props) {
@@ -22,7 +22,7 @@ export default function FeaturesAndAmenities({ icon, title }: Props) {
       }}
     >
       <Box column center>
-        {icon} <Room></Room>
+        {icon}
         <Text variant="small" bold>
           {title}
         </Text>

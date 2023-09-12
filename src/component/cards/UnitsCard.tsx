@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Button, Text } from "@/wrappers";
 import Image from "next/image";
-import { ThreeD } from "@/assets";
+import Link from "next/link";
 
 interface proptypes {
   img: string;
@@ -82,8 +82,7 @@ export default function UnitsCard({
               display: { xs: "flex", md: "none" },
             }}
           >
-            location
-            {location}
+            {location || "location"}
           </Text>
         </Box>
 
@@ -110,8 +109,7 @@ export default function UnitsCard({
               }
             }
           >
-            {location}
-            Location
+            {location || "location"}
           </Text>
         </Box>
         <Box row center xbetween sx={{ mt: { xs: "8px", md: "12px" } }}>
@@ -134,8 +132,7 @@ export default function UnitsCard({
                 }
               }
             >
-              {price}
-              SAR 25,000.00
+              {price || " SAR 25,000.00"}
             </Text>
           </Box>
 
@@ -171,14 +168,14 @@ export default function UnitsCard({
                 fontSize: { xs: "10px", md: "16px" },
               }}
             >
-              {area}
-              23 Sqm
+              {area || "23 Sqm"}
             </Text>
           </Box>
         </Box>
       </Box>
       <Box sx={{ py: "16px", px: "24px" }}>
         <Button
+          component={Link}
           variant="outlined"
           sx={{
             display: "dlex",

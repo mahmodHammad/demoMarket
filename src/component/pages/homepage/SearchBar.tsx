@@ -1,6 +1,7 @@
 "use client";
 import { Box, Button, Text } from "@/wrappers";
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   Autocomplete,
   ButtonBase,
@@ -362,7 +363,12 @@ const SearchBar = () => {
           borderRadius={"20px"}
           center
         >
-          <IconButton aria-label="delete" size="large" href="/listingpage">
+          <IconButton
+            component={Link}
+            aria-label="delete"
+            size="large"
+            href="/listingpage"
+          >
             <Search />
           </IconButton>
         </Box>

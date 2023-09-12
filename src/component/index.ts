@@ -32,3 +32,4 @@ export { default as PropertyFilters } from "./filters/PropertyFilters";
 export { default as AccordionChipsFilter } from "./filters/AccordionChipsFilter";
 
 export { default as SearchBox } from "./listingpage/SearchBox";
+export { default as ListingBodey } from "./listingpage/ListingBodey";

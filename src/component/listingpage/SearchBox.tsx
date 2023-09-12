@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Box, Text } from "@/wrappers";
 import { ButtonBase, IconButton } from "@mui/material";
-
+import theme from "@/ThemeRegistry/theme";
 import { Search, Location } from "@/assets";
 
 export default function SearchBox({}) {
@@ -26,7 +26,7 @@ export default function SearchBox({}) {
               width: { xs: "50px", md: "90px" },
               height: { xs: "25px", md: "39px" },
 
-              backgroundColor: isRent ? null : "#008EA5",
+              backgroundColor: isRent ? null : "theme.palette.primary.main",
               borderRadius: {
                 xs: "8px 8px 0px 0px",
                 md: "15px 15px 0px 0px",
