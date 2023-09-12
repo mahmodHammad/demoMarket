@@ -17,7 +17,7 @@ export default function page(props: Props) {
 
           {/* Abdullah */}
 
-          <Grid item xs={12} md={8} height={'100hv'} display={{ xs: 'none', md: 'flex' }}>
+          <Grid item xs={12} md={8} height={'100hv'} display={{ xs: 'flex', md: 'flex' }}>
             <ListingBody />
           </Grid>
         </Grid>

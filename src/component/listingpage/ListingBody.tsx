@@ -46,7 +46,7 @@ const listingBody = () => {
 
         <Grid container mt={'47px'} spacing={'28px'}>
           {data?.map((d, index) => (
-            <Grid item xs={6} key={index}>
+            <Grid item xs={6} md={6} key={index}>
               <UnitsCard
                 title={d?.title}
                 img={d?.img}
