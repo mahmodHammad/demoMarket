@@ -1,13 +1,14 @@
 import React from "react";
 import { Box, Button, Text } from "@/wrappers";
 import Image from "next/image";
-import { ThreeD } from "@/assets";
+import { Room, ThreeD } from "@/assets";
 import { Grid } from "@mui/material";
 import FeaturesAndAmenities from "./FeaturesAndAmenities";
 
 interface proptypes {
-  Feature: any;
+  Feature: [{ title: string; icon: React.ElementType }];
 }
+// React.ReactNode;
 export default function Features({ Feature }: proptypes) {
   return (
     <>
@@ -15,33 +16,11 @@ export default function Features({ Feature }: proptypes) {
         Features & amenities
       </Text>
       <Grid container>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
-        <Grid item>
-          <FeaturesAndAmenities title={"Pool"} />
-        </Grid>
+        {Feature.map((d, index) => (
+          <Grid item key={index}>
+            <FeaturesAndAmenities title={d.title} icon={d.icon} />
+          </Grid>
+        ))}
       </Grid>
     </>
   );

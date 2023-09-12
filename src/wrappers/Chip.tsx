@@ -9,7 +9,7 @@ interface Chip extends ChipProps {
 const setChipLayoutSXProps = (props: any) => ({
 	borderRadius: '32px',
 	height: '32px',
-	borderColor: props.checked ? '#008EA5' : '#E3E3E3',
+	borderColor: props.checked ? 'primary.main' : '#E3E3E3',
 	...props.sx,
 });
 
