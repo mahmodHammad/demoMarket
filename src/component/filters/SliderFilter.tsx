@@ -40,7 +40,7 @@ const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
         valueLabelDisplay="on"
       />
 
-      <Box row xbetween ycenter gap={'18px'} sx={{ width: '100%' }}>
+      <Box row xbetween ycenter gap={'18px'} fullWidth>
         <TextInput
           type="number"
           value={value[0]}
