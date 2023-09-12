@@ -31,5 +31,6 @@ export { default as SearchBar } from "./pages/homepage/SearchBar";
 export { default as PropertyFilters } from "./filters/PropertyFilters";
 export { default as AccordionChipsFilter } from "./filters/AccordionChipsFilter";
 export { default as CounterFilter } from "./filters/CounterFilter";
+export { default as SliderFilter } from "./filters/SliderFilter";
 
 export { default as SearchBox } from "./listingpage/SearchBox";

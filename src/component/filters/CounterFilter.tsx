@@ -9,7 +9,7 @@ type Props = {
   handleIncrement: () => void;
 };
 
-const CounterFilter = ({ name, number, handleDecrement, handleIncrement: handleIncrement }: Props) => {
+const CounterFilter = ({ name, number, handleDecrement, handleIncrement }: Props) => {
   return (
     <Box row xbetween ycenter>
       <Text>{name}</Text>
