@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js, jsx,tsx, ts}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -25,5 +32,9 @@
     "react-hook-form": "^7.45.4",
     "react-photo-album": "^2.3.0",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1"
   }
 }
