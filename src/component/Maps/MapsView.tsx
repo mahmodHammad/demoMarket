@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 // import atarlogo from "@/assets/atarcloud_primary.png";
 import { Typography, Button, SvgIcon, CircularProgress } from "@mui/material";
@@ -13,7 +13,7 @@ const MapsView = ({
   mapData,
   latLng,
   handleSubmit,
-  handleMarkerClick = () => { },
+  // handleMarkerClick = () => { },
   handleMapClick = () => { },
   address
 }: Props) => {
@@ -23,12 +23,20 @@ const MapsView = ({
     // console.log("service",service)
     // // ...
   };
-  const markers = [
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [markers, setMarkers] = useState([
     { lat: 24.774265, lng: 46.738586, isSelected: true },
     { lat: 24.776135337799865, lng: 46.76248846413293, isSelected: false },
     { lat: 24.783772258002134, lng: 46.702664474264765, isSelected: false },
     { lat: 24.757430691966952, lng: 46.739916375671385, isSelected: false },
-  ]
+  ])
+  const handleMarkerClick = (newIndex) => {
+    let temp = markers;
+    temp[currentIndex].isSelected = false;
+    temp[newIndex].isSelected = true;
+    setMarkers([...temp])
+    setCurrentIndex(newIndex);
+  }
   const ReyadCenter = { lat: 24.774265, lng: 46.738586 };
   const initialCenter = viewOnly
     ? { lat: mapData.latitude, lng: mapData.longitude }
@@ -57,7 +65,7 @@ const MapsView = ({
         <InfoWindowEx
           pixelOffset={new window.google.maps.Size(0, -25)}
           position={{ lat: latLng.lat, lng: latLng.lng }}
-          visible={true}
+          visible={false}
           style={{ background: "red", padding: "100px" }}
         >
           <Box
@@ -126,7 +134,7 @@ const MapsView = ({
           scaledSize: new google.maps.Size(37, 37)
         }}
         // icon={<LocationIcon />}
-        onClick={handleMarkerClick}
+        onClick={() => handleMarkerClick(index)}
         // itle="Location"
         id={1}
         draggable={true}
