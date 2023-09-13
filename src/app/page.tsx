@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Box>
       {/* Logged In component */}
-        <div style={{}}>
+        {/* <div style={{}}>
           hello
           hello
           hello
@@ -23,15 +23,15 @@ export default function Home() {
           hello
           hello
           hello
-        </div>
+        </div> */}
 
       {/* Logged out component */}
-      {/* <Hero />
+      <Hero />
       <Container maxWidth="xl" sx={{ pb: { xs: "90px", md: "164px" } }}>
         <Neighbourhoods />
         <RecentlyAdded />
         <MostViewed />
-      </Container> */}
+      </Container>
     </Box>
   );
 }
