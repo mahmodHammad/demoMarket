@@ -46,7 +46,7 @@ type Props = {
 
 const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
   return (
-      <Box column width={'100%'} ycenter>
+      <Box column fullWidth>
         <Text variant="h4">Properties in Saudi Arabia</Text>
         <SearchBox />
 
@@ -85,7 +85,7 @@ const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
           ))}
         </Grid>
 
-        <Pagination count={10} color="primary" sx={{mt: 5}} />
+        <Pagination count={10} color="primary" sx={{mt: 5, alignSelf: 'center'}} />
       </Box>
   );
 };
