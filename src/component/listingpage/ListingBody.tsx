@@ -1,10 +1,11 @@
-import { Box, Text } from '@/wrappers';
+import { Box, Button, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
 import React from 'react';
 import UnitsCard from '../cards/UnitsCard';
 import SearchBox from './SearchBox';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
+import { Filter } from '@/assets';
 
 const data = [
   {
@@ -37,16 +38,42 @@ const data = [
 //   ];
 // }
 // const listingBodey = ({ data }: proptypes) => {
-const listingBody = () => {
+
+type Props = {
+  isMobileView?: boolean;
+  openFilterOnMobileView?: () => void;
+};
+
+const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
   return (
     <>
       <Box column width={'100%'}>
         <Text variant="h4">Properties in Saudi Arabia</Text>
         <SearchBox />
 
-        <Grid container mt={'47px'} spacing={'28px'}>
+        {isMobileView && (
+          <Box
+            fullWidth
+            row
+            xbetween
+            ycenter
+            mt={'30px'}
+          >
+            <Text>Total Properties: {data.length}</Text>
+            <Button
+              startIcon={<Filter />}
+              sx={{py: 0.5, px: 1.7, alignItems: 'center'}}
+              grayBorder
+              variant='outlined'
+              onClick={openFilterOnMobileView}
+            >
+              Filter
+            </Button>
+          </Box>)}
+
+        <Grid container mt={isMobileView ? '0px' :'47px'} spacing={'28px'}>
           {data?.map((d, index) => (
-            <Grid item xs={6} md={6} key={index}>
+            <Grid item xs={12} md={6} key={index}>
               <UnitsCard
                 title={d?.title}
                 img={d?.img}
