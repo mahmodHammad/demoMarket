@@ -37,6 +37,14 @@ const floorFeatures = [
   { icon: <Room />, title: "5 beds" },
 ];
 
+const data = [
+  { title: "Pool", icon: <Room /> },
+  { title: "Room", icon: <FrontSide /> },
+  { title: "Front Side", icon: <GroundFloor /> },
+  { title: "Pool", icon: <Room /> },
+  { title: "Pool", icon: <Room /> },
+];
+
 interface Props {
   id?: string;
   photos?: any;
@@ -86,7 +94,7 @@ export default function page({
           </Button>
         </Box> */}
 
-        <Grid container spacing={3} sx={{ mt: "5px",pt:"26px" }} mb={1}>
+        <Grid container spacing={3} sx={{ mt: "5px", pt: "26px" }} mb={1}>
           <QuiltedImageList />
 
           <Grid item xs={12} md={8} height={"100hv"}>
@@ -136,7 +144,7 @@ export default function page({
             </Grid>
 
             <FloorPlans />
-            <Features Feature={""} />
+            <Features Feature={data} />
             <UnitMap location={location} />
           </Grid>
 

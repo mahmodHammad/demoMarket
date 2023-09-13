@@ -1,7 +1,8 @@
-import React from "react";
-import { Box, Button, Text } from "@/wrappers";
-import Image from "next/image";
-import { ThreeD } from "@/assets";
+import React from 'react';
+import { Box, Button, Text } from '@/wrappers';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Divider } from '@mui/material';
 
 interface proptypes {
   img: string;
@@ -11,27 +12,19 @@ interface proptypes {
   area: string;
   location: string;
 }
-export default function UnitsCard({
-  img,
-  title,
-  link,
-  price,
-  area,
-  location,
-}: proptypes) {
+export default function UnitsCard({ img, title, link, price, area, location }: proptypes) {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: { xs: "300px", md: "447px" },
+        width: '100%',
+        // height: { xs: '300px', md: '447px' },
         // position: "relative",
         // overflow: "hidden",
-        borderRadius: "16px",
+        borderRadius: '16px',
 
-        boxShadow: "0px 6px 12px 0px rgba(28, 39, 49, 0.05)",
-      }}
-    >
-      <Box
+        boxShadow: '0px 6px 12px 0px rgba(28, 39, 49, 0.05)',
+      }}>
+      {/* <Box
         center
         sx={{
           position: "absolute",
@@ -43,12 +36,14 @@ export default function UnitsCard({
           backgroundColor: "rgba(52, 52, 52, 0.2)",
           borderRadius: 100,
         }}
-      ></Box>
+      >
+        Hart Icon
+      </Box> */}
       <Box
         sx={{
-          width: "100%",
-          height: { xs: "150px", md: "237px" },
-          borderRadius: "16px 16px 0 0",
+          width: '100%',
+          height: { xs: '150px', md: '237px' },
+          borderRadius: '16px 16px 0 0',
         }}
         component={Image}
         placeholder="blur"
@@ -58,46 +53,40 @@ export default function UnitsCard({
       <Box
         column
         sx={{
-          width: "100%",
-          height: { xs: "80px", md: "136px" },
-          py: "12px",
-          px: "16px",
-        }}
-      >
+          width: '100%',
+          height: { xs: '80px', md: '136px' },
+          py: '12px',
+          px: '16px',
+        }}>
         <Box column>
           <Text
             variant="h5"
             sx={{
-              fontSize: { xs: "14px", md: "18px" },
-            }}
-          >
+              fontSize: { xs: '14px', md: '18px' },
+            }}>
             {title}
           </Text>
           <Text
             variant="small"
             sx={{
               // fontSize: { xs: "14px", md: "18px" },
-              display: { xs: "flex", md: "none" },
-            }}
-          >
-            location
-            {location}
+              display: { xs: 'flex', md: 'none' },
+            }}>
+            {location || 'location'}
           </Text>
         </Box>
 
         <Box
           column
           sx={{
-            mt: { xs: "15px", md: "22px" },
-            display: { xs: "none", md: "flex" },
-          }}
-        >
+            mt: { xs: '15px', md: '22px' },
+            display: { xs: 'none', md: 'flex' },
+          }}>
           <Text
             variant="caption"
             sx={{
-              fontSize: { xs: "8px", md: "10px" },
-            }}
-          >
+              fontSize: { xs: '8px', md: '10px' },
+            }}>
             Location
           </Text>
           <Text
@@ -106,21 +95,18 @@ export default function UnitsCard({
               {
                 // fontSize: { xs: "14px", md: "14px" },
               }
-            }
-          >
-            {location}
-            Location
+            }>
+            {location || 'location'}
           </Text>
         </Box>
-        <Box row center xbetween sx={{ mt: { xs: "8px", md: "12px" } }}>
+        <Box row center xbetween sx={{ mt: { xs: '8px', md: '12px' } }}>
           <Box column>
             <Text
               variant="caption"
               sx={{
-                fontSize: { xs: "8px", md: "10px" },
-                display: { xs: "none", md: "flex" },
-              }}
-            >
+                fontSize: { xs: '8px', md: '10px' },
+                display: { xs: 'none', md: 'flex' },
+              }}>
               Price
             </Text>
             <Text
@@ -130,10 +116,8 @@ export default function UnitsCard({
                 {
                   // fontSize: { xs: "14px", md: "24px" },
                 }
-              }
-            >
-              {price}
-              SAR 25,000.00
+              }>
+              {price || ' SAR 25,000.00'}
             </Text>
           </Box>
 
@@ -154,41 +138,39 @@ export default function UnitsCard({
           <Box
             center
             sx={{
-              backgroundColor: "rgba(42, 43, 45, 0.08) ",
-              borderRadius: "32px",
-              height: "26px",
-              py: "8px",
-              px: "12px",
-            }}
-          >
+              backgroundColor: 'rgba(42, 43, 45, 0.08) ',
+              borderRadius: '32px',
+              height: '26px',
+              py: '8px',
+              px: '12px',
+            }}>
             <Text
               center
               variant="body"
               s={16}
               sx={{
-                fontSize: { xs: "10px", md: "16px" },
-              }}
-            >
-              {area}
-              23 Sqm
+                fontSize: { xs: '10px', md: '16px' },
+              }}>
+              {area || '23 Sqm'}
             </Text>
           </Box>
         </Box>
       </Box>
-      <Box sx={{ py: "16px", px: "24px" }}>
+      <Divider sx={{ mt: '16px', backgroundColor: '#F0F0F0', height: '1px', border: '0px' }}></Divider>
+      <Box sx={{ py: '16px', px: '24px' }}>
         <Button
+          component={Link}
           variant="outlined"
           sx={{
-            display: "dlex",
-            height: "20px",
-            padding: "16px 24px",
-            justifyContent: " center",
-            alignItems: "center",
+            display: 'dlex',
+            height: '20px',
+            padding: '16px 24px',
+            justifyContent: ' center',
+            alignItems: 'center',
 
-            fontSize: { xs: "12px", md: "16px" },
+            fontSize: { xs: '12px', md: '14px' },
           }}
-          href={"/unitdetails"}
-        >
+          href={'/unitdetails'}>
           View Details
         </Button>
       </Box>
