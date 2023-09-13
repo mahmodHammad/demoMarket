@@ -37,9 +37,9 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
         borderRadius: '16px',
         pb: '20px',
       }}>
-      <Box column ycenter fullWidth gap={isMobileView ? '0px' : '12px'} p={'16px'}>
+      <Box column ycenter fullWidth gap={{xs: 0, md: '12px'}} p={'16px'}>
         <Box fullWidth>
-          <Box row ycenter xbetween py={isMobileView ? '0px' : '12px'} pb={isMobileView ? '10px' : '20px'}>
+          <Box row ycenter xbetween py={{xs: 0, md: '12px'}} pb={{xs: '10px', md: '12px'}}>
             <Text variant={isMobileView ? 'h4' : 'h5'}>Filter</Text>
             {isMobileView ? (
               <IconButton onClick={closeFilterOnMobileView}>
