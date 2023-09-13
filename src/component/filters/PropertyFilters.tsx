@@ -3,10 +3,15 @@
 import React, { useState } from 'react';
 import { AccordionChipsFilter, CheckBox, CounterFilter, SliderFilter, TextInput } from '@/component';
 import { Box, Text, Button, Accordion } from '@/wrappers';
+import { IconButton } from '@mui/material';
+import { Close } from '@/assets';
 
-type Props = {};
+type Props = {
+  isMobileView?: boolean;
+  closeFilterOnMobileView?: () => void;
+};
 
-const PropertyFilters = (props: Props) => {
+const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Props) => {
   const [filters, setFilters] = useState(FILTERS);
 
   const [noOfBedrooms, setNoOfBedrooms] = useState<number>(0);
@@ -35,11 +40,17 @@ const PropertyFilters = (props: Props) => {
         pb: '20px',
       }}>
       <Box fullWidth>
-        <Box row ycenter xbetween py={'12px'}>
-          <Text variant="h5">Filter</Text>
-          <Button size="medium" sx={{ color: '#004256', fontWeight: '700', fontSize: 14 }}>
-            Apply Filter
-          </Button>
+        <Box row ycenter xbetween py={'12px'} pb={isMobileView ? 3 : 0}>
+          <Text variant={isMobileView ? 'h4' : 'h5'}>Filter</Text>
+          {isMobileView ? (
+            <IconButton onClick={closeFilterOnMobileView}>
+              <Close sx={{ fontSize: 26 }} />
+            </IconButton>
+          ) : (
+            <Button size="medium" sx={{ color: '#004256', fontWeight: '700', fontSize: 14 }}>
+              Apply Filter
+            </Button>
+          )}
         </Box>
 
         <TextInput placeholder="Search" />
@@ -141,6 +152,8 @@ const PropertyFilters = (props: Props) => {
         filters={filters.availability}
         onFilterStateChange={handleFiltersState}
       />
+
+      {/* //TODO: implement apply and clear button in case of mobile view */}
     </Box>
   );
 };

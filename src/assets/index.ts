@@ -23,3 +23,4 @@ export { default as Location } from "./icons/Location";
 export { default as AccordionIcon } from "./icons/AccordionIcon";
 export { default as Minus } from "./icons/Minus";
 export { default as Plus } from "./icons/Plus";
+export { default as Filter } from "./icons/Filter";
