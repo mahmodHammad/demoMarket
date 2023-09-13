@@ -18,7 +18,7 @@ export default function page() {
 
   return (
     <Container maxWidth="xl" sx={{ position: 'relative' }}>
-      <Grid container spacing={3} sx={{ mt: '5px', pt: '26px' }} mb={15}>
+      <Grid container spacing={3} sx={{ mt: { xs: 0, md: '5px' }, pt: { xs: 0, md: '26px' } }} mb={15}>
         <SlideTransitions isMobileView={isMobileView} showFiltersOnMob={showFiltersOnMob}>
           <Grid item xs={12} md={4} display={{ xs: 'flex', height: 'fit-content' }}>
             <PropertyFilters isMobileView={isMobileView} closeFilterOnMobileView={() => setShowFiltersOnMob(false)} />
