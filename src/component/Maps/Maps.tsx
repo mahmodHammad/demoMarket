@@ -1,10 +1,6 @@
 'use client';
-import React, { useEffect, useState } from "react";
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
-// import { Box, Button, Typography } from "@/Shared/layout";
-import MapsAutoComplete from "./MapsAutoComplete";
+import React, { useState } from "react";
 import MapsView from "./MapsView";
-import { Box } from "@/wrappers";
 
 const GeocodingAPIBase = "https://maps.googleapis.com/maps/api/geocode/json";
 const GoogleMapsLinkBase = "https://www.google.com/maps/search/?api=1";
@@ -18,7 +14,6 @@ const MapContainer = ({setShowMap, handleMapSubmit}) => {
   const [returnObj, setReturnObj] = useState({});
 
   const handleMapClick = (props, marker, event) => {
-    console.log(props?.geometry?.location?.lat()|| event.latLng.lat(),props?.geometry?.location?.lng()|| event.latLng.lng(),'shreyas')
     // Handle marker click event here
     setLatLng({ lat: props?.geometry?.location?.lat() || event.latLng.lat(), lng: props?.geometry?.location?.lng() || event.latLng.lng() });
     setShowingInfoWindow(true);
@@ -34,8 +29,8 @@ const MapContainer = ({setShowMap, handleMapSubmit}) => {
       setReturnObj({
         "latitude": props?.geometry?.location?.lat(),
         "longitude": props?.geometry?.location?.lng(),
-        "latitudeDelta": 0.02,
-        "longitudeDelta": 0.009244060475161988,
+        "latitudeDelta": process.env.LATITUDE_DELTA,
+        "longitudeDelta": process.env.LONGITUDE_DELTA,
         "formattedAddress": props?.formatted_address,
         "districtName": districtName,
         "mapsLink": `${GoogleMapsLinkBase}&query=${props?.geometry?.location?.lat()},${props?.geometry?.location?.lng()}`,
@@ -46,7 +41,6 @@ const MapContainer = ({setShowMap, handleMapSubmit}) => {
     }
   };
   const handleSubmit = () => {
-    console.log('shreyas',returnObj)
     handleMapSubmit(returnObj);
   }
   const handleInfoWindowClosed = () => {
@@ -55,7 +49,7 @@ const MapContainer = ({setShowMap, handleMapSubmit}) => {
 
   const onPlaceSelected = (details) => {
     fetch(
-      `${GeocodingAPIBase}?latlng=${latLng.lat},${latLng.lng}&key=${import.meta.env.VITE_MAPS_KEY
+      `${GeocodingAPIBase}?latlng=${latLng.lat},${latLng.lng}&key=${process.env.VITE_MAPS_KEY
       }`
     )
       .then((response) => response.json())
@@ -70,8 +64,8 @@ const MapContainer = ({setShowMap, handleMapSubmit}) => {
         setReturnObj({
           "latitude": latLng.lat,
           "longitude": latLng.lng,
-          "latitudeDelta": 0.02,
-          "longitudeDelta": 0.009244060475161988,
+          "latitudeDelta": process.env.LATITUDE_DELTA,
+          "longitudeDelta": process.env.LONGITUDE_DELTA,
           "formattedAddress": formattedAddress,
           "districtName": districtName,
           "mapsLink": mapsLink,

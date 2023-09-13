@@ -1,43 +1,16 @@
 import {
-  AtarColoredLogo,
-  AtarWhiteLogo,
   FrontSide,
   GroundFloor,
   Room,
 } from "@/assets";
 import {
-  AboutUnit,
-  BuildingSchemeIcons,
-  BuyNowCard,
-  ConstructionStatus,
-  Features,
-  FeaturesAndAmenities,
-  FloorPlans,
   Neighbourhoods,
-  OwnerCard,
-  QuiltedImageList,
-  UnitHeader,
-  UnitMap,
 } from "@/component";
-import { Box, Button, Item } from "@/wrappers";
-import { Container, Grid } from "@mui/material";
-import Link from "next/link";
+import { Item } from "@/wrappers";
+import { Grid } from "@mui/material";
 import React from "react";
-
-import logocolored from "@/assets/images/logocolored.png";
-import floor from "@/assets/images/floor.png";
-import PhotoAlbum from "react-photo-album";
 import MapContainer from "@/component/Maps/Maps";
 
-const photos = [{ src: "@/assets/images/photo1.png", width: 800, height: 600 }];
-
-const floorFeatures = [
-  { icon: <Room />, title: "3 room" },
-  { icon: <FrontSide />, title: "Front Side" },
-  { icon: <GroundFloor />, title: "Ground Floor" },
-  { icon: <Room />, title: "3 room" },
-  { icon: <Room />, title: "5 beds" },
-];
 
 interface Props {
   id?: string;
@@ -83,10 +56,10 @@ export default function page({
           <MapContainer />
 
         </Item>
-        <Item>
+        {/* <Item>
           <Neighbourhoods />
 
-        </Item>
+        </Item> */}
       </Grid>
       {/* <Container maxWidth="xl" id="#shreyas"> */}
       {/* <Box sx={{ mt: "30px" }}> */}
