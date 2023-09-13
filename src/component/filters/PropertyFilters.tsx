@@ -37,9 +37,9 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
         borderRadius: '16px',
         pb: '20px',
       }}>
-      <Box column ycenter fullWidth gap={{xs: 0, md: '12px'}} p={'16px'}>
+      <Box column ycenter fullWidth gap={{ xs: 0, md: '12px' }} p={'16px'}>
         <Box fullWidth>
-          <Box row ycenter xbetween py={{xs: 0, md: '12px'}} pb={{xs: '10px', md: '12px'}}>
+          <Box row ycenter xbetween py={{ xs: 0, md: '12px' }} pb={{ xs: '10px', md: '12px' }}>
             <Text variant={isMobileView ? 'h4' : 'h5'}>Filter</Text>
             {isMobileView ? (
               <IconButton onClick={closeFilterOnMobileView}>
@@ -130,7 +130,9 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
         />
 
         <Box fullWidth row ycenter xbetween>
-          <Text bold>Pet-Friendly</Text>
+          <Text bold sx={{ fontSize: 14 }}>
+            Pet-Friendly
+          </Text>
           <CheckBox />
         </Box>
 

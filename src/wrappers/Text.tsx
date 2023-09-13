@@ -7,10 +7,9 @@ interface Text extends TypographyProps {
   gray?: boolean;
   primary?: boolean;
   bold?: boolean;
+  medium?: boolean;
   light?: boolean;
   color?: string;
-  sx?: any;
-  component?: React.ElementType;
   children: ReactNode;
 }
 const setTypographyLayoutSXProps = (props: Text) => {
@@ -19,6 +18,7 @@ const setTypographyLayoutSXProps = (props: Text) => {
     ...(props.gray && { color: `#525451 !important` }),
     ...(props.s && { fontSize: `${props.s}px !important ` }),
     ...(props.light && { fontWeight: 400 }),
+    ...(props.medium && { fontWeight: 500 }),
     ...(props.bold && { fontWeight: `bold` }),
     ...props.sx,
   };
