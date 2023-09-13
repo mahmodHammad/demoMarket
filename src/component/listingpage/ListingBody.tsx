@@ -1,5 +1,5 @@
 import { Box, Button, Text } from '@/wrappers';
-import { Grid } from '@mui/material';
+import { Grid, Pagination } from '@mui/material';
 import React from 'react';
 import UnitsCard from '../cards/UnitsCard';
 import SearchBox from './SearchBox';
@@ -46,8 +46,7 @@ type Props = {
 
 const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
   return (
-    <>
-      <Box column width={'100%'}>
+      <Box column width={'100%'} ycenter>
         <Text variant="h4">Properties in Saudi Arabia</Text>
         <SearchBox />
 
@@ -85,8 +84,9 @@ const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
             </Grid>
           ))}
         </Grid>
+
+        <Pagination count={10} color="primary" sx={{mt: 5}} />
       </Box>
-    </>
   );
 };
 

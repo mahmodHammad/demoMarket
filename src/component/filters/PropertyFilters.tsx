@@ -43,7 +43,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
             <Text variant={isMobileView ? 'h4' : 'h5'}>Filter</Text>
             {isMobileView ? (
               <IconButton onClick={closeFilterOnMobileView}>
-                <Close sx={{ fontSize: 26 }} />
+                <Close sx={{ fontSize: 26, mr: -1 }} />
               </IconButton>
             ) : (
               <Button size="medium" sx={{ color: '#004256', fontWeight: '700', fontSize: 14 }}>
