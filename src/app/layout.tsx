@@ -2,6 +2,7 @@ import * as React from "react";
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import { Box } from '@/wrappers';
 import { Footer, Navbar, LoginModal } from '@/component';
+import AppLayout from "@/component/loggedInLayout/AppLayout";
 
 export const metadata = {
 	title: 'Atar Market place',
@@ -20,9 +21,14 @@ export default function RootLayout({
 		<html lang='en'>
 			<body>
 				<ThemeRegistry>
-					<Navbar/>
+
+					{/* Looged In layout */}
+					<AppLayout children={children}/>
+
+					{/* Looged Out layout */}
+					{/* <Navbar/>
 					<Box component='main'>{children}</Box>
-					<Footer />
+					<Footer /> */}
 
 					{/* // TODO: move the login modal, and create Context API to mange its state away from layout because we can't handle state management here  */}
 					{/* <LoginModal loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} /> */}

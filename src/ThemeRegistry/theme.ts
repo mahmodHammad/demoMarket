@@ -23,6 +23,9 @@ const theme = responsiveFontSizes(
         light: '#002A37',
         dark: '#002A37',
       },
+      error: { main: '#FF4242' },
+      
+
     },
     typography: {
       fontFamily: roboto.style.fontFamily,
