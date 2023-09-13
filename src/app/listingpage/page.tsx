@@ -44,7 +44,7 @@ const SlideTransitions = ({ children, isMobileView, showFiltersOnMob }: SlidePro
 
   return (
     <Slide
-      direction="down"
+      direction="up"
       in={isMobileView && showFiltersOnMob}
       mountOnEnter
       unmountOnExit
