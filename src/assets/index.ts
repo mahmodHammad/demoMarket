@@ -26,3 +26,4 @@ export { default as Plus } from "./icons/Plus";
 export { default as Filter } from "./icons/Filter";
 export { default as OutlineHeart } from "./icons/OutlineHeart";
 export { default as FilledHeart } from "./icons/FilledHeart";
+export { default as SearchLine } from "./icons/SearchLine";
