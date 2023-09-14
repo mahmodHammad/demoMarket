@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 // import atarlogo from "@/assets/atarcloud_primary.png";
-import { Typography, Button, SvgIcon, CircularProgress } from "@mui/material";
+import { Typography, CircularProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import ReactDOM from "react-dom";
 import LocationIcon from "@/assets/icons/LocationIcon";

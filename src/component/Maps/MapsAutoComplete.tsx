@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 
 import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
-import { Input, SvgIcon, TextField } from "@mui/material";
 import './maps.css'
 const MapsAutoComplete = ({ handleMapClick, address }) => {
   const inputRef = useRef(null);

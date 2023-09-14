@@ -1,7 +1,6 @@
 // import { Box, Button, Typography } from "@/Shared/layout";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import { Box, Button, Text } from "@/wrappers";
-import { SvgIcon } from "@mui/material";
 
 
 function MapAdress({ title, body, mapsLink }) {
