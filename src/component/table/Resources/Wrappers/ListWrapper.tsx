@@ -1,4 +1,4 @@
-import { Container } from '@/Shared/layout'
+import { Container } from '@/wrappers'
 import { Box } from '@mui/material'
 import { SectionWrapperComponentProps } from '../PaginatedResourcesList'
 

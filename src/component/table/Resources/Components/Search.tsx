@@ -1,11 +1,11 @@
-import { Box } from "@/Shared/layout";
+import { Box } from "@/wrappers";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton, TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { debounce } from "lodash";
 import { useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 const Search = ({
   search,
   handleSearch,
@@ -14,7 +14,7 @@ const Search = ({
   handleSearch: (value: string) => void;
 }) => {
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [value, setValue] = useState("");
 
   const debouncedSearchHandler = useMemo(
@@ -42,7 +42,7 @@ const Search = ({
           }}
           margin="none"
           variant="outlined"
-          placeholder={t("dashboard.search")}
+          placeholder={'Search'}
           value={value}
           onChange={handleChange}
           InputProps={{
@@ -59,57 +59,6 @@ const Search = ({
           }}
         />
       </Box>
-
-      {/* {showSearchBar ? (
-				<TextField
-					sx={{
-						mr: 4,
-					}}
-					variant="outlined"
-					placeholder={t('dashboard.search')}
-					value={value}
-					onChange={handleChange}
-					InputProps={{
-						endAdornment: (
-							<InputAdornment position="end">
-								<CloseIcon
-									style={{ color: '#008EA5', cursor: 'pointer' }}
-									onClick={() => {
-										handleSearch('')
-										setShowSearchBar(false)
-									}}
-								/>
-							</InputAdornment>
-						),
-						startAdornment: (
-							<InputAdornment position="end">
-								<SearchIcon
-									sx={{
-										color: '#008EA5',
-										cursor: 'pointer',
-									}}
-								/>
-							</InputAdornment>
-						),
-					}}
-				/>
-			) : (
-				<IconButton
-					sx={{
-						mr: 4,
-						width: 'fit-content',
-						border: '1px solid #f5f5f5',
-					}}
-					onClick={() => setShowSearchBar(true)}
-					size="large"
-				>
-					<SearchIcon
-						sx={{
-							fontSize: '3rem',
-						}}
-					/>
-				</IconButton>
-			)} */}
     </>
   );
 };
