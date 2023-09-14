@@ -1,7 +1,7 @@
 // import { Box, Button, Typography } from "@/Shared/layout";
 import LocationIcon from "@/assets/icons/LocationIcon";
-import { Box, Button } from "@/wrappers";
-import { SvgIcon, Typography } from "@mui/material";
+import { Box, Button, Text } from "@/wrappers";
+import { SvgIcon } from "@mui/material";
 
 
 function MapAdress({ title, body, mapsLink }) {
@@ -16,17 +16,17 @@ function MapAdress({ title, body, mapsLink }) {
       <Box row>
         <LocationIcon sx={{ mr: "8px" }} />
         <Box column>
-          <Typography
+          <Text
             variant="body"
           >
             {title}
-          </Typography>
+          </Text>
 
-          <Typography
+          <Text
             variant="small"
           >
             {body}
-          </Typography>
+          </Text>
         </Box>
       </Box>
       <Button component="a" href={mapsLink} target="_blank" fullWidth sx={{ mt: "12px" }}>
