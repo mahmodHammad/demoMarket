@@ -74,7 +74,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           filters={filters.location}
           onFilterStateChange={handleFiltersState}
           moreContent={
-            <Button startIcon={<SearchLine />} sx={{ width: 0.28, p: 0, py: 0.5 }} variant="text">
+            <Button startIcon={<SearchLine />} sx={{ width: { xs: 0.4, md: 0.28 }, p: 0, py: 0.5 }} variant="text">
               More Location
             </Button>
           }
