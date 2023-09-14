@@ -44,6 +44,7 @@ export default function UnitsCard({ img, title, link, price, area, location }: p
           width: '100%',
           height: { xs: '150px', md: '237px' },
           borderRadius: '16px 16px 0 0',
+          objectFit: 'cover',
         }}
         component={Image}
         placeholder="blur"
