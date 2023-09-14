@@ -62,11 +62,14 @@ const FilterPopup: React.FC<Props> = ({
                             <FilterListIcon
                                 sx={{
                                     color: "#232425",
-                                    mr: 4,
+                                    mr: '8px',
                                 }}
                             />
                             {filterTitle}
-                            <ArrowDropDownIcon />
+                            <ArrowDropDownIcon sx={{
+                                color: "#232425",
+                                ml: '8px',
+                            }} />
                         </>
                     </Button>
                     <Dialog onClose={handleClose} open={open} sx={{ minWidth: '400px' }}>

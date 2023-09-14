@@ -1,20 +1,5 @@
 import { Container } from '@/wrappers'
 import { Pagination } from '@mui/material'
-// import { makeStyles } from '@mui/styles'
-
-// const useStyles = makeStyles(() => ({
-//   ul: {
-//     "& .MuiPaginationItem-root": {
-//       color: "#232425",
-//       fontWeight:400
-//     },
-//     "& .Mui-selected": {
-//       color: "white",
-//       backgroundColor:'#2E3032'
-//     },
-
-//   }
-// }));
 
 const PaginationWrapper = ({
 	page,
@@ -25,8 +10,6 @@ const PaginationWrapper = ({
 	count: number | undefined
 	handler: (value: number) => void
 }) => {
-  
-//   const classes = useStyles();
 	return (
 		<Container justifyContent="flex-end">
 			<Pagination
@@ -36,19 +19,24 @@ const PaginationWrapper = ({
 					handler(value)
 				}}
 				color="primary"
-        variant="outlined" shape="rounded"
-        // classes={{ ul: classes.ul }}
-        sx={{
-          '.MuiPagination-outlined':{color:'red'},
-		  "& .MuiPaginationItem-root": {
-			color: "#232425",
-			fontWeight:400
-		  },
-		  "& .Mui-selected": {
-			color: "white",
-			backgroundColor:'#2E3032'
-		  },
-        }}
+				variant="outlined" shape="rounded"
+				sx={{
+					'.MuiPagination-outlined': { color: 'red' },
+					"& .MuiPaginationItem-root": {
+						color: "#232425",
+						fontWeight: 400
+					},
+					"& .Mui-selected": {
+						color: "#FFFFFF !important",
+						backgroundColor: '#2E3032 !important'
+					},
+					".MuiPaginationItem-previousNext": {
+						svg: {
+							color: '#232425 !important',
+						},
+						backgroundColor: '#F0F0F0'
+					}
+				}}
 			/>
 		</Container>
 	)

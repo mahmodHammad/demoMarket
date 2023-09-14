@@ -5,10 +5,18 @@ import { TableCell, tableCellClasses, TableRow } from "@mui/material";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        color: theme.palette.common.white,
+        span: {
+            fontSize: 16,
+            fontWeight: 700,
+            color: '#232425',
+        }
+        // color: theme.palette.common.white,
+
     },
     [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
+        padding:'4px 4px 4px 16px'
+        // fontSize: 16,
+        // fontWeight: 700
     },
 }));
 

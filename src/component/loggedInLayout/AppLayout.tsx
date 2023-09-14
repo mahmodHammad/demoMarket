@@ -274,7 +274,7 @@ export default function AppLayout(props: Props) {
             }
           /> */}
         </Container>
-        <div style={{ backgroundColor: '#FAFCFD', height: '100%' }}>
+        <div style={{ backgroundColor: '#FAFCFD' }}>
           {props.children}
         </div>
         {/* <Outlet /> */}

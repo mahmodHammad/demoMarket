@@ -13,15 +13,15 @@ export default function Home() {
   return (
     <Box>
       {/* Logged In component */}
-        <MyBookings/>
+        {/* <MyBookings/> */}
 
       {/* Logged out component */}
-      {/* <Hero />
+      <Hero />
       <Container maxWidth="xl" sx={{ pb: { xs: "90px", md: "164px" } }}>
         <Neighbourhoods />
         <RecentlyAdded />
         <MostViewed />
-      </Container> */}
+      </Container>
     </Box>
   );
 }

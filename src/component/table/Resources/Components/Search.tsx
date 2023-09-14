@@ -1,7 +1,6 @@
 import { Box } from "@/wrappers";
-import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
-import { IconButton, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { debounce } from "lodash";
 import { useMemo, useState } from "react";
@@ -49,9 +48,11 @@ const Search = ({
             startAdornment: (
               <InputAdornment position="end">
                 <SearchIcon
-                color="primary"
+                  color="primary"
                   sx={{
                     cursor: "pointer",
+                    marginRight: '8px',
+                    color: '#969798'
                   }}
                 />
               </InputAdornment>

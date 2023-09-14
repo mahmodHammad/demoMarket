@@ -1,7 +1,4 @@
-import {
-    Button,
-    Text,
-} from "@/wrappers";
+import { Button, Text} from "@/wrappers";
 import { StyledTableRow, StyledTableCell } from "@/wrappers/table-cells";
 
 export const bookingHeaders = () => {
@@ -20,7 +17,7 @@ const BookingData = ({ data }: { data: any[] }) => {
             {data?.length &&
                 data?.map((row: any) => (
                     <StyledTableRow key={row?.id} >
-                        <StyledTableCell component="th" scope="row">
+                        <StyledTableCell component="th" scope="row" sx={{ fontWeight: 700 }}>
                             {row?.name}
                         </StyledTableCell>
                         <StyledTableCell>
@@ -36,7 +33,7 @@ const BookingData = ({ data }: { data: any[] }) => {
                                         py: 2,
                                     }}
                                 >
-                                    <Text variant="caption" sx={{
+                                    <Text variant="label" sx={{
                                         color: '#FF4242'
                                     }}>
                                         Cancel
@@ -93,43 +90,33 @@ const BookingData = ({ data }: { data: any[] }) => {
 export default BookingData;
 
 const colorJson = {
-    'Visit Booked': '#E3E3E3',
-    'Pay Down': '#FFC225',
-    'Payment Completed': '#1EC27B',
-    'Completed': '#1EC27B',
-    6: '#FFC225',
-    7: '#FF4242',
-    8: '#1EC27B',
-    9: '#FFC225',
-    10: '#FF4242',
-    11: '#1EC27B',
-    12: '#FFC225',
-    13: '#FFC225',
-    14: '#FFC225',
-    15: '#004256',
-    16: '#FFC225',
-    17: '#FF4242',
-    18: '#004256',
-    19: '#FFC225',
-    20: '#FFC225',
-    21: '#004256',
-    22: '#FF4242',
-    23: '#004256',
-    24: '#FFC225',
+    'Visit Booked': { bg: '#EBF0F1', color: '#002A37' },
+    'Pay Down': { color: '#8A6A16', bg: '#FCEDC7' },
+    'Payment Completed': { color: '#00697A', bg: '#EBF6F8' },
+    'Completed': { color: '#0A9458', bg: '#EDFAF4' },
 }
 export const renderProgress = (status) => {
     return (
         <>
-            <span>
-                <span style={{
-                    background: colorJson[status],
-                    minHeight: '10px',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    minWidth: '10px',
-                    marginRight: '3px'
-                }}></span>  {status}
+            <span style={{
+                color: colorJson[status]?.color,
+                backgroundColor: colorJson[status]?.bg,
+                borderRadius: 50,
+                padding: '10px',
+                fontWeight: 500,
+            }}>
+                {status}
             </span>
         </>
     )
+}
+
+//Filter values for filtering Requests. 1st level is accordian name. 2nd level is key-value for filters.
+export const BookingFilterValues = {
+    'Filter by status': [
+        { name: 'Visit Booked', value: true, id: 'Visit Booked', status: 1 },
+        { name: 'Pay Down', value: true, id: 'Pay Down', status: 18 },
+        { name: 'Payment Completed', value: true, id: 'Payment Completed', status: 20 },
+        { name: 'Completed', value: true, id: 'Completed', status: 3 },
+    ]
 }
