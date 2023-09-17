@@ -31,6 +31,9 @@ const theme = responsiveFontSizes(
         light: '#002A37',
         dark: '#002A37',
       },
+      error: { main: '#FF4242' },
+      
+
     },
     typography: {
       fontFamily: roboto.style.fontFamily,
@@ -201,6 +204,7 @@ const theme = responsiveFontSizes(
             style: {
               display: 'block',
               fontSize: '16px',
+              fontWeight: 400,
               [initTheme.breakpoints.down('md')]: {
                 fontSize: '14px',
               },
