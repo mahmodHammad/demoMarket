@@ -112,6 +112,9 @@ const page = ({
                   src={QR}
                 />
               </Box>
+              <Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
+                <LocationCard />
+              </Grid>
               <Box row gap={'40px'} my="25px">
                 <Button
                   variant="outlined"
@@ -142,7 +145,7 @@ const page = ({
                 </Button>
               </Box>
             </Grid>
-            <Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'flex' }}>
+            <Grid item contaier xs={12} md={4} display={{ xs: 'none', md: 'flex' }}>
               <LocationCard />
             </Grid>
           </Grid>
