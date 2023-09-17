@@ -25,3 +25,4 @@ export { default as Minus } from './icons/Minus';
 export { default as Plus } from './icons/Plus';
 export { default as LocationIcon } from './icons/LocationIcon';
 export { default as Calendar } from './icons/Calendar';
+export { default as Delete } from './icons/Delete';
