@@ -11,14 +11,15 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
+import { useAuth } from '@/contexts/AuthContext';
 
 const pages = ["Login", "Signup"];
 
-type PropsTypes = {
-  // setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+function ResponsiveAppBar() {
+  const {
+		openLoginModal,
+	} = useAuth();
 
-function ResponsiveAppBar(props: PropsTypes) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -78,7 +79,7 @@ function ResponsiveAppBar(props: PropsTypes) {
                 component={Link}
                 href="/login"
                 onClick={() => {
-                  // setLoginModalOpen(true);
+                  openLoginModal();
                   handleCloseNavMenu()
                 }}
                 sx={{ color: "#fff", fontSize: "20px", mr: "12px" }}

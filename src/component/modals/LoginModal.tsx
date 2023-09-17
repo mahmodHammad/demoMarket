@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import { Box, Button, Text } from '@/wrappers';
 import { Modal } from '@mui/material';
 import { Close } from '@/assets';
@@ -26,19 +27,17 @@ const style = {
 	// pt: 11
 };
 
-type PropsTypes = {
-	loginModalOpen: boolean;
-	setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
 
-const LoginModal = ({ loginModalOpen, setLoginModalOpen }: PropsTypes) => {
-	const handleOpen = () => setLoginModalOpen(true);
-	const handleClose = () => setLoginModalOpen(false);
+const LoginModal = () => {
+	const {
+		isLoginModalOpen,
+		closeLoginModal,
+	} = useAuth();
 
 	return (
 		<Modal
-			open={loginModalOpen}
-			onClose={handleClose}
+			open={isLoginModalOpen}
+			onClose={closeLoginModal}
 			aria-labelledby='modal-modal-title'
 			aria-describedby='modal-modal-description'
 		>
@@ -49,7 +48,7 @@ const LoginModal = ({ loginModalOpen, setLoginModalOpen }: PropsTypes) => {
 				sx={style}
 			>
 				<IconButton
-					onClick={() => setLoginModalOpen(false)}
+					onClick={closeLoginModal}
 					sx={{
 						position: 'absolute',
 						top: '36px',
