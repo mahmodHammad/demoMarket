@@ -36,7 +36,7 @@ export default function UnitHeader({ logo, title, location }: Props) {
           }}
           // size="small"
         >
-          <Share color={'#008EA5D6'} />
+          <Share />
         </IconButton>
         <IconButton
           color="primary"
@@ -47,7 +47,7 @@ export default function UnitHeader({ logo, title, location }: Props) {
             mt: '-10px',
           }}
           size="large">
-          <Favorite color={'#008EA5D6'} />
+          <Favorite />
         </IconButton>
         <Button
           variant="outlined"
@@ -62,7 +62,7 @@ export default function UnitHeader({ logo, title, location }: Props) {
             borderRadius: '8px',
             borderColor: '#E3E3E3',
           }}
-          startIcon={<Share size="small" color={'#002A37'} />}>
+          startIcon={<Share size="small" />}>
           Share
         </Button>
 
@@ -79,7 +79,7 @@ export default function UnitHeader({ logo, title, location }: Props) {
             borderRadius: '8px',
             borderColor: '#E3E3E3',
           }}
-          startIcon={<Favorite color={'#002A37'} />}
+          startIcon={<Favorite />}
 
           //   color="black"
         >

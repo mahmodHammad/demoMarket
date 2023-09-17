@@ -124,19 +124,19 @@ const SearchBar = () => {
       <Box
         xbetween
         row
+        center
         sx={{
-          width: { xs: '400px', md: '918px' },
+          width: { xs: '100%', md: '918px' },
           height: { xs: '70px', md: '102px' },
-          top: '347px',
-          borderRadius: ' 0px 20px 20px 20px',
+          borderRadius: { xs: ' 0px 16px 16px 16px', md: ' 0px 20px 20px 20px' },
           boxShadow: ' 0px 30px 60px -15px #8F90BC26',
           backgroundColor: '#FFFFFFCC',
           backdropFilter: 'blur(10px)',
-          p: { xs: '10px', md: '24px' },
+          p: { xs: '12px', md: '24px' },
         }}>
         <Box xbetween width={'100%'}>
-          <Box center width={'100%'} sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <Box column width={'100%'} mr={'10px'}>
+          <Box center width={'100%'} sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'space-around' }}>
+            <Box width={'100%'}>
               <Autocomplete
                 {...defaultProps}
                 id="disable-close-on-select"
@@ -151,6 +151,7 @@ const SearchBar = () => {
                     variant="standard"
                     placeholder="Location"
                     sx={{
+                      width: '100%',
                       input: {
                         '&::placeholder': {
                           textOverflow: 'ellipsis !important',
@@ -165,7 +166,7 @@ const SearchBar = () => {
               />
             </Box>
 
-            <Box column width={'100%'} mr={'10px'}>
+            <Box column width={'100%'}>
               <Autocomplete
                 {...defaultProps}
                 id="disable-close-on-select"
@@ -193,7 +194,7 @@ const SearchBar = () => {
                 )}
               />
             </Box>
-            <Box column width={'100%'} mr={'10px'}>
+            <Box column width={'100%'}>
               <Autocomplete
                 {...defaultProps}
                 id="disable-close-on-select"
@@ -329,12 +330,12 @@ const SearchBar = () => {
         </Box>
 
         <Box
-          width={{ md: '54px' }}
-          height={{ md: '54px' }}
+          width={{ xs: '30px', md: '54px' }}
+          height={{ xs: '30px', md: '54px' }}
           bgcolor={theme.palette.primary.main}
-          borderRadius={'20px'}
+          borderRadius={{ xs: '8px', md: '15px' }}
           center>
-          <IconButton component={Link} aria-label="delete" size="large" href="/listingpage">
+          <IconButton component={Link} aria-label="delete" size="small" href="/listingpage">
             <Search />
           </IconButton>
         </Box>

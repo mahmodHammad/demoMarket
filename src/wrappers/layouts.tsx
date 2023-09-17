@@ -26,6 +26,8 @@ interface common {
   yend?: boolean;
   ybetween?: boolean;
   fullWidth?: boolean;
+  relative?: boolean;
+  absolute?: boolean;
   component?: React.ElementType;
   children?: ReactNode;
 }
@@ -83,6 +85,12 @@ const setLayoutSXProps = (props: any) => {
     }),
     ...(props.fullWidth && {
       width: 1
+    }),
+    ...(props.relative && {
+        position: 'relative'
+    }),
+    ...(props.absolute && {
+        position: 'absolute'
     }),
 
     ...props.sx,
