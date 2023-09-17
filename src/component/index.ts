@@ -35,4 +35,9 @@ export { default as CounterFilter } from './filters/CounterFilter';
 export { default as SliderFilter } from './filters/SliderFilter';
 
 export { default as SearchBox } from './listingpage/SearchBox';
+export { default as BookingDetails } from './bookingDetails/BookingDetails';
+export { default as BookingDetails_uhitHeader } from './bookingDetails/BookingDetails_uhitHeader';
+export { default as BookingDetails_timedate } from './bookingDetails/BookingDetails_timedate';
+export { default as BookingDetailsInfo } from './bookingDetails/BookingDetailsInfo';
+export { default as LocationCard } from './bookingDetails/LocationCard';
 export { default as ListingBody } from './listingpage/ListingBody';

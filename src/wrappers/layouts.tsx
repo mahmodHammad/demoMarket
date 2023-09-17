@@ -5,6 +5,10 @@ import {
   Grid,
   BoxProps,
   GridProps,
+  TableCell,
+  TableRow,
+  styled,
+  tableCellClasses,
 } from "@mui/material";
 
 import { ReactNode } from "react";
@@ -27,9 +31,9 @@ interface common {
   component?: React.ElementType;
   children?: ReactNode;
 }
-interface Box extends BoxProps, common {}
+interface Box extends BoxProps, common { }
 
-interface Grid extends GridProps, common {}
+interface Grid extends GridProps, common { }
 
 const setLayoutSXProps = (props: any) => {
   return {
@@ -80,7 +84,7 @@ const setLayoutSXProps = (props: any) => {
       alignItems: "space-between",
     }),
     ...(props.fullWidth && {
-        width: 1
+      width: 1
     }),
     ...(props.relative && {
         position: 'relative'
