@@ -8,6 +8,39 @@ import { Text, Button } from "@/wrappers";
 export default function Home() {
   return (
     <Box>
+            <br />
+      <br />
+
+      <Box sx={{display: 'flex', flexDirection: 'row', gap: '20px', ml: 5}} >
+      <Button variant="contained">
+        Contained
+      </Button>
+
+      <Button variant="outlined">
+        Outlined
+      </Button>
+
+      <Button variant="text">
+        text
+      </Button>
+
+      <Button variant="hover">
+        Hover
+      </Button>
+
+      <Button variant="danger">
+        Danger
+      </Button>
+
+      <Button variant="success">
+        Success
+      </Button>
+
+      </Box>
+
+
+      <br />
+      <br />
       <Button variant="contained" size="small">
         small s
       </Button>

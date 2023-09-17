@@ -1,23 +1,22 @@
-import { Box, Text } from "@/wrappers";
-import React from "react";
-import Image from "next/image";
-import heroBG from "@/assets/images/herobg.png";
-import SearchBar from "./SearchBar";
+import { Box, Text } from '@/wrappers';
+import React from 'react';
+import Image from 'next/image';
+import heroBG from '@/assets/images/herobg.png';
+import SearchBar from './SearchBar';
 export default function Hero() {
   return (
     <Box
       sx={{
-        height: { xs: "calc(100vh - 120px)", md: "calc(100vh - 100px)" },
-        position: "relative",
-      }}
-    >
+        height: { xs: 'calc(100vh - 120px)', md: 'calc(100vh - 100px)' },
+        position: 'relative',
+      }}>
       <Box
         sx={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "bottom",
-          position: "absolute",
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'bottom',
+          position: 'absolute',
         }}
         component={Image}
         priority
@@ -29,39 +28,33 @@ export default function Hero() {
 
       <Box
         sx={{
-          position: "absolute",
+          position: 'absolute',
           zIndex: 100,
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
         }}
         center
-        column
-      >
-        <Box sx={{ maxWidth: { xl: "720px", md: "60%", xs: "90%" } }}>
-          <Text
-            variant="h2"
-            align="center"
-            sx={{ color: "#fff" }}
-            component="h1"
-          >
+        column>
+        <Box sx={{ maxWidth: { xl: '720px', md: '60%', xs: '90%' } }}>
+          <Text variant="h2" align="center" sx={{ color: '#fff' }} component="h1">
             Buy, rent, or sell your property easily
           </Text>
           <Text
             variant="body"
             align="center"
             sx={{
-              mt: { md: "26px", xs: "16px" },
-              color: "#fff",
-              textAlign: "center",
-            }}
-          >
-            Lorem ipsum dolor sit amet consectetur. Neque augue dictum nullam
-            sollicitudin morbi mauris ornare bibendum condimentum.Lorem ipsum
-            dolor sit amet consectetur. Neque augue dictum nullam sollicitudin
-            morbi mauris ornare bibendum condimentum.
+              mt: { md: '26px', xs: '16px' },
+              color: '#fff',
+              textAlign: 'center',
+            }}>
+            Lorem ipsum dolor sit amet consectetur. Neque augue dictum nullam sollicitudin morbi mauris ornare bibendum
+            condimentum.Lorem ipsum dolor sit amet consectetur. Neque augue dictum nullam sollicitudin morbi mauris
+            ornare bibendum condimentum.
           </Text>
         </Box>
-        <SearchBar />
+        <Box width={'100%'} px={'25px'}>
+          <SearchBar />
+        </Box>
       </Box>
     </Box>
   );
