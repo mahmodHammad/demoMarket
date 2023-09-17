@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 import BookingTable from "@/component/my-booking/BookingTable";
 import ForSale from "@/component/my-booking/ForSale";
 import { Box, Text } from "@/wrappers";
-import neibourhoodcover2 from "@/assets/images/Rectangle 4535.png";
+import neibourhoodcover2 from "@/assets/images/Rectangle 45351.png";
 import UpcomingVisitsCard from "@/component/cards/UpcomingVisitsCard";
 
 interface Props { }

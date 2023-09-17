@@ -20,7 +20,7 @@ const DrawerContainer = ({ handleDrawerToggle, open }: any) => {
   return (
     <>
       <Box sx={{
-        paddingLeft: '48px',
+        paddingLeft: '24px',
         marginTop: '24px',
         marginBottom: '24px',
         height: "auto",

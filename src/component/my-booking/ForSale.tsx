@@ -72,6 +72,7 @@ export default function ForSale() {
                             top: "180px",
                             left: "32px",
                             position: "absolute",
+                            fontWeight:'700'
                         }}>
                         Schedule a Visit
                     </Button>

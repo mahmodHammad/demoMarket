@@ -24,7 +24,10 @@ const PaginationWrapper = ({
 					'.MuiPagination-outlined': { color: 'red' },
 					"& .MuiPaginationItem-root": {
 						color: "#232425",
-						fontWeight: 400
+						fontWeight: 400,
+						fontSize: '16px',
+						background: '#F0F0F0',
+						border: 'none'
 					},
 					"& .Mui-selected": {
 						color: "#FFFFFF !important",

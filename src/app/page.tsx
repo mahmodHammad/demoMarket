@@ -9,6 +9,8 @@ export default function Home() {
       {/* Logged In component */}
       <BookingDetails />
       {/* <MyBookings/> */}
+      {/* <MyBookings/> */}
+      {/* <MyPayments/> */}
 
       {/* Logged out component */}
       <Hero />

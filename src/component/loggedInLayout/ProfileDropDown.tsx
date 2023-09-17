@@ -1,25 +1,21 @@
 
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
-import QrCode2Icon from "@mui/icons-material/QrCode2";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import { Box, Text } from "@/wrappers";
 import {
   Avatar,
-  Box,
   ButtonBase,
-  Divider,
   Fade,
   Paper,
   Popper,
-  Typography,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import React, { useEffect, useState } from "react";
+import Pencilline from "@/assets/icons/Pencilline";
+import ShieldKeyholeLine from "@/assets/icons/ShieldKeyholeLine";
+import LogoutBoxLine from "@/assets/icons/LogoutBoxLine";
+import InformationLine from "@/assets/icons/InformationLine";
+import NextIcon from "@/assets/icons/NextIcon";
 // import { useTranslation } from "react-i18next";
 // import { useNavigate } from "react-router-dom";
+import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 
 const PopupDetails = ({
   name,
@@ -48,39 +44,12 @@ const PopupDetails = ({
         src={image}
         sx={{ width: 80, height: 80 }}
       />
-      <Typography
-        variant="subtitle1"
-        sx={{ mt: 5, textTransform: "capitalize" }}
+      <Text
+        variant="h5"
+        sx={{ mt: '8px', textTransform: "capitalize" }}
       >
         {name}
-      </Typography>
-      {isAdmin && (
-        <Typography variant="subtitle2" sx={{ fontWeight: 400 }}>
-          Admin
-        </Typography>
-      )}
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          alignItems: "center",
-          backgroundColor: "rgba(75, 145, 140, 0.2)",
-          padding: "8px 16px",
-          borderRadius: "50px",
-          mt: 5,
-          cursor: "pointer",
-        }}
-        onClick={handleModal}
-      >
-        <QrCode2Icon
-          sx={{
-            color: "#4B918C",
-          }}
-        />
-        <Typography variant="subtitle2" sx={{ fontWeight: 400 }}>
-        My Digital ID
-        </Typography>
-      </Box>
+      </Text>
     </Box>
   );
 };
@@ -102,47 +71,33 @@ const OptionLink = ({
         textDecoration: "none",
       }}
     >
-      <Box
+      <Box ycenter xbetween
         sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2rem",
           cursor: "pointer",
-          transition: "0.1s linear",
-          padding: "2px 6px",
+          padding: "12px 24px",
           borderRadius: "10px",
-          color: "#4D6075",
-          "&:hover": {
-            backgroundColor: grey[200],
-          },
         }}
       >
-        {startIcon}
-        <Typography
-          variant="subtitle1"
+        <Box ycenter
           sx={{
-            mt: 1,
-            flex: 1,
-            fontWeight: 500,
-            color: "#252E3B",
+            gap: "8px",
           }}
         >
-          {label}
-        </Typography>
-        <ArrowForwardIosIcon
-          sx={{
-            fontSize: "1.6rem",
-          }}
-        />
+          {startIcon}
+          <Text variant="label">
+            {label}
+          </Text>
+        </Box>
+        <NextIcon />
       </Box>
-    </Box>
+    </Box >
   );
 };
 
 const ProfileDropDown = () => {
   // const { t } = useTranslation();
 
- 
+
   // const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -170,7 +125,9 @@ const ProfileDropDown = () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
   });
-
+  const handleClickAway = () => {
+    setOpen(false);
+  }
   return (
     <Box ref={myRef}>
       <ButtonBase
@@ -179,149 +136,97 @@ const ProfileDropDown = () => {
         onClick={handleClick}
       >
         <Avatar
-          alt={'Shreyas'}
+          alt={'Image'}
           src={''}
           sx={{ width: 40, height: 40 }}
         />
       </ButtonBase>
-
-      <Popper
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        transition
-        sx={{
-          zIndex: 1200,
-          "& .MuiPaper-root": {
-            boxShadow: "0px 0px 21px rgba(218, 218, 218, 0.3)",
-            borderRadius: "12px",
-          },
-        }}
-      >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps}>
-            <Paper
-              sx={{
-                mt: 5,
-                mr: 10,
-                p: 2,
-                bgcolor: "background.paper",
-                color: "black",
-                zindex: 20,
-                borderRadius: 3,
-              }}
-            >
-              <Box
-                sx={{
-                  width: 400,
-                  padding: "15px 40px 40px 40px",
-                }}
-              >
-                <PopupDetails
-                  image={''}
-                  handleModal={() => setOpenModal(true)}
-                  name={'SHreysas'}
-                  isAdmin={true}
-                />
-                {/* options */}
-                <Box
+      {open &&
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <Popper
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            transition
+            sx={{
+              zIndex: 1200,
+              "& .MuiPaper-root": {
+                boxShadow: "0px 0px 21px rgba(218, 218, 218, 0.3)",
+                borderRadius: "12px",
+                minWidth: '330px'
+              },
+            }}
+          >
+            {({ TransitionProps }) => (
+              <Fade {...TransitionProps}>
+                <Paper
                   sx={{
-                    mt: 8,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
+                    mt: '30px',
+                    mr: '30px',
+                    // p: 2,
+                    bgcolor: "background.paper",
+                    color: "black",
+                    zindex: 20,
+                    borderRadius: 3,
                   }}
                 >
-                  <OptionLink
-                    // onClick={() => navigate("/edit-profile")}
-                    label={'Edit'}
-                    startIcon={
-                      <BorderColorOutlinedIcon
-                        sx={{
-                          fontSize: "2.4rem",
-                        }}
-                      />
-                    }
-                  />
-                  <OptionLink
-                    // onClick={() => navigate("/privacy_policy")}
-                    label={"privacyPolicy"}
-                    startIcon={
-                      <PrivacyTipOutlinedIcon
-                        sx={{
-                          fontSize: "2.4rem",
-                        }}
-                      />
-                    }
-                  />
-                  <OptionLink
-                    // onClick={() => navigate("/terms_and_conditions")}
-                    label={"termsAndConditions"}
-                    startIcon={
-                      <InfoOutlinedIcon
-                        sx={{
-                          fontSize: "2.4rem",
-                        }}
-                      />
-                    }
-                  />
-
-                  <Divider sx={{ my: 2 }} />
-
-                  <OptionLink
-                    // onClick={() => navigate("/settings")}
-                    label={"settings"}
-                    startIcon={
-                      <SettingsOutlinedIcon
-                        sx={{
-                          fontSize: "2.4rem",
-                        }}
-                      />
-                    }
-                  />
-
-
                   <Box
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "2rem",
-                      color: "#FF0000",
-                      mb: 10,
-                      cursor: "pointer",
-                      transition: "0.1s linear",
-                      padding: "2px 6px",
-                      borderRadius: "10px",
-                      "&:hover": {
-                        backgroundColor: grey[200],
-                      },
-                    }}
-                    onClick={() => {
-                     
+                      // width: 400,
+                      padding: "21px 24px 21px 24px",
                     }}
                   >
-                    <LogoutOutlinedIcon
-                      sx={{
-                        fontSize: "2.4rem",
-                      }}
+                    <PopupDetails
+                      image={''}
+                      handleModal={() => setOpenModal(true)}
+                      name={'Mohammad Abdullah'}
+                      isAdmin={true}
                     />
-                    <Typography
-                      variant="subtitle1"
+                    {/* options */}
+                    <Box
                       sx={{
-                        mt: 1,
-                        flex: 1,
-                        fontWeight: 500,
+                        mt: '24px',
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "10px",
                       }}
                     >
-                      logout
-                    </Typography>
+                      <OptionLink
+                        // onClick={() => navigate("/edit-profile")}
+                        label={'Edit'}
+                        startIcon={
+                          <Pencilline />
+                        }
+                      />
+                      <OptionLink
+                        // onClick={() => navigate("/privacy_policy")}
+                        label={"Privacy Policy"}
+                        startIcon={
+                          <ShieldKeyholeLine />
+                        }
+                      />
+                      <OptionLink
+                        // onClick={() => navigate("/terms_and_conditions")}
+                        label={"Terms And Conditions"}
+                        startIcon={
+                          <InformationLine />
+                        }
+                      />
+                      <OptionLink
+                        // onClick={() => navigate("/terms_and_conditions")}
+                        label={"Logout"}
+                        startIcon={
+                          <LogoutBoxLine />
+                        }
+                      />
+                    </Box>
                   </Box>
-                </Box>
-              </Box>
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
+                </Paper>
+              </Fade>
+            )}
+          </Popper>
+        </ClickAwayListener>
+      }
     </Box>
   );
 };
