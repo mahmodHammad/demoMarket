@@ -2,7 +2,6 @@ import { Box } from "@/wrappers";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import { debounce } from "lodash";
 import { useMemo, useState } from "react";
 // import { useTranslation } from "react-i18next";
 const Search = ({
@@ -16,13 +15,13 @@ const Search = ({
   // const { t } = useTranslation();
   const [value, setValue] = useState("");
 
-  const debouncedSearchHandler = useMemo(
-    () => debounce((nextValue) => handleSearch(nextValue), 1000),
-    []
-  );
+  // const debouncedSearchHandler = useMemo(
+  //   () => debounce((nextValue) => handleSearch(nextValue), 1000),
+  //   []
+  // );
   const handleChange = (event: any) => {
     setValue(event.target.value);
-    debouncedSearchHandler(event.target.value);
+    // debouncedSearchHandler(event.target.value);
   };
 
   return (

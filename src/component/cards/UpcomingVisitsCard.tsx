@@ -16,13 +16,13 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
                 borderRadius: '16px',
                 boxShadow: '0px 6px 12px 0px rgba(28, 39, 49, 0.05)',
             }}>
-            <Item xs={4}>
+            <Item xs={5} sx={{ padding: '12px 15px 11px 14px' }}>
                 <Box
                     sx={{
                         width: '100%',
                         height: { xs: '150px', md: '237px' },
                         borderRadius: '16px',
-                        padding: '10px',
+                        // padding: '10px',
                         objectFit: 'cover'
                     }}
                     component={Image}
@@ -31,7 +31,7 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
                     src={img}
                 />
             </Item>
-            <Item xs={8}>
+            <Item xs={7}>
                 <Box
                     sx={{
                         width: '100%',
@@ -48,24 +48,19 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text
-                            variant="caption"
-                            sx={{
-                                fontSize: { xs: '8px', md: '10px' },
-                            }}>
+                        <Text variant="caption" sx={{color:'#CACACA'}}>
                             Location
                         </Text>
                         <Text variant="label">
                             {location || 'location'}
                         </Text>
                     </Box>
-                    <Box
-                        column
+                    <Box column
                         sx={{
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption">
+                        <Text variant="caption" sx={{color:'#CACACA'}}>
                             Visit Date & Time
                         </Text>
                         <Text variant="label">

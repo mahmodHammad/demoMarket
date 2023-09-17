@@ -8,12 +8,14 @@ import { Hero, Neighbourhoods } from "@/component";
 import RecentlyAdded from "@/component/pages/homepage/RecentlyAdded";
 import MostViewed from "@/component/pages/homepage/MostViewed";
 import MyBookings from "./my-bookings/page";
+import MyPayments from "./my-payments/page";
 
 export default function Home() {
   return (
     <Box>
       {/* Logged In component */}
         {/* <MyBookings/> */}
+        {/* <MyPayments/> */}
 
       {/* Logged out component */}
       <Hero />
