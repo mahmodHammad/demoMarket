@@ -1,14 +1,18 @@
+'use client'
+
 import { Box, Button, Text } from '@/wrappers';
 import { Grid, Pagination } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import UnitsCard from '../cards/UnitsCard';
 import SearchBox from './SearchBox';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import { Filter } from '@/assets';
 
-const data = [
+const DATA = [
   {
+    id: 1,
+    liked: false,
     title: 'Al-Arid District',
     img: neibourhoodcover2,
     link: '/',
@@ -16,13 +20,13 @@ const data = [
     area: '120 sqm',
     location: 'Riyadh',
   },
-  { title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-  { title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-  { title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+  { id: 2, liked: false, title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
+  { id: 3, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+  { id: 4, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+  { id: 5, liked: false, title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
+  { id: 6, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+  { id: 7, liked: false, title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
+  { id: 8, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 ];
 
 // interface proptypes {
@@ -45,6 +49,7 @@ type Props = {
 };
 
 const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
+  const [data, setData] = useState(DATA);
   return (
       <Box column fullWidth>
         <Text variant="h4">Properties in Saudi Arabia</Text>
@@ -74,12 +79,15 @@ const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
           {data?.map((d, index) => (
             <Grid item xs={12} md={6} key={index}>
               <UnitsCard
+                id={+d?.id}
                 title={d?.title}
                 img={d?.img}
                 link={d?.link}
                 price={d?.price}
                 area={d?.area}
                 location={d?.location}
+                liked={d?.liked}
+                toggleLike={id => setData(prev => prev.map((d: any) => +d.id === +id ? ({...d, liked: !d.liked}) : d))}
               />
             </Grid>
           ))}

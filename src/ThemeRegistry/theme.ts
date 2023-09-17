@@ -3,6 +3,14 @@
 import { Roboto } from 'next/font/google';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    hover: true;
+    danger: true;
+    success: true;
+  }
+}
+
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
@@ -64,6 +72,68 @@ const theme = responsiveFontSizes(
             }),
           }),
         },
+        variants: [
+          {
+            props: { variant: 'contained' },
+            style: {
+              backgroundColor: 'primary.main',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'primary.dark',
+              },
+            },
+          },
+          {
+            props: { variant: 'text' },
+            style: {
+              color: 'primary.main',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 142, 165, 0.08)',
+              },
+            },
+          },
+          {
+            props: { variant: 'outlined' },
+            style: {
+              borderColor: '#008EA5',
+              color: '#008EA5',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 142, 165, 0.08)',
+                borderColor: 'primary.main',
+              },
+            },
+          },
+          {
+            props: { variant: 'danger' },
+            style: {
+              backgroundColor: '#f44336',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: '#d32f2f',
+              },
+            },
+          },
+          {
+            props: { variant: 'hover' },
+            style: {
+              color: '#008EA5',
+              backgroundColor: 'rgba(0, 142, 165, 0.08)',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 142, 165, 0.08)',
+              },
+            },
+          },
+          {
+            props: { variant: 'success' },
+            style: {
+              backgroundColor: '#4caf50',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: '#388e3c',
+              },
+            },
+          },
+        ],
       },
       MuiTypography: {
         styleOverrides: {

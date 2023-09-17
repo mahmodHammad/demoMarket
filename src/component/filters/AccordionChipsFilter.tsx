@@ -14,9 +14,10 @@ type Props = {
   filters: Filter[];
   onFilterStateChange: (filterName: string, id: number) => void;
   defaultExpanded?: boolean;
+  moreContent?: any;
 };
 
-const AccordionChipsFilter = ({ header, filterName, filters, onFilterStateChange, defaultExpanded = true }: Props) => {
+const AccordionChipsFilter = ({ header, filterName, filters, onFilterStateChange, defaultExpanded = true, ...props }: Props) => {
   return (
     <Accordion
       defaultExpanded={defaultExpanded}
@@ -32,6 +33,7 @@ const AccordionChipsFilter = ({ header, filterName, filters, onFilterStateChange
               label={<Chip label={filter.label} checked={filter.checked} />}
             />
           ))}
+          {props.moreContent}
         </FormGroup>
       )}
     />

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { AccordionChipsFilter, CheckBox, CounterFilter, SliderFilter, TextInput } from '@/component';
 import { Box, Text, Button, Accordion } from '@/wrappers';
 import { IconButton } from '@mui/material';
-import { Close } from '@/assets';
+import { Close, SearchLine } from '@/assets';
 
 type Props = {
   isMobileView?: boolean;
@@ -73,6 +73,11 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           filterName="location"
           filters={filters.location}
           onFilterStateChange={handleFiltersState}
+          moreContent={
+            <Button startIcon={<SearchLine />} sx={{ width: { xs: 0.4, md: 0.28 }, p: 0, py: 0.5 }} variant="text">
+              More Location
+            </Button>
+          }
         />
 
         <AccordionChipsFilter
