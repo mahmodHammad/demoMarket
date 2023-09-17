@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <Box>
       {/* Logged In component */}
-      <BookingDetails />
+      {/* <BookingDetails /> */}
       {/* <MyBookings/> */}
       {/* <MyBookings/> */}
       {/* <MyPayments/> */}
