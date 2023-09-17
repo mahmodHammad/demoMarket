@@ -1,12 +1,12 @@
-"use client";
-import { Box, Container, Item } from "@/wrappers";
-import React from "react";
+'use client';
+import { Box, Container, Item } from '@/wrappers';
+import React from 'react';
 
-import HomeTitleBody from "./HomeTitleBody";
-import NeighbourhoodCard from "@/component/cards/NeighbourhoodCard";
+import HomeTitleBody from './HomeTitleBody';
+import NeighbourhoodCard from '@/component/cards/NeighbourhoodCard';
 
-import Carousel from "@/component/Carousel";
-import { UnitsCard } from "@/component";
+import Carousel from '@/component/Carousel';
+import { UnitsCard } from '@/component';
 
 interface datatyle {
   title: string;
@@ -22,46 +22,30 @@ interface types {
   hasneighbourhoods?: boolean;
 }
 
-export default function HomeCardsContainer({
-  title,
-  body,
-  link,
-  data,
-  hasneighbourhoods,
-}: types) {
+export default function HomeCardsContainer({ title, body, link, data, hasneighbourhoods }: types) {
   return (
     <Box
       sx={{
-        mt: { md: "200px", xs: "80px" },
-      }}
-    >
+        mt: { md: '200px', xs: '80px' },
+      }}>
       <HomeTitleBody title={title} body={body} link={link} />
       <Box
         sx={{
-          mt: { md: "34px", xs: "22px" },
-        }}
-      >
+          mt: { md: '34px', xs: '22px', width: '100%' },
+        }}>
         <Carousel
           items={data.map((d: any, index: number) => (
             <Box
               key={index}
               sx={{
-                pr: "20px",
-                display: "flex",
-                width: { xs: "235px", md: "373px" },
-              }}
-            >
+                pr: '20px',
+                display: 'flex',
+                width: { xs: '235px', md: '373px' },
+              }}>
               {hasneighbourhoods ? (
                 <NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
               ) : (
-                <UnitsCard
-                  title={d.title}
-                  img={d.img}
-                  link={d.link}
-                  price={""}
-                  area={""}
-                  location={""}
-                />
+                <UnitsCard title={d.title} img={d.img} link={d.link} price={''} area={''} location={''} />
               )}
             </Box>
           ))}

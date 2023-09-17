@@ -10,13 +10,13 @@ type NavLink = { to: string; text: string; icon: SvgIconComponent };
 
 export const navLinks: NavLink[] = [
   {
-    to: "/",
+    to: "/my-bookings",
     text: `My Bookings`,
     icon: BookingIcon,
   },
 
   {
-    to: "/",
+    to: "/my-payments",
     text: `My Payments`,
     icon: PaymentsIcon,
   },

@@ -1,44 +1,32 @@
-
-import {
-  Collapse,
-  Divider,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import { Text } from "@/wrappers";
+import { Collapse, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Text } from '@/wrappers';
 
 // import { useTranslation } from "react-i18next";
 // import { useLocation, useNavigate } from "react-router-dom";
-import { navLinks } from "./NavLinks";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState } from "react";
-import SupportIcon from "@/assets/icons/SupportIcon";
+import { navLinks } from './NavLinks';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useState } from 'react';
+import SupportIcon from '@/assets/icons/SupportIcon';
+import Link from 'next/link';
 export default function Sidebar({ toggleDrawer, open }: any) {
   // const { t } = useTranslation();
   // const location = useLocation();
   // const navigate = useNavigate();
   const [isopen, setOpen] = useState(false);
-  const [selected, setSelected] = useState("");
-
+  const [selected, setSelected] = useState('');
 
   const handleClick = (text) => {
     if (selected === text) {
-      setSelected("");
+      setSelected('');
       setOpen(false);
     } else {
       setSelected(text);
       setOpen(true);
     }
   };
-  const handlenavigate = (to, text = "", selectedTab: 0) => {
+  const handlenavigate = (to, text = '', selectedTab: 0) => {
     setSelected(text);
-    // navigate(to, {
-    //   replace: true,
-    //   state: { selectedTab: selectedTab },
-    // });
   };
   const returnColor = (to, links, text, theme) => {
     return theme?.palette?.primary?.main;
@@ -53,25 +41,19 @@ export default function Sidebar({ toggleDrawer, open }: any) {
       return theme?.palette?.primary?.main;
     }
 
-    return "";
+    return '';
   };
 
   return (
-    <div style={{
-      paddingTop: '18px',
-      paddingBottom: '18px'
-    }}>
-      {navLinks
-        ?.filter(({ hidefor }) => !hidefor?.includes(CurrentBrand))
-        .map(({ text, to, icon: Icon, links }, index) => (
-          <>
-            <ListItem
-              key={text}
-              button
-              onClick={() =>
-                links?.length ? handleClick(text) : handlenavigate(to, text)
-              }
-            >
+    <div
+      style={{
+        paddingTop: '18px',
+        paddingBottom: '18px',
+      }}>
+      {navLinks?.map(({ text, to, icon: Icon, links }, index) => (
+        <>
+          <ListItem key={text} component={Link} href={to}>
+            <ListItemButton component={Link} href={to}>
               <ListItemIcon>
                 <Icon
                   sx={{
@@ -87,73 +69,32 @@ export default function Sidebar({ toggleDrawer, open }: any) {
                       fontWeight: 700,
                       // color: (theme: any) =>
                       //   returnColor(to, links, text, theme),
-                    }}
-                  >
+                    }}>
                     {text}
                   </Text>
                 }
               />
-              {links?.length ? (
-                isopen && selected === text ? (
-                  <ExpandLessIcon color="primary" />
-                ) : (
-                  <ExpandMoreIcon />
-                )
-              ) : (
-                <></>
-              )}
-            </ListItem>
-            <Collapse in={selected === text} timeout="auto" unmountOnExit>
-              {links?.map(
-                ({ text, to, icon: Icon, links, selectedTab }, index) => (
-                  <ListItem component="div" disablePadding key={index}>
-                    <ListItemButton
-                      onClick={() => {
-                        handlenavigate(to, "", selectedTab);
-                        // navigate(to, { replace: true });
-                      }}
-                    >
-                      <ListItemIcon></ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Text
-                            variant="small"
-                            sx={{
-                              fontWeight: 700,
-                              color: (theme: any) =>
-                                returnColor(to, links, text, theme),
-                            }}
-                          >
-                            {text}
-                          </Text>
-                        }
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                )
-              )}
-            </Collapse>
-          </>
-        ))}
+            </ListItemButton>
+          </ListItem>
+        </>
+      ))}
       <Divider variant="middle" />
       <ListItem disablePadding>
-        <ListItemButton
-        >
-          <ListItemIcon
-          >
+        <ListItemButton>
+          <ListItemIcon>
             <SupportIcon />
           </ListItemIcon>
           <ListItemText
-
-            primary={<Text
-              variant="small"
-              sx={{
-                // fontSize: "14px !important",
-                fontWeight: 700,
-              }}
-            >
-              Support
-            </Text>}
+            primary={
+              <Text
+                variant="small"
+                sx={{
+                  // fontSize: "14px !important",
+                  fontWeight: 700,
+                }}>
+                Support
+              </Text>
+            }
           />
         </ListItemButton>
       </ListItem>
