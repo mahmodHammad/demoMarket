@@ -40,3 +40,4 @@ export { default as BookingDetails } from './bookingDetails/BookingDetails';
 export { default as BookingDetails_uhitHeader } from './bookingDetails/BookingDetails_uhitHeader';
 export { default as BookingDetails_timedate } from './bookingDetails/BookingDetails_timedate';
 export { default as BookingDetailsInfo } from './bookingDetails/BookingDetailsInfo';
+export { default as LocationCard } from './bookingDetails/LocationCard';

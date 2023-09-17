@@ -1,4 +1,5 @@
 import theme from '@/ThemeRegistry/theme';
+import { Calendar } from '@/assets';
 import { Box, Button, Text } from '@/wrappers';
 
 interface Props {
@@ -32,7 +33,9 @@ function BookingDetails_timedate({ logo, date }: Props) {
       </Box>
 
       <Box column>
-        <Button variant="outlined">Add to calendar</Button>
+        <Button variant="outlined" startIcon={<Calendar />}>
+          Add to calendar
+        </Button>
       </Box>
     </Box>
   );

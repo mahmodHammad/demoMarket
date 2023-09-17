@@ -5,6 +5,7 @@ import {
   BookingDetailsInfo,
   BuyNowCard,
   date,
+  LocationCard,
   QuiltedImageList,
 } from '@/component';
 import { Box, Button, Item } from '@/wrappers';
@@ -111,7 +112,7 @@ const page = ({
                   src={QR}
                 />
               </Box>
-              <Box row gap={'40px'} m="25px">
+              <Box row gap={'40px'} my="25px">
                 <Button
                   variant="outlined"
                   component={Link}
@@ -141,30 +142,8 @@ const page = ({
                 </Button>
               </Box>
             </Grid>
-
-            <Grid item xs={12} md={4} height={'518px'} display={{ xs: 'none', md: 'flex' }}>
-              <Card
-                sx={{
-                  padding: '12px',
-                }}>
-                <Text s={24}>{'Location Details'}</Text>
-                <Box
-                  sx={{
-                    height: '240px',
-                    width: '100%',
-                    position: 'relative',
-                    mt: '8px',
-                    borderRadius: '16px',
-                    overflow: 'hidden',
-                  }}>
-                  <MapsView mapData={unitData?.maps} viewOnly={true} />
-                </Box>
-                <MapAdress
-                  title={unitData?.maps?.districtName}
-                  body={unitData?.maps?.formattedAddress}
-                  mapsLink={unitData?.maps?.mapsLink}
-                />
-              </Card>
+            <Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'flex' }}>
+              <LocationCard />
             </Grid>
           </Grid>
         </Container>
