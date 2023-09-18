@@ -109,7 +109,7 @@ export default function AppLayout(props: Props) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        open={open}
+        open={true}
         sx={{
           backgroundColor: '#fff',
         }}>
