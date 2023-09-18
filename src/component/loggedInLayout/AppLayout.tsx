@@ -1,12 +1,10 @@
 
 'use client'
-// import Languages from "@/Shared/Languages";
 import { CssBaseline, InputAdornment, TextField, Toolbar } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
 import { CSSObject, styled, Theme } from "@mui/material/styles";
-import React, { useState } from "react";
-// import { useTranslation } from "react-i18next";
+import React from "react";
 import SearchIcon from '@mui/icons-material/Search'
 
 import DrawerContainer from "./Drawer";
@@ -106,20 +104,6 @@ interface Props {
 }
 
 export default function AppLayout(props: Props) {
-
-  // const { t, i18n } = useTranslation();
-
-
-
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [open, setOpen] = useState(true);
-
-  const closeDrawer = () => {
-    setMobileOpen(false);
-    setOpen(false);
-  };
-  // if (isFetchingProfile) return <LoadingPage />
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
       <CssBaseline />
@@ -153,7 +137,6 @@ export default function AppLayout(props: Props) {
               }}
               variant="outlined"
               placeholder="Search"
-              // onChange={handleChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -190,9 +173,6 @@ export default function AppLayout(props: Props) {
                 gap: '48px'
               }}
             >
-              {/* <Box sx={{ mr: "28px" }}>
-                <Languages />
-              </Box> */}
               <Box
                 xcenter
                 sx={{
@@ -212,12 +192,12 @@ export default function AppLayout(props: Props) {
       </AppBar>
       <Drawer
         variant="permanent"
-        open={open}
+        open={true}
         sx={{
           display: { xs: "none", sm: "block" },
         }}
       >
-        <DrawerContainer open={open} handleDrawerToggle={closeDrawer} />
+        <DrawerContainer />
       </Drawer>
 
       <Box
@@ -237,13 +217,6 @@ export default function AppLayout(props: Props) {
             borderRadius: "4px",
           }}
         >
-          {/* <Breadcrumbs
-            routes={
-              [
-                ...routes.filter((r) => r?.children).map((r) => r.children),
-              ].flat() as unknown as RoutePathDefinition[]
-            }
-          /> */}
         </Container>
         <div style={{ backgroundColor: '#FAFCFD', minHeight: '80vh' }}>
           {props.children}

@@ -12,16 +12,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 
-export default function Sidebar({ toggleDrawer, open }: any) {
+export default function Sidebar() {
   const pathname = usePathname()
-
-  const returnColor = (to, links, text, theme) => {
-    if (pathname === to) {
-      return '#008EA5';
-    } else {
-      return '#232425';
-    }
-  };
 
   return (
     <div style={{
@@ -29,8 +21,7 @@ export default function Sidebar({ toggleDrawer, open }: any) {
       paddingBottom: '18px'
     }}>
       {navLinks
-        ?.filter(({ hidefor }) => !hidefor?.includes(CurrentBrand))
-        .map(({ text, to, icon: Icon, links }, index) => (
+        .map(({ text, to, icon: Icon }) => (
           <>
             <ListItem
               component={Link}
@@ -39,10 +30,10 @@ export default function Sidebar({ toggleDrawer, open }: any) {
             >
               <ListItemIcon>
                 <Icon
-                // ||ask peers about this icon color issue||
+                  // ||ask peers about this icon color issue||
                   // color={returnColor(to, links, text, theme)}
                   sx={{
-                    color: (theme: any) => returnColor(to, links, text, theme),
+                    color: pathname === to ? '#008EA5' : '#232425',
                   }}
                 />
               </ListItemIcon>
@@ -52,8 +43,7 @@ export default function Sidebar({ toggleDrawer, open }: any) {
                     variant="small"
                     sx={{
                       fontWeight: 700,
-                      color: (theme: any) =>
-                        returnColor(to, links, text, theme),
+                      color: pathname === to ? '#008EA5' : '#232425',
                     }}
                   >
                     {text}
@@ -65,21 +55,21 @@ export default function Sidebar({ toggleDrawer, open }: any) {
         ))}
       <Divider variant="middle" />
       <ListItem disablePadding>
-        <ListItemButton
-        >
-          <ListItemIcon
-          >
+        <ListItemButton>
+          <ListItemIcon>
             <SupportIcon />
           </ListItemIcon>
           <ListItemText
-            primary={<Text
-              variant="small"
-              sx={{
-                fontWeight: 700,
-              }}
-            >
-              Support
-            </Text>}
+            primary={
+              <Text
+                variant="small"
+                sx={{
+                  fontWeight: 700,
+                }}
+              >
+                Support
+              </Text>
+            }
           />
         </ListItemButton>
       </ListItem>

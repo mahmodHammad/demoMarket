@@ -13,22 +13,15 @@ import ShieldKeyholeLine from "@/assets/icons/ShieldKeyholeLine";
 import LogoutBoxLine from "@/assets/icons/LogoutBoxLine";
 import InformationLine from "@/assets/icons/InformationLine";
 import NextIcon from "@/assets/icons/NextIcon";
-// import { useTranslation } from "react-i18next";
-// import { useNavigate } from "react-router-dom";
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 
 const PopupDetails = ({
   name,
-  isAdmin,
-  handleModal,
   image,
 }: {
   name: string;
-  isAdmin: boolean;
-  handleModal: () => void;
   image: string;
 }) => {
-  // const { t } = useTranslation();
 
   return (
     <Box
@@ -55,18 +48,14 @@ const PopupDetails = ({
 };
 
 const OptionLink = ({
-  onClick,
   label,
   startIcon,
-  url = "",
 }: {
   label: string;
   startIcon: any;
-  url?: string;
 }) => {
   return (
     <Box
-      onClick={onClick}
       style={{
         textDecoration: "none",
       }}
@@ -145,7 +134,6 @@ const ProfileDropDown = () => {
                   sx={{
                     mt: '30px',
                     mr: '30px',
-                    // p: 2,
                     bgcolor: "background.paper",
                     color: "black",
                     zindex: 20,
@@ -154,15 +142,12 @@ const ProfileDropDown = () => {
                 >
                   <Box
                     sx={{
-                      // width: 400,
                       padding: "21px 24px 21px 24px",
                     }}
                   >
                     <PopupDetails
                       image={''}
-                      handleModal={() => {}}
                       name={'Mohammad Abdullah'}
-                      isAdmin={true}
                     />
                     {/* options */}
                     <Box
@@ -174,14 +159,12 @@ const ProfileDropDown = () => {
                       }}
                     >
                       <OptionLink
-                        // onClick={() => navigate("/edit-profile")}
                         label={'Edit'}
                         startIcon={
                           <Pencilline />
                         }
                       />
                       <OptionLink
-                        // onClick={() => navigate("/privacy_policy")}
                         label={"Privacy Policy"}
                         startIcon={
                           <ShieldKeyholeLine />
@@ -194,7 +177,6 @@ const ProfileDropDown = () => {
                         }
                       />
                       <OptionLink
-                        // onClick={() => navigate("/terms_and_conditions")}
                         label={"Logout"}
                         startIcon={
                           <LogoutBoxLine />

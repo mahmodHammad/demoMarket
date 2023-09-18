@@ -27,7 +27,7 @@ export default function RootLayout({
 
 					{/* Looged Out layout */}
 					{/* <Navbar/>
-					<Box component='main'>{children}</Box>
+					<Box sx={{background:"#a331"}} component='main'>{children}</Box>
 					<Footer /> */}
 
 					{/* // TODO: move the login modal, and create Context API to mange its state away from layout because we can't handle state management here  */}
