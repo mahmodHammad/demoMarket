@@ -52,7 +52,7 @@ export default function Hero() {
             ornare bibendum condimentum.
           </Text>
         </Box>
-        <Box width={'100%'} px={'25px'}>
+        <Box width={'100%'} px={'25px'} xcenter>
           <SearchBar />
         </Box>
       </Box>
