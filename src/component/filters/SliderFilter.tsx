@@ -1,9 +1,9 @@
-'user client';
+'use client';
 
-import * as React from 'react';
 import { TextInput } from '@/component';
 import { Slider } from '@mui/material';
 import { Box } from '@/wrappers';
+import React, { useState } from 'react';
 
 type Props = {
   label: string;
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
-  const [value, setValue] = React.useState<number[]>(sliderValues);
+  const [value, setValue] = useState<number[]>(sliderValues);
 
   const handleChange = (event: Event | null, newValue: number[] | number) => {
     setValue(newValue as number[]);

@@ -1,7 +1,8 @@
 import { BookingDetails, Hero, Neighbourhoods } from '@/component';
 import MostViewed from '@/component/pages/homepage/MostViewed';
 import RecentlyAdded from '@/component/pages/homepage/RecentlyAdded';
-import { Box, Container } from '@/wrappers';
+import { Box } from '@/wrappers';
+import { Container } from '@mui/material';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
 
       {/* Logged out component */}
       {/* <Hero />
+      <Hero />
       <Container maxWidth="xl" sx={{ pb: { xs: '90px', md: '164px' } }}>
         <Neighbourhoods />
         <RecentlyAdded />
