@@ -8,17 +8,17 @@ export default function Home() {
     <Box>
       {/* Logged In component */}
       {/* <BookingDetails /> */}
-      {/* <MyBookings/> */}
+      <MyBookings/>
       {/* <MyBookings/> */}
       {/* <MyPayments/> */}
 
       {/* Logged out component */}
-      <Hero />
+      {/* <Hero />
       <Container maxWidth="xl" sx={{ pb: { xs: '90px', md: '164px' } }}>
         <Neighbourhoods />
         <RecentlyAdded />
         <MostViewed />
-      </Container>
+      </Container> */}
     </Box>
   );
 }

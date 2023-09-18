@@ -97,6 +97,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+
 interface Props {
   window?: () => Window;
   children?: React.ReactElement;
@@ -165,17 +166,13 @@ export default function AppLayout(props: Props) {
           <Box
             sx={{
               display: "flex",
-              // gap: 5,
               alignItems: "center",
               justifyContent: "flex-end",
-              // justifyContent: "space-around",
-              // flexWrap: { xs: "wrap", md: "nowrap" },
             }}
           >
             <Box
               sx={{
                 flex: 1,
-                // backgroundColor: "gray",
                 justifyContent: "flex-end",
                 display: "flex",
                 mr: "48px",
@@ -213,26 +210,6 @@ export default function AppLayout(props: Props) {
           </Box>
         </Toolbar>
       </AppBar>
-
-      {/* <DrawerMobile
-        container={container}
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: drawerWidth,
-          },
-        }}
-      >
-        <DrawerContainer open={mobileOpen} handleDrawerToggle={closeDrawer} />
-      </DrawerMobile> */}
-
       <Drawer
         variant="permanent"
         open={open}
@@ -246,21 +223,15 @@ export default function AppLayout(props: Props) {
       <Box
         component="main"
         sx={{
-          // backgroundColor: "#F346F9",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          // minHeight: "calc(100vh )",
-          // height: "100%",
-          // background: "red",
           borderRadius: "4px",
           marginTop: { xs: "70px", sm: "70px", md: "70px" },
           overflow: "auto",
           position: "relative",
-          // paddingBottom:"30px",
         }}
       >
         <Container
           sx={{
-            // backgroundColor: "#fff",
             alignItems: "center",
             mb: 4,
             borderRadius: "4px",
@@ -274,10 +245,9 @@ export default function AppLayout(props: Props) {
             }
           /> */}
         </Container>
-        <div style={{ backgroundColor: '#FAFCFD', minHeight:'80vh' }}>
+        <div style={{ backgroundColor: '#FAFCFD', minHeight: '80vh' }}>
           {props.children}
         </div>
-        {/* <Outlet /> */}
       </Box>
     </Box>
   );

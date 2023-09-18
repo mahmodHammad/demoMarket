@@ -1,8 +1,4 @@
-
-import { List, Toolbar } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import Sidebar from "./Sidebar";
-import AtarWhiteLogo from "@/assets/icons/AtarWhiteLogo";
 import AtarColoredLogo from "@/assets/icons/AtarColoredLogo";
 import { Box } from "@/wrappers/layouts";
 

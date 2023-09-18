@@ -7,7 +7,7 @@ import {
   Paper,
   Popper,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Pencilline from "@/assets/icons/Pencilline";
 import ShieldKeyholeLine from "@/assets/icons/ShieldKeyholeLine";
 import LogoutBoxLine from "@/assets/icons/LogoutBoxLine";
@@ -95,15 +95,8 @@ const OptionLink = ({
 };
 
 const ProfileDropDown = () => {
-  // const { t } = useTranslation();
-
-
-  // const navigate = useNavigate();
-
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [openModal, setOpenModal] = useState(false);
-
   const myRef = React.useRef<HTMLDivElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -114,17 +107,6 @@ const ProfileDropDown = () => {
   const canBeOpen = open && Boolean(anchorEl);
   const id = canBeOpen ? "spring-popper" : undefined;
 
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (myRef.current && !myRef.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  });
   const handleClickAway = () => {
     setOpen(false);
   }
@@ -178,7 +160,7 @@ const ProfileDropDown = () => {
                   >
                     <PopupDetails
                       image={''}
-                      handleModal={() => setOpenModal(true)}
+                      handleModal={() => {}}
                       name={'Mohammad Abdullah'}
                       isAdmin={true}
                     />
@@ -206,7 +188,6 @@ const ProfileDropDown = () => {
                         }
                       />
                       <OptionLink
-                        // onClick={() => navigate("/terms_and_conditions")}
                         label={"Terms And Conditions"}
                         startIcon={
                           <InformationLine />
