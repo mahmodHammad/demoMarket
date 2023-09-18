@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import { Box } from '@/wrappers';
-import { Footer, Navbar, LoginModal } from '@/component';
+// import { Footer, Navbar, LoginModal } from '@/component';
 import AppLayout from '@/component/loggedInLayout/AppLayout';
 
 export const metadata = {
