@@ -17,7 +17,7 @@ export const metadata = {
   colorScheme: 'light',
   creator: 'Atar',
   publisher: 'Atar dev team',
-  formatDetection: {
+  			formatDetection: {
     email: false,
     address: false,
     telephone: false,
