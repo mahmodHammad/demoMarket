@@ -1,4 +1,4 @@
-
+// commented code of <collapse> is for multi-level router.
 import {
   Collapse,
   Divider,
@@ -16,13 +16,15 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import SupportIcon from "@/assets/icons/SupportIcon";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 export default function Sidebar({ toggleDrawer, open }: any) {
   // const { t } = useTranslation();
   // const location = useLocation();
   // const navigate = useNavigate();
   const [isopen, setOpen] = useState(false);
   const [selected, setSelected] = useState("");
-
+  const pathname = usePathname()
 
   const handleClick = (text) => {
     if (selected === text) {
@@ -41,17 +43,22 @@ export default function Sidebar({ toggleDrawer, open }: any) {
     // });
   };
   const returnColor = (to, links, text, theme) => {
-    return theme?.palette?.primary?.main;
-    if (location?.pathname === to) {
+    // return theme?.palette?.primary?.main;
+    console.log(theme?.palette?.secondary.light, to, 'shreyas1')
+    if (pathname === to) {
       return theme?.palette?.primary?.main;
+      return 'primary.main';
+    } else {
+      return theme?.palette?.secondary.light;
+      return 'secondary.light';
     }
-    if (links?.length) {
-      if (isopen && selected === text) {
-        return theme?.palette?.primary?.main;
-      }
-    } else if (selected === text) {
-      return theme?.palette?.primary?.main;
-    }
+    // if (links?.length) {
+    //   if (isopen && selected === text) {
+    //     return theme?.palette?.primary?.main;
+    //   }
+    // } else if (selected === text) {
+    //   return theme?.palette?.primary?.main;
+    // }
 
     return "";
   };
@@ -66,14 +73,17 @@ export default function Sidebar({ toggleDrawer, open }: any) {
         .map(({ text, to, icon: Icon, links }, index) => (
           <>
             <ListItem
+              component={Link}
               key={text}
-              button
-              onClick={() =>
-                links?.length ? handleClick(text) : handlenavigate(to, text)
-              }
+              href={to}
+            // button
+            // onClick={() =>
+            //   links?.length ? handleClick(text) : handlenavigate(to, text)
+            // }
             >
               <ListItemIcon>
                 <Icon
+                  // color={returnColor(to, links, text, theme)}
                   sx={{
                     color: (theme: any) => returnColor(to, links, text, theme),
                   }}
@@ -85,15 +95,15 @@ export default function Sidebar({ toggleDrawer, open }: any) {
                     variant="small"
                     sx={{
                       fontWeight: 700,
-                      // color: (theme: any) =>
-                      //   returnColor(to, links, text, theme),
+                      color: (theme: any) =>
+                        returnColor(to, links, text, theme),
                     }}
                   >
                     {text}
                   </Text>
                 }
               />
-              {links?.length ? (
+              {/* {links?.length ? (
                 isopen && selected === text ? (
                   <ExpandLessIcon color="primary" />
                 ) : (
@@ -101,9 +111,9 @@ export default function Sidebar({ toggleDrawer, open }: any) {
                 )
               ) : (
                 <></>
-              )}
+              )} */}
             </ListItem>
-            <Collapse in={selected === text} timeout="auto" unmountOnExit>
+            {/* <Collapse in={selected === text} timeout="auto" unmountOnExit>
               {links?.map(
                 ({ text, to, icon: Icon, links, selectedTab }, index) => (
                   <ListItem component="div" disablePadding key={index}>
@@ -132,7 +142,7 @@ export default function Sidebar({ toggleDrawer, open }: any) {
                   </ListItem>
                 )
               )}
-            </Collapse>
+            </Collapse> */}
           </>
         ))}
       <Divider variant="middle" />

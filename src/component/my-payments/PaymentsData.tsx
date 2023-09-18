@@ -1,5 +1,6 @@
 import { Button, Text } from "@/wrappers";
 import { StyledTableRow, StyledTableCell } from "@/wrappers/table-cells";
+import Link from "next/link";
 
 export const paymentHeaders = () => {
     return [
@@ -34,6 +35,8 @@ const PaymentData = ({ data }: { data: any[] }) => {
                                 <Button
                                     fullWidth
                                     sx={{ py: 2, }}
+                                    component={Link}
+                                    href={'/payment-details'}
                                 >
                                     <Text variant="body" sx={{ color: '#008EA5' }}>
                                         View Details
