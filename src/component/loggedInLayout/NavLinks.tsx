@@ -21,7 +21,7 @@ export const navLinks: NavLink[] = [
     icon: PaymentsIcon,
   },
   {
-    to: "/",
+    to: "/favourites",
     text: `Favourites`,
     icon: FavouritesIcon,
   },
