@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Container, Item, Text } from '@/wrappers';
 
-export default function ViewPayments({ data }) {
+export default function ViewPayments() {
     return (
         <>
             <Text variant="h4" sx={{ padding: '35px 0px 15px 10px' }}>
