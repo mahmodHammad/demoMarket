@@ -7,12 +7,12 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 export const metadata = {
 	title: 'Atar Market place',
 	description:
-				'Property Portal Explore Our Wide Range of Properties for Sale and Rentals in Saudi arabia, Golf, and middle east and more Verified Listings: Apartments, Villas, Houses Find Your Perfect Appartment their',
-			generator: 'marketplace',
-			applicationName: 'atar marketplace',
-			referrer: 'origin-when-cross-origin',
-			keywords: ['rent', 'property', 'house', 'saudi', 'units', 'marketplace', 'atar'],
-			authors: [{ name: 'Atar', url: 'https://atarcloud.com/' }],
+		'Property Portal Explore Our Wide Range of Properties for Sale and Rentals in Saudi arabia, Golf, and middle east and more Verified Listings: Apartments, Villas, Houses Find Your Perfect Appartment their',
+	generator: 'marketplace',
+	applicationName: 'atar marketplace',
+	referrer: 'origin-when-cross-origin',
+	keywords: ['rent', 'property', 'house', 'saudi', 'units', 'marketplace', 'atar'],
+	authors: [{ name: 'Atar', url: 'https://atarcloud.com/' }],
 	colorScheme: 'light',
 	creator: 'Atar',
 	publisher: 'Atar dev team',

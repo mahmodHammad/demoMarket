@@ -11,7 +11,10 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-   
+    "*.{js, jsx,tsx, ts}": [
+      "git add",
+      "eslint --cache --fix"
+    ],
     "*.--write": "prettier --write"
   },
   "dependencies": {
