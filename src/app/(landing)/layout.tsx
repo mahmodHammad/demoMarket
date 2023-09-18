@@ -18,7 +18,7 @@ export const metadata = {
   creator: 'Atar',
   publisher: 'Atar dev team',
   			formatDetection: {
-    email: false,
+    			email: false,
     address: false,
     telephone: false,
   },
