@@ -3,6 +3,7 @@ import { MouseEventHandler, ReactNode } from "react";
 
 interface Button extends ButtonProps {
   whiteborder?: boolean;
+  grayBorder?: boolean;
 
   sx?: any;
   component?: React.ElementType;
@@ -15,6 +16,11 @@ const setButtonLayoutSXProps = (props: any) => {
       color: "#fff",
       borderColor: "#fff",
       "&:hover": { borderColor: "#fff", background: "#ffffff09" },
+    }),
+    ...(props.grayBorder && {
+      color: "#232425",
+      borderColor: "#E3E3E3",
+      "&:hover": { borderColor: "#E3E3E3", background: "#E3E3E309" },
     }),
 
     ...props.sx,

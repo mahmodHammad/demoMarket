@@ -1,38 +1,55 @@
-import React, { useState } from "react";
-import { Grid, Container } from "@mui/material";
-import { ListingBodey, PropertyFilters } from "@/component";
+'use client';
 
-interface Props {}
+import React, { useState, useEffect } from 'react';
+import { Grid, Container, Slide } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { ListingBody, PropertyFilters } from '@/component';
 
-export default function page(props: Props) {
+export default function page() {
+  const theme = useTheme();
+
+  const isMobileView = useMediaQuery(theme.breakpoints.down('md'));
+  const [showFiltersOnMob, setShowFiltersOnMob] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!isMobileView) setShowFiltersOnMob(false);
+  }, [isMobileView]);
+
   return (
-    <>
-      <Container maxWidth="xl">
-        <Grid container spacing={3} sx={{ mt: "5px", pt: "26px" }} mb={15}>
-          {/* Abdulrahman */}
-
-          <Grid
-            item
-            xs={12}
-            md={4}
-            display={{ xs: "none", md: "flex", height: "fit-content" }}
-          >
-            <PropertyFilters />
+    <Container maxWidth="xl" sx={{ position: 'relative' }}>
+      <Grid container spacing={3} sx={{ mt: { xs: 0, md: '5px' }, pt: { xs: 0, md: '26px' } }} mb={15}>
+        <SlideTransitions isMobileView={isMobileView} showFiltersOnMob={showFiltersOnMob}>
+          <Grid item xs={12} md={4} display={{ xs: 'flex', height: 'fit-content' }}>
+            <PropertyFilters isMobileView={isMobileView} closeFilterOnMobileView={() => setShowFiltersOnMob(false)} />
           </Grid>
+        </SlideTransitions>
 
-          {/* Abdullah */}
-
-          <Grid
-            item
-            xs={12}
-            md={8}
-            height={"100hv"}
-            display={{ xs: "none", md: "flex" }}
-          >
-            <ListingBodey />
-          </Grid>
+        <Grid item xs={12} md={8} display={{ xs: showFiltersOnMob ? 'none' : 'flex', md: 'flex' }}>
+          <ListingBody isMobileView={isMobileView} openFilterOnMobileView={() => setShowFiltersOnMob(true)} />
         </Grid>
-      </Container>
-    </>
+      </Grid>
+    </Container>
   );
 }
+
+type SlideProps = {
+  isMobileView: boolean;
+  showFiltersOnMob: boolean;
+  children: any;
+};
+
+const SlideTransitions = ({ children, isMobileView, showFiltersOnMob }: SlideProps) => {
+  if (!isMobileView) return <>{children}</>;
+
+  return (
+    <Slide
+      direction="up"
+      in={isMobileView && showFiltersOnMob}
+      mountOnEnter
+      unmountOnExit
+      timeout={{ enter: 500, exit: 500 }}>
+      {children}
+    </Slide>
+  );
+};

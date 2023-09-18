@@ -3,18 +3,23 @@ import { Box, Button, Text } from '@/wrappers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from '@mui/material';
+import { FilledHeart, OutlineHeart } from '@/assets';
 
-interface proptypes {
+interface Props {
+  id: number;
   img: string;
   title: string;
   link: string;
   price: string;
   area: string;
   location: string;
+  liked: boolean;
+  toggleLike: (id: number) => void
 }
-export default function UnitsCard({ img, title, link, price, area, location }: proptypes) {
+export default function UnitsCard({ id, liked, img, title, link, price, area, location, toggleLike }: Props) {
   return (
     <Box
+      relative
       sx={{
         width: '100%',
         // height: { xs: '300px', md: '447px' },
@@ -24,6 +29,32 @@ export default function UnitsCard({ img, title, link, price, area, location }: p
 
         boxShadow: '0px 6px 12px 0px rgba(28, 39, 49, 0.05)',
       }}>
+			<Box
+				absolute
+				top={16}
+				right={16}
+				xcenter
+				ycenter
+				sx={{
+					width: 36,
+					height: 36,
+					borderRadius: 18,
+					bgcolor: '#00425630',
+					cursor: 'pointer',
+					transition: 'transform 0.2s',
+					'&:hover': {
+						transform: 'scale(1.15)',
+					},
+				}}
+			>
+				<Box
+					xcenter
+					ycenter
+					onClick={() => toggleLike(id)}
+				>
+					{liked ? <FilledHeart /> : <OutlineHeart />}
+				</Box>
+			</Box>
       {/* <Box
         center
         sx={{
@@ -44,6 +75,7 @@ export default function UnitsCard({ img, title, link, price, area, location }: p
           width: '100%',
           height: { xs: '150px', md: '237px' },
           borderRadius: '16px 16px 0 0',
+          objectFit: 'cover',
         }}
         component={Image}
         placeholder="blur"
