@@ -1,11 +1,10 @@
-import * as React from 'react';
-import { Switch, SwitchProps } from '@mui/material';
+import { Checkbox as MUICheckbox, CheckboxProps } from '@mui/material';
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+const label = { inputProps: { 'aria-label': 'Checkbox' } };
 
-const CheckBox = (props: SwitchProps) => {
-  // TODO: customize the style
-  return <Switch {...label} defaultChecked />;
+const Checkbox = (props: CheckboxProps) => {
+	// TODO: customize style 
+	return <MUICheckbox {...label} {...props} />;
 };
 
-export default CheckBox;
+export default Checkbox;
