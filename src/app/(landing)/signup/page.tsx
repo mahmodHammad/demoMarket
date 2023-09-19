@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import signupimg from "@/assets/images/signup.png";
 import { FormLabel, Input } from "@mui/material";
-import { Phoneinput } from "@/component";
+import { PhoneInput } from "@/component";
 import { useForm } from "react-hook-form";
 
 type Props = {};
@@ -79,7 +79,7 @@ const Signup = (props: Props) => {
               placeholder="Enter your phone number"
             />
           </Box>
-          {/* <Phoneinput control={form.control}/> */}
+          {/* <PhoneInput control={form.control}/> */}
 
           <Text variant="small" gray align="left" mt="18px">
             By proceeding to create your account, you are agreeing to
