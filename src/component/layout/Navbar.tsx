@@ -26,6 +26,11 @@ function ResponsiveAppBar() {
 		setAnchorElNav(null);
 	};
 
+	const handleLoginClicked = () => {
+		openLoginModal();
+		handleCloseNavMenu();
+	};
+
 	return (
 		<AppBar position="static">
 			<Container maxWidth="xl">
@@ -69,10 +74,7 @@ function ResponsiveAppBar() {
 							<Button
 								component={Link}
 								href="/login"
-								onClick={() => {
-									openLoginModal();
-									handleCloseNavMenu();
-								}}
+								onClick={handleLoginClicked}
 								sx={{ color: '#fff', fontSize: '20px', mr: '12px' }}
 								size="medium">
 								Login
@@ -80,7 +82,6 @@ function ResponsiveAppBar() {
 							<Button
 								component={Link}
 								href="/signup"
-								onClick={handleCloseNavMenu}
 								size="medium"
 								variant="outlined"
 								whiteborder
@@ -117,11 +118,12 @@ function ResponsiveAppBar() {
 							sx={{
 								display: { xs: 'block', md: 'none' },
 							}}>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Text textAlign="center">{page}</Text>
-								</MenuItem>
-							))}
+							<MenuItem onClick={handleLoginClicked}>
+								<Text textAlign="center">Login</Text>
+							</MenuItem>
+							<MenuItem component={Link} href="/signup">
+								<Text textAlign="center">Signup</Text>
+							</MenuItem>
 						</Menu>
 					</Box>
 				</Toolbar>
