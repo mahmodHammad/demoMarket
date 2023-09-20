@@ -1,4 +1,4 @@
-const page = () => {
+const Visitors = () => {
   return (
     <>
       hi
@@ -6,4 +6,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Visitors;
