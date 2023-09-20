@@ -23,7 +23,7 @@ export default function Footer() {
         },
         {
           name: "About Us",
-          link: "/About Us",
+          link: "https://www.atarcloud.com/about",
         },
         {
           name: "Properties",
@@ -52,14 +52,16 @@ export default function Footer() {
 
   const contactUs = [
     {
-      name: "+234- 70-1449-8006",
+      name: "Want to know more?",
+       link:"https://www.atarcloud.com/contact"
     },
     {
-      name: "atarcloud@gmail.com",
+      name: "info@goatar.com",
+       link:"mailto:info@goatar.com"
     },
     {
-      name: "4112 Al Narjis - Anas Bin Malik Road - Central Province - Riyadh 13327",
-      link: ".",
+      name: "3504 Imam Saud bin Faisal Rd. Almalqa 6418, Riyadh, Saudi Arabia ",
+      link: "https://maps.app.goo.gl/t6fw3RsFjvt5uC6R7",
     },
   ];
 
@@ -70,11 +72,11 @@ export default function Footer() {
     },
     {
       icon: <Twitter />,
-      link: "https://www.twitter.com/",
+      link: "https://twitter.com/goatar_sa",
     },
     {
       icon: <LinkedIn />,
-      link: "https://www.linkedin.com/",
+      link: "https://www.linkedin.com/company/goatarsa/",
     },
   ];
 
@@ -123,6 +125,7 @@ export default function Footer() {
                       href={item.link}
                       color="inherit"
                       sx={{ mr: "10px" }}
+                      target="_blank"
                     >
                       {item.icon}
                     </Link>
@@ -142,6 +145,7 @@ export default function Footer() {
                 {column.resources.map((item, index) => (
                   <Link
                     href={item.link}
+                    target="_blank"
                     color="inherit"
                     key={index}
                     sx={{
@@ -170,6 +174,15 @@ export default function Footer() {
                 Contact Us
               </Text>
               {contactUs.map((item, index) => (
+                   <Link
+                    href={item.link}
+                    target="_blank"
+                    color="inherit"
+                    key={index}
+                    sx={{
+                      textDecoration: "none",
+                    }}
+                  >
                 <Text
                   key={item?.name}
                   variant="small"
@@ -177,7 +190,7 @@ export default function Footer() {
                   sx={{ mb: { xs: "12px", md: "16px" } }}
                 >
                   {item?.name}
-                </Text>
+                </Text></Link>
               ))}
             </Grid>
           </Grid>
@@ -189,6 +202,7 @@ export default function Footer() {
           <Text variant="body2" color="#fff" align="center">
             {"©  "}
             <Link
+            target="_blank"
               color="inherit"
               href="https://www.atarcloud.com/"
               sx={{ textDecoration: "none" }}
@@ -207,6 +221,7 @@ export default function Footer() {
           {logos.map((item, index) => (
             <Link
               key={index}
+              target="_blank"
               href={item.link}
               color="inherit"
               sx={{
