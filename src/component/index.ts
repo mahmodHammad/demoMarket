@@ -27,6 +27,9 @@ export { default as Slider } from './forms/Slider';
 export { default as SimpleSelect } from './forms/SimpleSelect';
 export { default as Rating } from './forms/Rating';
 export { default as RadioGroup } from './forms/RadioGroup';
+export { default as DatePicker } from './forms/DatePicker';
+export { default as TimePicker } from './forms/TimePicker';
+export { default as DateTimePicker } from './forms/DateTimePicker';
 
 export { default as TextInputController } from './forms/controlled/TextInputController';
 export { default as SwitchController } from './forms/controlled/SwitchController';
@@ -36,6 +39,9 @@ export { default as SliderController } from './forms/controlled/SliderController
 export { default as RadioGroupController } from './forms/controlled/RadioGroupController';
 export { default as RatingController } from './forms/controlled/RatingController';
 export { default as PhoneInputController } from './forms/controlled/PhoneInputController';
+export { default as DatePickerController } from './forms/controlled/DatePickerController';
+export { default as TimePickerController } from './forms/controlled/TimePickerController';
+export { default as DateTimePickerController } from './forms/controlled/DateTimePickerController';
 
 export { default as LoginModal } from './modals/LoginModal';
 
