@@ -12,7 +12,7 @@ type TextInputControllerProps = Omit<TextFieldProps, 'name'> &
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const TextInputController = ({ name, rules, control, errors, ...otherProps }: TextInputControllerProps) => {
+const TextInputController = ({ name, rules, control, errors, disabled, label, ...otherProps }: TextInputControllerProps) => {
 	return (
 		<Controller
 			name={name}
@@ -20,7 +20,10 @@ const TextInputController = ({ name, rules, control, errors, ...otherProps }: Te
 			rules={rules}
 			render={({ field }) => (
 				<>
-					<TextInput {...field} {...otherProps} />
+					<Text variant="caption" sx={{ mb: '10px', color: `${disabled ? '#CACACA' : ''}` }}>
+						{label}
+					</Text>
+					<TextInput {...field} {...otherProps} disabled={disabled} />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
 				</>
 			)}

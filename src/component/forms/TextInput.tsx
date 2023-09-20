@@ -10,6 +10,7 @@ const TextInput = (props: TextFieldProps) => {
 					borderColor: '#E3E3E3',
 					borderRadius: '8px',
 					fontSize: '16px',
+					background:`${props?.disabled ? '#F0F0F0' :''}`
 				},
 			}}
 			{...props}
