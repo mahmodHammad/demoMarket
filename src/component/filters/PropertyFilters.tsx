@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { AccordionChipsFilter, CheckBox, CounterFilter, SliderFilter, TextInput } from '@/component';
+import { AccordionChipsFilter, Switch, CounterFilter, SliderFilter, TextInput } from '@/component';
 import { Box, Text, Button, Accordion } from '@/wrappers';
 import { IconButton } from '@mui/material';
 import { Close, SearchLine } from '@/assets';
@@ -138,7 +138,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           <Text bold sx={{ fontSize: 14 }}>
             Pet-Friendly
           </Text>
-          <CheckBox />
+          <Switch defaultChecked />
         </Box>
 
         <AccordionChipsFilter

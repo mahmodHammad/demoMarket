@@ -5,7 +5,7 @@ import { Box, Button, Text } from '@/wrappers';
 import { Modal } from '@mui/material';
 import { Close } from '@/assets';
 
-import { Phoneinput } from '@/component';
+// import { PhoneInput } from '@/component';
 
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
@@ -81,7 +81,7 @@ const LoginModal = ({ loginModalOpen, setLoginModalOpen }: PropsTypes) => {
 					</Text>
 				</Box>
 
-				<Phoneinput />
+				{/* <PhoneInput /> */}
 
 				<InfoBox
 					type='info'
