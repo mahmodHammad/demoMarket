@@ -68,15 +68,12 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
 							mt: '16px',
 						}}>
 						<Button
-							variant="danger"
+							variant="dangerOutlined"
 							sx={{
-								background: 'transparent',
-								border: '1px solid #FF4242',
-								color: '#FF4242',
+								
                                 fontWeight:700,
-                                "&:hover": { borderColor: "#FF4242", background: "transparent" },
-							}}
-							color="error">
+                             	}}
+							>
 							Cancel Visit
 						</Button>
 					</Box>

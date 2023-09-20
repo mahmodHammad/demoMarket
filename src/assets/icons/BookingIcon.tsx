@@ -1,6 +1,6 @@
 import { SvgIcon } from '@mui/material';
 
-export default function SupportIcon(props: any) {
+export default function BookingIcon(props: any) {
 	return (
 		<SvgIcon {...props} inheritViewBox>
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
