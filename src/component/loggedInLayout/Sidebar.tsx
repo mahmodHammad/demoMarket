@@ -1,4 +1,4 @@
-import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, ListItem } from '@mui/material';
 import { Text } from '@/wrappers';
 import { navLinks } from './NavLinks';
 import SupportIcon from '@/assets/icons/SupportIcon';
@@ -25,7 +25,7 @@ export default function Sidebar() {
 						}}>
 						<Icon
 							sx={{
-								color: pathname === to ? '#008EA5' : '#232425',
+								fill: pathname === to ? '#008EA5' : '#232425',
 							}}
 						/>
 						<Text
