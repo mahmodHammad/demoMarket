@@ -11,14 +11,11 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
 
-const pages = ['Login', 'Signup'];
+function ResponsiveAppBar() {
+	const { openLoginModal } = useAuth();
 
-type PropsTypes = {
-	// setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function ResponsiveAppBar(props: PropsTypes) {
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -27,6 +24,11 @@ function ResponsiveAppBar(props: PropsTypes) {
 
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
+	};
+
+	const handleLoginClicked = () => {
+		openLoginModal();
+		handleCloseNavMenu();
 	};
 
 	return (
@@ -71,18 +73,8 @@ function ResponsiveAppBar(props: PropsTypes) {
 						<Box>
 							<Button
 								component={Link}
-								href="/my-bookings"
-								sx={{ color: '#fff', fontSize: '18px', mr: '12px' }}
-								size="medium">
-								My bookings
-							</Button>
-							<Button
-								component={Link}
 								href="/login"
-								onClick={() => {
-									// setLoginModalOpen(true);
-									handleCloseNavMenu();
-								}}
+								onClick={handleLoginClicked}
 								sx={{ color: '#fff', fontSize: '20px', mr: '12px' }}
 								size="medium">
 								Login
@@ -90,7 +82,6 @@ function ResponsiveAppBar(props: PropsTypes) {
 							<Button
 								component={Link}
 								href="/signup"
-								onClick={handleCloseNavMenu}
 								size="medium"
 								variant="outlined"
 								whiteborder
@@ -127,11 +118,12 @@ function ResponsiveAppBar(props: PropsTypes) {
 							sx={{
 								display: { xs: 'block', md: 'none' },
 							}}>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Text textAlign="center">{page}</Text>
-								</MenuItem>
-							))}
+							<MenuItem onClick={handleLoginClicked}>
+								<Text textAlign="center">Login</Text>
+							</MenuItem>
+							<MenuItem component={Link} href="/signup">
+								<Text textAlign="center">Signup</Text>
+							</MenuItem>
 						</Menu>
 					</Box>
 				</Toolbar>
