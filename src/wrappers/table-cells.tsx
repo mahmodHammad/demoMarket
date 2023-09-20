@@ -10,13 +10,10 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
             fontWeight: 700,
             color: '#232425',
         }
-        // color: theme.palette.common.white,
 
     },
     [`&.${tableCellClasses.body}`]: {
         padding:'4px 4px 4px 16px'
-        // fontSize: 16,
-        // fontWeight: 700
     },
 }));
 

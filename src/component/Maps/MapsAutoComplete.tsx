@@ -14,10 +14,6 @@ const MapsAutoComplete = ({ handleMapClick, address }) => {
       componentRestrictions: { country },
     },
   });
-  // const handleLatLng = (place) => {
-  //   console.log(place?.geometry?.location?.lat(),place?.geometry?.location?.lng(), 'place, shreyas')
-  //   setLatLng({ lat: place?.geometry?.location?.lat(), lng: place?.geometry?.location?.lng() });
-  // }
   return (
     <div className="App">
       <header className="App-header" style={{

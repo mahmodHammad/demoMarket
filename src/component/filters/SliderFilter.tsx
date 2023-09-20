@@ -1,9 +1,8 @@
-'user client';
+'use client';
 
-import * as React from 'react';
-import { TextInput } from '@/component';
-import { Slider } from '@mui/material';
+import { TextInput, Slider } from '@/component';
 import { Box } from '@/wrappers';
+import React, { useState } from 'react';
 
 type Props = {
   label: string;
@@ -12,7 +11,7 @@ type Props = {
 };
 
 const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
-  const [value, setValue] = React.useState<number[]>(sliderValues);
+  const [value, setValue] = useState<number[]>(sliderValues);
 
   const handleChange = (event: Event | null, newValue: number[] | number) => {
     setValue(newValue as number[]);
@@ -21,23 +20,12 @@ const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
   return (
     <Box mt={4} column gap={'12px'} ycenter>
       <Slider
-        disableSwap
-        size="medium"
-        sx={{
-          width: 0.91,
-          '& .MuiSlider-valueLabel': {
-            backgroundColor: 'primary.main',
-            borderRadius: '4px',
-            width: '35px',
-          },
-        }}
         value={value}
         getAriaLabel={() => `${label} range`}
         onChange={handleChange}
         onChangeCommitted={(event: React.SyntheticEvent | Event, value: number | number[]) =>
           handleSliderChange(value as number[])
         }
-        valueLabelDisplay="on"
       />
 
       <Box row xbetween ycenter gap={'18px'} fullWidth>

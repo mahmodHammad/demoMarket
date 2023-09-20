@@ -19,9 +19,23 @@ export { default as FloorPlans } from './unitDetails/FloorPlans';
 
 export { default as UnitMap } from './unitDetails/UnitMap';
 
-export { default as Phoneinput } from './forms/Phoneinput';
+export { default as PhoneInput } from './forms/PhoneInput';
 export { default as TextInput } from './forms/TextInput';
-export { default as CheckBox } from './forms/Checkbox';
+export { default as Switch } from './forms/Switch';
+export { default as Checkbox } from './forms/Checkbox';
+export { default as Slider } from './forms/Slider';
+export { default as SimpleSelect } from './forms/SimpleSelect';
+export { default as Rating } from './forms/Rating';
+export { default as RadioGroup } from './forms/RadioGroup';
+
+export { default as TextInputController } from './forms/controlled/TextInputController';
+export { default as SwitchController } from './forms/controlled/SwitchController';
+export { default as CheckboxController } from './forms/controlled/CheckboxController';
+export { default as SimpleSelectController } from './forms/controlled/SimpleSelectController';
+export { default as SliderController } from './forms/controlled/SliderController';
+export { default as RadioGroupController } from './forms/controlled/RadioGroupController';
+export { default as RatingController } from './forms/controlled/RatingController';
+export { default as PhoneInputController } from './forms/controlled/PhoneInputController';
 
 export { default as LoginModal } from './modals/LoginModal';
 
