@@ -19,12 +19,12 @@ export const navLinks: NavLink[] = [
     icon: DashboardIcon,
   },
   {
-    to: "/dashboard",
+    to: "/visitors",
     text: `Visitors`,
     icon: VisitorIcon,
   },
   {
-    to: "/dashboard",
+    to: "/properties",
     text: `Properties`,
     icon: PropertiesIcon,
   },
@@ -45,7 +45,7 @@ export const navLinks: NavLink[] = [
     icon: FavouritesIcon,
   },
   {
-    to: "/favourites",
+    to: "/advertisement",
     text: `Advertisement`,
     icon: Advertisement,
   },
