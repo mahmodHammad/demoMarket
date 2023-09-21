@@ -1,4 +1,4 @@
-/* New COMPONENT */
+/* New COMPONENT, (WIP) */
 'use client';
 
 import ReactPhoneInput, { parsePhoneNumber } from 'react-phone-number-input';

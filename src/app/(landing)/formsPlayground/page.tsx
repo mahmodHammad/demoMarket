@@ -87,13 +87,13 @@ export default function FormsPlayground() {
 			</Box>
 
 			<Box sx={{ width: 0.2 }} column gap={3}>
-				<PhoneInput name="phone" control={control} errors={errors} />
-
 				<DatePicker name="date" control={control} errors={errors} label="Date picker" />
 
 				<TimePicker name="time" control={control} errors={errors} label="Time picker" />
 
 				<DateTimePicker name="dateTime" control={control} errors={errors} label="Date Time picker" />
+				
+				<PhoneInput name="phone" control={control} errors={errors} />
 			</Box>
 
 			<Box sx={{ width: 0.2 }} column gap={3}>
