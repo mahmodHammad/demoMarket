@@ -8,6 +8,7 @@ declare module '@mui/material/Button' {
     hover: true;
     danger: true;
     success: true;
+    dangerOutlined: true;
   }
 }
 
@@ -28,7 +29,7 @@ const theme = responsiveFontSizes(
       },
       secondary: {
         main: '#002A37',
-        light: '#002A37',
+        light: '#232425',
         dark: '#002A37',
       },
       error: { main: '#FF4242' },
@@ -133,6 +134,17 @@ const theme = responsiveFontSizes(
               color: 'white',
               '&:hover': {
                 backgroundColor: '#388e3c',
+              },
+            },
+          },
+             {
+            props: { variant: 'dangerOutlined' },
+            style: {
+              border: '1px solid #FF4242',
+              backgroundColor: 'transparent',
+              color: '#FF4242',
+              '&:hover': {
+               borderColor: "#FF4242", background: "rgba( 255, 66, 66, 0.09) "
               },
             },
           },

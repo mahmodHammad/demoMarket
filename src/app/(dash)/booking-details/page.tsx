@@ -117,9 +117,9 @@ const page = ({
               </Grid>
               <Box row gap={'40px'} my="25px">
                 <Button
-                  variant="outlined"
+                  variant="dangerOutlined"
                   component={Link}
-                  color="error"
+                  
                   href="/"
                   sx={{
                     mt: '24px',

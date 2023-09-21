@@ -1,7 +1,6 @@
 import NotificationIcon from '@/assets/icons/Notifications'
 import {
 	Badge,
-	SvgIcon,
 } from '@mui/material'
 export default function Notifications() {
 
@@ -18,7 +17,6 @@ export default function Notifications() {
 			<NotificationIcon
 				sx={{
 					color: theme => theme?.palette?.primary?.dark,
-					// fontSize: 40,
 					mb: "10px"
 				}}
 			/>

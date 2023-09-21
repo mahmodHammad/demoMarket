@@ -19,7 +19,7 @@ export { default as FloorPlans } from './unitDetails/FloorPlans';
 
 export { default as UnitMap } from './unitDetails/UnitMap';
 
-export { default as PhoneInput } from './forms/PhoneInput';
+export { default as PhoneInput } from './forms/Phoneinput';
 export { default as TextInput } from './forms/TextInput';
 export { default as Switch } from './forms/Switch';
 export { default as Checkbox } from './forms/Checkbox';

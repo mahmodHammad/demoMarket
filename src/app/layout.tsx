@@ -1,9 +1,6 @@
 'use client'
 
 import * as React from 'react';
-import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
-import { Box } from '@/wrappers';
-import { Footer, Navbar } from '@/component';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'

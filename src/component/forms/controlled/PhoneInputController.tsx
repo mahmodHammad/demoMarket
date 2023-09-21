@@ -2,7 +2,7 @@
 
 import { Controller, FieldValues, UseControllerProps, UseFormReturn } from 'react-hook-form';
 import { Text } from '@/wrappers';
-import PhoneInput from '../PhoneInput';
+import PhoneInput from '../Phoneinput';
 
 type PhoneInputControllerProps = Omit<UseControllerProps<FieldValues>, 'control'> & {
 	name: string;
