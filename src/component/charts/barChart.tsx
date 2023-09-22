@@ -1,16 +1,10 @@
+'use client';
 import React from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { Card, CardContent } from '@mui/material';
-import { Box } from '@/Shared/layout';
+import { Card, CardContent, CardHeader, Divider } from '@mui/material';
+import { Box, Container, Item } from '@/wrappers';
 
-import { useTranslation } from 'react-i18next';
-
-import { useQuery } from '@tanstack/react-query';
-import { mngmtHttp } from '@/Utils/Http/Http';
-import { useNavigate } from 'react-router-dom';
-import Brands from '@/Constants/Brands';
-import { useBrandContext } from '@/Contexts/BrandProvider';
 import theme from '@/ThemeRegistry/theme';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -37,35 +31,22 @@ export const options = {
 		},
 	},
 };
-export default function App({ selectedPeriod }) {
-	const { t } = useTranslation();
-
-	const lables = [
-		t('accounting.today'),
-		`1-30 ${t('common.day')}`,
-		`31-60 ${t('common.day')}`,
-		`60-90 ${t('common.day')}`,
-		`91-120 ${t('common.day')}`,
-		`+121 ${t('common.day')}`,
-	];
-	const { data: chartData } = useQuery(['LEASECHART'], () =>
-		mngmtHttp.get(`/reports/performance/leases`).then((response) => response?.data?.data),
-	);
-	const lablesdata = [
-		chartData?.['0'],
-		chartData?.['1_30'],
-		chartData?.['31_60'],
-		chartData?.['61_90'],
-		chartData?.['91_120'],
-		chartData?.['121'],
-	];
-	const sum = lablesdata.reduce((a, b) => +a + +b);
-
+export default function BarChart({
+	chartData,
+	header,
+	infoBar,
+	footer,
+}: {
+	chartData: Object;
+	header: React.ReactNode;
+	infoBar: React.ReactNode;
+	footer: React.ReactNode;
+}) {
 	const data = {
-		labels: lables,
+		labels: Object.keys(chartData),
 		datasets: [
 			{
-				data: lablesdata,
+				data: Object.values(chartData),
 				backgroundColor: theme.palette.primary.main,
 				fill: false,
 				borderColor: theme.palette.primary.main + '50',
@@ -79,23 +60,37 @@ export default function App({ selectedPeriod }) {
 	return (
 		<Box sx={{ height: '100%' }}>
 			<Card sx={{ p: '12px 8px', height: '100%' }}>
+				<CardHeader title={<>{header}</>}></CardHeader>
+				<Divider sx={{mb:'20px'}}/>
 				<CardContent
 					sx={{
 						display: 'flex',
-						height: '300px',
+						height: '100%',
+                        mt:'20px'
 					}}>
 					<Box
 						sx={{
-							// background: "#fef",
 							height: '100%',
 							width: '100%',
-							// backgroundImage: `url( ${financialChart})`,
 							backgroundPosition: 'center',
 							backgroundSize: 'contain',
 							backgroundRepeat: 'no-repeat',
-							mt: '-7%',
+							mt: '-8%',
 						}}>
-						<Bar options={options} data={data} />
+						<Container
+							sx={{
+								height: '100%',
+								display: 'flex',
+								alignItems: 'center',
+							}}>
+							<Item xs={4} lg={4} xl={4}>
+								{infoBar}
+							</Item>
+							<Item xs={8} lg={8} xl={8} sx={{ ml: '-20px', height: '200px' }}>
+								<Bar options={options} data={data} />
+							</Item>
+							{footer}
+						</Container>
 					</Box>
 				</CardContent>
 			</Card>

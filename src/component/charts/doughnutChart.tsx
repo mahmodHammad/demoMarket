@@ -1,11 +1,8 @@
 'use client';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, CardHeader } from '@mui/material';
 import { Box, Container, Item } from '@/wrappers';
-
-// import faker from "faker";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,28 +12,25 @@ export default function DoughnutChart({
 	chartData,
 	title,
 	total,
+	header,
+	infoBar,
+	footer,
 }: {
-	chartData: object;
+	chartData: Array<T>;
 	title: string;
 	total: number;
+	header: React.ReactNode;
+	infoBar: React.ReactNode;
+	footer: React.ReactNode;
 }) {
-	const datavalues = [
-		...Object.keys(chartData)?.map((key, index) => {
-			return {
-				name: key,
-				value: Math.ceil((100 * chartData[key]) / total) || 0,
-				color: Colors[index],
-			};
-		}),
-	];
 	const data = {
-		labels: datavalues?.map((d) => d?.name),
+		labels: chartData?.map((d) => d?.name),
 		datasets: [
 			{
 				cutout: '88%',
 				weight: 10,
-				data: datavalues?.map((d) => d?.value),
-				backgroundColor: datavalues?.map((d) => d?.color),
+				data:  chartData?.map((d) => d?.value),
+				backgroundColor:  chartData?.map((d) => d?.color),
 				cutoutPercentage: 2,
 				borderRadius: 5,
 				spacing: -9,
@@ -47,7 +41,7 @@ export default function DoughnutChart({
 		],
 	};
 
-	const options = {
+    const options = {
 		hover: false,
 		plugins: {
 			legend: {
@@ -89,16 +83,37 @@ export default function DoughnutChart({
 	return (
 		<Box sx={{ height: '100%' }}>
 			<Card sx={{ p: '12px 8px', height: '100%' }}>
-				<Container
+				<CardHeader title={header}></CardHeader>
+				<CardContent
 					sx={{
-						height: '100%',
 						display: 'flex',
-						alignItems: 'center',
+						height: '100%',
 					}}>
-					<Item xs={7} lg={6} xl={8} sx={{ ml: '-20px', height: '200px' }}>
-						{total ? <Doughnut redraw={true} options={options} plugins={plugins} data={data} /> : null}
-					</Item>
-				</Container>
+					<Box
+						sx={{
+							height: '100%',
+							width: '100%',
+							backgroundPosition: 'center',
+							backgroundSize: 'contain',
+							backgroundRepeat: 'no-repeat',
+							mt: '-8%',
+						}}>
+						<Container
+							sx={{
+								height: '100%',
+								display: 'flex',
+								alignItems: 'center',
+							}}>
+							<Item xs={7} lg={6} xl={8} sx={{ ml: '-20px', height: '200px' }}>
+								{total ? <Doughnut redraw={true} options={options} plugins={plugins} data={data} /> : null}
+							</Item>
+							<Item xs={5} lg={6} xl={4}>
+								{infoBar}
+							</Item>
+							{footer}
+						</Container>
+					</Box>
+				</CardContent>
 			</Card>
 		</Box>
 	);
