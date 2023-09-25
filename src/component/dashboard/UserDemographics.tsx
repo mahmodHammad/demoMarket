@@ -58,9 +58,9 @@ export default function UserDemographics() {
 				}}></Box>
 			<Box row sx={{ justifyContent: 'space-between', flex: 1 }}>
 				<Text
+                    gray
+                    variant='caption'
 					sx={{
-						color: '#525451',
-						fontWeight: 400,
 						textTransform: 'capitalize',
 					}}>
 					{title}
@@ -80,15 +80,12 @@ export default function UserDemographics() {
 		};
 	}
 	const header = (
-		<Container alignItems="center" justifyContent="space-between" mb={10}>
+		<Container alignItems="center" justifyContent="space-between" mb={'32px'}>
 			<Box>
-				<Text s={14}>User Demographics</Text>
+				<Text variant="title">User Demographics</Text>
 				<Text
-					s={12}
-					sx={{
-						color: '#525451',
-						fontWeight: 400,
-					}}>
+					variant="caption"
+					gray>
 					All Users
 				</Text>
 			</Box>
@@ -98,7 +95,13 @@ export default function UserDemographics() {
 				value={currentFilter}
 				onChange={handleChange}
 				aria-label="nav tabs example"
-				sx={{ fontSize: '14px !important' }}>
+				sx={{
+					fontSize: '14px !important',
+					'& .Mui-selected': {
+						color: '#004256',
+                        fontWeight:700
+					},
+				}}>
 				<Tab
 					value="nationality"
 					sx={{ fontSize: '12px !important', minWidth: '70px' }}
@@ -126,9 +129,9 @@ export default function UserDemographics() {
 	const infoBar = datavalues.map((d) => <ChartData title={d.name} color={d.color} value={d.value} />);
 
 	const footer = (
-		<Item xs={12} lg={12} xl={12} mb={10} sx={{ display: 'flex', justifyContent: 'end', cursor: 'pointer' }}>
-			<Text s={14} sx={{ color: (theme) => theme.palette.primary.main }}>
-				Export Data
+		<Item mt={'32px'} xs={12} lg={12} xl={12} sx={{ display: 'flex', justifyContent: 'end', cursor: 'pointer' }}>
+			<Text variant='title' sx={{ color: (theme) => theme.palette.primary.main }}>
+				Export Data {'>'}
 			</Text>
 		</Item>
 	);

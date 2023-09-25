@@ -1,36 +1,31 @@
-'use client';
+// 'use client';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import { Box, Container, Item } from '@/wrappers';
+import { DoughnutDataset } from '@/utils/interfaces';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Colors = ['#002A37', '#2a5b6a', '#008EA5', '#CCE8ED', '#CC28EA', '#CC28EM'];
+interface Props {
+	labels?: Array<string>;
+	chartData?: [DoughnutDataset];
+	header?: React.ReactNode;
+	footer?: React.ReactNode;
+	infoBar?: React.ReactNode;
+	title?: string;
+	total?: number;
+}
 
-export default function DoughnutChart({
-	chartData,
-	title,
-	total,
-	header,
-	infoBar,
-	footer,
-}: {
-	chartData: Array<T>;
-	title: string;
-	total: number;
-	header: React.ReactNode;
-	infoBar: React.ReactNode;
-	footer: React.ReactNode;
-}) {
+export default function DoughnutChart({ chartData, title, total, header, infoBar, footer }: Props) {
 	const data = {
 		labels: chartData?.map((d) => d?.name),
 		datasets: [
 			{
 				cutout: '88%',
 				weight: 10,
-				data:  chartData?.map((d) => d?.value),
-				backgroundColor:  chartData?.map((d) => d?.color),
+				data: chartData?.map((d) => d?.value),
+				backgroundColor: chartData?.map((d) => d?.color),
 				cutoutPercentage: 2,
 				borderRadius: 5,
 				spacing: -9,
@@ -41,7 +36,7 @@ export default function DoughnutChart({
 		],
 	};
 
-    const options = {
+	const options = {
 		hover: false,
 		plugins: {
 			legend: {
@@ -81,7 +76,7 @@ export default function DoughnutChart({
 		},
 	];
 	return (
-		<Box sx={{ height: '100%' }}>
+		<Box>
 			<Card sx={{ p: '12px 8px', height: '100%' }}>
 				<CardHeader title={header}></CardHeader>
 				<CardContent
@@ -103,8 +98,8 @@ export default function DoughnutChart({
 								height: '100%',
 								display: 'flex',
 								alignItems: 'center',
-							}}>
-							<Item xs={7} lg={6} xl={8} sx={{ ml: '-20px', height: '200px' }}>
+							}} spacing={'10px'}>
+							<Item xs={7} lg={6} xl={8} sx={{  height: '200px' }}>
 								{total ? <Doughnut redraw={true} options={options} plugins={plugins} data={data} /> : null}
 							</Item>
 							<Item xs={5} lg={6} xl={4}>

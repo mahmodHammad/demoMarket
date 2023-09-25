@@ -1,9 +1,7 @@
-
 import { Divider } from '@mui/material';
 import { Box, Container, Text } from '@/wrappers';
 
 import Infometrics from '../charts/Infometrics';
-
 
 export default function DisplayNumbers() {
 	const data = [
@@ -29,13 +27,8 @@ export default function DisplayNumbers() {
 								<>
 									<Container alignItems="center" justifyContent="space-between">
 										<Box>
-											<Text s={14}>{item?.title}</Text>
-											<Text
-												s={12}
-												sx={{
-													color: '#525451',
-													fontWeight: 400,
-												}}>
+											<Text variant="title">{item?.title}</Text>
+											<Text variant="caption" gray>
 												{item?.subTitle}
 											</Text>
 										</Box>
@@ -48,9 +41,8 @@ export default function DisplayNumbers() {
 									sx={{
 										height: '100%',
 										width: '100%',
-										// mt: "-8%",
 									}}>
-									<Text s={16}>{item?.content}</Text>
+									<Text variant="label">{item?.content}</Text>
 								</Box>
 							}
 						/>

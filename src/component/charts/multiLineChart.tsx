@@ -12,6 +12,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { Card, CardContent, CardHeader, Divider } from '@mui/material';
 import { Box } from '@/wrappers';
+import { MultilineDataset } from '@/utils/interfaces';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -26,10 +27,14 @@ export const options = {
 	},
 };
 
-export default function MultiLineChart({ labels,dataset, header, footer }: { chartData: object }) {
-	// Get the labels from the data.
-	// We only need to iterate on the first element for labels as both datasets will have same labels.
-    
+interface Props {
+	labels?: Array<string>;
+	dataset?: [MultilineDataset];
+	header?: React.ReactNode;
+	footer?: React.ReactNode;
+}
+
+export default function MultiLineChart({ labels, dataset, header, footer }: Props) {
 	const data = {
 		labels: labels,
 		datasets: dataset,
@@ -58,26 +63,12 @@ export default function MultiLineChart({ labels,dataset, header, footer }: { cha
 					<Box sx={{ height: '250px' }}>
 						<Line options={options} data={data} />
 					</Box>
-                    {footer}
+					{footer}
 				</Box>
 			</CardContent>
 		</Card>
 	);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /// Commented reusable Code for now. Will be deleted after merge.
 // let flag = false;

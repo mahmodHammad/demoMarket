@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, Divider, Tab, Tabs } from '@mui/material';
+import { Card, CardContent, CardHeader, Tab, Tabs } from '@mui/material';
 import { Box, Container, Item, Text } from '@/wrappers';
 import SaleIcon from '@/assets/icons/SaleIcon';
 import PropertiesSaleIcon from '@/assets/icons/PropertiesSaleIcon';
@@ -50,24 +50,25 @@ export default function App() {
 							<Container alignItems="center" justifyContent="space-between">
 								<Item xs={5}>
 									<Box>
-										<Text s={14}>Properties Activity</Text>
-										<Text
-											s={12}
-											sx={{
-												color: '#525451',
-												fontWeight: 400,
-											}}>
+										<Text variant="title">Properties Activity</Text>
+										<Text variant="caption" gray>
 											Total No. of Properties: 134.351
 										</Text>
 									</Box>
 								</Item>
 								<Item xs={7} display={'flex'} justifyContent={'flex-end'}>
 									<Tabs
+										sx={{
+											fontSize: '14px !important',
+											'& .Mui-selected': {
+												color: '#004256 !important',
+												fontWeight: '700 !important',
+											},
+										}}
 										variant="standard"
 										value={currentFilter}
 										onChange={handleChange}
-										aria-label="nav tabs example"
-										sx={{ fontSize: '14px !important' }}>
+										aria-label="nav tabs example">
 										<Tab
 											value="details"
 											sx={{ fontSize: '12px !important', minWidth: '70px' }}
@@ -101,19 +102,25 @@ export default function App() {
 						{chartData?.map(({ title, value, icon: Icon }, index) => {
 							return (
 								<Item xs={6} key={index}>
-									<Container alignItems="center" spacing={5} justifyContent="space-between" mb={5}>
+									<Container alignItems="center" spacing={'16px'} justifyContent="space-between">
 										<Item xs={2}>
-											<Icon color="primary" sx={{ color: '#008EA5' }} />
+											<Icon
+												color="primary"
+												sx={{
+													color: (theme) => theme.palette.primary.main,
+													stroke: (theme) => theme.palette.primary.main,
+												}}
+											/>
 										</Item>
 										<Item xs={9}>
 											<Box>
-												<Text fontWeight={400} s={14}>
+												<Text fontWeight={400} variant="caption">
 													{title}
 												</Text>
 												<Text
-													s={18}
+													variant="h5"
 													sx={{
-														color: '#525451',
+														color: '#232425',
 														fontWeight: 700,
 													}}>
 													{value}
@@ -125,9 +132,9 @@ export default function App() {
 							);
 						})}
 						<Item xs={12} sx={{ display: 'flex', justifyContent: 'end', cursor: 'pointer' }}>
-							<Text s={14} sx={{ color: (theme) => theme.palette.primary.main }}>
-								Export Data
-							</Text>
+							{/* <Text variant="title" sx={{ color: (theme) => theme.palette.primary.main }}>
+								Export Data {'>'}
+							</Text> */}
 						</Item>
 					</Container>
 				</CardContent>

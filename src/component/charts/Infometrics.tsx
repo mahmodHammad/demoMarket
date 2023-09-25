@@ -1,8 +1,5 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-
 import { Card, CardContent, CardHeader } from '@mui/material';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Infometrics({ header, content }) {
 	return (

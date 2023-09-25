@@ -9,6 +9,13 @@ import theme from '@/ThemeRegistry/theme';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+interface Props {
+	chartData?: { [key: string | number]: string | number };
+	header?: React.ReactNode;
+	infoBar?: React.ReactNode;
+	footer?: React.ReactNode;
+}
+
 export const options = {
 	plugins: {
 		legend: {
@@ -31,17 +38,7 @@ export const options = {
 		},
 	},
 };
-export default function BarChart({
-	chartData,
-	header,
-	infoBar,
-	footer,
-}: {
-	chartData: Object;
-	header: React.ReactNode;
-	infoBar: React.ReactNode;
-	footer: React.ReactNode;
-}) {
+export default function BarChart({ chartData, header, infoBar, footer }: Props) {
 	const data = {
 		labels: Object.keys(chartData),
 		datasets: [
@@ -61,12 +58,11 @@ export default function BarChart({
 		<Box sx={{ height: '100%' }}>
 			<Card sx={{ p: '12px 8px', height: '100%' }}>
 				<CardHeader title={<>{header}</>}></CardHeader>
-				<Divider sx={{mb:'20px'}}/>
+				<Divider sx={{ mb: '20px' }} />
 				<CardContent
 					sx={{
 						display: 'flex',
-						height: '100%',
-                        mt:'20px'
+						mt: '16px',
 					}}>
 					<Box
 						sx={{
@@ -75,18 +71,17 @@ export default function BarChart({
 							backgroundPosition: 'center',
 							backgroundSize: 'contain',
 							backgroundRepeat: 'no-repeat',
-							mt: '-8%',
 						}}>
 						<Container
 							sx={{
 								height: '100%',
 								display: 'flex',
 								alignItems: 'center',
-							}}>
+							}} spacing={'10px'}>
 							<Item xs={4} lg={4} xl={4}>
 								{infoBar}
 							</Item>
-							<Item xs={8} lg={8} xl={8} sx={{ ml: '-20px', height: '200px' }}>
+							<Item xs={8} lg={8} xl={8} sx={{ ml: '-20px', minHeight: '250px' }}>
 								<Bar options={options} data={data} />
 							</Item>
 							{footer}

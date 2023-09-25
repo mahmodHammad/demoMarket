@@ -18,7 +18,6 @@ export default function SelectDate() {
 	];
 	const {
 		control,
-		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -26,19 +25,18 @@ export default function SelectDate() {
 		},
 	});
 	return (
-		<Card sx={{ p: '12px 8px 0', height: '450px' }}>
+		<Card sx={{ p: '12px 8px 0', height: '100%' }}>
 			<CardHeader
 				title={
 					<>
 						<Container alignItems="center" justifyContent="space-between">
 							<Box>
-								<Text s={14}>Select Dashboard Time Period</Text>
+								<Text variant="title">Select Dashboard Time Period</Text>
 								<Text
-									s={12}
+									variant="caption"
+									gray
 									sx={{
 										mb: '16px',
-										color: '#525451',
-										fontWeight: 400,
 									}}>
 									Select a time period from the list below to view relevant data
 								</Text>
@@ -61,11 +59,7 @@ export default function SelectDate() {
 						</Container>
 					</>
 				}></CardHeader>
-			<CardContent
-				sx={{
-					display: 'flex',
-					height: '275px',
-				}}></CardContent>
+			<CardContent sx={{}}></CardContent>
 		</Card>
 	);
 }

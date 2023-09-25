@@ -76,22 +76,26 @@ export default function SalesTarget() {
 		.filter(Boolean);
 
 	let color = ['#FF8484', '#FF8383', '#008EA5', '#FF8381', '#009EA9'];
-	const dataset = Object.keys(data)?.map((item: string, index) => {
-		if (Array.isArray(data[item])) {
-			return {
-				label: '',
-				data: data[item]?.map((ele) => {
-					return ele.value;
-				}),
-				borderColor: color[index],
-				backgroundColor: color[index],
-			};
-		}
-	}).filter(Boolean);
+	const dataset = Object.keys(data)
+		?.map((item: string, index) => {
+			if (Array.isArray(data[item])) {
+				return {
+					label: '',
+					data: data[item]?.map((ele) => {
+						return ele.value;
+					}),
+					borderColor: color[index],
+					backgroundColor: color[index],
+				};
+			}
+		})
+		.filter(Boolean);
 
 	const header = (
 		<Container alignItems="center" justifyContent="space-between">
-			<Text sx={{ mb: '12px', ml: '16px' }}>Sales And Target</Text>
+			<Text variant="title" sx={{ mb: '12px', ml: '16px' }}>
+				Sales And Target
+			</Text>
 		</Container>
 	);
 
@@ -109,15 +113,14 @@ export default function SalesTarget() {
 						}}></Box>
 					<Box>
 						<Text
-							s={12}
+							variant="caption"
+							gray
 							sx={{
-								fontWeight: 400,
 								lineHeight: '10px',
-								color: '#525451',
 							}}>
 							Actual Sales
 						</Text>
-						<Text s={14}>SAR 25,000.00</Text>
+						<Text variant="title">SAR 25,000.00</Text>
 					</Box>
 				</Box>
 				<Box row ycenter sx={{ ml: '32px' }}>
@@ -131,15 +134,14 @@ export default function SalesTarget() {
 						}}></Box>
 					<Box>
 						<Text
-							s={12}
+							variant="caption"
+							gray
 							sx={{
-								fontWeight: 400,
 								lineHeight: '10px',
-								color: '#525451',
 							}}>
 							Target Sales
 						</Text>
-						<Text s={14}>SAR 25,000.00</Text>
+						<Text variant="title">SAR 25,000.00</Text>
 					</Box>
 				</Box>
 			</Box>

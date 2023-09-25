@@ -22,15 +22,10 @@ export default function SalesByAgent() {
 					mr: '8px',
 				}}></Box>
 			<Box row alignItems={'center'}>
-				<Text
-					sx={{
-						fontWeight: 400,
-						lineHeight: '10px',
-						color: '#525451',
-					}}>
-					Paid 
+				<Text gray variant="caption">
+					Paid
 				</Text>
-				<Text>&nbsp; SAR 25,000.00</Text>
+				<Text variant='h5'>&nbsp; SAR 25,000.00</Text>
 			</Box>
 		</Box>
 	);
@@ -38,13 +33,8 @@ export default function SalesByAgent() {
 	const header = (
 		<Container alignItems="center" justifyContent="space-between">
 			<Box>
-				<Text s={14}>Sales by Agent</Text>
-				<Text
-					s={12}
-					sx={{
-						color: '#525451',
-						fontWeight: 400,
-					}}>
+				<Text variant="title">Sales by Agent</Text>
+				<Text variant="caption" gray>
 					All Users
 				</Text>
 			</Box>
