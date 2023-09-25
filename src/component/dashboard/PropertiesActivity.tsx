@@ -5,6 +5,7 @@ import { Box, Container, Item, Text } from '@/wrappers';
 import SaleIcon from '@/assets/icons/SaleIcon';
 import PropertiesSaleIcon from '@/assets/icons/PropertiesSaleIcon';
 import RentIcon from '@/assets/icons/RentIcon';
+import ValuesWithIcon from './ValuesWithIcon';
 
 export default function PropertiesActivity() {
 	const [currentFilter, setCurrentFilter] = useState('details');
@@ -99,32 +100,10 @@ export default function PropertiesActivity() {
 							display: 'flex',
 							alignItems: 'center',
 						}}>
-						{chartData?.map(({ title, value, icon: Icon }, index) => {
+						{chartData?.map(({ title, value, icon }, index) => {
 							return (
 								<Item xs={6} key={index}>
-									<Container alignItems="center" spacing={'16px'} justifyContent="space-between">
-										<Item xs={2}>
-											<Icon
-												color="primary"
-												sx={{
-													color: (theme) => theme.palette.primary.main,
-													fill: (theme) => theme.palette.primary.main,
-													stroke: (theme) => theme.palette.primary.main,
-												}}
-											/>
-										</Item>
-										<Item xs={9}>
-											<Box>
-												<Text fontWeight={400} variant="caption">
-													{title}
-												</Text>
-												<Text
-													variant="h5">
-													{value}
-												</Text>
-											</Box>
-										</Item>
-									</Container>
+									<ValuesWithIcon title={title} value={value} Icon={icon} />
 								</Item>
 							);
 						})}
