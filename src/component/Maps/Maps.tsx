@@ -79,21 +79,10 @@ const MapContainer = ({setShowMap, handleMapSubmit}) => {
       .catch((error) => console.error(error));
   };
   return (
-    // <Box
-    //   sx={{
-    //     background: "gray",
-    //     position: "absolute",
-    //     width: "calc(100% - 60px)",
-    //     height: "calc(100% - 120px)",
-    //     borderRadius: "6px",
-    //     overflow: "hidden",
-    //   }}
-    // >
     <div className="google-map">
       {/* <MapsAutoComplete handleMapClick={handleMapClick} address={address} /> */}
 
       <MapsView handleSubmit={handleSubmit} address={address} handleMapClick={handleMapClick} latLng={latLng} />
-    {/* // </Box> */}
     </div>
   );
 };

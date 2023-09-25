@@ -39,7 +39,7 @@ const data = [
 //   ];
 // }
 // const listingBodey = ({ data }: proptypes) => {
-const page = () => {
+const favourites = () => {
   return (
     <>
       <Box column p={'35px'} width={'100%'}>
@@ -48,10 +48,10 @@ const page = () => {
           <Box>
             <Button
               startIcon={<Delete />}
-              variant="outlined"
+              variant="dangerOutlined"
               component={Link}
-              color="error"
-              href="/"
+              color="warning"
+              href="/favourites"
               sx={{
                 height: '40px',
                 padding: '10px 20px',
@@ -67,12 +67,12 @@ const page = () => {
           {data?.map((d, index) => (
             <Grid item xs={4} key={index}>
               <UnitsCard
-                title={d.title}
-                img={d.img}
-                link={d.link}
-                price={d.price}
-                area={d.area}
-                location={d.location}
+                title={d?.title}
+                img={d?.img}
+                link={d?.link}
+                price={d?.price}
+                area={d?.area}
+                location={d?.location}
               />
             </Grid>
           ))}
@@ -82,4 +82,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default favourites;
