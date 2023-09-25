@@ -6,7 +6,7 @@ import SaleIcon from '@/assets/icons/SaleIcon';
 import PropertiesSaleIcon from '@/assets/icons/PropertiesSaleIcon';
 import RentIcon from '@/assets/icons/RentIcon';
 
-export default function App() {
+export default function PropertiesActivity() {
 	const [currentFilter, setCurrentFilter] = useState('details');
 
 	const chartData = [

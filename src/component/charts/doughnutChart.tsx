@@ -99,7 +99,7 @@ export default function DoughnutChart({ chartData, title, total, header, infoBar
 								display: 'flex',
 								alignItems: 'center',
 							}} spacing={'10px'}>
-							<Item xs={7} lg={6} xl={8} sx={{  height: '200px' }}>
+							<Item xs={7} lg={6} xl={8} sx={{  minHeight: '200px' }}>
 								{total ? <Doughnut redraw={true} options={options} plugins={plugins} data={data} /> : null}
 							</Item>
 							<Item xs={5} lg={6} xl={4}>

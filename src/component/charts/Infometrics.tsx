@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader } from '@mui/material';
 
-
-export default function Infometrics({ header, content }) {
+export default function Infometrics({ header, content }: { header: React.ReactNode; content: React.ReactNode }) {
 	return (
 		<>
 			<Card sx={{ p: '12px 8px', height: '45%' }}>
