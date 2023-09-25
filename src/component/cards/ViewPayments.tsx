@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Button, Container, Item, Text } from '@/wrappers';
 
-export default function ViewPayments({ data }) {
+export default function ViewPayments() {
     return (
         <>
-        <Text variant="h4" sx={{ padding: '35px 0px 15px 10px' }}>
-                    My Payments
-                </Text>
+            <Text variant="h4" sx={{ padding: '35px 0px 15px 10px' }}>
+                My Payments
+            </Text>
             <Container
                 sx={{
                     width: '100%',
@@ -22,9 +22,6 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA', display: 'none' }}>
-                            Date
-                        </Text>
                         <Text variant="label" sx={{ pt: '10px' }}>
                             Today at 11:00 PM
                         </Text>
@@ -38,7 +35,7 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA' }}>
+                        <Text variant="caption">
                             PaymentType
                         </Text>
                         <Text variant="label">
@@ -53,7 +50,7 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA' }}>
+                        <Text variant="caption">
                             Date
                         </Text>
                         <Text variant="label">
@@ -68,7 +65,7 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA' }}>
+                        <Text variant="caption">
                             Sender
                         </Text>
                         <Text variant="label">
@@ -83,7 +80,7 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA' }}>
+                        <Text variant="caption">
                             Amount
                         </Text>
                         <Text variant="label">
@@ -98,7 +95,7 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA' }}>
+                        <Text variant="caption">
                             Unit name
                         </Text>
                         <Text variant="label">
@@ -113,7 +110,7 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA' }}>
+                        <Text variant="caption">
                             Community Name
                         </Text>
                         <Text variant="label">
@@ -128,7 +125,7 @@ export default function ViewPayments({ data }) {
                             mt: '16px',
                             display: { xs: 'none', md: 'flex' },
                         }}>
-                        <Text variant="caption" sx={{ color: '#CACACA' }}>
+                        <Text variant="caption">
                             Building Name
                         </Text>
                         <Text variant="label">
@@ -142,7 +139,8 @@ export default function ViewPayments({ data }) {
                 borderRadius: '16px',
                 padding: '16px',
                 marginTop: '35px',
-                maxWidth: '370px'
+                maxWidth: '370px',
+                fontWeight: 700,
             }}>
                 View Invoice
             </Button>

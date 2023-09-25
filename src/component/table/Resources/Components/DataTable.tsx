@@ -38,7 +38,7 @@ export default function DataTable({
           <Box center column sx={{ py: "64px" }}>
             {/* <img src={nodataImg} width="80px" height="80px" alt="loadingData" /> */}
             <Text s={24} sx={{ mt: "16px" }}>
-              {"loading Data"}
+              {"Loading Data"}
             </Text>
           </Box>
         ) : //</TableHead>
@@ -70,12 +70,6 @@ export default function DataTable({
                 )}
                 {isEmpty ? (
                   <Box center column sx={{ py: "64px" }}>
-                    {/* <img
-                      src={nodataImg}
-                      width="80px"
-                      height="80px"
-                      alt="No data available"
-                    /> */}
                     <Text s={24} sx={{ mt: "16px" }}>
                       {"No Data Available"}
                     </Text>

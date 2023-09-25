@@ -1,17 +1,18 @@
-'use client';
-// import Languages from "@/Shared/Languages";
-import { CssBaseline, InputAdornment, TextField, Toolbar } from '@mui/material';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import MuiDrawer from '@mui/material/Drawer';
-import { CSSObject, styled, Theme } from '@mui/material/styles';
-import React, { useState } from 'react';
-// import { useTranslation } from "react-i18next";
-import SearchIcon from '@mui/icons-material/Search';
+
+'use client'
+import { CssBaseline, InputAdornment, TextField, Toolbar } from "@mui/material";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import MuiDrawer from "@mui/material/Drawer";
+import { CSSObject, styled, Theme } from "@mui/material/styles";
+import React from "react";
+import SearchIcon from '@mui/icons-material/Search'
 
 import DrawerContainer from './Drawer';
 import Notifications from './Notifications';
 import ProfileDropDown from './ProfileDropDown';
 import { Box, Container } from '@/wrappers/layouts';
+import MarketPlace from "@/assets/icons/MarketPlace";
+import { Button } from "@/wrappers";
 
 const drawerWidth: number = 240;
 interface AppBarProps extends MuiAppBarProps {
@@ -94,6 +95,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+
 interface Props {
   window?: () => Window;
   children?: React.ReactElement;
@@ -102,23 +104,12 @@ interface Props {
 }
 
 export default function AppLayout(props: Props) {
-  // const { t, i18n } = useTranslation();
-
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [open, setOpen] = useState(true);
-
-  const closeDrawer = () => {
-    setMobileOpen(false);
-    setOpen(false);
-  };
-  // if (isFetchingProfile) return <LoadingPage />
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
-        open={open}
+        open={true}
         sx={{
           backgroundColor: '#fff',
         }}>
@@ -143,7 +134,6 @@ export default function AppLayout(props: Props) {
               }}
               variant="outlined"
               placeholder="Search"
-              // onChange={handleChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -155,22 +145,31 @@ export default function AppLayout(props: Props) {
           </Box>
           <Box
             sx={{
-              display: 'flex',
-              // gap: 5,
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              // justifyContent: "space-around",
-              // flexWrap: { xs: "wrap", md: "nowrap" },
-            }}>
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
             <Box
               sx={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '48px',
-              }}>
-              {/* <Box sx={{ mr: "28px" }}>
-                <Languages />
-              </Box> */}
+                flex: 1,
+                justifyContent: "flex-end",
+                display: "flex",
+                mr: "48px",
+              }}
+            >
+              <Button variant="contained" endIcon={<MarketPlace />}>
+                Marketplace
+              </Button>
+            </Box>
+
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: '48px'
+              }}
+            >
               <Box
                 xcenter
                 sx={{
@@ -187,66 +186,37 @@ export default function AppLayout(props: Props) {
           </Box>
         </Toolbar>
       </AppBar>
-
-      {/* <DrawerMobile
-        container={container}
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: drawerWidth,
-          },
-        }}
-      >
-        <DrawerContainer open={mobileOpen} handleDrawerToggle={closeDrawer} />
-      </DrawerMobile> */}
-
       <Drawer
         variant="permanent"
-        open={open}
+        open={true}
         sx={{
-          display: { xs: 'none', sm: 'block' },
-        }}>
-        <DrawerContainer open={open} handleDrawerToggle={closeDrawer} />
+          display: { xs: "none", sm: "block" },
+        }}
+      >
+        <DrawerContainer />
       </Drawer>
 
       <Box
         component="main"
         sx={{
-          // backgroundColor: "#F346F9",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          // minHeight: "calc(100vh )",
-          // height: "100%",
-          // background: "red",
-          borderRadius: '4px',
-          marginTop: { xs: '70px', sm: '70px', md: '70px' },
-          overflow: 'auto',
-          position: 'relative',
-          // paddingBottom:"30px",
-        }}>
+          borderRadius: "4px",
+          marginTop: { xs: "70px", sm: "70px", md: "70px" },
+          overflow: "auto",
+          position: "relative",
+        }}
+      >
         <Container
           sx={{
-            // backgroundColor: "#fff",
-            alignItems: 'center',
+            alignItems: "center",
             mb: 4,
-            borderRadius: '4px',
-          }}>
-          {/* <Breadcrumbs
-            routes={
-              [
-                ...routes.filter((r) => r?.children).map((r) => r.children),
-              ].flat() as unknown as RoutePathDefinition[]
-            }
-          /> */}
+            borderRadius: "4px",
+          }}
+        >
         </Container>
-        <div style={{ backgroundColor: '#FAFCFD', minHeight: '80vh' }}>{props.children}</div>
-        {/* <Outlet /> */}
+        <div style={{ backgroundColor: '#FAFCFD', minHeight: '80vh' }}>
+          {props.children}
+        </div>
       </Box>
     </Box>
   );
