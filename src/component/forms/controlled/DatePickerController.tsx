@@ -12,7 +12,7 @@ type DatePickerControllerProps = Omit<DatePickerProps<Date>, 'name'> &
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const DatePickerController = ({ name, rules, control, errors, ...otherProps }: DatePickerControllerProps) => {
+const DatePickerController = ({ name, rules, control, errors, disabled, label, ...otherProps }: DatePickerControllerProps) => {
 	return (
 		<Controller
 			name={name}
@@ -20,7 +20,9 @@ const DatePickerController = ({ name, rules, control, errors, ...otherProps }: D
 			rules={rules}
 			render={({ field }) => (
 				<>
-				
+					<Text variant="caption" sx={{ mb: '10px', color: `${disabled ? '#CACACA' : ''}` }}>
+						{label}
+					</Text>
 					<DatePicker {...field} {...otherProps} />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
 				

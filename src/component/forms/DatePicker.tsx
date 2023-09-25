@@ -6,7 +6,7 @@ import LocalizationProviderWrapper from '../../wrappers/LocalizationProviderWrap
 const DatePicker = (props: DatePickerProps<Date>) => {
 	// TODO: customize style
 	return <LocalizationProviderWrapper>
-				<MUIDatePicker {...props} />
+				<MUIDatePicker sx={{ width:'100%', '& .MuiInputBase-root': { borderRadius:'8px !important' } }} {...props} />
 			</LocalizationProviderWrapper>;
 };
 

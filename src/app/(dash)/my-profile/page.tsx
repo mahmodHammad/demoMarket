@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Box, Container, Item, Text } from '@/wrappers';
+import { Box, Button, Container, Item, Text } from '@/wrappers';
 import TextInputController from '@/component/forms/controlled/TextInputController';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CheckboxController, PhoneInputController, RadioGroup, SwitchController } from '@/component';
+import { CheckboxController, DatePickerController as DatePicker, RadioGroup, SwitchController } from '@/component';
+import dayjs from 'dayjs';
+import { Avatar } from '@mui/material';
 
 const schema = yup.object().shape({
 	firstName: yup.string().required('First Name is required'),
@@ -14,10 +16,7 @@ const schema = yup.object().shape({
 	NationalID: yup.string().required('National ID is required'),
 	email: yup.string().required('Email is required'),
 	enable: yup.boolean(),
-	notify: yup.boolean(),
-	total: yup.number().required('Total required'),
-	range: yup.number(),
-	rate: yup.number().required('Rate required'),
+	date: yup.date().required('Date required'),
 	gender: yup.string(),
 });
 const RADIO_OPTIONS = [
@@ -44,10 +43,7 @@ export default function MyProfile() {
 			NationalID: '7373727',
 			email: 'sksj@jsjs.com',
 			enable: true,
-			notify: true,
-			total: 10,
-			range: 0,
-			// rate: 0,
+			date: dayjs('2023-09-20') as unknown as Date,
 			gender: 'male',
 		},
 		resolver: yupResolver(schema),
@@ -61,10 +57,20 @@ export default function MyProfile() {
 		<>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Container>
-					<Text variant="h4" sx={{ padding: '35px 0px 15px 36px' }}>
+					<Text variant="h4" sx={{ padding: '35px 0px 36px 36px' }}>
 						Edit Profile
 					</Text>
-					<Container row sx={{ padding: '35px 0px 15px 36px' }}>
+					<Container row rowGap={'50px'} sx={{ padding: '0px 0px 16px 36px' }}>
+						<Item xs={12}>
+							<Avatar
+								alt={'Image'}
+								src={''}
+								sx={{ width: 80, height: 80, mb: '12px' }}
+							/>
+							<Button variant="outlined">
+								Update Photo
+							</Button>
+						</Item>
 						<Item xs={9}>
 							<Container rowGap={'16px'} columnGap={'36px'}>
 								<Item xs={5}>
@@ -85,15 +91,21 @@ export default function MyProfile() {
 									<RadioGroup name="gender" label="Gender" options={RADIO_OPTIONS} control={control} errors={errors} />
 								</Item>
 								<Item xs={5}>
+									<DatePicker name="date" control={control} errors={errors} label="Date of birth" />
+									<Text variant='small' sx={{mt:'8px'}}> <CheckboxController name="Hijari" control={control} errors={errors} /> Hijari </Text>
+								</Item>
+								<Item xs={5}>
 									<TextInputController label={'Email'} name={'email'} control={control} />
 								</Item>
 								<Item xs={5} ycenter>
-									<CheckboxController name="Hijari" control={control} errors={errors} /> Hijari
-								</Item>
-								<Item xs={5} ycenter>
-									<SwitchController name="Hijari" control={control} errors={errors} /> Hijari
+									
 								</Item>
 							</Container>
+						</Item>
+						<Item xs={12}>
+							<Button variant="contained">
+								Save Changes
+							</Button>
 						</Item>
 					</Container>
 				</Container>

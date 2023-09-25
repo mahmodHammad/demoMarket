@@ -6,7 +6,7 @@ import LocalizationProviderWrapper from '../../wrappers/LocalizationProviderWrap
 const TimePicker = (props: TimePickerProps<Date>) => {
 	// TODO: customize style
 	return <LocalizationProviderWrapper>
-				<MUITimePicker {...props} />
+				<MUITimePicker sx={{ width:'100%', '& .MuiInputBase-root': { borderRadius:'8px !important' } }} {...props} />
 			</LocalizationProviderWrapper>;
 };
 
