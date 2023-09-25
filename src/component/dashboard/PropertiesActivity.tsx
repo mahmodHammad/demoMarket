@@ -108,6 +108,7 @@ export default function PropertiesActivity() {
 												color="primary"
 												sx={{
 													color: (theme) => theme.palette.primary.main,
+													fill: (theme) => theme.palette.primary.main,
 													stroke: (theme) => theme.palette.primary.main,
 												}}
 											/>
