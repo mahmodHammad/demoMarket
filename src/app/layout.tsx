@@ -1,8 +1,6 @@
 
 import * as React from 'react';
 
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 export const metadata = {
 	title: 'Atar Market place',
@@ -13,9 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<LocalizationProvider dateAdapter={AdapterDayjs}>
 				<body>{children}</body>
-			</LocalizationProvider>
 		</html>
 	);
 }

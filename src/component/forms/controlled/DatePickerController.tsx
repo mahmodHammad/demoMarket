@@ -20,9 +20,11 @@ const DatePickerController = ({ name, rules, control, errors, ...otherProps }: D
 			rules={rules}
 			render={({ field }) => (
 				<>
+				
 					<DatePicker {...field} {...otherProps} />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
-				</>
+				
+					</>
 			)}
 		/>
 	);
