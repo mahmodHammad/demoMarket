@@ -15,21 +15,29 @@ export default function PropertiesActivity() {
 			title: 'Properties for Sale',
 			value: '31,242',
 			icon: PropertiesSaleIcon,
+			height:'36px',
+			width:'30px',
 		},
 		{
 			title: 'Sales',
 			value: '$15,567.62',
 			icon: SaleIcon,
+			height:'36px',
+			width:'36px',
 		},
 		{
 			title: 'Properties for Rent',
 			value: '72,816',
 			icon: PropertiesSaleIcon,
+			height:'36px',
+			width:'30px',
 		},
 		{
 			title: 'Rent',
 			value: '$7.45',
 			icon: RentIcon,
+			height:'36px',
+			width:'36px',
 		},
 	];
 
@@ -100,10 +108,10 @@ export default function PropertiesActivity() {
 							display: 'flex',
 							alignItems: 'center',
 						}}>
-						{chartData?.map(({ title, value, icon }, index) => {
+						{chartData?.map(({ title, value, icon, height, width }, index) => {
 							return (
 								<Item xs={6} key={index}>
-									<ValuesWithIcon title={title} value={value} Icon={icon} />
+									<ValuesWithIcon height={height} width={width} title={title} value={value} Icon={icon} />
 								</Item>
 							);
 						})}

@@ -6,8 +6,12 @@ export default function ValuesWithIcon({
 	title,
 	value,
 	Icon,
+    height,
+    width
 }: {
 	title: string;
+	height: string;
+	width: string;
 	value: string | number;
 	Icon: SvgIconComponent;
 }) {
@@ -17,6 +21,8 @@ export default function ValuesWithIcon({
 				<Icon
 					color="primary"
 					sx={{
+                        height:height,
+                        width:width,
 						color: (theme) => theme.palette.primary.main,
 						fill: (theme) => theme.palette.primary.main,
 						stroke: (theme) => theme.palette.primary.main,
