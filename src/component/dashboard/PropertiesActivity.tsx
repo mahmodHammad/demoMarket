@@ -118,11 +118,7 @@ export default function PropertiesActivity() {
 													{title}
 												</Text>
 												<Text
-													variant="h5"
-													sx={{
-														color: '#232425',
-														fontWeight: 700,
-													}}>
+													variant="h5">
 													{value}
 												</Text>
 											</Box>
