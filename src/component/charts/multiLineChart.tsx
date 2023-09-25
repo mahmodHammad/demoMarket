@@ -40,7 +40,7 @@ export default function MultiLineChart({ labels, dataset, header, footer }: Prop
 		datasets: dataset,
 	};
 	return (
-		<Card sx={{ p: '12px 8px' }}>
+		<Card sx={{ p: '12px 8px', boxShadow:'0px 17px 33px -2px rgba(28, 39, 49, 0.05)' }}>
 			<CardHeader
 				sx={{ px: '0' }}
 				title={

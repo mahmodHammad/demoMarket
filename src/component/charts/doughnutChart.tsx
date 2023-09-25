@@ -77,7 +77,7 @@ export default function DoughnutChart({ chartData, title, total, header, infoBar
 	];
 	return (
 		<Box>
-			<Card sx={{ p: '12px 8px', height: '100%' }}>
+			<Card sx={{ p: '12px 8px', height: '100%', boxShadow:'0px 17px 33px -2px rgba(28, 39, 49, 0.05)' }}>
 				<CardHeader title={header}></CardHeader>
 				<CardContent
 					sx={{

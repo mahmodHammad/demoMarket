@@ -56,7 +56,7 @@ export default function BarChart({ chartData, header, infoBar, footer }: Props) 
 
 	return (
 		<Box sx={{ height: '100%' }}>
-			<Card sx={{ p: '12px 8px', height: '100%' }}>
+			<Card sx={{ p: '12px 8px', height: '100%', boxShadow:'0px 17px 33px -2px rgba(28, 39, 49, 0.05)' }}>
 				<CardHeader title={<>{header}</>}></CardHeader>
 				<Divider sx={{ mb: '20px' }} />
 				<CardContent
