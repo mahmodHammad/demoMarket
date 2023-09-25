@@ -2,7 +2,7 @@
 import { Box, Button, Container, Item, Text } from "@/wrappers";
 import Image from "next/image";
 import React from "react";
-import signupimg from "@/assets/images/signup.png";
+import signupimg from "@/assets/images/herobg.png";
 import { FormLabel, Input } from "@mui/material";
 import { PhoneInput } from "@/component";
 import { useForm } from "react-hook-form";
