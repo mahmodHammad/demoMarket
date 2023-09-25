@@ -12,6 +12,7 @@ import ProfileDropDown from './ProfileDropDown';
 import { Box, Container } from '@/wrappers/layouts';
 import MarketPlace from '@/assets/icons/MarketPlace';
 import { Button } from '@/wrappers';
+import Link from 'next/link';
 
 const drawerWidth: number = 240;
 interface AppBarProps extends MuiAppBarProps {
@@ -154,7 +155,7 @@ export default function AppLayout(props: Props) {
 								display: 'flex',
 								mr: '48px',
 							}}>
-							<Button variant="contained" endIcon={<MarketPlace />}>
+							<Button component={Link} href="/" variant="contained" endIcon={<MarketPlace />}>
 								Marketplace
 							</Button>
 						</Box>
