@@ -243,7 +243,17 @@ const theme = responsiveFontSizes(
               },
             },
           },
-
+          {
+            props: { variant: 'title' },
+            style: {
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              [initTheme.breakpoints.down('md')]: {
+                fontSize: '12px',
+              },
+            },
+          },
           {
             props: { variant: 'caption' },
             style: {
