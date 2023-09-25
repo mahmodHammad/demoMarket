@@ -1,11 +1,11 @@
 'use client';
 
 import { DateTimePicker as MUIDateTimePicker, DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
-import DateTimeHOC from './DateTimeHOC';
+import LocalizationProviderWrapper from '../../wrappers/LocalizationProviderWrapper';
 
 const DateTimePicker = (props: DateTimePickerProps<Date>) => {
 	// TODO: customize style
-	return <DateTimeHOC><MUIDateTimePicker {...props} /></DateTimeHOC>;
+	return <LocalizationProviderWrapper><MUIDateTimePicker {...props} /></LocalizationProviderWrapper>;
 };
 
 export default DateTimePicker;

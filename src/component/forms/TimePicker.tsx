@@ -1,13 +1,13 @@
 'use client';
 
 import { TimePicker as MUITimePicker, TimePickerProps } from '@mui/x-date-pickers/TimePicker';
-import DateTimeHOC from './DateTimeHOC';
+import LocalizationProviderWrapper from '../../wrappers/LocalizationProviderWrapper';
 
 const TimePicker = (props: TimePickerProps<Date>) => {
 	// TODO: customize style
-	return <DateTimeHOC>
+	return <LocalizationProviderWrapper>
 				<MUITimePicker {...props} />
-			</DateTimeHOC>;
+			</LocalizationProviderWrapper>;
 };
 
 export default TimePicker;
