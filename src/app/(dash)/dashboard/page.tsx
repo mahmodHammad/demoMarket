@@ -10,7 +10,7 @@ import { Grid } from '@mui/material';
 const Dashboard = () => {
 	return (
 		<>
-			<Grid container spacing={'48px'}  padding={'35px'}>
+			<Grid container spacing={'48px'}  padding={'35px'} maxWidth={'1600px'}>
 				<Item xs={4}>
 					<SelectDate />
 				</Item>
