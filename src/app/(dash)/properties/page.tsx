@@ -46,19 +46,8 @@ const Properties = () => {
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Properties List</Text>
 					<Box>
-						<Button
-							startIcon={<Delete />}
-							variant="dangerOutlined"
-							component={Link}
-							color="warning"
-							href="/favourites"
-							sx={{
-								height: '40px',
-								padding: '10px 20px',
-
-								borderRadius: '9px',
-							}}>
-							Remove All
+						<Button variant="outlined" component={Link} href="/properties">
+							Select Multiple
 						</Button>
 					</Box>
 				</Box>

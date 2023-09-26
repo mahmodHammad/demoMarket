@@ -9,21 +9,21 @@ import { UnitsCard } from '@/component';
 import { Delete } from '@/assets';
 
 const data = [
-  {
-    title: 'Al-Arid District',
-    img: neibourhoodcover2,
-    link: '/',
-    price: 'SAR 60,000',
-    area: '120 sqm',
-    location: 'Riyadh',
-  },
-  { title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-  { title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-  { title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-  { title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+	{
+		title: 'Al-Arid District',
+		img: neibourhoodcover2,
+		link: '/',
+		price: 'SAR 60,000',
+		area: '120 sqm',
+		location: 'Riyadh',
+	},
+	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 ];
 
 // interface proptypes {
@@ -40,46 +40,46 @@ const data = [
 // }
 // const listingBodey = ({ data }: proptypes) => {
 const favourites = () => {
-  return (
-    <>
-      <Box column p={'35px'} width={'100%'}>
-        <Box center width={'100%'} xbetween row>
-          <Text variant="h4">Favourites</Text>
-          <Box>
-            <Button
-              startIcon={<Delete />}
-              variant="dangerOutlined"
-              component={Link}
-              color="warning"
-              href="/favourites"
-              sx={{
-                height: '40px',
-                padding: '10px 20px',
+	return (
+		<>
+			<Box column p={'35px'} width={'100%'}>
+				<Box center width={'100%'} xbetween row>
+					<Text variant="h4">Favourites</Text>
+					<Box>
+						<Button
+							startIcon={<Delete />}
+							variant="dangerOutlined"
+							component={Link}
+							color="warning"
+							href="/favourites"
+							sx={{
+								height: '40px',
+								padding: '10px 20px',
 
-                borderRadius: '9px',
-              }}>
-              Remove All
-            </Button>
-          </Box>
-        </Box>
+								borderRadius: '9px',
+							}}>
+							Remove All
+						</Button>
+					</Box>
+				</Box>
 
-        <Grid container mt={'25px'} spacing={'28px'}>
-          {data?.map((d, index) => (
-            <Grid item xs={4} key={index}>
-              <UnitsCard
-                title={d?.title}
-                img={d?.img}
-                link={d?.link}
-                price={d?.price}
-                area={d?.area}
-                location={d?.location}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-    </>
-  );
+				<Grid container mt={'25px'} spacing={'28px'}>
+					{data?.map((d, index) => (
+						<Grid item xs={4} key={index}>
+							<UnitsCard
+								title={d?.title}
+								img={d?.img}
+								link={d?.link}
+								price={d?.price}
+								area={d?.area}
+								location={d?.location}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			</Box>
+		</>
+	);
 };
 
 export default favourites;
