@@ -6,7 +6,7 @@ import TextInputController from '@/component/forms/controlled/TextInputControlle
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CheckboxController, DatePickerController as DatePicker, RadioGroup, SwitchController } from '@/component';
+import { CheckboxController, DatePickerController as DatePicker, RadioGroupController as RadioGroup } from '@/component';
 import dayjs from 'dayjs';
 import { Avatar } from '@mui/material';
 
@@ -15,7 +15,7 @@ const schema = yup.object().shape({
 	lastName: yup.string().required('Last Name is required'),
 	NationalID: yup.string().required('National ID is required'),
 	email: yup.string().required('Email is required'),
-	enable: yup.boolean(),
+	Hijari: yup.boolean(),
 	date: yup.date().required('Date required'),
 	gender: yup.string(),
 });
@@ -42,7 +42,7 @@ export default function MyProfile() {
 			lastName: 'kanzarkar',
 			NationalID: '7373727',
 			email: 'sksj@jsjs.com',
-			enable: true,
+			Hijari: true,
 			date: dayjs('2023-09-20') as unknown as Date,
 			gender: 'male',
 		},
@@ -60,7 +60,7 @@ export default function MyProfile() {
 					<Text variant="h4" sx={{ padding: '35px 0px 36px 36px' }}>
 						Edit Profile
 					</Text>
-					<Container row rowGap={'50px'} sx={{ padding: '0px 0px 16px 36px' }}>
+					<Container row rowGap={'50px'} sx={{ padding: '0px 0px 0px 36px' }}>
 						<Item xs={12}>
 							<Avatar
 								alt={'Image'}
@@ -97,13 +97,10 @@ export default function MyProfile() {
 								<Item xs={5}>
 									<TextInputController label={'Email'} name={'email'} control={control} />
 								</Item>
-								<Item xs={5} ycenter>
-									
-								</Item>
 							</Container>
 						</Item>
 						<Item xs={12}>
-							<Button variant="contained">
+							<Button type='submit' variant="contained">
 								Save Changes
 							</Button>
 						</Item>
