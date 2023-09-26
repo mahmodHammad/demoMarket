@@ -90,7 +90,7 @@ const FilterPopup: React.FC<Props> = ({
                             </Container>
                         </DialogTitle>
 
-                        {Object.keys(fliters).map((element, id) => (
+                        {fliters && Object.keys(fliters).map((element, id) => (
                             <>
                                 <Accordion defaultExpanded={true} style={{
                                     boxShadow: 'none',
