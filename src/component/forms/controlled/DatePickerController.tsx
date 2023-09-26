@@ -1,18 +1,18 @@
 'use client';
 
-import { TextFieldProps } from '@mui/material';
+import DatePicker from '../DatePicker';
+import { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { Controller, FieldValues, UseControllerProps, UseFormReturn } from 'react-hook-form';
 import { Text } from '@/wrappers';
-import TextInput from '../TextInput';
 
-type TextInputControllerProps = Omit<TextFieldProps, 'name'> &
+type DatePickerControllerProps = Omit<DatePickerProps<Date>, 'name'> &
 	Omit<UseControllerProps<FieldValues>, 'control'> & {
 		name: string;
 		control: any;
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const TextInputController = ({ name, rules, control, errors, disabled, label, ...otherProps }: TextInputControllerProps) => {
+const DatePickerController = ({ name, rules, control, errors, disabled, label, ...otherProps }: DatePickerControllerProps) => {
 	return (
 		<Controller
 			name={name}
@@ -23,12 +23,13 @@ const TextInputController = ({ name, rules, control, errors, disabled, label, ..
 					<Text variant="caption" sx={{ mb: '10px', color: `${disabled ? '#CACACA' : ''}` }}>
 						{label}
 					</Text>
-					<TextInput {...field} {...otherProps} disabled={disabled} />
+					<DatePicker {...field} {...otherProps} />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
-				</>
+				
+					</>
 			)}
 		/>
 	);
 };
 
-export default TextInputController;
+export default DatePickerController;

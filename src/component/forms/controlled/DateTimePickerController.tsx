@@ -1,18 +1,18 @@
 'use client';
 
-import { TextFieldProps } from '@mui/material';
+import DateTimePicker from '../DateTimePicker';
+import { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
 import { Controller, FieldValues, UseControllerProps, UseFormReturn } from 'react-hook-form';
 import { Text } from '@/wrappers';
-import TextInput from '../TextInput';
 
-type TextInputControllerProps = Omit<TextFieldProps, 'name'> &
+type DateTimePickerControllerProps = Omit<DateTimePickerProps<Date>, 'name'> &
 	Omit<UseControllerProps<FieldValues>, 'control'> & {
 		name: string;
 		control: any;
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const TextInputController = ({ name, rules, control, errors, disabled, label, ...otherProps }: TextInputControllerProps) => {
+const DateTimePickerController = ({ name, rules, control, errors, ...otherProps }: DateTimePickerControllerProps) => {
 	return (
 		<Controller
 			name={name}
@@ -20,10 +20,7 @@ const TextInputController = ({ name, rules, control, errors, disabled, label, ..
 			rules={rules}
 			render={({ field }) => (
 				<>
-					<Text variant="caption" sx={{ mb: '10px', color: `${disabled ? '#CACACA' : ''}` }}>
-						{label}
-					</Text>
-					<TextInput {...field} {...otherProps} disabled={disabled} />
+					<DateTimePicker {...field} {...otherProps} />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
 				</>
 			)}
@@ -31,4 +28,4 @@ const TextInputController = ({ name, rules, control, errors, disabled, label, ..
 	);
 };
 
-export default TextInputController;
+export default DateTimePickerController;
