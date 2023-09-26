@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 
 export type ResourcesListProps = {
 	Header?: JSX.Element | ReactNode
-	Section?: JSX.Element
+	Section?: ReactNode | JSX.Element | any
 	Footer?: JSX.Element | ReactNode
 	className?: string
 	AfterHeader?: JSX.Element
@@ -19,11 +19,11 @@ export default function ResourcesList({
 }: ResourcesListProps) {
 	return (
 		<MainContainer maxWidth={false}>
-			{Header}
-			{AfterHeader}
-			{Section}
-			{BeforeFooter}
-			{Footer}
+			{/* {Header} */}
+			{/* {AfterHeader} */}
+			<Section />
+			{/* {BeforeFooter} */}
+			{/* {Footer} */}
 		</MainContainer>
 	)
 }

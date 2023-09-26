@@ -2,7 +2,7 @@ import { Box } from "@/wrappers";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 // import { useTranslation } from "react-i18next";
 const Search = ({
   search,
@@ -13,14 +13,15 @@ const Search = ({
 }) => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   // const { t } = useTranslation();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   // const debouncedSearchHandler = useMemo(
   //   () => debounce((nextValue) => handleSearch(nextValue), 1000),
   //   []
   // );
   const handleChange = (event: any) => {
-    setValue(event.target.value);
+    // setValue(event.target.value);
+    handleSearch(event.target.value);
     // debouncedSearchHandler(event.target.value);
   };
 
@@ -32,6 +33,7 @@ const Search = ({
         }}
       >
         <TextField
+          autoFocus={search?.length > 0}
           sx={{
             mr: 4,
             "& .MuiOutlinedInput-input": {
@@ -41,7 +43,7 @@ const Search = ({
           margin="none"
           variant="outlined"
           placeholder={'Search'}
-          value={value}
+          value={search}
           onChange={handleChange}
           InputProps={{
             startAdornment: (
