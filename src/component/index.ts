@@ -55,3 +55,5 @@ export { default as BookingDetails_timedate } from './bookingDetails/BookingDeta
 export { default as BookingDetailsInfo } from './bookingDetails/BookingDetailsInfo';
 export { default as LocationCard } from './bookingDetails/LocationCard';
 export { default as ListingBody } from './listingpage/ListingBody';
+
+export { default as Table } from './table/Table';
