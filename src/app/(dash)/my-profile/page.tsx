@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Box, Button, Container, Item, Text } from '@/wrappers';
+import React from 'react';
+import { Button, Container, Item, Text } from '@/wrappers';
 import TextInputController from '@/component/forms/controlled/TextInputController';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -30,7 +30,6 @@ const RADIO_OPTIONS = [
 	},
 ];
 export default function MyProfile() {
-	const [formData, setFormData] = useState(null);
 
 	const {
 		control,
@@ -50,7 +49,6 @@ export default function MyProfile() {
 	});
 
 	const onSubmit = (data: any) => {
-		setFormData(data);
 		console.log('form data', data);
 	};
 	return (
