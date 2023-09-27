@@ -11,8 +11,8 @@ import { StyledTableCell } from "@/wrappers/table-cells";
 export default function DataTable({
   headerData,
   children,
-  pagination,
-  filters,
+  Pagination,
+  Filters,
   isLoading,
   isEmpty = true,
 }: //   open,
@@ -21,8 +21,8 @@ export default function DataTable({
   {
     headerData: any;
     children?: any;
-    pagination?: any;
-    filters?: any;
+    Pagination?: any;
+    Filters?: any;
     isLoading?: boolean;
     isEmpty?: boolean;
     //   open: any;
@@ -46,9 +46,9 @@ export default function DataTable({
           (
             <>
               <TableHead>
-                {(filters || pagination) && (
+                {(Filters || Pagination) && (
                   <TableRow>
-                    <StyledTableCell colSpan={headerData.length}>
+                    <StyledTableCell colSpan={headerData?.length}>
                       <Box
                         sx={{
                           display: "grid",
@@ -61,9 +61,9 @@ export default function DataTable({
                             alignItems: "center",
                           }}
                         >
-                          {filters && filters}
+                          {Filters && <Filters />}
                         </Box>
-                        <Box>{pagination && pagination}</Box>
+                        <Box>{Pagination && <Pagination />}</Box>
                       </Box>
                     </StyledTableCell>
                   </TableRow>
@@ -79,7 +79,7 @@ export default function DataTable({
                   </Box>
                 ) : (
                   <TableRow>
-                    {headerData.map((item: any, index) => (
+                    {headerData?.map((item: any, index) => (
                       <StyledTableCell key={index}>
                         <Text variant="caption">{item}</Text>
                       </StyledTableCell>

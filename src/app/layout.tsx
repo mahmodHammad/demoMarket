@@ -1,4 +1,6 @@
+
 import * as React from 'react';
+
 
 export const metadata = {
 	title: 'Atar Market place',
