@@ -6,9 +6,12 @@ const TextInput = (props: TextFieldProps) => {
 			variant="outlined"
 			fullWidth
 			InputProps={{
-				style: {
-					fontSize: '16px',
-					background:`${props?.disabled ? '#F0F0F0' :''}`
+				sx: {
+					borderColor: '#E3E3E3',
+					borderRadius: '8px',
+					height: { md: '46px', xs: '40px' },
+					fontSize: { md: '15px', xs: '11.8px' },
+					background: `${props?.disabled ? '#F0F0F0' : ''}`,
 				},
 			}}
 			{...props}

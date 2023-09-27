@@ -12,7 +12,15 @@ type TextInputControllerProps = Omit<TextFieldProps, 'name'> &
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const TextInputController = ({ name, rules, control, errors, disabled, label, ...otherProps }: TextInputControllerProps) => {
+const TextInputController = ({
+	name,
+	rules,
+	control,
+	errors,
+	disabled,
+	label,
+	...otherProps
+}: TextInputControllerProps) => {
 	return (
 		<Controller
 			name={name}
@@ -20,7 +28,7 @@ const TextInputController = ({ name, rules, control, errors, disabled, label, ..
 			rules={rules}
 			render={({ field }) => (
 				<>
-					<Text variant="caption" sx={{ mb: '10px', color: `${disabled ? '#CACACA' : ''}` }}>
+					<Text variant="caption" sx={{ float: 'left', mb: '8px', color: `${disabled ? '#CACACA' : ''}` }}>
 						{label}
 					</Text>
 					<TextInput {...field} {...otherProps} disabled={disabled} />
