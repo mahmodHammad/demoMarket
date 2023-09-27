@@ -9,10 +9,13 @@ type PhoneInputProps = {
 	onChange?: any;
 };
 
-const PhoneInput = ({ value, onChange, ...otherProps }: PhoneInputProps) => {
+const PhoneInput = ({ value, onChange = () => null, ...otherProps }: PhoneInputProps) => {
 	// TODO: customize style
 	return (
 		<ReactPhoneInput
+		inputStyle={{
+			width: '100%'
+		}}
 			country="sa"
 			placeholder="Enter phone number"
 			enableSearch
@@ -21,7 +24,7 @@ const PhoneInput = ({ value, onChange, ...otherProps }: PhoneInputProps) => {
 			// disableCountryCode // plus char
 			// enableAreaCodes={false}
 			// enableAreaCodes
-			// value={value}
+			value={value}
 			onChange={(value, country: any, e, formattedValue) => {
 				console.log('value from phone input', value);
 				onChange({
