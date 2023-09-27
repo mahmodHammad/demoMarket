@@ -4,13 +4,14 @@ import SalesByAgent from '@/component/dashboard/SalesByAgent';
 import SalesTarget from '@/component/dashboard/SalesTarget';
 import SelectDate from '@/component/dashboard/SelectDate';
 import UserDemographics from '@/component/dashboard/UserDemographics';
-import { Item } from '@/wrappers';
+import { Item, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
 
 const Dashboard = () => {
 	return (
 		<>
-			<Grid container spacing={'48px'}  padding={'35px'} maxWidth={'1600px'}>
+			<Text variant="h4" sx={{padding:'35px 0px 26px 35px'}}>Dashboard</Text>
+			<Grid container spacing={'48px'} padding={'0px 35px 0px 35px'} maxWidth={'1600px'}>
 				<Item xs={4}>
 					<SelectDate />
 				</Item>
