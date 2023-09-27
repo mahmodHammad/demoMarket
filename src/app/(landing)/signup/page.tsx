@@ -84,7 +84,7 @@ const Signup = () => {
 							// background: '#fa03',
 							minHeight: 'calc(100vh - 180px)',
 							textAlign: { xs: 'left', md: 'center' },
-							margin: { xs: '36px 24px 56px 24px', md: '47px 0px 42px 0', xl: '0' },
+							margin: { xs: '36px 24px 56px 24px', md: '50px 0px 42px 0', xl: '0' },
 						}}
 						column>
 						<Text variant="h4">
