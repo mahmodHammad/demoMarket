@@ -190,23 +190,24 @@ export default function AppLayout(props: Props) {
 				}}>
 				<DrawerContainer />
 			</Drawer>
-
 			<Box
-				component="main"
 				sx={{
+					backgroundColor: '#FAFCFD',
+					borderRadius:"8px",
 					width: { sm: `calc(100% - ${drawerWidth}px)` },
-					borderRadius: '4px',
-					marginTop: { xs: '70px', sm: '70px', md: '70px' },
-					overflow: 'auto',
-					position: 'relative',
 				}}>
-				<Container
+				<Box
+					component="main"
 					sx={{
-						alignItems: 'center',
-						mb: 4,
+						maxWidth: '1680px',
 						borderRadius: '4px',
-					}}></Container>
-				<div style={{ backgroundColor: '#FAFCFD', minHeight: '80vh' }}>{props.children}</div>
+						marginTop: { xs: '70px', sm: '70px', md: '70px' },
+						overflow: 'auto',
+						position: 'relative',
+						minHeight: '80vh',
+					}}>
+					{props.children}
+				</Box>
 			</Box>
 		</Box>
 	);
