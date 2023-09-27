@@ -38,7 +38,7 @@ function ResponsiveAppBar() {
 					disableGutters
 					sx={{
 						justifyContent: 'space-between',
-						height: { md: '100px', xs: '72px' },
+						height: { xl: '100px', md: '82px', xs: '72px' },
 					}}>
 					<Box
 						component={Link}
@@ -49,7 +49,7 @@ function ResponsiveAppBar() {
 						}}>
 						<AtarWhiteLogo
 							sx={{
-								height: '52px',
+								height: { md: '40px', xl: '52px' },
 								width: '133px',
 							}}
 						/>
