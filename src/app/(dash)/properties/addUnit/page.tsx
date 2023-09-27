@@ -1,12 +1,16 @@
+'use client'
+
 import { Box, Button, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
-import React from 'react';
 import Link from 'next/link';
 
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
-import { UnitsCard } from '@/component';
-import { Delete } from '@/assets';
+// import { UnitsCard } from '@/component';
+// import { Delete } from '@/assets';
+
+import React    from 'react';
+import { UnitsCard } from '@/component'; 
 
 const data = [
 	{
@@ -26,39 +30,16 @@ const data = [
 	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 ];
 
-// interface proptypes {
-//   data: [
-//     {
-//       title: string;
-//       img: string;
-//       link: string;
-//       price: string;
-//       area: string;
-//       location: string;
-//     }
-//   ];
-// }
-// const listingBodey = ({ data }: proptypes) => {
-const favourites = () => {
+ 
+const Properties = () => {
 	return (
 		<>
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
-					<Text variant="h4">Favourites</Text>
+					<Text variant="h4">Properties List</Text>
 					<Box>
-						<Button
-							startIcon={<Delete />}
-							variant="dangerOutlined"
-							component={Link}
-							color="warning"
-							href="/favourites"
-							sx={{
-								height: '40px',
-								padding: '10px 20px',
-
-								borderRadius: '9px',
-							}}>
-							Remove All
+						<Button variant="outlined" component={Link} href="/properties">
+							Select Multiple
 						</Button>
 					</Box>
 				</Box>
@@ -81,5 +62,5 @@ const favourites = () => {
 		</>
 	);
 };
-
-export default favourites;
+export default Properties
+  

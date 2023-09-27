@@ -64,4 +64,6 @@ export { default as BookingDetailsInfo } from './bookingDetails/BookingDetailsIn
 export { default as LocationCard } from './bookingDetails/LocationCard';
 export { default as ListingBody } from './listingpage/ListingBody';
 
+export { default as AdvertisementsCard } from './advertisements/AdvertisementsCard';
+export { default as NotificationCard } from './cards/NotificationCard';
 export { default as Table } from './table/Table';

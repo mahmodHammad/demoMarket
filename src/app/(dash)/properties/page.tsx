@@ -1,9 +1,11 @@
 'use client';
 
+import { Box, Button, Text } from '@/wrappers';
+
 import React, { useEffect, useState } from 'react';
-import { Box, Text } from '@/wrappers';
 import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
+import { Plus } from '@/assets';
 
 export default function Properties() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -32,9 +34,17 @@ export default function Properties() {
 	return (
 		<>
 			<Box>
-				<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
-					My Properties
-				</Text>
+				<Box sx={{
+					display:"flex",
+					justifyContent:"space-between",
+					alignItems:"center"
+
+				}}>
+					<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
+						My Properties
+					</Text>
+					<Button startIcon={<Plus sx={{fill:"#fff"}}/>} variant="contained" sx={{mr:"40px"}}>Add unit to market place</Button>
+				</Box>
 				<Table
 					headers={HEADERS}
 					cellsTypes={CELLS_TYPES}
