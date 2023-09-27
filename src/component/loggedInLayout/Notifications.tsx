@@ -15,6 +15,39 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import NotificationIcon from '@/assets/icons/Notifications';
 import NotificationCard from '../cards/NotificationCard';
 
+const data = [
+	{
+		title: 'Titile',
+		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+		read: true,
+		date: 'Today at 10:00 AM',
+	},
+	{
+		title: 'Titile',
+		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+		read: false,
+		date: 'Today at 10:00 AM',
+	},
+	{
+		title: 'Titile',
+		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+		read: false,
+		date: 'Today at 10:00 AM',
+	},
+	{
+		title: 'Titile',
+		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+		read: false,
+		date: 'Today at 10:00 AM',
+	},
+	{
+		title: 'Titile',
+		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+		read: false,
+		date: 'Today at 10:00 AM',
+	},
+];
+
 const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 	const [age, setAge] = React.useState('');
 	const handleChange = (event: SelectChangeEvent) => {
@@ -133,25 +166,20 @@ const Notifications = () => {
 												display: 'flex',
 												flexDirection: 'column',
 												gap: '10px',
+												maxHeight: 'calc(100vh - 200px)',
+												overflow: 'auto',
 											}}>
-											<NotificationCard
-												title={'Titile'}
-												content={'Refrigerator is not cooling for the past two days and there is a bad smell coming '}
-												read={false}
-												date={'Today at 9:00 AM'}
-											/>
-											<NotificationCard
-												title={'Titile'}
-												content={'Refrigerator is not cooling for the past two days and there is a bad smell coming '}
-												read={true}
-												date={'Today at 9:00 AM'}
-											/>{' '}
-											<NotificationCard
-												title={'Titile'}
-												content={'Refrigerator is not cooling for the past two days and there is a bad smell coming '}
-												read={false}
-												date={'Today at 9:00 AM'}
-											/>
+											{data?.map((d, index) => (
+												<ButtonBase>
+													<NotificationCard
+														key={index}
+														title={d?.title}
+														content={d?.content}
+														read={d?.read}
+														date={d?.date}
+													/>
+												</ButtonBase>
+											))}
 										</Box>
 									</Box>
 								</Paper>
