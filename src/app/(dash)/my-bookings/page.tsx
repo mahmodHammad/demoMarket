@@ -128,7 +128,7 @@ const CELLS_TYPES = [
 			variant: 'text', // OPTIONAL: buttons variants, default is text
 			textColor: 'primary', // OPTIONAL, either semantic or hexa, default is black
 			isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
-			href: '/payment-details', // OPTIONAL: pass it in case it's link,
+			href: '/booking-details', // OPTIONAL: pass it in case it's link,
 			onClick: () => console.log('clicked'), // pass it in case it's not link,
 			sx: { py: 2 },
 		},

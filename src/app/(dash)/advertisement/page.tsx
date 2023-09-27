@@ -1,6 +1,6 @@
 'use client';
 import { Box, Button, Text } from '@/wrappers';
-import { Grid, Tab, Tabs } from '@mui/material';
+import { ButtonBase, Grid, Tab, Tabs } from '@mui/material';
 import React from 'react';
 import Link from 'next/link';
 import { Calendar, Plus } from '@/assets';
@@ -20,6 +20,12 @@ const data = [
 	{ title: '15% on cash ', img: photo2, duration: '16 Nov -17 Nov, 2021' },
 	{ title: '15% on cash ', img: photo3, duration: '16 Nov -17 Nov, 2021' },
 	{ title: '15% on cash ', img: photo1, duration: '16 Nov -17 Nov, 2021' },
+	{ title: '15% on cash ', img: photo2, duration: '16 Nov -17 Nov, 2021' },
+	{ title: '15% on cash ', img: photo1, duration: '16 Nov -17 Nov, 2021' },
+	{ title: '15% on cash ', img: photo3, duration: '16 Nov -17 Nov, 2021' },
+];
+
+const data2 = [
 	{ title: '15% on cash ', img: photo2, duration: '16 Nov -17 Nov, 2021' },
 	{ title: '15% on cash ', img: photo1, duration: '16 Nov -17 Nov, 2021' },
 	{ title: '15% on cash ', img: photo3, duration: '16 Nov -17 Nov, 2021' },
@@ -63,7 +69,11 @@ const Advertisement = () => {
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Advertisements </Text>
 
-					<Button variant="contained" component={Link} href="/properties" startIcon={<Plus sx={{fill:"#fff"}}/>}>
+					<Button
+						variant="contained"
+						component={Link}
+						href="advertisement/Create-Advertisements"
+						startIcon={<Plus sx={{ fill: '#fff' }} />}>
 						Create New
 					</Button>
 				</Box>
@@ -79,16 +89,20 @@ const Advertisement = () => {
 						<Grid container mt={'25px'} spacing={'28px'}>
 							{data?.map((d, index) => (
 								<Grid item xs={6} key={index}>
-									<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
+									<ButtonBase component={Link} sx={{ width: '100%' }} href="advertisement/advertisment-Details">
+										<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
+									</ButtonBase>
 								</Grid>
 							))}
 						</Grid>
 					</CustomTabPanel>
 					<CustomTabPanel value={value} index={1}>
 						<Grid container mt={'25px'} spacing={'28px'}>
-							{data?.map((d, index) => (
+							{data2?.map((d, index) => (
 								<Grid item xs={6} key={index}>
-									<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
+									<ButtonBase component={Link} sx={{ width: '100%' }} href="advertisement/advertisment-Details">
+										<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
+									</ButtonBase>
 								</Grid>
 							))}
 						</Grid>
