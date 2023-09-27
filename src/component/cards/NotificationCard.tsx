@@ -1,6 +1,6 @@
 import NotificationIcon from '@/assets/icons/Notifications';
 import { Box, Text } from '@/wrappers';
-import { Avatar, Badge, Divider } from '@mui/material';
+import { Avatar, Badge, ButtonBase, Divider } from '@mui/material';
 import React from 'react';
 
 type Props = {
@@ -12,7 +12,16 @@ type Props = {
 const NotificationCard = ({ title, content, read, date }: Props) => {
 	return (
 		<>
-			<Box row width={'100%'} maxWidth={'390px'} mt={'16px'}>
+			<Box
+				px={2}
+				row
+				width={'100%'}
+				maxWidth={'390px'}
+				mt={'16px'}
+				sx={{
+					transition: 'transform 0.15s ease-in-out',
+					'&:hover': { transform: 'scale3d(1.05, 1.05, 1)' },
+				}}>
 				<Box mr={'13px'}>
 					<Badge
 						variant="dot"
@@ -33,16 +42,21 @@ const NotificationCard = ({ title, content, read, date }: Props) => {
 					</Badge>
 				</Box>
 
-				<Box column>
-					<Text variant="label">{title}</Text>
-					<Text my={'8px'} variant="small">
+				<Box column xstart>
+					<Text variant="label" align="left">
+						{title}
+					</Text>
+
+					<Text my={'8px'} variant="small" align="left">
 						{content}
 					</Text>
-					<Text gray variant="caption">
+
+					<Text gray variant="caption" align="left">
 						{date}
 					</Text>
 				</Box>
 			</Box>
+
 			<Divider></Divider>
 		</>
 	);

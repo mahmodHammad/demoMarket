@@ -163,14 +163,16 @@ const Notifications = () => {
 										{/* options */}
 										<Box
 											sx={{
+												overflowX: 'hidden',
+												overflowY: 'hidden',
+
 												display: 'flex',
 												flexDirection: 'column',
 												gap: '10px',
 												maxHeight: 'calc(100vh - 200px)',
-												overflow: 'auto',
 											}}>
 											{data?.map((d, index) => (
-												<ButtonBase>
+												<ButtonBase onClick={handleClickAway}>
 													<NotificationCard
 														key={index}
 														title={d?.title}
