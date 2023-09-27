@@ -3,7 +3,7 @@
 import { Box, Button, Container, Item, Text } from '@/wrappers';
 import Image from 'next/image';
 import React from 'react';
-import neigbourhoodCover from '@/assets/images/Rectangle 4542.svg';
+import signupimg from '@/assets/images/herobg.png';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -73,10 +73,10 @@ const Signup = () => {
 						}}
 						component={Image}
 						alt="houses and properties for rent"
-						src={neigbourhoodCover}
+						src={signupimg}
 					/>
 				</Item>
-				<Item md={6} center column>
+				<Item md={6} column>
 					<Box
 						maxWidth="370px"
 						sx={{ textAlign: 'center', margin: { xs: '26px 24px 26px 24px', md: '100px 227px 137px 100px' } }}
