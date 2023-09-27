@@ -7,7 +7,7 @@ import signupimg from '@/assets/images/herobg.png';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { TextInputController } from '@/component';
+import { PhoneInputController, TextInputController } from '@/component';
 import { RadioGroupController as RadioGroup } from '@/component';
 import theme from '@/ThemeRegistry/theme';
 
@@ -116,6 +116,13 @@ const Signup = () => {
 										type="number"
 										control={control}
 									/>
+									{/* <PhoneInputController
+										placeholder="Enter your Phone number"
+										label={'Phone number'}
+										name={'number'}
+										type="number"
+										control={control}
+									/>  */}
 								</Item>
 
 								<Item xs={12}>
@@ -126,7 +133,7 @@ const Signup = () => {
 										control={control}
 									/>
 								</Item>
-								<Item md={6.1} xs={8}>
+								<Item md={6.1} xs={8.1}>
 									<RadioGroup name="gender" label="Gender" options={RADIO_OPTIONS} control={control} errors={errors} />
 								</Item>
 								<Item xs={12} md={9}>
