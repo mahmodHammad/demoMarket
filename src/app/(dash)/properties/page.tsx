@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
 import { Plus } from '@/assets';
+import Link from 'next/link';
 
 export default function Properties() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -37,13 +38,14 @@ export default function Properties() {
 				<Box sx={{
 					display:"flex",
 					justifyContent:"space-between",
-					alignItems:"center"
+					alignItems:"center",
+					mb:"40px"
 
 				}}>
 					<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
 						My Properties
 					</Text>
-					<Button startIcon={<Plus sx={{fill:"#fff"}}/>} variant="contained" sx={{mr:"40px"}}>Add unit to market place</Button>
+					<Button component={Link} href="/properties/addUnit" startIcon={<Plus sx={{fill:"#fff"}}/>} variant="contained" sx={{mr:"40px"}}>Add unit to market place</Button>
 				</Box>
 				<Table
 					headers={HEADERS}

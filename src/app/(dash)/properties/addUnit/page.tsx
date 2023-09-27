@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Box, Button, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
@@ -9,8 +9,8 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 // import { UnitsCard } from '@/component';
 // import { Delete } from '@/assets';
 
-import React    from 'react';
-import { UnitsCard } from '@/component'; 
+import React from 'react';
+import { UnitsCard } from '@/component';
 
 const data = [
 	{
@@ -30,7 +30,6 @@ const data = [
 	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 ];
 
- 
 const Properties = () => {
 	return (
 		<>
@@ -54,6 +53,7 @@ const Properties = () => {
 								price={d?.price}
 								area={d?.area}
 								location={d?.location}
+								buttonName="add"
 							/>
 						</Grid>
 					))}
@@ -62,5 +62,4 @@ const Properties = () => {
 		</>
 	);
 };
-export default Properties
-  
+export default Properties;
