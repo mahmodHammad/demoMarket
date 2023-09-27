@@ -1,3 +1,5 @@
+'use client';
+
 import { AppBar, CssBaseline, Toolbar } from '@mui/material';
 import React from 'react';
 // import SearchIcon from '@mui/icons-material/Search';
