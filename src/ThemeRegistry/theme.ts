@@ -149,6 +149,16 @@ const theme = responsiveFontSizes(
 					},
 				],
 			},
+			MuiFormLabel: {
+				styleOverrides: {
+					root: {
+						color: '#525451',
+						'&.Mui-focused': {
+							color: '#525451',
+						},
+					},
+				},
+			},
 			MuiTypography: {
 				styleOverrides: {
 					root: {
@@ -192,6 +202,17 @@ const theme = responsiveFontSizes(
 						props: { variant: 'h4' },
 						style: {
 							fontSize: '36px',
+							fontWeight: 'bold',
+
+							[initTheme.breakpoints.down('md')]: {
+								fontSize: '24px',
+							},
+						},
+					},
+					{
+						props: { variant: 'h5' },
+						style: {
+							fontSize: '24px',
 							fontWeight: 'bold',
 
 							[initTheme.breakpoints.down('md')]: {
@@ -276,19 +297,16 @@ const theme = responsiveFontSizes(
 					}),
 				},
 			},
-			MuiFormLabel: {
+			MuiInputBase: {
 				styleOverrides: {
-					root: {
-						color: '#525451',
-						'&.Mui-focused': {
-							color: '#525451',
-						},
-					},
+					root: ({ ownerState, theme }) => ({
+						borderRadius: '8px !important',
+						borderColor: '#E3E3E3',
+					}),
 				},
 			},
 		},
 	}),
 );
-
 
 export default theme;

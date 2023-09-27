@@ -1,33 +1,44 @@
 /* New COMPONENT, (WIP) */
 'use client';
 
-import ReactPhoneInput, { parsePhoneNumber } from 'react-phone-number-input';
-import 'react-phone-number-input/style.css';
+import ReactPhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/material.css';
 
 type PhoneInputProps = {
 	value?: string;
 	onChange?: any;
 };
 
-const PhoneInput = ({ value, onChange, ...otherProps }: PhoneInputProps) => {
+const PhoneInput = ({ value, onChange = () => null, ...otherProps }: PhoneInputProps) => {
 	// TODO: customize style
-
 	return (
 		<ReactPhoneInput
-			defaultCountry="SA"
+		inputStyle={{
+			width: '100%'
+		}}
+			country="sa"
 			placeholder="Enter phone number"
+			enableSearch
+			countryCodeEditable={false}
+			disableCountryGuess
+			// disableCountryCode // plus char
+			// enableAreaCodes={false}
+			// enableAreaCodes
 			value={value}
-			onChange={(e: string) => {
-				console.log('e from i', e);
-				// onChange(parsePhoneNumber(e));
+			onChange={(value, country: any, e, formattedValue) => {
+				console.log('value from phone input', value);
+				onChange({
+					phone_country_code: {
+						id: country.countryCode.toUpperCase(),
+						name: `${country.countryCode.toUpperCase()} ${country.dialCode}`,
+					},
+					number: value.slice(country.dialCode.length),
+				});
 			}}
-			// onChange={(e: any) => console.log('phone e', parsePhoneNumber(e))}
 			{...otherProps}
 		/>
 	);
 };
-
-
 
 export default PhoneInput;
 

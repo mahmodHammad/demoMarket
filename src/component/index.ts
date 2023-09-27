@@ -30,6 +30,7 @@ export { default as RadioGroup } from './forms/RadioGroup';
 export { default as DatePicker } from './forms/DatePicker';
 export { default as TimePicker } from './forms/TimePicker';
 export { default as DateTimePicker } from './forms/DateTimePicker';
+export { default as OTPInput } from './forms/OTPInput';
 
 export { default as TextInputController } from './forms/controlled/TextInputController';
 export { default as SwitchController } from './forms/controlled/SwitchController';
@@ -44,6 +45,7 @@ export { default as TimePickerController } from './forms/controlled/TimePickerCo
 export { default as DateTimePickerController } from './forms/controlled/DateTimePickerController';
 
 export { default as LoginModal } from './modals/LoginModal';
+export { default as InfoBox } from './InfoBox';
 
 export { default as QuiltedImageList } from './unitDetails/QuiltedImageList';
 export { default as FloorCard } from './unitDetails/FloorCard';
