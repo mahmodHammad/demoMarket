@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AccordionChipsFilter, Switch, CounterFilter, SliderFilter, TextInput } from '@/component';
 import { Box, Text, Button, Accordion } from '@/wrappers';
 import { IconButton } from '@mui/material';
@@ -12,19 +12,59 @@ type Props = {
 };
 
 const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Props) => {
-  const [filters, setFilters] = useState(FILTERS);
+  const [AccordionFilters, setAccordionFilters] = useState(FILTERS);
 
   const [noOfBedrooms, setNoOfBedrooms] = useState<number>(0);
   const [noOfBathrooms, setNoOfBathrooms] = useState<number>(0);
+  const [petFriendly, setPetFriendly] = useState<boolean>(true);
 
   const [budgetSliderValues, setBudgetSliderValues] = useState<number[]>([0, 100]);
   const [areaSliderValues, setAreaSliderValues] = useState<number[]>([0, 100]);
+  
 
   const handleFiltersState = (filter: string, id: number) =>
-    setFilters((prev: any) => ({
+    setAccordionFilters((prev: any) => ({
       ...prev,
       [filter]: prev[filter].map((f: any) => (f.id === id ? { ...f, checked: !f.checked } : f)),
     }));
+
+
+    useEffect(() => {
+      const params = {
+        noOfBedrooms,
+        noOfBathrooms,
+        petFriendly,
+        budgeRange: budgetSliderValues,
+        areaRange: areaSliderValues,
+        location: AccordionFilters.location
+          .filter((f) => f.checked)
+          .map((f) => f.id),
+        propertyType: AccordionFilters.propertyType
+          .filter((f) => f.checked)
+          .map((f) => f.id),
+        amenities: AccordionFilters.amenities
+          .filter((f) => f.checked)
+          .map((f) => f.id),
+        furnishingStatus: AccordionFilters.furnishingStatus
+          .filter((f) => f.checked)
+          .map((f) => f.id),
+        dateListed: AccordionFilters.dateListed
+          .filter((f) => f.checked)
+          .map((f) => f.id),
+        availability: AccordionFilters.availability
+          .filter((f) => f.checked)
+          .map((f) => f.id),
+      };
+      console.log('params', params);
+    }, [
+      noOfBedrooms,
+      noOfBathrooms,
+      budgetSliderValues,
+      areaSliderValues,
+      petFriendly,
+      AccordionFilters,
+    ]);
+    
 
   return (
     <Box
@@ -71,7 +111,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           defaultExpanded={!isMobileView}
           header="Location"
           filterName="location"
-          filters={filters.location}
+          filters={AccordionFilters.location}
           onFilterStateChange={handleFiltersState}
           moreContent={
             <Button startIcon={<SearchLine />} sx={{ width: { xs: 0.4, md: 0.28 }, p: 0, py: 0.5 }} variant="text">
@@ -84,7 +124,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           defaultExpanded={!isMobileView}
           header="Property Type"
           filterName="propertyType"
-          filters={filters.propertyType}
+          filters={AccordionFilters.propertyType}
           onFilterStateChange={handleFiltersState}
         />
 
@@ -130,7 +170,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           defaultExpanded={!isMobileView}
           header="Amenities"
           filterName="amenities"
-          filters={filters.amenities}
+          filters={AccordionFilters.amenities}
           onFilterStateChange={handleFiltersState}
         />
 
@@ -138,14 +178,14 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           <Text bold sx={{ fontSize: 14 }}>
             Pet-Friendly
           </Text>
-          <Switch defaultChecked />
+          <Switch value={petFriendly} onChange={(_: ChangeEvent<HTMLInputElement>, checked: boolean) => setPetFriendly(checked)} />
         </Box>
 
         <AccordionChipsFilter
           defaultExpanded={!isMobileView}
           header="Furnishing Status"
           filterName="furnishingStatus"
-          filters={filters.furnishingStatus}
+          filters={AccordionFilters.furnishingStatus}
           onFilterStateChange={handleFiltersState}
         />
 
@@ -153,7 +193,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           defaultExpanded={!isMobileView}
           header="Date Listed"
           filterName="dateListed"
-          filters={filters.dateListed}
+          filters={AccordionFilters.dateListed}
           onFilterStateChange={handleFiltersState}
         />
 
@@ -161,7 +201,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
           defaultExpanded={!isMobileView}
           header="Availability"
           filterName="availability"
-          filters={filters.availability}
+          filters={AccordionFilters.availability}
           onFilterStateChange={handleFiltersState}
         />
       </Box>

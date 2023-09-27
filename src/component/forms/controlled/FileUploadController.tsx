@@ -1,37 +1,43 @@
 'use client';
 
-import { TextFieldProps } from '@mui/material';
+import { ButtonProps } from '@mui/material';
 import { Controller, FieldValues, UseControllerProps, UseFormReturn } from 'react-hook-form';
 import { Text } from '@/wrappers';
-import TextInput from '../TextInput';
+import FileUpload from '../FileUpload';
 
-type TextInputControllerProps = Omit<TextFieldProps, 'name'> &
+type FileUploadControllerProps = Omit<ButtonProps, 'name'> &
 	Omit<UseControllerProps<FieldValues>, 'control'> & {
 		name: string;
+		label: string;
+		accept?: string;
+		multiple?: boolean;
 		control: any;
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const TextInputController = ({
+const FileUploadController = ({
 	name,
 	rules,
 	control,
 	errors,
-	disabled,
 	label,
+	accept,
+	multiple = false,
 	...otherProps
-}: TextInputControllerProps) => {
+}: FileUploadControllerProps) => {
 	return (
 		<Controller
 			name={name}
 			control={control}
 			rules={rules}
-			render={({ field }) => (
+			render={({ field: { onChange, value } }) => (
 				<>
-					<Text variant="caption" sx={{ float: 'left', mb: '8px', color: `${disabled ? '#CACACA' : ''}` }}>
-						{label}
-					</Text>
-					<TextInput {...field} {...otherProps} disabled={disabled} />
+					<FileUpload
+						label={label}
+						onChange={(e) => onChange(e.target.files)}
+						value={value?.fileName}
+						{...otherProps}
+					/>
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
 				</>
 			)}
@@ -39,4 +45,4 @@ const TextInputController = ({
 	);
 };
 
-export default TextInputController;
+export default FileUploadController;

@@ -8,7 +8,9 @@ const Rating = (props: RatingProps) => {
 			sx={{
 				'& > legend': { mt: 2 },
 			}}>
-			<Text component="legend">Rating</Text>
+			<Text component="legend" variant="caption" sx={{ pb: '8px' }}>
+				Rating
+			</Text>
 			<MUIRating {...props} />
 		</Box>
 	);
