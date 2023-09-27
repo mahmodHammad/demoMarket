@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import AppLayout from '@/component/loggedInLayout/AppLayout';
