@@ -76,22 +76,31 @@ const Signup = () => {
 						src={signupimg}
 					/>
 				</Item>
-				<Item md={6} column>
+				<Item md={6} center>
 					<Box
-						maxWidth="370px"
-						sx={{ textAlign: 'center', margin: { xs: '26px 24px 26px 24px', md: '100px 227px 137px 100px' } }}
+						maxWidth="540px"
+						xcenter
+						sx={{
+							// background: '#fa03',
+							minHeight: 'calc(100vh - 180px)',
+							textAlign: { xs: 'left', md: 'center' },
+							margin: { xs: '36px 24px 56px 24px', md: '47px 0px 42px 0', xl: '0' },
+						}}
 						column>
 						<Text variant="h4">
 							Welcome to
-							<span style={{ color: theme.palette.primary.main }}> Makeen</span>
+							<Box component="span" sx={{ color: theme.palette.primary.main }}>
+								{' '}
+								Atar
+							</Box>
 						</Text>
-						<Text variant="small" gray align="center" mt="16px">
+						<Text variant="small" gray mt="16px">
 							Take control of the service experience during your property search & ownership journey
 						</Text>
 
 						<Box sx={{ mt: '24px' }}>
-							<Container rowGap={'16px'} columnGap={'36px'}>
-								<Item xs={12}>
+							<Container spacing={2}>
+								<Item xs={6}>
 									<TextInputController
 										placeholder="Enter your Full Name"
 										label={'Full Name'}
@@ -99,7 +108,7 @@ const Signup = () => {
 										control={control}
 									/>
 								</Item>
-								<Item xs={12}>
+								<Item xs={6}>
 									<TextInputController
 										placeholder="Enter your Phone number"
 										label={'Phone number'}
@@ -117,10 +126,10 @@ const Signup = () => {
 										control={control}
 									/>
 								</Item>
-								<Item xs={12}>
+								<Item md={6.1} xs={8}>
 									<RadioGroup name="gender" label="Gender" options={RADIO_OPTIONS} control={control} errors={errors} />
 								</Item>
-								<Item xs={12}>
+								<Item xs={12} md={9}>
 									<RadioGroup
 										name="intrested"
 										label="Intrested To"
@@ -132,19 +141,27 @@ const Signup = () => {
 							</Container>
 						</Box>
 
-						<Text variant="small" gray align="left" mt="18px">
-							By proceeding to create your account, you are agreeing to our
-							<b> Terms of Use </b> and <b> Privacy Policy</b>
-						</Text>
-						<Button type="submit" variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
-							sign up
-						</Button>
-						<Text mt="24px">
+						<Container spacing={2} center>
+							<Item xs={12} md={7}>
+								<Text variant="small" gray align="left" mt="18px">
+									By proceeding to create your account, you are agreeing to our
+									<b> Terms of Use </b> and <b> Privacy Policy</b>
+								</Text>
+							</Item>
+
+							<Item xs={12} md={5}>
+								<Button type="submit" variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
+									sign up
+								</Button>
+							</Item>
+						</Container>
+
+						{/* <Text mt="24px">
 							Already have an account?{' '}
 							<Text component={'span'} sx={{ display: 'inline' }} color="primary" bold>
 								Sign in
 							</Text>
-						</Text>
+						</Text> */}
 					</Box>
 				</Item>
 			</Container>
