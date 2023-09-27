@@ -13,9 +13,9 @@ const PhoneInput = ({ value, onChange = () => null, ...otherProps }: PhoneInputP
 	// TODO: customize style
 	return (
 		<ReactPhoneInput
-		inputStyle={{
-			width: '100%'
-		}}
+			inputStyle={{
+				width: '100%',
+			}}
 			country="sa"
 			placeholder="Enter phone number"
 			enableSearch
