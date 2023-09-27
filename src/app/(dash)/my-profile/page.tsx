@@ -1,14 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Box, Button, Container, Item, Text } from '@/wrappers';
+import React, { useEffect } from 'react';
+import { Button, Container, Item, Text } from '@/wrappers';
 import TextInputController from '@/component/forms/controlled/TextInputController';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CheckboxController, DatePickerController as DatePicker, RadioGroupController as RadioGroup } from '@/component';
+import {
+	CheckboxController,
+	DatePickerController as DatePicker,
+	RadioGroupController as RadioGroup,
+} from '@/component';
 import dayjs from 'dayjs';
 import { Avatar } from '@mui/material';
+import FileUploadController from '@/component/forms/controlled/FileUploadController';
 
 const schema = yup.object().shape({
 	firstName: yup.string().required('First Name is required'),
@@ -18,6 +23,7 @@ const schema = yup.object().shape({
 	Hijari: yup.boolean(),
 	date: yup.date().required('Date required'),
 	gender: yup.string(),
+	image: yup.array(),
 });
 const RADIO_OPTIONS = [
 	{
@@ -30,11 +36,10 @@ const RADIO_OPTIONS = [
 	},
 ];
 export default function MyProfile() {
-	const [formData, setFormData] = useState(null);
-
 	const {
 		control,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -45,13 +50,17 @@ export default function MyProfile() {
 			Hijari: true,
 			date: dayjs('2023-09-20') as unknown as Date,
 			gender: 'male',
+			image: [],
 		},
 		resolver: yupResolver(schema),
 	});
-
+	const image = watch('image');
 	const onSubmit = (data: any) => {
-		setFormData(data);
 		console.log('form data', data);
+	};
+	const readFileData = (fl: any) => {
+		const file = URL.createObjectURL(fl);;
+		return file;
 	};
 	return (
 		<>
@@ -64,12 +73,10 @@ export default function MyProfile() {
 						<Item xs={12}>
 							<Avatar
 								alt={'Image'}
-								src={''}
+								src={`${image?.length ? readFileData(image[0]) : ''}`}
 								sx={{ width: 80, height: 80, mb: '12px' }}
 							/>
-							<Button variant="outlined">
-								Update Photo
-							</Button>
+							<FileUploadController label={'Update Photo'} name={'image'} accept="image/*" control={control} />
 						</Item>
 						<Item xs={9}>
 							<Container rowGap={'16px'} columnGap={'36px'}>
@@ -92,7 +99,10 @@ export default function MyProfile() {
 								</Item>
 								<Item xs={5}>
 									<DatePicker name="date" control={control} errors={errors} label="Date of birth" />
-									<Text variant='small' sx={{mt:'8px'}}> <CheckboxController name="Hijari" control={control} errors={errors} /> Hijari </Text>
+									<Text variant="small" sx={{ mt: '8px' }}>
+										{' '}
+										<CheckboxController name="Hijari" control={control} errors={errors} /> Hijari{' '}
+									</Text>
 								</Item>
 								<Item xs={5}>
 									<TextInputController label={'Email'} name={'email'} control={control} />
@@ -100,7 +110,7 @@ export default function MyProfile() {
 							</Container>
 						</Item>
 						<Item xs={12}>
-							<Button type='submit' variant="contained">
+							<Button type="submit" variant="contained">
 								Save Changes
 							</Button>
 						</Item>

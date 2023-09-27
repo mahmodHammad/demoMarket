@@ -277,6 +277,14 @@ const theme = responsiveFontSizes(
           }),
         },
       },
+      MuiInputBase:{
+        styleOverrides: {
+          root: ({ ownerState, theme }) => ({
+            borderRadius: '8px !important',
+            borderColor: '#E3E3E3',
+          }),
+        }
+      }
     },
   }),
 );
