@@ -11,6 +11,8 @@ interface Text extends TypographyProps {
   light?: boolean;
   color?: string;
   children: ReactNode;
+  center?: boolean;
+  href?: string
 }
 const setTypographyLayoutSXProps = (props: Text) => {
   return {
@@ -20,6 +22,7 @@ const setTypographyLayoutSXProps = (props: Text) => {
     ...(props.light && { fontWeight: 400 }),
     ...(props.medium && { fontWeight: 500 }),
     ...(props.bold && { fontWeight: `bold` }),
+    ...(props.center && { textAlign: 'center' }),
     ...props.sx,
   };
 };
