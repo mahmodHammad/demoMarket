@@ -63,7 +63,7 @@ const Advertisement = () => {
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Advertisements </Text>
 
-					<Button variant="contained" component={Link} href="/properties" startIcon={<Plus />}>
+					<Button variant="contained" component={Link} href="/properties" startIcon={<Plus sx={{fill:"#fff"}}/>}>
 						Create New
 					</Button>
 				</Box>

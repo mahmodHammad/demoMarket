@@ -16,8 +16,20 @@ interface Props {
 	location: string;
 	liked: boolean;
 	toggleLike: (id: number) => void;
+	buttonName?: string;
 }
-export default function UnitsCard({ id, liked, img, title, link, price, area, location, toggleLike }: Props) {
+export default function UnitsCard({
+	id,
+	liked,
+	img,
+	title,
+	link,
+	price,
+	area,
+	location,
+	toggleLike,
+	buttonName = 'View Details',
+}: Props) {
 	return (
 		<Box
 			relative
@@ -199,7 +211,7 @@ export default function UnitsCard({ id, liked, img, title, link, price, area, lo
 						fontSize: { xs: '12px', md: '14px' },
 					}}
 					href={link || '/unitdetails'}>
-					View Details
+					{buttonName}
 				</Button>
 			</Box>
 		</Box>
