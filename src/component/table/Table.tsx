@@ -91,8 +91,9 @@ const TableBody = ({ data, cellsTypes }: any) => (
 								component={c.options?.isLink ? Link : 'button'}
 								href={c.options?.isLink && c.options?.href}
 								onClick={!c.options?.isLink && c.options?.onClick}
-								fullWidth
-								sx={c.options?.sx}>
+								fullWidth={false}
+								sx={{ height: '38px', ...c.options?.sx }}>
+
 								<Text color={c.options?.textColor} sx={{ fontWeight: 'bold' }}>
 									{c.options?.title}
 								</Text>

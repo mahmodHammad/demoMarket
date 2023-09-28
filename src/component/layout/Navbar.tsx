@@ -73,10 +73,17 @@ function ResponsiveAppBar() {
 						<Box>
 							<Button
 								component={Link}
+								href="/dashboard"
+								sx={{ color: '#fff', fontSize: '18px', mr: '12px' }}
+								size="medium">
+								admin
+							</Button>
+							<Button
+								component={Link}
 								href="/my-bookings"
 								sx={{ color: '#fff', fontSize: '18px', mr: '12px' }}
 								size="medium">
-								My bookings
+								Visitor
 							</Button>
 							<Button onClick={handleLoginClicked} sx={{ color: '#fff', fontSize: '20px', mr: '12px' }} size="medium">
 								Login
