@@ -1,6 +1,8 @@
 import MyPayments from '@/component/pages/myPayments/MyPayments';
 import React from 'react';
 
-export default function VisitorMyPayments() {
+const AdminPayments = () => {
 	return <MyPayments />;
-}
+};
+
+export default AdminPayments;
