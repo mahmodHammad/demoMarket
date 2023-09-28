@@ -31,6 +31,7 @@ const schema = yup.object().shape({
 	date: yup.date().required('Date required'),
 	time: yup.date().required('Time required'),
 	dateTime: yup.date().required('Date & Time required'),
+	phone: yup.object().required('Phone required'), // 9
 });
 
 export default function FormsPlayground() {
@@ -92,11 +93,11 @@ export default function FormsPlayground() {
 				<TimePicker name="time" control={control} errors={errors} label="Time picker" />
 
 				<DateTimePicker name="dateTime" control={control} errors={errors} label="Date Time picker" />
-				
+
 				<PhoneInput name="phone" control={control} errors={errors} />
 			</Box>
 
-			<Box sx={{ width: 0.2 }} column gap={3}>
+			<Box sx={{ width: 0.2, ml: 8 }} column gap={3}>
 				{formData && (
 					<pre
 						dangerouslySetInnerHTML={{

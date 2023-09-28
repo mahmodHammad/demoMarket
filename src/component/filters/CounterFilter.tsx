@@ -26,7 +26,7 @@ const CounterFilter = ({ name, number, handleDecrement, handleIncrement }: Props
         }}>
         <Minus style={{ cursor: 'pointer' }} onClick={handleDecrement} />
         <Text>{number}</Text>
-        <Plus style={{ cursor: 'pointer' }} onClick={handleIncrement} />
+        <Plus style={{ cursor: 'pointer',fill:"#4F5154" }} onClick={handleIncrement} />
       </Box>
     </Box>
   );

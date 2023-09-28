@@ -28,7 +28,7 @@ const TextInputController = ({
 			rules={rules}
 			render={({ field }) => (
 				<>
-					<Text variant="caption" sx={{ float: 'left', mb: '10px', color: `${disabled ? '#CACACA' : ''}` }}>
+					<Text variant="caption" sx={{ float: 'left', mb: '8px', color: `${disabled ? '#CACACA' : ''}` }}>
 						{label}
 					</Text>
 					<TextInput {...field} {...otherProps} disabled={disabled} />
