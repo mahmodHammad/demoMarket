@@ -80,9 +80,7 @@ export default function Properties() {
 						alignItems: 'center',
 						mb: '40px',
 					}}>
-					<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
-						My Properties
-					</Text>
+					<Text variant="h4">My Properties</Text>
 					<Button
 						component={Link}
 						href="/properties/addUnit"
@@ -92,7 +90,7 @@ export default function Properties() {
 						Add unit to market place
 					</Button>
 				</Box>
-				<Box >
+				<Box>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
 							<Tab label="Rent" {...a11yProps(0)} />

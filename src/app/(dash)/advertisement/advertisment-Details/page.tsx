@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const AdvertismentDetails = () => {
 	return (
-		<Box column p={'35px'} width={'100%'}>
+		<Box column width={'100%'}>
 			<Box center width={'100%'} xbetween row>
 				<Text variant="h4">15% CASH </Text>
 
