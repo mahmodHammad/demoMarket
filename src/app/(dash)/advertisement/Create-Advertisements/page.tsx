@@ -6,15 +6,12 @@ import TextInputController from '@/component/forms/controlled/TextInputControlle
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import {
-	CheckboxController,
-	DatePickerController as DatePicker,
-	RadioGroupController as RadioGroup,
-} from '@/component';
 import dayjs from 'dayjs';
 import { Avatar } from '@mui/material';
 import FileUploadController from '@/component/forms/controlled/FileUploadController';
 import theme from '@/ThemeRegistry/theme';
+import DragDropFile from '@/component/forms/DragDropFile';
+import DragDropController from '@/component/forms/controlled/DragAndDropController';
 
 const schema = yup.object().shape({
 	firstName: yup.string().required('First Name is required'),
@@ -24,7 +21,7 @@ const schema = yup.object().shape({
 	Hijari: yup.boolean(),
 	date: yup.date().required('Date required'),
 	gender: yup.string(),
-	image: yup.array(),
+	file: yup.array(),
 });
 const RADIO_OPTIONS = [
 	{
@@ -51,13 +48,13 @@ export default function CreateAdvertisement() {
 			Hijari: true,
 			date: dayjs('2023-09-20') as unknown as Date,
 			gender: 'male',
-			image: [],
+			file: [],
 		},
 		resolver: yupResolver(schema),
 	});
-	const image = watch('image');
+	const image = watch('file');
 	const onSubmit = (data: any) => {
-		console.log('form data', data);
+		console.log('form data shreyas', data);
 	};
 	const readFileData = (fl: any) => {
 		const file = URL.createObjectURL(fl);
@@ -97,43 +94,9 @@ export default function CreateAdvertisement() {
 								<Item xs={4}>
 									<Text variant="h5">Banner</Text>{' '}
 								</Item>
-								<Item xs={5}>
-									<Container sx={{ border: 2, borderColor: 'black', borderStyle: 'dashed', borderRadius: '10px' }}>
-										<div className="space-y-1 text-center">
-											<svg
-												className="w-12 h-12 mx-auto text-gray-400"
-												stroke="currentColor"
-												fill="none"
-												viewBox="0 0 48 48"
-												aria-hidden="true">
-												<path
-													d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-													strokeWidth={2}
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												/>
-											</svg>
-											<div className="flex pt-4">
-												<label
-													htmlFor={name}
-													className="h-full left-0 top-3 pt-16 w-full absolute block font-medium text-center rounded-md cursor-pointer">
-													<Text variant="subtitle2" className="text-center">
-														Upload an images and files
-													</Text>
-													{/* <input
-								type="file"
-								id={name}
-								name={name}
-								ref={ref}
-								onChange={onChange}
-								className="hidden"
-							/> */}
-												</label>
-											</div>
-											PNG, JPG, GIF up to
-											<Text> Max 2 files</Text>
-										</div>
-									</Container>
+								<Item xs={10}>
+									<DragDropController name={'file'} control={control} />
+									{/* <FileUploadController name={'file'} label={'file'} control={control}/> */}
 								</Item>
 								<Item xs={5}>
 									<TextInputController label={'Email'} name={'email'} control={control} />
