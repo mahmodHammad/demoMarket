@@ -63,67 +63,84 @@ export default function AdminBookings() {
 const DATA = [
 	{
 		id: 1,
-		name: 'Mahmoud',
-		phoneNumber: '+966 5678 98 ',
-		RegisterTime: '2021-2-2 / 8:00PM',
-		Progress: 'Progress state1',
+		type: 'U001',
+		user: 'Mahmoud',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
 	},
 	{
 		id: 1,
-		name: 'Mahmoud',
-		phoneNumber: '+966 5678 98 ',
-		RegisterTime: '2021-2-2 / 8:00PM',
-		Progress: 'Progress state2',
+		type: 'U052301',
+		user: 'Abdo',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
 	},
 	{
 		id: 1,
-		name: 'Mahmoud',
-		phoneNumber: '+966 5678 98 ',
-		RegisterTime: '2021-2-2 / 8:00PM',
-		Progress: 'Progress state4524',
+		type: 'U0231',
+		user: 'Banda',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
 	},
 	{
 		id: 1,
-		name: 'Mahmoud',
-		phoneNumber: '+966 5678 98 ',
-		RegisterTime: '2021-2-2 / 8:00PM',
-		Progress: 'Progress state1321',
-	},
-	{
-		id: 1,
-		name: 'Mahmoud',
-		phoneNumber: '+966 5678 98 ',
-		RegisterTime: '2021-2-2 / 8:00PM',
-		Progress: 'Progress state1012',
-	},
-	{
-		id: 1,
-		name: 'Mahmoud',
-		phoneNumber: '+966 5678 98 ',
-		RegisterTime: '2021-2-2 / 8:00PM',
-		Progress: 'Progress state6643',
+		type: 'U041',
+		user: 'Ali',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
 	},
 ];
 
-const HEADERS = ['name', 'Phone Number', 'Register Time', 'Progress'];
+const HEADERS = ['Unit Number', 'User', 'Request Type', 'Booking Date', '', ''];
 
 const CELLS_TYPES = [
 	{
 		type: TYPES.STRING, // Type of cell
-		dataKey: 'name', // data access key of cell
+		dataKey: 'type', // data access key of cell
 	},
 	{
 		type: TYPES.STRING,
-		dataKey: 'phoneNumber',
+		dataKey: 'user',
 	},
+  {
+		type: TYPES.STRING,
+		dataKey: 'RequestType',
+	},
+ 
 	{
 		type: TYPES.STRING,
-		dataKey: 'RegisterTime',
+		dataKey: 'BookingDate',
 	},
+	
 
 	{
-		type: TYPES.STRING,
-		dataKey: 'Progress',
+		type: TYPES.BUTTON,
+		options: {
+			title: 'Accept',
+			variant: 'contained', // OPTIONAL: buttons variants, default is text
+			textColor: '#fff', // OPTIONAL, either semantic or hexa, default is black
+
+			// isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
+			// href: '/payment-details', // OPTIONAL: pass it in case it's link,
+			onClick: () => console.log('clicked'), // pass it in case it's not link,
+			sx: { py: 2 },
+		},
+	},
+	{
+		type: TYPES.BUTTON,
+		options: {
+			title: 'Reject',
+			variant: 'text', // OPTIONAL: buttons variants, default is text
+			textColor: '#FF4242', // OPTIONAL, either semantic or hexa, default is black
+			// isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
+			// href: '/payment-details', // OPTIONAL: pass it in case it's link,
+			onClick: () => console.log('clicked'), // pass it in case it's not link,
+			sx: { py: 2 },
+		},
 	},
 ];
 
