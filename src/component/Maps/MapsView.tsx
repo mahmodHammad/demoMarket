@@ -1,11 +1,9 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-// import atarlogo from "@/assets/atarcloud_primary.png";
-import { Typography, CircularProgress } from '@mui/material';
-import { Box } from '@mui/system';
+import { CircularProgress } from '@mui/material';
 import ReactDOM from 'react-dom';
-import LocationIcon from '@/assets/icons/LocationIcon';
 import UnitsCard from '../cards/UnitsCard';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import './maps.css';
@@ -94,7 +92,7 @@ const MapsView = ({
 							scaledSize: new google.maps.Size(37, 37),
 						}}
 						onClick={() => handleMarkerClick(index)}
-						id={1}
+						id={index}
 						draggable={true}
 						key={index}></Marker>
 				))}
@@ -116,6 +114,7 @@ const LoadingContainer = (props) => (
 		<CircularProgress />
 	</div>
 );
+
 export default GoogleApiWrapper({
 	apiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
 	LoadingContainer: LoadingContainer,
