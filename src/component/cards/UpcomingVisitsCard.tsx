@@ -20,7 +20,7 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
 				<Box
 					sx={{
 						width: '100%',
-						height: { xs: '150px', md: '237px' },
+						height: { xs: '150px', md: '224px' },
 						borderRadius: '16px',
 						// padding: '10px',
 						objectFit: 'cover',
@@ -46,7 +46,7 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
 							mt: '16px',
 							display: { xs: 'none', md: 'flex' },
 						}}>
-						<Text variant="caption" sx={{ color: '#CACACA' }}>
+						<Text variant="caption" gray>
 							Location
 						</Text>
 						<Text variant="label">{location || 'location'}</Text>
@@ -57,7 +57,7 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
 							mt: '16px',
 							display: { xs: 'none', md: 'flex' },
 						}}>
-						<Text variant="caption" sx={{ color: '#CACACA' }}>
+						<Text variant="caption" gray>
 							Visit Date & Time
 						</Text>
 						<Text variant="label">{dateTime || 'dateTime'}</Text>

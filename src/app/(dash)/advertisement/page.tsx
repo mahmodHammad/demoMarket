@@ -65,7 +65,7 @@ const Advertisement = () => {
 	};
 	return (
 		<>
-			<Box column p={'35px'} width={'100%'}>
+			<Box column width={'100%'}>
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Advertisements </Text>
 

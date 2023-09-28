@@ -73,7 +73,7 @@ export default function MyPayments({ isadmin }) {
 	return (
 		<>
 			<Box>
-				<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
+				<Text variant="h4" mb="24px">
 					My Payments
 				</Text>
 				<Table
