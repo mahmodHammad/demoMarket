@@ -92,13 +92,14 @@ export default function Properties() {
 						Add unit to market place
 					</Button>
 				</Box>
-				<Box sx={{ width: '100%' }}>
+				<Box >
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
 							<Tab label="Rent" {...a11yProps(0)} />
 							<Tab label="Buy" {...a11yProps(1)} />
 						</Tabs>
 					</Box>
+
 					<CustomTabPanel value={value} index={0}>
 						<Table
 							headers={HEADERS}
