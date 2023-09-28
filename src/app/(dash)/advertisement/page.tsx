@@ -88,7 +88,7 @@ const Advertisement = () => {
 					<CustomTabPanel value={value} index={0}>
 						<Grid container mt={'25px'} spacing={'28px'}>
 							{data?.map((d, index) => (
-								<Grid item xs={6} key={index}>
+								<Grid item xs={4} key={index}>
 									<ButtonBase component={Link} sx={{ width: '100%' }} href="advertisement/advertisment-Details">
 										<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
 									</ButtonBase>
@@ -99,7 +99,7 @@ const Advertisement = () => {
 					<CustomTabPanel value={value} index={1}>
 						<Grid container mt={'25px'} spacing={'28px'}>
 							{data2?.map((d, index) => (
-								<Grid item xs={6} key={index}>
+								<Grid item xs={4} key={index}>
 									<ButtonBase component={Link} sx={{ width: '100%' }} href="advertisement/advertisment-Details">
 										<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
 									</ButtonBase>
