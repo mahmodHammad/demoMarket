@@ -12,7 +12,7 @@ interface Props {
 }
 const AdvertisementsCard = (props: Props) => {
 	return (
-		<ButtonBase sx={{ maxWidth: '451px', width: '100%' }}>
+		<ButtonBase sx={{ width: '100%' }}>
 			<Box
 				sx={{
 					boxShadow: '0px 6px 12px 0px #1C27310D',

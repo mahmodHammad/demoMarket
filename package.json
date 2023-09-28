@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --fix --max-warnings=0",
@@ -41,7 +41,6 @@
     "react-hook-form": "^7.46.1",
     "react-otp-input": "^3.0.4",
     "react-phone-input-2": "^2.15.1",
-    "react-photo-album": "^2.3.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {

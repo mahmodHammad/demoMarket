@@ -26,7 +26,20 @@ label {
     background-repeat: no-repeat; */
 }
 
-.gm-style-iw button{
-    top: 5px !important;
-    right: 2px !important;
+.gm-style-iw button {
+    display: none !important;
+}
+
+.gm-style-iw-d {
+    overflow: none !important;
+    max-height: none !important;
+    height: 100% !important;
+}
+
+.gm-style-iw-d .MuiBox-root{
+    a {
+        color: '#008EA5'!important;
+        border-color: '#008EA5'!important;
+    }
+
 }
