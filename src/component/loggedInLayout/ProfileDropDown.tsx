@@ -7,6 +7,7 @@ import LogoutBoxLine from '@/assets/icons/LogoutBoxLine';
 import InformationLine from '@/assets/icons/InformationLine';
 import NextIcon from '@/assets/icons/NextIcon';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import Link from 'next/link';
 
 const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 	return (
@@ -17,7 +18,11 @@ const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 				width: '100%',
 				alignItems: 'center',
 			}}>
-			<Avatar alt={name.toUpperCase()} src="https://mui.com/static/images/avatar/2.jpg" sx={{ width: 80, height: 80 }} />
+			<Avatar
+				alt={name.toUpperCase()}
+				src="https://mui.com/static/images/avatar/2.jpg"
+				sx={{ width: 80, height: 80 }}
+			/>
 			<Text variant="h5" sx={{ mt: '8px', textTransform: 'capitalize' }}>
 				{name}
 			</Text>
