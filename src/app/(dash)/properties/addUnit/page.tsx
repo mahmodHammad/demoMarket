@@ -10,7 +10,7 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 // import { Delete } from '@/assets';
 
 import React from 'react';
-import { UnitsCard } from '@/component';
+import { PopUpCard, UnitsCard } from '@/component';
 
 const data = [
 	{
@@ -36,7 +36,7 @@ const Properties = () => {
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Properties List</Text>
-					<Box>
+					<Box row>
 						<Button variant="outlined" component={Link} href="/properties">
 							Select Multiple
 						</Button>

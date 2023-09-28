@@ -67,3 +67,4 @@ export { default as ListingBody } from './listingpage/ListingBody';
 export { default as AdvertisementsCard } from './advertisements/AdvertisementsCard';
 export { default as NotificationCard } from './cards/NotificationCard';
 export { default as Table } from './table/Table';
+export { default as PopUpCard } from './cards/PopUpCard';
