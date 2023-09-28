@@ -9,7 +9,7 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 // import { UnitsCard } from '@/component';
 // import { Delete } from '@/assets';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { PopUpCard, UnitsCard } from '@/component';
 
 const data = [
@@ -29,10 +29,11 @@ const data = [
 	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
 	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 ];
-
+const [openPopup, setopenPopup] = useState(false);
 const Properties = () => {
 	return (
 		<>
+			<PopUpCard openPopup={openPopup} setopenPopup={setopenPopup} />
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Properties List</Text>
@@ -54,6 +55,7 @@ const Properties = () => {
 								area={d?.area}
 								location={d?.location}
 								buttonName="add"
+								onClick={()=>setopenPopup(true)}
 							/>
 						</Grid>
 					))}

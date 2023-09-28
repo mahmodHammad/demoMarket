@@ -20,6 +20,7 @@ interface Props {
 	imgHeight?: string;
 	toggleLike: (id: number) => void;
 	buttonName?: string;
+	onClick?: () => void;
 }
 export default function UnitsCard({
 	id,
@@ -35,6 +36,7 @@ export default function UnitsCard({
 	width = '100%',
 	height = '',
 	buttonName = 'View Details',
+	onClick,
 }: Props) {
 	return (
 		<Box
@@ -66,7 +68,7 @@ export default function UnitsCard({
 					},
 				}}>
 				<Box xcenter ycenter onClick={() => toggleLike(id)}>
-					{liked ? <FilledHeart  /> : <OutlineHeart />}
+					{liked ? <FilledHeart /> : <OutlineHeart />}
 				</Box>
 			</Box>
 			{/* <Box
@@ -204,21 +206,38 @@ export default function UnitsCard({
 			</Box>
 			<Divider sx={{ mt: '16px', backgroundColor: '#F0F0F0', height: '1px', border: '0px' }}></Divider>
 			<Box sx={{ py: '16px', px: '24px' }}>
-				<Button
-					component={Link}
-					variant="outlined"
-					sx={{
-						display: 'dlex',
-						height: '20px',
-						padding: '16px 24px',
-						justifyContent: ' center',
-						alignItems: 'center',
+				{onClick ? (
+					<Button
+						variant="outlined"
+						sx={{
+							display: 'dlex',
+							height: '20px',
+							padding: '16px 24px',
+							justifyContent: ' center',
+							alignItems: 'center',
 
-						fontSize: { xs: '12px', md: '14px' },
-					}}
-					href={link}>
-					{buttonName}
-				</Button>
+							fontSize: { xs: '12px', md: '14px' },
+						}}
+						>
+						{buttonName}
+					</Button>
+				) : (
+					<Button
+						component={Link}
+						variant="outlined"
+						sx={{
+							display: 'dlex',
+							height: '20px',
+							padding: '16px 24px',
+							justifyContent: ' center',
+							alignItems: 'center',
+
+							fontSize: { xs: '12px', md: '14px' },
+						}}
+						href={link}>
+						{buttonName}
+					</Button>
+				)}
 			</Box>
 		</Box>
 	);

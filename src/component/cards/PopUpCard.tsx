@@ -8,15 +8,14 @@ import { Box, Button, Text } from '@/wrappers';
 import Succesgreen from '@/assets/icons/Succesgreen';
 import { SuccessInfoIcon } from '@/assets';
 
-export default function PopUpCard() {
-	const [open, setOpen] = React.useState(false);
+export default function PopUpCard({openPopup, setopenPopup}) {
 
 	const handleClickOpen = () => {
-		setOpen(true);
+		setopenPopup(true);
 	};
 
 	const handleClose = () => {
-		setOpen(false);
+		setopenPopup(false);
 	};
 
 	return (
@@ -27,7 +26,7 @@ export default function PopUpCard() {
 
 			<Dialog
 				sx={{ borderRadius: '16px' }}
-				open={open}
+				open={openPopup}
 				onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description">
