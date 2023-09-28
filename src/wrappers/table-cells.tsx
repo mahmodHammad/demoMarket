@@ -13,7 +13,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
     },
     [`&.${tableCellClasses.body}`]: {
-        padding:'4px 4px 4px 16px'
+        padding:'16px 12px 16px 12px'
     },
 }));
 

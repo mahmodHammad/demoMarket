@@ -4,11 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { Box, Text } from '@/wrappers';
 import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
-import ForSale from '@/component/ForSale';
-import neibourhoodcover2 from '@/assets/images/Rectangle 45351.png';
-import UpcomingVisitsCard from '@/component/cards/UpcomingVisitsCard';
 
-export default function MyBookings() {
+export default function AdminBookings() {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
@@ -23,7 +20,7 @@ export default function MyBookings() {
 	const handleSort = (id: string) => setSort(id);
 
 	useEffect(() => {
-		console.log('bookings table state changed', {
+		console.log('payment table state changed', {
 			search,
 			currentPage,
 			status,
@@ -34,30 +31,10 @@ export default function MyBookings() {
 
 	return (
 		<>
-			<Box pb={8}>
-				<Text variant="h4" sx={{ padding: '35px 0px 0px 36px' }}>
-					My Bookings
+			<Box>
+				<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
+					Booking Visit Requests List
 				</Text>
-				<Box
-					sx={{
-						display: 'grid',
-						gridTemplateColumns: '2fr 1fr',
-						columnGap: '30px',
-						padding: '25px 36px 36px 36px',
-					}}>
-					<ForSale />
-					<Box>
-						<Text variant="h5" sx={{ mb: '10px' }}>
-							Upcoming Visits
-						</Text>
-						<UpcomingVisitsCard
-							title={'Property 1'}
-							img={neibourhoodcover2}
-							dateTime={'01/01/2023,10:00 AM'}
-							location={'Pune'}
-						/>
-					</Box>
-				</Box>
 				<Table
 					headers={HEADERS}
 					cellsTypes={CELLS_TYPES}
@@ -84,14 +61,41 @@ export default function MyBookings() {
 
 // actual table data
 const DATA = [
-	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Pay down', method: 'Net Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
+	{
+		id: 1,
+		type: 'U001',
+		user: 'Mahmoud',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
+	},
+	{
+		id: 1,
+		type: 'U052301',
+		user: 'Abdo',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
+	},
+	{
+		id: 1,
+		type: 'U0231',
+		user: 'Banda',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
+	},
+	{
+		id: 1,
+		type: 'U041',
+		user: 'Ali',
+		date: '12-10-2022',
+		RequestType: 'In person',
+		BookingDate: 'Tomorrow at 11:00 AM',
+	},
 ];
 
-const HEADERS = ['Payment Type', 'Payment Method', 'Date', 'Amount', 'Status', ''];
+const HEADERS = ['Unit Number', 'User', 'Request Type', 'Booking Date', '', ''];
 
 const CELLS_TYPES = [
 	{
@@ -100,35 +104,40 @@ const CELLS_TYPES = [
 	},
 	{
 		type: TYPES.STRING,
-		dataKey: 'method',
+		dataKey: 'user',
 	},
-	{
-		type: TYPES.DATE,
-		dataKey: 'date',
+  {
+		type: TYPES.STRING,
+		dataKey: 'RequestType',
 	},
+ 
 	{
 		type: TYPES.STRING,
-		dataKey: 'amount',
+		dataKey: 'BookingDate',
 	},
+	
+
 	{
-		type: TYPES.LABEL,
-		dataKey: 'status',
+		type: TYPES.BUTTON,
 		options: {
-			// label colors based on value, key is the label text (from data column), value is the colors
-			colorPalette: {
-				Pending: { color: '#8A6A16', bg: '#FCEDC7' },
-				'Pay Down': { color: '#0A9458', bg: '#EDFAF4' },
-			},
+			title: 'Accept',
+			variant: 'contained', // OPTIONAL: buttons variants, default is text
+			textColor: '#fff', // OPTIONAL, either semantic or hexa, default is black
+
+			// isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
+			// href: '/payment-details', // OPTIONAL: pass it in case it's link,
+			onClick: () => console.log('clicked'), // pass it in case it's not link,
+			sx: { py: 2 },
 		},
 	},
 	{
 		type: TYPES.BUTTON,
 		options: {
-			title: 'View Details',
+			title: 'Reject',
 			variant: 'text', // OPTIONAL: buttons variants, default is text
-			textColor: 'primary', // OPTIONAL, either semantic or hexa, default is black
-			isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
-			href: '/booking-details', // OPTIONAL: pass it in case it's link,
+			textColor: '#FF4242', // OPTIONAL, either semantic or hexa, default is black
+			// isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
+			// href: '/payment-details', // OPTIONAL: pass it in case it's link,
 			onClick: () => console.log('clicked'), // pass it in case it's not link,
 			sx: { py: 2 },
 		},

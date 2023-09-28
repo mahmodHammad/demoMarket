@@ -1,20 +1,23 @@
+'use client'
 import { Divider, ListItem } from '@mui/material';
 import { Text } from '@/wrappers';
-import { navLinks } from './NavLinks';
+
 import SupportIcon from '@/assets/icons/SupportIcon';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { visitorNavLinks, adminNavLinks } from '@/component/loggedInLayout/SidebarLinks';
 
-export default function Sidebar() {
+export default function Sidebar({ type }) {
 	const pathname = usePathname();
 
+	const links = type === 'visitor' ? visitorNavLinks : adminNavLinks;
 	return (
 		<div
 			style={{
 				paddingTop: '18px',
 				paddingBottom: '18px',
 			}}>
-			{navLinks.map(({ text, to, icon: Icon }) => (
+			{links?.map(({ text, to, icon: Icon }) => (
 				<>
 					<ListItem
 						key={text}

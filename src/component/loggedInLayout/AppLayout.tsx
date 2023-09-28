@@ -1,108 +1,24 @@
 'use client';
-import { CssBaseline, InputAdornment, TextField, Toolbar } from '@mui/material';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import MuiDrawer from '@mui/material/Drawer';
-import { CSSObject, styled, Theme } from '@mui/material/styles';
+
+import { AppBar, CssBaseline, Toolbar } from '@mui/material';
 import React from 'react';
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 
 import DrawerContainer from './Drawer';
 import Notifications from './Notifications';
 import ProfileDropDown from './ProfileDropDown';
-import { Box, Container } from '@/wrappers/layouts';
+import { Box } from '@/wrappers/layouts';
 import MarketPlace from '@/assets/icons/MarketPlace';
 import { Button } from '@/wrappers';
 import Link from 'next/link';
 
 const drawerWidth: number = 240;
-interface AppBarProps extends MuiAppBarProps {
-	open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-	shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-	boxShadow: 'none',
-	minHeight: '90px',
-	maxHeight: '200px',
-	justifyContent: 'center',
-	zIndex: theme.zIndex.drawer,
-	transition: theme.transitions.create(['width', 'margin'], {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
-	...(open && {
-		marginLeft: drawerWidth,
-		width: `calc(100% - ${drawerWidth}px)`,
-		[theme.breakpoints.down('sm')]: {
-			width: '100%',
-		},
-		transition: theme.transitions.create(['width', 'margin'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	}),
-	...(!open && {
-		marginLeft: '100px',
-		width: `calc(100% - 100px)`,
-		[theme.breakpoints.down('sm')]: {
-			width: '100%',
-		},
-		transition: theme.transitions.create(['width', 'margin'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	}),
-}));
-
-const openedMixin = (theme: Theme): CSSObject => ({
-	width: drawerWidth,
-	border: 'none',
-	transition: theme.transitions.create('width', {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.enteringScreen,
-	}),
-	overflowX: 'hidden',
-	padding: '0 1rem 1rem 2rem',
-});
-
-const closedMixin = (theme: Theme): CSSObject => ({
-	transition: theme.transitions.create('width', {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
-	border: 'none',
-	overflowX: 'hidden',
-	width: `100px`,
-	padding: '2rem',
-});
-const Drawer = styled(MuiDrawer, {
-	shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-	width: drawerWidth,
-	flexShrink: 0,
-	whiteSpace: 'nowrap',
-	boxSizing: 'border-box',
-	...(open && {
-		width: drawerWidth,
-		...openedMixin(theme),
-		'& .MuiDrawer-paper': openedMixin(theme),
-	}),
-	...(!open && {
-		width: '100px',
-		...closedMixin(theme),
-		'& .MuiDrawer-paper': closedMixin(theme),
-	}),
-}));
 
 interface Props {
-	window?: () => Window;
 	children?: React.ReactElement;
-	currentLang?: any;
-	changeLang?: Function;
 }
 
-export default function AppLayout(props: Props) {
+export default function AppLayout({ children, type }: Props) {
 	return (
 		<Box sx={{ display: 'flex', height: '100vh' }}>
 			<CssBaseline />
@@ -111,6 +27,13 @@ export default function AppLayout(props: Props) {
 				open={true}
 				sx={{
 					backgroundColor: '#fff',
+					boxShadow: 'none',
+					minHeight: '90px',
+					maxHeight: '200px',
+					justifyContent: 'center',
+
+					marginLeft: drawerWidth,
+					width: `calc(100% - ${drawerWidth}px)`,
 				}}>
 				<Toolbar
 					sx={{
@@ -126,7 +49,7 @@ export default function AppLayout(props: Props) {
 							display: 'flex',
 							alignItems: 'center',
 						}}>
-						<TextField
+						{/* <TextField
 							size="small"
 							sx={{
 								width: '366px',
@@ -140,7 +63,7 @@ export default function AppLayout(props: Props) {
 									</InputAdornment>
 								),
 							}}
-						/>
+						/> */}
 					</Box>
 					<Box
 						sx={{
@@ -182,18 +105,12 @@ export default function AppLayout(props: Props) {
 					</Box>
 				</Toolbar>
 			</AppBar>
-			<Drawer
-				variant="permanent"
-				open={true}
-				sx={{
-					display: { xs: 'none', sm: 'block' },
-				}}>
-				<DrawerContainer />
-			</Drawer>
+
+			<DrawerContainer type={type} />
 			<Box
 				sx={{
 					backgroundColor: '#FAFCFD',
-					borderRadius:"8px",
+					borderRadius: '8px',
 					width: { sm: `calc(100% - ${drawerWidth}px)` },
 				}}>
 				<Box
@@ -206,7 +123,7 @@ export default function AppLayout(props: Props) {
 						position: 'relative',
 						minHeight: '80vh',
 					}}>
-					{props.children}
+					{children}
 				</Box>
 			</Box>
 		</Box>
