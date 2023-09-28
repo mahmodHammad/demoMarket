@@ -66,7 +66,7 @@ export default function UnitsCard({
 					},
 				}}>
 				<Box xcenter ycenter onClick={() => toggleLike(id)}>
-					{liked ? <FilledHeart /> : <OutlineHeart />}
+					{liked ? <FilledHeart  /> : <OutlineHeart />}
 				</Box>
 			</Box>
 			{/* <Box

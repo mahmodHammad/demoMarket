@@ -51,6 +51,8 @@ const theme = responsiveFontSizes(
 				styleOverrides: {
 					root: ({ ownerState, theme }) => ({
 						color: theme.palette.primary.main,
+						fill: theme.palette.primary.main,
+						strock: theme.palette.primary.main,
 					}),
 				},
 			},

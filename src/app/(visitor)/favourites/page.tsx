@@ -16,14 +16,15 @@ const data = [
 		price: 'SAR 60,000',
 		area: '120 sqm',
 		location: 'Riyadh',
+		liked: true,
 	},
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
+	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/', liked: true },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
+	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/', liked: true },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
+	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/', liked: true },
+	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
 ];
 
 // interface proptypes {
@@ -73,6 +74,7 @@ const favourites = () => {
 								price={d?.price}
 								area={d?.area}
 								location={d?.location}
+								liked={d?.liked}
 							/>
 						</Grid>
 					))}
