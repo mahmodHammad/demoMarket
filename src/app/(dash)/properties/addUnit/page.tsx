@@ -29,8 +29,9 @@ const data = [
 	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
 	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 ];
-const [openPopup, setopenPopup] = useState(false);
 const Properties = () => {
+	const [openPopup, setopenPopup] = useState(false);
+
 	return (
 		<>
 			<PopUpCard openPopup={openPopup} setopenPopup={setopenPopup} />
@@ -55,7 +56,7 @@ const Properties = () => {
 								area={d?.area}
 								location={d?.location}
 								buttonName="add"
-								onClick={()=>setopenPopup(true)}
+								onClick={() => setopenPopup(true)}
 							/>
 						</Grid>
 					))}
