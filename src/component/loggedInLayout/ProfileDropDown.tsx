@@ -30,9 +30,11 @@ const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 	);
 };
 
-const OptionLink = ({ label, startIcon }: { label: string; startIcon: any }) => {
+const OptionLink = ({ label, href, startIcon }: { label: string; href:string; startIcon: any }) => {
 	return (
 		<Box
+			component={Link}
+			href={href}
 			style={{
 				textDecoration: 'none',
 			}}>
@@ -119,9 +121,9 @@ const ProfileDropDown = () => {
 												gap: '10px',
 											}}>
 											<OptionLink component={Link} href="/my-profile" label={'Edit'} startIcon={<Pencilline />} />
-											<OptionLink label={'Privacy Policy'} startIcon={<ShieldKeyholeLine />} />
-											<OptionLink label={'Terms And Conditions'} startIcon={<InformationLine />} />
-											<OptionLink label={'Logout'} startIcon={<LogoutBoxLine />} />
+											<OptionLink href="/my-profile" label={'Privacy Policy'} startIcon={<ShieldKeyholeLine />} />
+											<OptionLink href="/my-profile" label={'Terms And Conditions'} startIcon={<InformationLine />} />
+											<OptionLink href="/my-profile" label={'Logout'} startIcon={<LogoutBoxLine />} />
 										</Box>
 									</Box>
 								</Paper>
