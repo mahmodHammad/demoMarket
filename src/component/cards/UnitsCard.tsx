@@ -15,15 +15,18 @@ interface Props {
   area: string;
   location: string;
   liked: boolean;
+  height?: string;
+  width?: string;
+  imgHeight?: string;
   toggleLike: (id: number) => void
 }
-export default function UnitsCard({ id, liked, img, title, link, price, area, location, toggleLike }: Props) {
+export default function UnitsCard({ id, liked, img, title, link, price, area, location, toggleLike, imgHeight='237px', width='100%', height='' }: Props) {
   return (
     <Box
       relative
       sx={{
-        width: '100%',
-        // height: { xs: '300px', md: '447px' },
+        width: width,
+        height: { xs: '', md: height },
         // position: "relative",
         // overflow: "hidden",
         borderRadius: '16px',
@@ -74,7 +77,7 @@ export default function UnitsCard({ id, liked, img, title, link, price, area, lo
       <Box
         sx={{
           width: '100%',
-          height: { xs: '150px', md: '237px' },
+          height: { xs: '150px', md: imgHeight },
           borderRadius: '16px 16px 0 0',
           objectFit: 'cover',
         }}
