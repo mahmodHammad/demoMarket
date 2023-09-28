@@ -15,6 +15,9 @@ interface Props {
 	area: string;
 	location: string;
 	liked: boolean;
+	height?: string;
+	width?: string;
+	imgHeight?: string;
 	toggleLike: (id: number) => void;
 	buttonName?: string;
 }
@@ -28,14 +31,17 @@ export default function UnitsCard({
 	area,
 	location,
 	toggleLike,
+	imgHeight = '237px',
+	width = '100%',
+	height = '',
 	buttonName = 'View Details',
 }: Props) {
 	return (
 		<Box
 			relative
 			sx={{
-				width: '100%',
-				// height: { xs: '300px', md: '447px' },
+				width: width,
+				height: { xs: '', md: height },
 				// position: "relative",
 				// overflow: "hidden",
 				borderRadius: '16px',
@@ -81,7 +87,7 @@ export default function UnitsCard({
 			<Box
 				sx={{
 					width: '100%',
-					height: { xs: '150px', md: '237px' },
+					height: { xs: '150px', md: imgHeight },
 					borderRadius: '16px 16px 0 0',
 					objectFit: 'cover',
 				}}
