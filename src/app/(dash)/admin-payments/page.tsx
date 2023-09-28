@@ -2,7 +2,7 @@ import MyPayments from '@/component/pages/myPayments/MyPayments';
 import React from 'react';
 
 const AdminPayments = () => {
-	return <MyPayments />;
+	return <MyPayments isadmin={true} />;
 };
 
 export default AdminPayments;
