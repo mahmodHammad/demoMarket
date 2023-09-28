@@ -99,8 +99,8 @@ const theme = responsiveFontSizes(
 					{
 						props: { variant: 'outlined' },
 						style: {
-							borderColor: '#008EA5',
-							color: '#008EA5',
+							borderColor: 'primary.main',
+							color: 'primary.main',
 							'&:hover': {
 								backgroundColor: 'rgba(0, 142, 165, 0.08)',
 								borderColor: 'primary.main',
@@ -120,7 +120,7 @@ const theme = responsiveFontSizes(
 					{
 						props: { variant: 'hover' },
 						style: {
-							color: '#008EA5',
+							color: 'primary.main',
 							backgroundColor: 'rgba(0, 142, 165, 0.08)',
 							'&:hover': {
 								backgroundColor: 'rgba(0, 142, 165, 0.08)',
