@@ -30,7 +30,7 @@ const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 	);
 };
 
-const OptionLink = ({ label, href, startIcon }: { label: string; href:string; startIcon: any }) => {
+const OptionLink = ({ label, href, startIcon }: { label: string; href: string; startIcon: any }) => {
 	return (
 		<Box
 			component={Link}
