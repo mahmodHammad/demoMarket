@@ -26,13 +26,13 @@ export const adminNavLinks: NavLink[] = [
 		icon: PropertiesIcon,
 	},
 	{
-		to: '/my-bookings',
+		to: '/admin-bookings',
 		text: `Bookings`,
 		icon: BookingIcon,
 	},
 
 	{
-		to: '/my-payments',
+		to: '/admin-payments',
 		text: `Payments`,
 		icon: PaymentsIcon,
 	},

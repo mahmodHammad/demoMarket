@@ -5,7 +5,7 @@ import { Text } from '@/wrappers';
 import SupportIcon from '@/assets/icons/SupportIcon';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { visitorNavLinks, adminNavLinks } from '@/component/loggedInLayout/AdminSidebarLinks';
+import { visitorNavLinks, adminNavLinks } from '@/component/loggedInLayout/SidebarLinks';
 
 export default function Sidebar({ type }) {
 	const pathname = usePathname();
