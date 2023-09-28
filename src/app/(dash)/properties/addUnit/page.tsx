@@ -49,7 +49,7 @@ const Properties = () => {
 							<UnitsCard
 								title={d?.title}
 								img={d?.img}
-								link={d?.link}
+								// link={d?.link}
 								price={d?.price}
 								area={d?.area}
 								location={d?.location}

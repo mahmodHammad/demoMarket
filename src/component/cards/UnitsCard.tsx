@@ -10,7 +10,7 @@ interface Props {
 	id: number;
 	img: string;
 	title: string;
-	link: string;
+	link?: string;
 	price: string;
 	area: string;
 	location: string;
@@ -23,7 +23,7 @@ export default function UnitsCard({
 	liked,
 	img,
 	title,
-	link,
+	link = '/unitdetails',
 	price,
 	area,
 	location,
@@ -210,7 +210,7 @@ export default function UnitsCard({
 
 						fontSize: { xs: '12px', md: '14px' },
 					}}
-					href={link || '/unitdetails'}>
+					href={link}>
 					{buttonName}
 				</Button>
 			</Box>
