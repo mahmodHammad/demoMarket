@@ -7,6 +7,13 @@ import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
 import { Plus } from '@/assets';
 import Link from 'next/link';
+import { Tab, Tabs } from '@mui/material';
+
+interface TabPanelProps {
+	children?: React.ReactNode;
+	index: number;
+	value: number;
+}
 
 export default function Properties() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -22,6 +29,11 @@ export default function Properties() {
 	const handleFilter = (id: string) => setFilter(id);
 	const handleSort = (id: string) => setSort(id);
 
+	const [value, setValue] = React.useState(0);
+
+	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+		setValue(newValue);
+	};
 	useEffect(() => {
 		console.log('properties table state changed', {
 			search,
@@ -32,38 +44,100 @@ export default function Properties() {
 		});
 	}, [search, currentPage, status, filter, sort]);
 
+	function CustomTabPanel(props: TabPanelProps) {
+		const { children, value, index, ...other } = props;
+
+		return (
+			<div
+				role="tabpanel"
+				hidden={value !== index}
+				id={`simple-tabpanel-${index}`}
+				aria-labelledby={`simple-tab-${index}`}
+				{...other}>
+				{value === index && (
+					<Box sx={{ p: 3 }}>
+						<Text>{children}</Text>
+					</Box>
+				)}
+			</div>
+		);
+	}
+
+	function a11yProps(index: number) {
+		return {
+			id: `simple-tab-${index}`,
+			'aria-controls': `simple-tabpanel-${index}`,
+		};
+	}
+
 	return (
 		<>
 			<Box>
-				<Box sx={{
-					display:"flex",
-					justifyContent:"space-between",
-					alignItems:"center",
-					mb:"40px"
-
-				}}>
+				<Box
+					sx={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						mb: '40px',
+					}}>
 					<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
 						My Properties
 					</Text>
-					<Button component={Link} href="/properties/addUnit" startIcon={<Plus sx={{fill:"#fff"}}/>} variant="contained" sx={{mr:"40px"}}>Add unit to market place</Button>
+					<Button
+						component={Link}
+						href="/properties/addUnit"
+						startIcon={<Plus sx={{ fill: '#fff' }} />}
+						variant="contained"
+						sx={{ mr: '40px' }}>
+						Add unit to market place
+					</Button>
 				</Box>
-				<Table
-					headers={HEADERS}
-					cellsTypes={CELLS_TYPES}
-					data={DATA}
-					filterValues={FilterValues}
-					loading={loading}
-					search={search}
-					handleSearch={handleSearch}
-					currentPage={currentPage}
-					handlePagination={handlePagination}
-					status={status}
-					handleStatusChange={handleStatusChange}
-					filter={filter}
-					handleFilter={handleFilter}
-					sort={sort}
-					handleSort={handleSort}
-				/>
+				<Box sx={{ width: '100%' }}>
+					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+						<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+							<Tab label="Rent" {...a11yProps(0)} />
+							<Tab label="Buy" {...a11yProps(1)} />
+						</Tabs>
+					</Box>
+					<CustomTabPanel value={value} index={0}>
+						<Table
+							headers={HEADERS}
+							cellsTypes={CELLS_TYPES}
+							data={DATA}
+							filterValues={FilterValues}
+							loading={loading}
+							search={search}
+							handleSearch={handleSearch}
+							currentPage={currentPage}
+							handlePagination={handlePagination}
+							status={status}
+							handleStatusChange={handleStatusChange}
+							filter={filter}
+							handleFilter={handleFilter}
+							sort={sort}
+							handleSort={handleSort}
+						/>
+					</CustomTabPanel>
+					<CustomTabPanel value={value} index={1}>
+						<Table
+							headers={HEADERS}
+							cellsTypes={CELLS_TYPES}
+							data={DATA2}
+							filterValues={FilterValues}
+							loading={loading}
+							search={search}
+							handleSearch={handleSearch}
+							currentPage={currentPage}
+							handlePagination={handlePagination}
+							status={status}
+							handleStatusChange={handleStatusChange}
+							filter={filter}
+							handleFilter={handleFilter}
+							sort={sort}
+							handleSort={handleSort}
+						/>
+					</CustomTabPanel>
+				</Box>
 			</Box>
 		</>
 	);
@@ -73,11 +147,19 @@ export default function Properties() {
 
 // actual table data
 const DATA = [
-	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Pay down', method: 'Net Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
+	{ id: 1, type: 'Rent Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 13500' },
+	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2024', status: 'Pay Down', amount: 'SAR 45100' },
+	{ id: 1, type: 'Rent Unit', method: 'UPI', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 154100' },
+	{ id: 1, type: 'Rent Unit', method: 'Net Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
+	{ id: 1, type: 'Rent Unit', method: 'UPI', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
+];
+
+const DATA2 = [
+	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
+	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2024', status: 'Pay Down', amount: 'SAR 45100' },
+	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 18100' },
+	{ id: 1, type: 'Pay down', method: 'Cash Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
+	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2024', status: 'Pay Down', amount: 'SAR 5200' },
 ];
 
 const HEADERS = ['Payment Type', 'Payment Method', 'Date', 'Amount', 'Status', ''];
