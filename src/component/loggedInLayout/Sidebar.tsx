@@ -28,7 +28,7 @@ export default function Sidebar({ type }) {
 						}}>
 						<Icon
 							sx={{
-								fill: (theme) => (pathname === to ? theme.palette.primary.main : theme.palette.secondary.light),
+								fill: (theme) => (pathname === to ? theme.palette.primary.main : "#232425"),
 							}}
 						/>
 						<Text
@@ -36,7 +36,7 @@ export default function Sidebar({ type }) {
 							sx={{
 								pl: '16px',
 								fontWeight: 700,
-								color: (theme) => (pathname === to ? theme.palette.primary.main : theme.palette.secondary.light),
+								color: (theme) => (pathname === to ? theme.palette.primary.main : "#232425"),
 							}}>
 							{text}
 						</Text>

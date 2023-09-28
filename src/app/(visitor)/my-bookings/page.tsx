@@ -35,7 +35,7 @@ export default function MyBookings() {
 	return (
 		<>
 			<Box pb={8}>
-				<Text variant="h4" sx={{ padding: '35px 0px 0px 36px' }}>
+				<Text variant="h4"  >
 					My Bookings
 				</Text>
 				<Box
@@ -43,7 +43,7 @@ export default function MyBookings() {
 						display: 'grid',
 						gridTemplateColumns: '2fr 1fr',
 						columnGap: '30px',
-						padding: '25px 36px 36px 36px',
+						padding: '25px 36px 36px 0',
 					}}>
 					<ForSale />
 					<Box>

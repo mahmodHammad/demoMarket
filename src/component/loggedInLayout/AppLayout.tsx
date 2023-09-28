@@ -116,9 +116,10 @@ export default function AppLayout({ children, type }: Props) {
 				<Box
 					component="main"
 					sx={{
-						maxWidth: '1680px',
+						maxWidth: '1600px',
 						borderRadius: '4px',
-						marginTop: { xs: '70px', sm: '70px', md: '70px' },
+						marginTop: { xs: '70px', sm: '70px', md: '90px' },
+						p:"32px",
 						overflow: 'auto',
 						position: 'relative',
 						minHeight: '80vh',

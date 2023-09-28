@@ -32,7 +32,7 @@ export default function AdminBookings() {
 	return (
 		<>
 			<Box>
-				<Text variant="h4" sx={{ padding: '35px 0px 24px 36px' }}>
+				<Text variant="h4" mb="24px">
 					Booking Visit Requests List
 				</Text>
 				<Table

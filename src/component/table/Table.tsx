@@ -47,7 +47,7 @@ export default function Table({
 	handleSort = () => null,
 }: TableProps) {
 	return (
-		<Box sx={{ pl: '16px', pr: '16px' }}>
+		<Box sx={{  }}>
 			<PaginatedResourcesTable
 				Table={() => (
 					<DataTable
