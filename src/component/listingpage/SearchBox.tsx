@@ -72,8 +72,8 @@ export default function SearchBox({}) {
 				</Box>
 				<Box row>
 					<Box
-            component={Link}
-            href='/maps'
+						component={Link}
+						href="/maps"
 						width={{ md: '54px' }}
 						height={{ md: '54px' }}
 						bgcolor={'#EBF6F8'}
@@ -81,7 +81,7 @@ export default function SearchBox({}) {
 						center
 						sx={{ cursor: 'pointer' }}
 						mr={'18px'}>
-						<Location />
+						<Location color="primary" sx={{ color: theme.palette.primary.main, fill: theme.palette.primary.main }} />
 					</Box>
 					<Box
 						width={{ md: '54px' }}
