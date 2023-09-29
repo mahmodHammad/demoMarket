@@ -17,40 +17,25 @@ const schema = yup.object().shape({
 	endDateTime: yup.date().required('End Date & Time required'),
 	startDateTime: yup.date().required('Start Date & Time required'),
 });
-const RADIO_OPTIONS = [
-	{
-		label: 'Male',
-		value: 'male',
-	},
-	{
-		label: 'Female',
-		value: 'female',
-	},
-];
+
 export default function CreateAdvertisement() {
 	const {
 		control,
 		handleSubmit,
-		watch,
 		setValue,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
 			title: '',
 			description: '',
-			file:[],
+			file: [],
 			startDateTime: dayjs('2022-04-17T15:35') as unknown as Date,
 			endDateTime: dayjs('2022-04-17T15:35') as unknown as Date,
 		},
 		resolver: yupResolver(schema),
 	});
-	const file = watch('file');
 	const onSubmit = (data: any) => {
 		console.log('form data shreyas', data);
-	};
-	const readFileData = (fl: any) => {
-		const file = URL.createObjectURL(fl);
-		return file;
 	};
 	return (
 		<>
@@ -88,14 +73,22 @@ export default function CreateAdvertisement() {
 								</Item>
 								<Item xs={10}>
 									<DragDropFile name={'file'} setValue={setValue} control={control} />
-									{/* <DragDropController name={'file'} control={control} /> */}
-									{/* <FileUploadController name={'file'} label={'file'} control={control}/> */}
 								</Item>
 								<Item xs={5}>
-									<DateTimePickerController name="startDateTime" control={control} errors={errors} label="Start Date & Time" />
+									<DateTimePickerController
+										name="startDateTime"
+										control={control}
+										errors={errors}
+										label="Start Date & Time"
+									/>
 								</Item>
 								<Item xs={5}>
-									<DateTimePickerController name="endDateTime" control={control} errors={errors} label="End Date & Time" />
+									<DateTimePickerController
+										name="endDateTime"
+										control={control}
+										errors={errors}
+										label="End Date & Time"
+									/>
 								</Item>
 							</Container>
 						</Item>
