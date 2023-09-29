@@ -1,27 +1,21 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Container, Item, Text } from '@/wrappers';
 import TextInputController from '@/component/forms/controlled/TextInputController';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import dayjs from 'dayjs';
-import { Avatar } from '@mui/material';
-import FileUploadController from '@/component/forms/controlled/FileUploadController';
-import theme from '@/ThemeRegistry/theme';
 import DragDropFile from '@/component/forms/DragDropFile';
-import DragDropController from '@/component/forms/controlled/DragAndDropController';
+import DateTimePickerController from '@/component/forms/controlled/DateTimePickerController';
 
 const schema = yup.object().shape({
-	firstName: yup.string().required('First Name is required'),
-	lastName: yup.string().required('Last Name is required'),
-	NationalID: yup.string().required('National ID is required'),
-	email: yup.string().required('Email is required'),
-	Hijari: yup.boolean(),
-	date: yup.date().required('Date required'),
-	gender: yup.string(),
+	title: yup.string().required('Title is required'),
+	description: yup.string().required('Description is required'),
 	file: yup.array(),
+	endDateTime: yup.date().required('End Date & Time required'),
+	startDateTime: yup.date().required('Start Date & Time required'),
 });
 const RADIO_OPTIONS = [
 	{
@@ -38,21 +32,19 @@ export default function CreateAdvertisement() {
 		control,
 		handleSubmit,
 		watch,
+		setValue,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			firstName: 'Shreyas',
-			lastName: 'kanzarkar',
-			NationalID: '7373727',
-			email: 'sksj@jsjs.com',
-			Hijari: true,
-			date: dayjs('2023-09-20') as unknown as Date,
-			gender: 'male',
-			file: [],
+			title: '',
+			description: '',
+			file:[],
+			startDateTime: dayjs('2022-04-17T15:35') as unknown as Date,
+			endDateTime: dayjs('2022-04-17T15:35') as unknown as Date,
 		},
 		resolver: yupResolver(schema),
 	});
-	const image = watch('file');
+	const file = watch('file');
 	const onSubmit = (data: any) => {
 		console.log('form data shreyas', data);
 	};
@@ -95,11 +87,15 @@ export default function CreateAdvertisement() {
 									<Text variant="h5">Banner</Text>{' '}
 								</Item>
 								<Item xs={10}>
-									<DragDropController name={'file'} control={control} />
+									<DragDropFile name={'file'} setValue={setValue} control={control} />
+									{/* <DragDropController name={'file'} control={control} /> */}
 									{/* <FileUploadController name={'file'} label={'file'} control={control}/> */}
 								</Item>
 								<Item xs={5}>
-									<TextInputController label={'Email'} name={'email'} control={control} />
+									<DateTimePickerController name="startDateTime" control={control} errors={errors} label="Start Date & Time" />
+								</Item>
+								<Item xs={5}>
+									<DateTimePickerController name="endDateTime" control={control} errors={errors} label="End Date & Time" />
 								</Item>
 							</Container>
 						</Item>
