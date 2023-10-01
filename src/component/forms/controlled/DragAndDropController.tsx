@@ -19,9 +19,9 @@ const DragDropController = ({ name, rules, control, errors, ...otherProps }: Che
 			name={name}
 			control={control}
 			rules={rules}
-			render={({ props }) => (
+			render={({ field: { onChange, value }  }) => (
 				<>
-					<DragDropFile  name={name} {...otherProps} {...props} />
+					<DragDropFile name={name} value={value} onChange={onChange} {...otherProps}  />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
 				</>
 			)}

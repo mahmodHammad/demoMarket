@@ -5,7 +5,7 @@ import { Button, ButtonProps, Grid, IconButton } from '@mui/material';
 import { useRef, useState } from 'react';
 import Delete from '@/assets/icons/Delete';
 
-const DragDropFile = ({ name, setValue, control }: { name: string; setValue: any; control: any }) => {
+const DragDropFile = ({ name, onChange, setValue }: { name: string; value?: any; onChange?: any; setValue?: any }) => {
 	const [files, setFiles] = useState([]);
 	const inputFile = useRef<HTMLInputElement | null>(null);
 	const onButtonClick = () => {
@@ -18,7 +18,8 @@ const DragDropFile = ({ name, setValue, control }: { name: string; setValue: any
 		const { files } = event.dataTransfer;
 		if (files.length > 0) {
 			setFiles([...files]);
-			setValue('file', [...files]);
+			// setValue('file', [...files]);
+			onChange([...files])
 		}
 	};
 
@@ -26,7 +27,8 @@ const DragDropFile = ({ name, setValue, control }: { name: string; setValue: any
 		const { files } = event.target;
 		if (files.length > 0) {
 			setFiles([...files]);
-			setValue('file', [...files]);
+			// setValue('file', [...files]);
+			onChange([...files])
 			return [...files];
 		}
 	};
@@ -76,7 +78,6 @@ const DragDropFile = ({ name, setValue, control }: { name: string; setValue: any
 							<input
 								id="file"
 								name={name}
-								control={control}
 								onChange={handleButtonUpload}
 								ref={inputFile}
 								hidden
