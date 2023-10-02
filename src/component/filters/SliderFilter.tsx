@@ -13,7 +13,7 @@ type Props = {
 const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
   const [value, setValue] = useState<number[]>(sliderValues);
 
-  const handleChange = (event: Event | null, newValue: number[] | number) => {
+  const handleChange = (_: Event | null, newValue: number[] | number) => {
     setValue(newValue as number[]);
   };
 
@@ -21,9 +21,11 @@ const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
     <Box mt={4} column gap={'12px'} ycenter>
       <Slider
         value={value}
+        min={+value[0]}
+        max={+value[1]}
         getAriaLabel={() => `${label} range`}
         onChange={handleChange}
-        onChangeCommitted={(event: React.SyntheticEvent | Event, value: number | number[]) =>
+        onChangeCommitted={(_: React.SyntheticEvent | Event, value: number | number[]) =>
           handleSliderChange(value as number[])
         }
       />
