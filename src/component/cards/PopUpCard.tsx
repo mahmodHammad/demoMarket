@@ -8,8 +8,15 @@ import { Box, Button, Text } from '@/wrappers';
 import Succesgreen from '@/assets/icons/Succesgreen';
 import { SuccessInfoIcon } from '@/assets';
 
-export default function PopUpCard({openPopup, setopenPopup}) {
+interface prop {
+	status: string;
+	title: string;
+	body: string;
+	openPopup: boolean;
+	setopenPopup: boolean;
+}
 
+export default function PopUpCard({ openPopup, setopenPopup, status, title, body }: prop) {
 	const handleClickOpen = () => {
 		setopenPopup(true);
 	};
@@ -31,14 +38,19 @@ export default function PopUpCard({openPopup, setopenPopup}) {
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description">
 				<Box column center height={'443px'} width={'557px'}>
-					<Box center height={'80px'} width={'80px'} borderRadius={'50%'} bgcolor={'#4caf50'}>
+					<Box
+						center
+						height={'80px'}
+						width={'80px'}
+						borderRadius={'50%'}
+						bgcolor={status === 'success' ? '#4caf50' : status === 'danger' ? '#f44336' : '#008EA5'}>
 						<Succesgreen></Succesgreen>
 					</Box>
 					<Text mt={'10px'} variant="h4">
-						Unit list Successful!
+						{title || 'Unit list Successful!'}
 					</Text>
-					<Text variant="body1">lorem ma lorem ma lorem ma lorem ma lorem ma </Text>
-					<Button onClick={handleClose} sx={{ mt: '80px', width: '300px' }} variant="success">
+					<Text variant="body1">{body || 'bodybodybody!'}</Text>
+					<Button onClick={handleClose} sx={{ mt: '80px', width: '300px' }} variant={status}>
 						Done
 					</Button>
 					<Button
