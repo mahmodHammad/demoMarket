@@ -29,11 +29,11 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 
 	const [budgetSliderValues, setBudgetSliderValues] = useState<number[]>([
 		(searchParams?.get('minBudget') as unknown as number) || 0,
-		(searchParams?.get('maxBudget') as unknown as number) || 100,
+		(searchParams?.get('maxBudget') as unknown as number) || 2000,
 	]);
 	const [areaSliderValues, setAreaSliderValues] = useState<number[]>([
 		(searchParams?.get('minArea') as unknown as number) || 0,
-		(searchParams?.get('maxArea') as unknown as number) || 100,
+		(searchParams?.get('maxArea') as unknown as number) || 200,
 	]);
 
 	const handleFiltersState = (filter: string, id: number) =>
@@ -104,6 +104,8 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 						<SliderFilter
 							label="Budget"
 							sliderValues={budgetSliderValues}
+							min={0}
+							max={2000}
 							handleSliderChange={(value: number[]) => setBudgetSliderValues(value)}
 						/>
 					)}
@@ -160,6 +162,8 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 						<SliderFilter
 							label="Area"
 							sliderValues={areaSliderValues}
+							min={0}
+							max={200}
 							handleSliderChange={(value: number[]) => setAreaSliderValues(value)}
 						/>
 					)}

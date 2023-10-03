@@ -8,9 +8,11 @@ type Props = {
   label: string;
   sliderValues: number[];
   handleSliderChange: (newValue: number[]) => void;
+  min?: number;
+  max?: number;
 };
 
-const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
+const SliderFilter = ({ label, sliderValues, handleSliderChange, min = 0, max = 100 }: Props) => {
   const [value, setValue] = useState<number[]>(sliderValues);
 
   const handleChange = (_: Event | null, newValue: number[] | number) => {
@@ -21,8 +23,8 @@ const SliderFilter = ({ label, sliderValues, handleSliderChange }: Props) => {
     <Box mt={4} column gap={'12px'} ycenter>
       <Slider
         value={value}
-        min={+value[0]}
-        max={+value[1]}
+        min={min}
+        max={max}
         getAriaLabel={() => `${label} range`}
         onChange={handleChange}
         onChangeCommitted={(_: React.SyntheticEvent | Event, value: number | number[]) =>
