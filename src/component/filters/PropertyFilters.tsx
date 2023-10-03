@@ -5,7 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { AccordionChipsFilter, Switch, CounterFilter, SliderFilter, TextInput } from '@/component';
 import { Box, Text, Button, Accordion } from '@/wrappers';
 import { IconButton } from '@mui/material';
-import { Close, SearchLine } from '@/assets';
+import { Close } from '@/assets';
+import { useTheme } from '@emotion/react';
 
 type Props = {
 	isMobileView?: boolean;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Props) => {
+	const theme: any = useTheme();
 	const searchParams = useSearchParams();
 
 	const [AccordionFilters, setAccordionFilters] = useState(FILTERS);
@@ -93,8 +95,6 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 							</Button>
 						)}
 					</Box>
-
-					{!isMobileView && <TextInput placeholder="Search" />}
 				</Box>
 
 				<Accordion
@@ -113,13 +113,10 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 					defaultExpanded={!isMobileView}
 					header="Location"
 					filterName="location"
-					filters={AccordionFilters.location}
+					filters={[...AccordionFilters.location, ...AccordionFilters.location, ...AccordionFilters.location]}
 					onFilterStateChange={handleFiltersState}
-					moreContent={
-						<Button startIcon={<SearchLine />} sx={{ width: { xs: 0.4, md: 0.28 }, p: 0, py: 0.5 }} variant="text">
-							More Location
-						</Button>
-					}
+					headerContent={<TextInput placeholder="Search" sx={{ width: 0.98, alignSelf: 'center', my: 1 }} />}
+					sx={locationContainerStyle(theme)}
 				/>
 
 				<AccordionChipsFilter
@@ -346,3 +343,19 @@ const FILTERS = {
 		},
 	],
 };
+
+const locationContainerStyle = (theme: any) => ({
+	maxHeight: 250,
+	flexWrap: 'nowrap',
+	overflowY: 'auto',
+	overflowX: 'clip',
+	'&::-webkit-scrollbar': {
+		width: '8px',
+		backgroundColor: '#1F448B14',
+		borderRadius: 16,
+	},
+	'&::-webkit-scrollbar-thumb': {
+		backgroundColor: theme.palette.primary.main,
+		borderRadius: 16,
+	},
+});
