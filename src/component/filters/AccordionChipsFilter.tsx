@@ -1,43 +1,57 @@
 import React from 'react';
-import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
-import { Accordion, Chip } from '@/wrappers';
+import { FormGroup, FormControlLabel, Checkbox, SxProps } from '@mui/material';
+import { Accordion, Box, Chip } from '@/wrappers';
 
 type Filter = {
-  id: number;
-  label: string;
-  checked: boolean;
+	id: number;
+	label: string;
+	checked: boolean;
 };
 
 type Props = {
-  header: string;
-  filterName: string;
-  filters: Filter[];
-  onFilterStateChange: (filterName: string, id: number) => void;
-  defaultExpanded?: boolean;
-  moreContent?: any;
+	header: string;
+	filterName: string;
+	filters: Filter[];
+	onFilterStateChange: (filterName: string, id: number) => void;
+	defaultExpanded?: boolean;
+	sx?: SxProps;
+	headerContent?: any;
+	footerContent?: any;
 };
 
-const AccordionChipsFilter = ({ header, filterName, filters, onFilterStateChange, defaultExpanded = true, ...props }: Props) => {
-  return (
-    <Accordion
-      defaultExpanded={defaultExpanded}
-      header={header}
-      Content={() => (
-        <FormGroup sx={{ ml: '9px' }}>
-          {filters?.map((filter) => (
-            <FormControlLabel
-              key={filter.id}
-              control={
-                <Checkbox checked={filter.checked} onChange={() => onFilterStateChange(filterName, filter.id)} />
-              }
-              label={<Chip label={filter.label} checked={filter.checked} />}
-            />
-          ))}
-          {props.moreContent}
-        </FormGroup>
-      )}
-    />
-  );
+const AccordionChipsFilter = ({
+	header,
+	filterName,
+	filters,
+	onFilterStateChange,
+	defaultExpanded = true,
+	sx = {},
+	...props
+}: Props) => {
+	return (
+		<Accordion
+			defaultExpanded={defaultExpanded}
+			header={header}
+			Content={() => (
+				<Box column width={1}>
+					{props.headerContent}
+					<FormGroup sx={{ ml: '9px', ...sx }}>
+						{filters?.map((filter) => (
+							<FormControlLabel
+							sx={{width: 1}}
+								key={filter.id}
+								control={
+									<Checkbox checked={filter.checked} onChange={() => onFilterStateChange(filterName, filter.id)} />
+								}
+								label={<Chip label={filter.label} checked={filter.checked}  />}
+							/>
+						))}
+					</FormGroup>
+					{props.footerContent}
+				</Box>
+			)}
+		/>
+	);
 };
 
 export default AccordionChipsFilter;
