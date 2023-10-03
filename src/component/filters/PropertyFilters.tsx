@@ -19,6 +19,9 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 
 	const [AccordionFilters, setAccordionFilters] = useState(FILTERS);
 
+	const [locationSearch, setLocationSearch] = useState<string>(
+		(searchParams?.get('locationSearch') as unknown as string) || '',
+	);
 	const [noOfBedrooms, setNoOfBedrooms] = useState<number>((searchParams?.get('bedrooms') as unknown as number) || 0);
 	const [noOfBathrooms, setNoOfBathrooms] = useState<number>(
 		(searchParams?.get('bathrooms') as unknown as number) || 0,
@@ -66,9 +69,18 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 		newSearchParams.set('minArea', areaSliderValues[0].toString());
 		newSearchParams.set('maxArea', areaSliderValues[1].toString());
 		newSearchParams.set('pet', petFriendly ? '1' : '0');
+		newSearchParams.set('locationSearch', locationSearch.toString());
 
 		window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams.toString()}`);
-	}, [noOfBedrooms, noOfBathrooms, budgetSliderValues, areaSliderValues, petFriendly, AccordionFilters]);
+	}, [
+		noOfBedrooms,
+		noOfBathrooms,
+		budgetSliderValues,
+		areaSliderValues,
+		petFriendly,
+		AccordionFilters,
+		locationSearch,
+	]);
 
 	return (
 		<Box
@@ -117,7 +129,14 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 					filterName="location"
 					filters={[...AccordionFilters.location, ...AccordionFilters.location, ...AccordionFilters.location]}
 					onFilterStateChange={handleFiltersState}
-					headerContent={<TextInput placeholder="Search" sx={{ width: 0.98, alignSelf: 'center', my: 1 }} />}
+					headerContent={
+						<TextInput
+							value={locationSearch}
+							onChange={(e) => setLocationSearch(e.target.value)}
+							placeholder="Search"
+							sx={{ width: 0.98, alignSelf: 'center', my: 1 }}
+						/>
+					}
 					sx={locationContainerStyle(theme)}
 				/>
 
