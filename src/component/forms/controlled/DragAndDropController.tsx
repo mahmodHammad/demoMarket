@@ -6,14 +6,14 @@ import { Text } from '@/wrappers';
 import DragDropFile from '../DragDropFile';
 
 
-type CheckboxControllerProps = Omit<ButtonProps, 'name'> &
+type DragDropControllerProps = Omit<ButtonProps, 'name'> &
 	Omit<UseControllerProps<FieldValues>, 'control'> & {
 		name: string;
 		control: any;
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const DragDropController = ({ name, rules, control, errors, ...otherProps }: CheckboxControllerProps) => {
+const DragDropController = ({ name, rules, control, errors, ...otherProps }: DragDropControllerProps) => {
 	return (
 		<Controller
 			name={name}

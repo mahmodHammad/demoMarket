@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import dayjs from 'dayjs';
 import DragDropFile from '@/component/forms/DragDropFile';
 import DateTimePickerController from '@/component/forms/controlled/DateTimePickerController';
+import DragDropController from '@/component/forms/controlled/DragAndDropController';
 
 const schema = yup.object().shape({
 	title: yup.string().required('Title is required'),
@@ -72,7 +73,7 @@ export default function CreateAdvertisement() {
 									<Text variant="h5">Banner</Text>{' '}
 								</Item>
 								<Item xs={10}>
-									<DragDropFile name={'file'} setValue={setValue} control={control} />
+									<DragDropController name="file" control={control} errors={errors} />
 								</Item>
 								<Item xs={5}>
 									<DateTimePickerController
