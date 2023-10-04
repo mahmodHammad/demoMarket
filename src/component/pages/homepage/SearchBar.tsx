@@ -18,7 +18,7 @@ import {
 	Slider,
 	TextField,
 } from '@mui/material';
-import { Location, Search } from '@/assets';
+import { Location, SearchIcon } from '@/assets';
 import theme from '@/ThemeRegistry/theme';
 
 function valuetext(value: number) {
@@ -336,7 +336,12 @@ const SearchBar = () => {
 					borderRadius={{ xs: '8px', md: '15px' }}
 					center>
 					<IconButton component={Link} aria-label="delete" size="small" href="/listingpage">
-						<Search />
+						<SearchIcon
+							sx={{
+								stroke: 'white',
+								color: 'white',
+							}}
+						/>
 					</IconButton>
 				</Box>
 			</Box>

@@ -1,57 +1,55 @@
 import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Box, Button, Text } from '@/wrappers';
-import Succesgreen from '@/assets/icons/Succesgreen';
-import { SuccessInfoIcon } from '@/assets';
+import { Box, Text } from '@/wrappers';
+import { useState } from 'react';
+import { Button } from '@mui/material';
 
 interface prop {
-	status: string;
+	color: string;
+	icon: any;
 	title: string;
 	body: string;
+	button1: string;
+	button2: string;
 	openPopup: boolean;
 	setopenPopup: boolean;
 }
 
-export default function PopUpCard({ openPopup, setopenPopup, status, title, body }: prop) {
+export default function PopUpCard({ openPopup, setopenPopup, color, title, body, button1, button2, icon }: prop) {
+	const [open, setOpen] = React.useState(false);
+
 	const handleClickOpen = () => {
-		setopenPopup(true);
+		setOpen(true);
 	};
 
 	const handleClose = () => {
-		setopenPopup(false);
+		setOpen(false);
 	};
 
 	return (
 		<div>
 			<Button variant="outlined" onClick={handleClickOpen}>
-				Open alert dialog
+				Open alert dialogg
 			</Button>
 
 			<Dialog
 				sx={{ borderRadius: '16px' }}
-				open={openPopup}
+				open={open}
 				onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description">
 				<Box column center height={'443px'} width={'557px'}>
-					<Box
-						center
-						height={'80px'}
-						width={'80px'}
-						borderRadius={'50%'}
-						bgcolor={status === 'success' ? '#4caf50' : status === 'danger' ? '#f44336' : '#008EA5'}>
-						<Succesgreen></Succesgreen>
+					<Box center height={'80px'} width={'80px'} borderRadius={'50%'} bgcolor={color}>
+						{icon}
 					</Box>
 					<Text mt={'10px'} variant="h4">
 						{title || 'Unit list Successful!'}
 					</Text>
 					<Text variant="body1">{body || 'bodybodybody!'}</Text>
-					<Button onClick={handleClose} sx={{ mt: '80px', width: '300px' }} variant={status}>
-						Done
+					<Button
+						onClick={handleClose}
+						sx={{ color: 'white', background: color, backgroundColor: color, mt: '80px', width: '300px' }}>
+						{button1}
 					</Button>
 					<Button
 						onClick={handleClose}
@@ -65,22 +63,9 @@ export default function PopUpCard({ openPopup, setopenPopup, status, title, body
 							},
 						}}
 						variant="text">
-						View On Market
+						{button2}
 					</Button>
 				</Box>
-				{/* <DialogTitle  id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-				<DialogContent>
-					<DialogContentText id="alert-dialog-description">
-						Let Google help apps determine location. This means sending anonymous location data to Google, even when no
-						apps are running.
-					</DialogContentText>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose}>Disagree</Button>
-					<Button onClick={handleClose} autoFocus>
-						Agree
-					</Button>
-				</DialogActions> */}
 			</Dialog>
 		</div>
 	);
