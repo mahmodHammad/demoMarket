@@ -1,6 +1,7 @@
 'use client';
 
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { AccordionChipsFilter, Switch, CounterFilter, SliderFilter, TextInput } from '@/component';
 import { Box, Text, Button, Accordion } from '@/wrappers';
 import { IconButton } from '@mui/material';
@@ -14,15 +15,29 @@ type Props = {
 
 const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Props) => {
 	const theme: any = useTheme();
+	const searchParams = useSearchParams();
 
 	const [AccordionFilters, setAccordionFilters] = useState(FILTERS);
 
-	const [noOfBedrooms, setNoOfBedrooms] = useState<number>(0);
-	const [noOfBathrooms, setNoOfBathrooms] = useState<number>(0);
-	const [petFriendly, setPetFriendly] = useState<boolean>(true);
+	const [locationSearch, setLocationSearch] = useState<string>(
+		(searchParams?.get('locationSearch') as unknown as string) || '',
+	);
+	const [noOfBedrooms, setNoOfBedrooms] = useState<number>((searchParams?.get('bedrooms') as unknown as number) || 0);
+	const [noOfBathrooms, setNoOfBathrooms] = useState<number>(
+		(searchParams?.get('bathrooms') as unknown as number) || 0,
+	);
+	const [petFriendly, setPetFriendly] = useState<boolean>(
+		(searchParams?.get('pet') as unknown as number) == 1 || false,
+	);
 
-	const [budgetSliderValues, setBudgetSliderValues] = useState<number[]>([0, 100]);
-	const [areaSliderValues, setAreaSliderValues] = useState<number[]>([0, 100]);
+	const [budgetSliderValues, setBudgetSliderValues] = useState<number[]>([
+		(searchParams?.get('minBudget') as unknown as number) || 0,
+		(searchParams?.get('maxBudget') as unknown as number) || 2000,
+	]);
+	const [areaSliderValues, setAreaSliderValues] = useState<number[]>([
+		(searchParams?.get('minArea') as unknown as number) || 0,
+		(searchParams?.get('maxArea') as unknown as number) || 200,
+	]);
 
 	const handleFiltersState = (filter: string, id: number) =>
 		setAccordionFilters((prev: any) => ({
@@ -31,7 +46,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 		}));
 
 	useEffect(() => {
-		const params = {
+		const filtersState = {
 			noOfBedrooms,
 			noOfBathrooms,
 			petFriendly,
@@ -44,8 +59,28 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 			dateListed: AccordionFilters.dateListed.filter((f) => f.checked).map((f) => f.id),
 			availability: AccordionFilters.availability.filter((f) => f.checked).map((f) => f.id),
 		};
-		console.log('params', params);
-	}, [noOfBedrooms, noOfBathrooms, budgetSliderValues, areaSliderValues, petFriendly, AccordionFilters]);
+
+		const newSearchParams = new URLSearchParams(searchParams?.toString());
+
+		newSearchParams.set('bedrooms', noOfBedrooms.toString());
+		newSearchParams.set('bathrooms', noOfBathrooms.toString());
+		newSearchParams.set('minBudget', budgetSliderValues[0].toString());
+		newSearchParams.set('maxBudget', budgetSliderValues[1].toString());
+		newSearchParams.set('minArea', areaSliderValues[0].toString());
+		newSearchParams.set('maxArea', areaSliderValues[1].toString());
+		newSearchParams.set('pet', petFriendly ? '1' : '0');
+		newSearchParams.set('locationSearch', locationSearch.toString());
+
+		window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams.toString()}`);
+	}, [
+		noOfBedrooms,
+		noOfBathrooms,
+		budgetSliderValues,
+		areaSliderValues,
+		petFriendly,
+		AccordionFilters,
+		locationSearch,
+	]);
 
 	return (
 		<Box
@@ -81,6 +116,8 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 						<SliderFilter
 							label="Budget"
 							sliderValues={budgetSliderValues}
+							min={0}
+							max={2000}
 							handleSliderChange={(value: number[]) => setBudgetSliderValues(value)}
 						/>
 					)}
@@ -92,7 +129,14 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 					filterName="location"
 					filters={[...AccordionFilters.location, ...AccordionFilters.location, ...AccordionFilters.location]}
 					onFilterStateChange={handleFiltersState}
-					headerContent={<TextInput placeholder="Search" sx={{ width: 0.98, alignSelf: 'center', my: 1 }} />}
+					headerContent={
+						<TextInput
+							value={locationSearch}
+							onChange={(e) => setLocationSearch(e.target.value)}
+							placeholder="Search"
+							sx={{ width: 0.98, alignSelf: 'center', my: 1 }}
+						/>
+					}
 					sx={locationContainerStyle(theme)}
 				/>
 
@@ -137,6 +181,8 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 						<SliderFilter
 							label="Area"
 							sliderValues={areaSliderValues}
+							min={0}
+							max={200}
 							handleSliderChange={(value: number[]) => setAreaSliderValues(value)}
 						/>
 					)}
@@ -155,7 +201,7 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 						Pet-Friendly
 					</Text>
 					<Switch
-						value={petFriendly}
+						checked={petFriendly}
 						onChange={(_: ChangeEvent<HTMLInputElement>, checked: boolean) => setPetFriendly(checked)}
 					/>
 				</Box>
