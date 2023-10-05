@@ -36,6 +36,8 @@ const NotificationCard = ({ title, content, read, date }: Props) => {
 							<NotificationIcon
 								sx={{
 									color: 'white',
+									fill: 'white',
+									strock: 'white',
 								}}
 							/>
 						</Avatar>{' '}

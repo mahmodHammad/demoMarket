@@ -34,7 +34,13 @@ const Properties = () => {
 
 	return (
 		<>
-			<PopUpCard openPopup={openPopup} setopenPopup={setopenPopup} />
+			<PopUpCard
+				status={'success'}
+				title={'unit listed'}
+				body={'this is the body'}
+				openPopup={openPopup}
+				setopenPopup={setopenPopup}
+			/>
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Properties List</Text>
