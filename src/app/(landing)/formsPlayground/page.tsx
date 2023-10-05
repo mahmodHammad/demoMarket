@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import dayjs, { Dayjs } from 'dayjs';
+import DragDropController from '@/component/forms/controlled/DragAndDropController';
 
 const schema = yup.object().shape({
 	firstName: yup.string().required('First Name required'),
@@ -31,7 +32,8 @@ const schema = yup.object().shape({
 	date: yup.date().required('Date required'),
 	time: yup.date().required('Time required'),
 	dateTime: yup.date().required('Date & Time required'),
-	phone: yup.object().required('Phone required'), // 9
+	// phone: yup.object().required('Phone required'), // 9
+	banner: yup.array().nullable().required('Banner file required'),
 });
 
 export default function FormsPlayground() {
@@ -94,7 +96,9 @@ export default function FormsPlayground() {
 
 				<DateTimePicker name="dateTime" control={control} errors={errors} label="Date Time picker" />
 
-				<PhoneInput name="phone" control={control} errors={errors} />
+				{/* <PhoneInput name="phone" control={control} errors={errors} /> */}
+
+				<DragDropController name="banner" control={control} errors={errors} />
 			</Box>
 
 			<Box sx={{ width: 0.2, ml: 8 }} column gap={3}>

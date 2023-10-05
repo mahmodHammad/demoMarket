@@ -12,6 +12,9 @@ const TextInput = (props: TextFieldProps) => {
 					height: { md: '46px', xs: '40px' },
 					fontSize: { md: '15px', xs: '11.8px' },
 					background: `${props?.disabled ? '#F0F0F0' : ''}`,
+					'&.MuiInputBase-multiline': {
+						height: '100px !important',
+					},
 				},
 			}}
 			{...props}

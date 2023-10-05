@@ -1,5 +1,4 @@
 import { Button, ButtonProps } from '@mui/material';
-
 const FileUpload = (props: ButtonProps) => {
 	return (
 		<Button component="label" variant="outlined" {...props}>
