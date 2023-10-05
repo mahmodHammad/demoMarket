@@ -2,14 +2,15 @@
 
 import { Box, Button, Container, Item, Text } from '@/wrappers';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import signupimg from '@/assets/images/herobg.png';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { PhoneInputController, TextInputController } from '@/component';
+import { OTPInput, PhoneInputController, TextInputController } from '@/component';
 import { RadioGroupController as RadioGroup } from '@/component';
 import theme from '@/ThemeRegistry/theme';
+import OTPModal from '@/component/modals/OTPModal';
 
 const schema = yup.object().shape({
 	fullName: yup.string().required('Full Name is required'),
@@ -58,9 +59,15 @@ const Signup = () => {
 		resolver: yupResolver(schema),
 	});
 
+	const [isOpen, setIsOpen] = useState(false);
+
 	const onSubmit = (data: any) => {
 		console.log('form data', data);
+		if (data?.number?.length) {
+			setIsOpen(true);
+		}
 	};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Container sx={{ height: '100%' }}>
@@ -148,7 +155,7 @@ const Signup = () => {
 							</Container>
 						</Box>
 
-						<Container spacing={2} center>
+						<Container>
 							<Item xs={12} md={7}>
 								<Text variant="small" gray align="left" mt="18px">
 									By proceeding to create your account, you are agreeing to our
@@ -156,19 +163,13 @@ const Signup = () => {
 								</Text>
 							</Item>
 
-							<Item xs={12} md={5}>
+							<Item xs={12} md={12}>
 								<Button type="submit" variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
 									sign up
 								</Button>
 							</Item>
 						</Container>
-
-						{/* <Text mt="24px">
-							Already have an account?{' '}
-							<Text component={'span'} sx={{ display: 'inline' }} color="primary" bold>
-								Sign in
-							</Text>
-						</Text> */}
+						{isOpen && <OTPModal isOpen={isOpen} setIsOpen={setIsOpen} mobile={'111'} />}
 					</Box>
 				</Item>
 			</Container>
