@@ -34,7 +34,7 @@ export default function UnitsCard({
 	toggleLike,
 	imgHeight = '237px',
 	width = '100%',
-	height = '',
+	height = 'inherit',
 	buttonName = 'View Details',
 	onClick,
 }: Props) {
@@ -43,7 +43,7 @@ export default function UnitsCard({
 			relative
 			sx={{
 				width: width,
-				height: { xs: '', md: height },
+				height: { xs: height, md: height },
 				// position: "relative",
 				// overflow: "hidden",
 				borderRadius: '16px',
@@ -217,8 +217,7 @@ export default function UnitsCard({
 							alignItems: 'center',
 
 							fontSize: { xs: '12px', md: '14px' },
-						}}
-						>
+						}}>
 						{buttonName}
 					</Button>
 				) : (
