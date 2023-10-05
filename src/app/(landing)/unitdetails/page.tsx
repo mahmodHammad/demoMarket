@@ -1,5 +1,5 @@
 'use client';
-import { AtarColoredLogo, FrontSide, GroundFloor, Room } from '@/assets';
+import { AtarColoredLogo, FrontSide, GroundFloor, Room, slides } from '@/assets';
 import {
 	AboutUnit,
 	BuyNowCard,
@@ -18,11 +18,15 @@ import 'yet-another-react-lightbox/styles.css';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
+import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 
 import photo1 from '@/assets/images/photo1.png';
 import photo2 from '@/assets/images/photo2.png';
 import photo3 from '@/assets/images/photo3.png';
 import Image from 'next/image';
+
+import PhotoAlbum from 'react-photo-album';
 
 import { Box, Button } from '@/wrappers';
 
@@ -37,29 +41,13 @@ const images = [
 	photo1,
 	photo2,
 	photo3,
+	photo3,
+	photo3,
+	photo3,
+	photo3,
+	photo3,
 	// ...
 ];
-
-const imageSizes = [16, 32, 48, 64, 96, 128, 256, 384];
-const deviceSizes = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
-
-function nextImageUrl(src, size) {
-	return `/_next/image?url=${encodeURIComponent(src)}&w=${size}&q=75`;
-}
-
-const slides = images.map(({ src, width, height }) => ({
-	width,
-	height,
-	src: nextImageUrl(src, width),
-	srcSet: imageSizes
-		.concat(...deviceSizes)
-		.filter((size) => size <= width)
-		.map((size) => ({
-			src: nextImageUrl(src, size),
-			width: size,
-			height: Math.round((height / width) * size),
-		})),
-}));
 
 interface Props {
 	id?: string;
@@ -95,6 +83,7 @@ export default function page({
 	map,
 }: Props) {
 	const [open, setOpen] = React.useState(false);
+	const [index, setIndex] = React.useState(-1);
 
 	return (
 		<>
@@ -102,18 +91,24 @@ export default function page({
 				<Grid container spacing={3} sx={{ mt: '5px', pt: '26px' }} mb={1}>
 					<Box column>
 						<QuiltedImageList />
-						<Button type="button" onClick={() => setOpen(true)}>
-							Open Lightbox
-						</Button>
 
-						{/* <Lightbox
-							open={open}
-							close={() => setOpen(false)}
-							slides={[photo1, photo1, photo1]}
-							// render={{ slide: , thumbnail: NextJsImage }}
-							plugins={[Thumbnails]}
-						/> */}
-						<Lightbox open={open} close={() => setOpen(false)} slides={slides} plugins={[Zoom, Thumbnails]} />
+						<PhotoAlbum
+							layout="rows"
+							photos={images}
+							targetRowHeight={150}
+							onClick={({ index: current }) => setIndex(current)}
+						/>
+
+						<Lightbox
+							styles={{
+								container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
+							}}
+							plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+							index={index}
+							slides={images}
+							open={index >= 0}
+							close={() => setIndex(-1)}
+						/>
 					</Box>
 
 					<Grid item xs={12} md={8} height={'100hv'}>

@@ -57,9 +57,9 @@ const Properties = () => {
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Properties List</Text>
 					<Box row>
-						<Button variant="outlined" component={Link} href="/properties">
+						{/* <Button variant="outlined" component={Link} href="/properties">
 							Select Multiple
-						</Button>
+						</Button> */}
 					</Box>
 				</Box>
 

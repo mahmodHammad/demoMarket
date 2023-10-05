@@ -33,3 +33,4 @@ export { default as FilledHeart } from './icons/FilledHeart';
 export { default as SearchLine } from './icons/SearchLine';
 export { default as SearcSuccesgreenhLine } from './icons/Succesgreen';
 export { default as FilterIcon } from './icons/FilterIcon';
+export { default as slides } from './images/slides';
