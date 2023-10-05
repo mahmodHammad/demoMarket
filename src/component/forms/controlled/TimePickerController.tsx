@@ -12,7 +12,7 @@ type TimePickerControllerProps = Omit<TimePickerProps<Date>, 'name'> &
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
-const TimePickerController = ({ name, rules, control, errors, ...otherProps }: TimePickerControllerProps) => {
+const TimePickerController = ({ name, rules, control, errors, disabled, label, ...otherProps }: TimePickerControllerProps) => {
 	return (
 		<Controller
 			name={name}
@@ -20,6 +20,9 @@ const TimePickerController = ({ name, rules, control, errors, ...otherProps }: T
 			rules={rules}
 			render={({ field }) => (
 				<>
+					<Text variant="caption" sx={{ mb: '10px', color: `${disabled ? '#CACACA' : ''}` }}>
+						{label}
+					</Text>
 					<TimePicker {...field} {...otherProps} />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
 				</>

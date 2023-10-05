@@ -100,7 +100,7 @@ const Signup = () => {
 
 						<Box sx={{ mt: '24px' }}>
 							<Container spacing={2}>
-								<Item xs={6}>
+								<Item xs={12}>
 									<TextInputController
 										placeholder="Enter your Full Name"
 										label={'Full Name'}
@@ -108,7 +108,7 @@ const Signup = () => {
 										control={control}
 									/>
 								</Item>
-								<Item xs={6}>
+								<Item xs={12}>
 									<TextInputController
 										placeholder="Enter your Phone number"
 										label={'Phone number'}
@@ -136,7 +136,7 @@ const Signup = () => {
 								<Item md={6.1} xs={8.1}>
 									<RadioGroup name="gender" label="Gender" options={RADIO_OPTIONS} control={control} errors={errors} />
 								</Item>
-								<Item xs={12} md={9}>
+								{/* <Item xs={12} md={9}>
 									<RadioGroup
 										name="intrested"
 										label="Intrested To"
@@ -144,7 +144,7 @@ const Signup = () => {
 										control={control}
 										errors={errors}
 									/>
-								</Item>
+								</Item> */}
 							</Container>
 						</Box>
 
