@@ -82,8 +82,8 @@ const SearchBar = () => {
 	};
 
 	return (
-		<Box sx={{ mt: { xs: '20px ', md: '60px' }, width: { xs: '100%' } }}>
-			<Box row width={'100%'}>
+		<Box sx={{ mt: { xs: '20px ', md: '60px' }, width: { xs: '100%', md: 'initial' } }}>
+			<Box row>
 				<ButtonBase onClick={handleClick}>
 					<Box
 						center
