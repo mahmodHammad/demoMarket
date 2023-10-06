@@ -8,7 +8,7 @@ import ForSale from '@/component/ForSale';
 import neibourhoodcover2 from '@/assets/images/Rectangle 45351.png';
 import UpcomingVisitPlaceholder from '@/assets/icons/UpcomingVisitPlaceholder';
 import UpcomingVisitsCard from '@/component/cards/UpcomingVisitsCard';
-import {data} from './mock'
+import { data } from './mock'
 
 export default function MyBookings() {
 	const [loading, setLoading] = useState<boolean>(false);
