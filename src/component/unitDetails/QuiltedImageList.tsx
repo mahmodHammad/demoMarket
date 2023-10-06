@@ -8,8 +8,9 @@ import photo2 from '@/assets/images/photo2.png';
 import photo3 from '@/assets/images/photo3.png';
 import Image from 'next/image';
 import { Box } from '@/wrappers';
-import { Grid } from '@mui/material';
+import { Grid, ImageListItemBar } from '@mui/material';
 import Carousel from '../Carousel';
+import { Label } from '../table/Table';
 
 export default function QuiltedImageList() {
 	const itemData = [
@@ -35,6 +36,8 @@ export default function QuiltedImageList() {
 		},
 	];
 
+	const imagesLength = [1, 2, 3];
+
 	return (
 		<>
 			<Grid container item xs={12} sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -58,6 +61,24 @@ export default function QuiltedImageList() {
 								}}
 								alt={itemData[index].title}
 							/>
+							{index === imagesLength?.length - 1 && (
+								<ImageListItemBar
+									sx={{ background: 'transparent', margin: '25px 15px' }}
+									actionIcon={
+										<span
+											style={{
+												color: '#00697A',
+												backgroundColor: '#EBF6F8',
+												borderRadius: 50,
+												padding: '10px',
+												fontWeight: 500,
+												cursor: 'pointer',
+											}}>
+											View more
+										</span>
+									}
+								/>
+							)}
 						</ImageListItem>
 					))}
 				</ImageList>
