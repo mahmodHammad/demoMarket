@@ -6,6 +6,7 @@ import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
 import ForSale from '@/component/ForSale';
 import neibourhoodcover2 from '@/assets/images/Rectangle 45351.png';
+import UpcomingVisitPlaceholder from '@/assets/icons/UpcomingVisitPlaceholder';
 import UpcomingVisitsCard from '@/component/cards/UpcomingVisitsCard';
 
 export default function MyBookings() {

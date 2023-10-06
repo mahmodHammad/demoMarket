@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import FeaturesAndAmenities from "./FeaturesAndAmenities";
 
 interface proptypes {
-  Feature: [{ title: string; icon: React.ElementType }];
+  Feature: [{ title: string; icon: React.ElementType; value?: string | number | boolean | null}];
 }
 // React.ReactNode;
 export default function Features({ Feature }: proptypes) {
@@ -18,7 +18,7 @@ export default function Features({ Feature }: proptypes) {
       <Grid container>
         {Feature.map((d, index) => (
           <Grid item key={index}>
-            <FeaturesAndAmenities title={d.title} icon={d.icon} />
+            <FeaturesAndAmenities title={d.title} icon={d.icon} value={d.value} />
           </Grid>
         ))}
       </Grid>
