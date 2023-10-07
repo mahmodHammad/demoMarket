@@ -29,11 +29,6 @@ export default function QuiltedImageList() {
 			rows: 2,
 			cols: 4,
 		},
-		{
-			img: photo3,
-			rows: 2,
-			cols: 4,
-		},
 	];
 
 	const imagesLength = [1, 2, 3];

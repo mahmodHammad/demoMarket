@@ -48,7 +48,16 @@ export default function PopUpCard({ openPopup, setopenPopup, color, title, body,
 					<Text variant="body1">{body || 'bodybodybody!'}</Text>
 					<Button
 						onClick={handleClose}
-						sx={{ color: 'white', background: color, backgroundColor: color, mt: '80px', width: '300px' }}>
+						sx={{
+							color: 'white',
+							background: color,
+							backgroundColor: color,
+							mt: '80px',
+							width: '300px',
+							'&:hover': {
+								backgroundColor: color,
+							},
+						}}>
 						{button1}
 					</Button>
 					<Button
