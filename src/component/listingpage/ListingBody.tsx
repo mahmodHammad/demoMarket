@@ -46,10 +46,10 @@ const DATA = [
 type Props = {
   isMobileView?: boolean;
   openFilterOnMobileView?: () => void;
+  data:any
 };
 
-const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
-  const [data, setData] = useState(DATA);
+const listingBody = ({isMobileView, openFilterOnMobileView, data}: Props) => {
   return (
       <Box column fullWidth>
         <Text variant="h4">Properties in Saudi Arabia</Text>
@@ -79,15 +79,15 @@ const listingBody = ({isMobileView, openFilterOnMobileView}: Props) => {
           {data?.map((d, index) => (
             <Grid item xs={12} md={6} key={index}>
               <UnitsCard
-                id={+d?.id}
-                title={d?.title}
-                img={d?.img}
+                id={d?.id}
+                title={d?.name}
+                img={neibourhoodcover2}
                 // link={d?.link}
                 price={d?.price}
-                area={d?.area}
-                location={d?.location}
+                area={d?.maps?.districtName}
+                location={d?.maps?.formattedAddress}
                 liked={d?.liked}
-                toggleLike={id => setData(prev => prev.map((d: any) => +d.id === +id ? ({...d, liked: !d.liked}) : d))}
+                toggleLike={id => setData(prev => prev.map((d: any) => d.id === id ? ({...d, liked: !d.liked}) : d))}
               />
             </Grid>
           ))}
