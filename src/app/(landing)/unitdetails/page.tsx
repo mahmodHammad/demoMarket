@@ -1,5 +1,5 @@
 'use client';
-import { AtarColoredLogo, FrontSide, GroundFloor, Room, slides } from '@/assets';
+import { AtarColoredLogo, FrontSide, GroundFloor, Room } from '@/assets';
 import {
 	AboutUnit,
 	BuyNowCard,
@@ -24,18 +24,19 @@ import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 import photo1 from '@/assets/images/photo1.png';
 import photo2 from '@/assets/images/photo2.png';
 import photo3 from '@/assets/images/photo3.png';
-import Image from 'next/image';
 
 import PhotoAlbum from 'react-photo-album';
 
-import { Box, Button } from '@/wrappers';
+import { Box } from '@/wrappers';
 
-const data = [
-	{ title: 'Pool', icon: <Room /> },
-	{ title: 'Room', icon: <FrontSide /> },
-	{ title: 'Front Side', icon: <GroundFloor /> },
-	{ title: 'Pool', icon: <Room /> },
-	{ title: 'Pool', icon: <Room /> },
+import { data } from './mock';
+
+const amenityData = [
+	{ title: 'Pool', icon: <Room />, value: data?.data?.data?.ac_type },
+	{ title: 'Room', icon: <FrontSide />, value: data?.data?.data?.floor },
+	{ title: 'Front Side', icon: <GroundFloor />, value: data?.data?.data?.bathrooms },
+	{ title: 'Pool', icon: <Room />, value: data?.data?.data?.bedrooms },
+	{ title: 'Pool', icon: <Room />, value: data?.data?.data?.lounges },
 ];
 const images = [
 	photo1,
@@ -121,8 +122,8 @@ export default function page({
 									}}
 								/>
 							}
-							title={propertyName || 'Property Name'}
-							location={location || 'Location'}
+							title={data?.data?.name || 'Property Name'}
+							location={data?.data?.locationable?.name || 'Location'}
 						/>
 						<ConstructionStatus
 							logo={
@@ -145,16 +146,22 @@ export default function page({
 						/>
 
 						<Grid item xs={12} md={4} display={{ xs: 'flex', md: 'none' }} mt={3}>
-							<BuyNowCard price={rentPrice || 'SAR 50000'} PriceType={rentType || 'monthly'} />
+							<BuyNowCard
+								price={data?.data?.active_lease?.annual_rent || 'SAR 50000'}
+								PriceType={rentType || 'monthly'}
+							/>
 						</Grid>
 
 						<FloorPlans />
-						<Features Feature={data} />
+						<Features Feature={amenityData} />
 						<UnitMap location={location} />
 					</Grid>
 
 					<Grid item xs={12} md={4} height={'518px'} display={{ xs: 'none', md: 'flex' }}>
-						<BuyNowCard price={rentPrice || 'SAR 50000'} PriceType={rentType || 'monthly'} />
+						<BuyNowCard
+							price={'SAR ' + data?.data?.active_lease?.annual_rent || 'SAR 50000'}
+							PriceType={rentType || 'monthly'}
+						/>
 					</Grid>
 				</Grid>
 			</Container>

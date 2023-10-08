@@ -6,7 +6,9 @@ import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
 import ForSale from '@/component/ForSale';
 import neibourhoodcover2 from '@/assets/images/Rectangle 45351.png';
+import UpcomingVisitPlaceholder from '@/assets/icons/UpcomingVisitPlaceholder';
 import UpcomingVisitsCard from '@/component/cards/UpcomingVisitsCard';
+import { data } from './mock'
 
 export default function MyBookings() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -61,7 +63,7 @@ export default function MyBookings() {
 				<Table
 					headers={HEADERS}
 					cellsTypes={CELLS_TYPES}
-					data={DATA}
+					data={data?.data?.data}
 					filterValues={FilterValues}
 					loading={loading}
 					search={search}
@@ -91,24 +93,20 @@ const DATA = [
 	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
 ];
 
-const HEADERS = ['Payment Type', 'Payment Method', 'Date', 'Amount', 'Status', ''];
+const HEADERS = ['Property Name', 'Visit Type', 'Visit Date & Time', 'Status', ''];
 
 const CELLS_TYPES = [
 	{
 		type: TYPES.STRING, // Type of cell
-		dataKey: 'type', // data access key of cell
+		dataKey: 'tenant', // data access key of cell
 	},
 	{
 		type: TYPES.STRING,
-		dataKey: 'method',
+		dataKey: 'visit_type',
 	},
 	{
 		type: TYPES.DATE,
-		dataKey: 'date',
-	},
-	{
-		type: TYPES.STRING,
-		dataKey: 'amount',
+		dataKey: 'day', // need to add 'time'
 	},
 	{
 		type: TYPES.LABEL,

@@ -290,18 +290,18 @@ const style = {
 	px: { xs: 2.5, md: 12 },
 };
 
-const STATIC_DATA = {
+export const STATIC_DATA = {
 	number: 555555555,
 	otp: 9999,
 };
 
-const STEPS = {
+export const STEPS = {
 	LOGIN: 'login',
 	VERIFICATION: 'verification',
 	SUCESS: 'sucess',
 };
 
-const OTP_STATUS = {
+export const OTP_STATUS = {
 	PENDING: 'pending',
 	INCORRECT: 'incorrect',
 	EXPIRED: 'expired',
@@ -309,7 +309,7 @@ const OTP_STATUS = {
 	RESENT: 'resent',
 };
 
-const InfoBoxStates: any = {
+export const InfoBoxStates: any = {
 	expired: {
 		type: 'error',
 		title: 'OTP Expired',

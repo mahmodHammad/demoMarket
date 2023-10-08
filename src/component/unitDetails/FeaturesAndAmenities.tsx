@@ -4,8 +4,9 @@ import { Box, Text } from '@/wrappers';
 interface Props {
   icon: any;
   title: string;
+  value?: string | number | boolean
 }
-export default function FeaturesAndAmenities({ icon, title }: Props) {
+export default function FeaturesAndAmenities({ icon, title, value }: Props) {
   return (
     <Box
       center

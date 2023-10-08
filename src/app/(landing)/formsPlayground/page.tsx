@@ -87,6 +87,10 @@ export default function FormsPlayground() {
 				<Button variant="contained" onClick={handleSubmit(onSubmit)}>
 					Submit
 				</Button>
+
+				<Button loading variant="contained">
+					Submit
+				</Button>
 			</Box>
 
 			<Box sx={{ width: 0.2 }} column gap={3}>
