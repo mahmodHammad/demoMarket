@@ -34,7 +34,7 @@ export default function UnitsCard({
 	toggleLike,
 	imgHeight = '237px',
 	width = '100%',
-	height = '',
+	height = 'inherit',
 	buttonName = 'View Details',
 	onClick,
 }: Props) {
@@ -43,7 +43,7 @@ export default function UnitsCard({
 			relative
 			sx={{
 				width: width,
-				height: { xs: '', md: height },
+				height: { xs: height, md: height },
 				// position: "relative",
 				// overflow: "hidden",
 				borderRadius: '16px',
@@ -205,7 +205,7 @@ export default function UnitsCard({
 				</Box>
 			</Box>
 			<Divider sx={{ mt: '16px', backgroundColor: '#F0F0F0', height: '1px', border: '0px' }}></Divider>
-			<Box sx={{ py: '16px', px: '24px' }}>
+			<Box sx={{ py: '16px', px: '24px', width: '100%' }}>
 				{onClick ? (
 					<Button
 						variant="outlined"
@@ -215,10 +215,9 @@ export default function UnitsCard({
 							padding: '16px 24px',
 							justifyContent: ' center',
 							alignItems: 'center',
-
+							width: '100%',
 							fontSize: { xs: '12px', md: '14px' },
-						}}
-						>
+						}}>
 						{buttonName}
 					</Button>
 				) : (
@@ -231,7 +230,7 @@ export default function UnitsCard({
 							padding: '16px 24px',
 							justifyContent: ' center',
 							alignItems: 'center',
-
+							width: '100%',
 							fontSize: { xs: '12px', md: '14px' },
 						}}
 						href={link}>

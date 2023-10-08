@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import photo3 from '@/assets/images/photo3.png';
 import Image from 'next/image';
+import theme from '@/ThemeRegistry/theme';
 
 const AdvertismentDetails = () => {
 	return (
@@ -14,14 +15,19 @@ const AdvertismentDetails = () => {
 
 				<Box>
 					{' '}
-					<Button sx={{ mr: '20px' }} variant="dangerOutlined" component={Link} href="" startIcon={<Delete />}>
+					<Button
+						sx={{ mr: '20px' }}
+						variant="dangerOutlined"
+						component={Link}
+						href=""
+						startIcon={<Delete sx={{ fill: 'red', color: 'red', strock: 'red' }} />}>
 						Delete Announcement
 					</Button>
 					<Button
 						variant="outlined"
 						component={Link}
 						href="advertisement/Create-Advertisements"
-						startIcon={<Pencilline sx={{ fill: '#FF4242' }} />}>
+						startIcon={<Pencilline />}>
 						Edit
 					</Button>
 				</Box>

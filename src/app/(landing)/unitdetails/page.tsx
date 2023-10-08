@@ -1,4 +1,5 @@
-import { AtarColoredLogo, FrontSide, GroundFloor, Room } from '@/assets';
+'use client';
+import { AtarColoredLogo, FrontSide, GroundFloor, Room, slides } from '@/assets';
 import {
 	AboutUnit,
 	BuyNowCard,
@@ -12,12 +13,40 @@ import {
 import { Container, Grid } from '@mui/material';
 import React from 'react';
 
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
+import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
+
+import photo1 from '@/assets/images/photo1.png';
+import photo2 from '@/assets/images/photo2.png';
+import photo3 from '@/assets/images/photo3.png';
+import Image from 'next/image';
+
+import PhotoAlbum from 'react-photo-album';
+
+import { Box, Button } from '@/wrappers';
+
 const data = [
 	{ title: 'Pool', icon: <Room /> },
 	{ title: 'Room', icon: <FrontSide /> },
 	{ title: 'Front Side', icon: <GroundFloor /> },
 	{ title: 'Pool', icon: <Room /> },
 	{ title: 'Pool', icon: <Room /> },
+];
+const images = [
+	photo1,
+	photo2,
+	photo3,
+	photo3,
+	photo3,
+	photo3,
+	photo3,
+	photo3,
+	// ...
 ];
 
 interface Props {
@@ -53,11 +82,34 @@ export default function page({
 	floorFeatures,
 	map,
 }: Props) {
+	const [open, setOpen] = React.useState(false);
+	const [index, setIndex] = React.useState(-1);
+
 	return (
 		<>
 			<Container maxWidth="xl">
 				<Grid container spacing={3} sx={{ mt: '5px', pt: '26px' }} mb={1}>
-					<QuiltedImageList />
+					<Box column>
+						<QuiltedImageList />
+
+						<PhotoAlbum
+							layout="rows"
+							photos={images}
+							targetRowHeight={150}
+							onClick={({ index: current }) => setIndex(current)}
+						/>
+
+						<Lightbox
+							styles={{
+								container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
+							}}
+							plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+							index={index}
+							slides={images}
+							open={index >= 0}
+							close={() => setIndex(-1)}
+						/>
+					</Box>
 
 					<Grid item xs={12} md={8} height={'100hv'}>
 						<UnitHeader

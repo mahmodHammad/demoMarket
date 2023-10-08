@@ -11,6 +11,8 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 
 import React, { useState } from 'react';
 import { PopUpCard, UnitsCard } from '@/component';
+import NotificationIcon from '@/assets/icons/Notifications';
+import Succesgreen from '@/assets/icons/Succesgreen';
 
 const data = [
 	{
@@ -31,23 +33,33 @@ const data = [
 ];
 const Properties = () => {
 	const [openPopup, setopenPopup] = useState(false);
+	const handleClickOpen = () => {
+		setopenPopup(true);
+	};
+
+	const handleClose = () => {
+		setopenPopup(false);
+	};
 
 	return (
 		<>
 			<PopUpCard
-				status={'success'}
-				title={'unit listed'}
-				body={'this is the body'}
+				color={'green'}
+				icon={<Succesgreen />}
+				title={'title'}
+				body={'body'}
+				button1={'hi'}
+				button2={'hi2'}
 				openPopup={openPopup}
-				setopenPopup={setopenPopup}
+				//setopenPopup={setopenPopup}
 			/>
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Properties List</Text>
 					<Box row>
-						<Button variant="outlined" component={Link} href="/properties">
+						{/* <Button variant="outlined" component={Link} href="/properties">
 							Select Multiple
-						</Button>
+						</Button> */}
 					</Box>
 				</Box>
 
@@ -62,7 +74,7 @@ const Properties = () => {
 								area={d?.area}
 								location={d?.location}
 								buttonName="add"
-								onClick={() => setopenPopup(true)}
+								onClick={handleClickOpen}
 							/>
 						</Grid>
 					))}
