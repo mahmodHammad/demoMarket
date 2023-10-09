@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import AppLayout from '@/component/loggedInLayout/AppLayout';
+import ProtectedPagesWrapper from '@/wrappers/ProtectedPagesWrapper';
 
 export const metadata = {
 	title: 'Visitor dashboard',
@@ -11,7 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeRegistry>
-			<AppLayout type="visitor">{children}</AppLayout>
+			<ProtectedPagesWrapper>
+				<AppLayout type="visitor">{children}</AppLayout>
+			</ProtectedPagesWrapper>
 		</ThemeRegistry>
 	);
 }
