@@ -1,7 +1,6 @@
 'use client';
 
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { ChangeEvent } from 'react';
 import { AccordionChipsFilter, Switch, CounterFilter, SliderFilter, TextInput } from '@/component';
 import { Box, Text, Button, Accordion } from '@/wrappers';
 import { IconButton } from '@mui/material';
@@ -11,76 +10,48 @@ import { useTheme } from '@emotion/react';
 type Props = {
 	isMobileView?: boolean;
 	closeFilterOnMobileView?: () => void;
+	// TODO: type states
+	budgetSliderValues: any;
+	setBudgetSliderValues: any;
+	AccordionFilters: any;
+	setAccordionFilters: any;
+	locationSearch: any;
+	setLocationSearch: any;
+	noOfBedrooms: any;
+	setNoOfBedrooms: any;
+	noOfBathrooms: any;
+	setNoOfBathrooms: any;
+	petFriendly: any;
+	setPetFriendly: any;
+	areaSliderValues: any;
+	setAreaSliderValues: any;
 };
 
-const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Props) => {
+const PropertyFilters = ({
+	isMobileView = false,
+	closeFilterOnMobileView,
+	budgetSliderValues,
+	setBudgetSliderValues,
+	AccordionFilters,
+	setAccordionFilters,
+	locationSearch,
+	setLocationSearch,
+	noOfBedrooms,
+	setNoOfBedrooms,
+	noOfBathrooms,
+	setNoOfBathrooms,
+	petFriendly,
+	setPetFriendly,
+	areaSliderValues,
+	setAreaSliderValues,
+}: Props) => {
 	const theme: any = useTheme();
-	const searchParams = useSearchParams();
-
-	const [AccordionFilters, setAccordionFilters] = useState(FILTERS);
-
-	const [locationSearch, setLocationSearch] = useState<string>(
-		(searchParams?.get('locationSearch') as unknown as string) || '',
-	);
-	const [noOfBedrooms, setNoOfBedrooms] = useState<number>((searchParams?.get('bedrooms') as unknown as number) || 0);
-	const [noOfBathrooms, setNoOfBathrooms] = useState<number>(
-		(searchParams?.get('bathrooms') as unknown as number) || 0,
-	);
-	const [petFriendly, setPetFriendly] = useState<boolean>(
-		(searchParams?.get('pet') as unknown as number) == 1 || false,
-	);
-
-	const [budgetSliderValues, setBudgetSliderValues] = useState<number[]>([
-		(searchParams?.get('minBudget') as unknown as number) || 0,
-		(searchParams?.get('maxBudget') as unknown as number) || 2000,
-	]);
-	const [areaSliderValues, setAreaSliderValues] = useState<number[]>([
-		(searchParams?.get('minArea') as unknown as number) || 0,
-		(searchParams?.get('maxArea') as unknown as number) || 200,
-	]);
 
 	const handleFiltersState = (filter: string, id: number) =>
 		setAccordionFilters((prev: any) => ({
 			...prev,
 			[filter]: prev[filter].map((f: any) => (f.id === id ? { ...f, checked: !f.checked } : f)),
 		}));
-
-	useEffect(() => {
-		const filtersState = {
-			noOfBedrooms,
-			noOfBathrooms,
-			petFriendly,
-			budgeRange: budgetSliderValues,
-			areaRange: areaSliderValues,
-			location: AccordionFilters.location.filter((f) => f.checked).map((f) => f.id),
-			propertyType: AccordionFilters.propertyType.filter((f) => f.checked).map((f) => f.id),
-			amenities: AccordionFilters.amenities.filter((f) => f.checked).map((f) => f.id),
-			furnishingStatus: AccordionFilters.furnishingStatus.filter((f) => f.checked).map((f) => f.id),
-			dateListed: AccordionFilters.dateListed.filter((f) => f.checked).map((f) => f.id),
-			availability: AccordionFilters.availability.filter((f) => f.checked).map((f) => f.id),
-		};
-
-		const newSearchParams = new URLSearchParams(searchParams?.toString());
-
-		newSearchParams.set('bedrooms', noOfBedrooms.toString());
-		newSearchParams.set('bathrooms', noOfBathrooms.toString());
-		newSearchParams.set('minBudget', budgetSliderValues[0].toString());
-		newSearchParams.set('maxBudget', budgetSliderValues[1].toString());
-		newSearchParams.set('minArea', areaSliderValues[0].toString());
-		newSearchParams.set('maxArea', areaSliderValues[1].toString());
-		newSearchParams.set('pet', petFriendly ? '1' : '0');
-		newSearchParams.set('locationSearch', locationSearch.toString());
-
-		window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams.toString()}`);
-	}, [
-		noOfBedrooms,
-		noOfBathrooms,
-		budgetSliderValues,
-		areaSliderValues,
-		petFriendly,
-		AccordionFilters,
-		locationSearch,
-	]);
 
 	return (
 		<Box
@@ -256,116 +227,6 @@ const PropertyFilters = ({ isMobileView = false, closeFilterOnMobileView }: Prop
 };
 
 export default PropertyFilters;
-
-const FILTERS = {
-	location: [
-		{
-			id: 1,
-			label: 'As Sahafah',
-			checked: false,
-		},
-		{
-			id: 2,
-			label: 'An Nada',
-			checked: true,
-		},
-		{
-			id: 3,
-			label: 'Qurtubah',
-			checked: false,
-		},
-	],
-	propertyType: [
-		{
-			id: 4,
-			label: 'Property Type',
-			checked: false,
-		},
-		{
-			id: 5,
-			label: 'Property Type',
-			checked: true,
-		},
-		{
-			id: 6,
-			label: 'Property Type',
-			checked: false,
-		},
-	],
-	amenities: [
-		{
-			id: 7,
-			label: 'Parking',
-			checked: true,
-		},
-		{
-			id: 8,
-			label: 'Lift',
-			checked: false,
-		},
-		{
-			id: 9,
-			label: 'Power Backup',
-			checked: false,
-		},
-		{
-			id: 10,
-			label: 'Security Personnel',
-			checked: true,
-		},
-		{
-			id: 11,
-			label: 'Park',
-			checked: false,
-		},
-	],
-	furnishingStatus: [
-		{
-			id: 12,
-			label: 'Unfurnished',
-			checked: false,
-		},
-		{
-			id: 13,
-			label: 'Semifinished',
-			checked: true,
-		},
-		{
-			id: 14,
-			label: 'Furnished',
-			checked: false,
-		},
-	],
-	dateListed: [
-		{
-			id: 15,
-			label: 'New',
-			checked: true,
-		},
-		{
-			id: 16,
-			label: 'Last 7 Days',
-			checked: false,
-		},
-		{
-			id: 17,
-			label: 'Last 30 Days',
-			checked: false,
-		},
-	],
-	availability: [
-		{
-			id: 18,
-			label: 'Immediately',
-			checked: false,
-		},
-		{
-			id: 19,
-			label: 'Within a month',
-			checked: true,
-		},
-	],
-};
 
 const locationContainerStyle = (theme: any) => ({
 	maxHeight: 250,
