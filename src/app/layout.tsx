@@ -1,6 +1,6 @@
-
 import * as React from 'react';
-
+import TanstackProvider from '@/utils/TanstackProvider';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export const metadata = {
 	title: 'Atar Market place',
@@ -11,7 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body>
+				<AuthProvider>
+					<TanstackProvider>{children}</TanstackProvider>
+				</AuthProvider>
+			</body>
 		</html>
 	);
 }

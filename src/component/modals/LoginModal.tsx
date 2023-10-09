@@ -10,9 +10,11 @@ import { Close } from '@/assets';
 
 const LoginModal = () => {
 	const { push } = useRouter();
-	const { isLoginModalOpen, closeLoginModal } = useAuth();
+	const { isLoginModalOpen, closeLoginModal, verifyNumber, login } = useAuth();
 
+	const [loading, setLoading] = useState(false);
 	const [phoneNumber, setPhoneNumber] = useState('');
+	const [vid, setVid] = useState(null);
 
 	const [currentStep, setCurrentStep] = useState(STEPS.LOGIN);
 	const [otpCode, setOtpCode] = useState('');
@@ -20,10 +22,6 @@ const LoginModal = () => {
 
 	const [isTimerRunning, setIsTimerRunning] = useState(false);
 	const [seconds, setSeconds] = useState(30);
-
-	useEffect(() => {
-		console.log('current otpCode', otpCode);
-	}, [otpCode]);
 
 	useEffect(() => {
 		let intervalId: NodeJS.Timeout | null = null;
@@ -79,22 +77,34 @@ const LoginModal = () => {
 		push('/signup');
 	};
 
-	const handlePhoneVerification = () => {
-		// TODO: verify API
-		// TODO: phone validation
-		setCurrentStep(STEPS.VERIFICATION);
-		startTimer();
+	const handlePhoneVerification = async () => {
+		setLoading(true);
+		const res = await verifyNumber(phoneNumber);
+		if (+res.status === 200) {
+			setLoading(false);
+			setVid(res.data.data.id);
+			setCurrentStep(STEPS.VERIFICATION);
+			startTimer();
+		} else {
+			setLoading(false);
+			// TODO: handle number error message
+			// console.log('error in verify', res);
+		}
 	};
 
-	const handleOtpVerification = () => {
-		// TODO: verify API
-		if (+otpCode === +STATIC_DATA.otp) {
+	const handleOtpVerification = async () => {
+		setLoading(true);
+		const res = await login(phoneNumber, otpCode, vid);
+		if (+res?.status === 200) {
+			setLoading(false);
 			setCurrentStep(STEPS.SUCESS);
 			closeLoginModal();
 			push('/my-bookings');
-			setTimeout(() => {}, 500);
 		} else {
+			setLoading(false);
+			console.log('error in otp', res);
 			setOtpCode('');
+			// TODO: handle cases of otp errors
 			setOtpStatus(OTP_STATUS.INCORRECT);
 			// TODO: set count for number of trials
 		}
@@ -153,11 +163,12 @@ const LoginModal = () => {
 
 							<PhoneInput
 								// value={phoneNumber}
-								onChange={(e: any) => setPhoneNumber(e.number)}
+								onChange={(e: any) => setPhoneNumber(e)}
 							/>
 						</Box>
 
 						<Button
+							loading={loading}
 							onClick={handlePhoneVerification}
 							disabled={!phoneNumber}
 							variant="contained"
@@ -222,6 +233,7 @@ const LoginModal = () => {
 						)}
 
 						<Button
+							loading={loading}
 							onClick={handleOtpVerification}
 							disabled={
 								(+otpCode.length !== 4 && otpStatus === OTP_STATUS.RESENT) ||
@@ -288,11 +300,6 @@ const style = {
 	boxShadow: 24,
 	py: { xs: 5, md: 10 },
 	px: { xs: 2.5, md: 12 },
-};
-
-export const STATIC_DATA = {
-	number: 555555555,
-	otp: 9999,
 };
 
 export const STEPS = {
