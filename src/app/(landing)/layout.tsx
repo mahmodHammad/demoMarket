@@ -4,6 +4,8 @@ import { Box } from '@/wrappers';
 import { Footer, Navbar, LoginModal } from '@/component';
 import { AuthProvider } from '@/contexts/AuthContext';
 // import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
 	title: 'Atar Market place',
@@ -57,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<Footer />
 
 				<LoginModal />
+				<ToastContainer />
 			</AuthProvider>
 		</ThemeRegistry>
 	);

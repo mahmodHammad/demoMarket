@@ -2,6 +2,8 @@
 import * as React from 'react';
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import AppLayout from '@/component/loggedInLayout/AppLayout'; 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
 	title: 'Admin dashboard',
@@ -12,6 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeRegistry>
+			<ToastContainer />
 			<AppLayout  >{children}</AppLayout>
 		</ThemeRegistry>
 	);
