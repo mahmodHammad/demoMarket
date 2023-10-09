@@ -1,6 +1,5 @@
-
 import * as React from 'react';
-
+import TanstackProvider from '@/utils/TanstackProvider';
 
 export const metadata = {
 	title: 'Atar Market place',
@@ -11,7 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body>
+				<TanstackProvider>{children}</TanstackProvider>
+			</body>
 		</html>
 	);
 }
