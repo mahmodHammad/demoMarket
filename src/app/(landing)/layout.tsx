@@ -51,13 +51,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 	return (
 		<ThemeRegistry>
-			<AuthProvider>
-				<Navbar />
-				<Box component="main">{children}</Box>
-				<Footer />
-
-				<LoginModal />
-			</AuthProvider>
+			<Navbar />
+			<Box component="main">{children}</Box>
+			<Footer />
+			<LoginModal />
 		</ThemeRegistry>
 	);
 }

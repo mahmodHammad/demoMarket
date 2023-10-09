@@ -15,3 +15,9 @@ http.interceptors.request.use(
 		Promise.reject(error);
 	},
 );
+
+export const setTokenInHeaders = () => {
+	const token = localStorage.getItem('token');
+	if (token) http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+	else delete http.defaults.headers.common['Authorization'];
+};

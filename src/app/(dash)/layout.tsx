@@ -1,7 +1,7 @@
-
 import * as React from 'react';
 import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
-import AppLayout from '@/component/loggedInLayout/AppLayout'; 
+import AppLayout from '@/component/loggedInLayout/AppLayout';
+import ProtectedPagesWrapper from '@/wrappers/ProtectedPagesWrapper';
 
 export const metadata = {
 	title: 'Admin dashboard',
@@ -12,7 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeRegistry>
-			<AppLayout  >{children}</AppLayout>
+			<ProtectedPagesWrapper>
+				<AppLayout>{children}</AppLayout>
+			</ProtectedPagesWrapper>
 		</ThemeRegistry>
 	);
 }
