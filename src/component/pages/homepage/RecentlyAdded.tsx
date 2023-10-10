@@ -22,7 +22,7 @@ export default async function RecentlyAdded() {
 			location: item.data.city_id && item.data.city_id.name,
 			img: neigbourhoodCover,
 			area: item.data.unit_size,
-			price: '750000',
+			price: '--',
 			link: '/',
 		};
 	});
