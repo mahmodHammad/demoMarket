@@ -14,7 +14,6 @@ export default async function RecentlyAdded() {
 		const name = item.name;
 		const location = item.data.city_id && item.data.city_id.name;
 		const area = item.data.unit_size;
-		console.log(name, location, area);
 	});
 	const slicedDataArray = dataArray;
 
