@@ -1,4 +1,3 @@
-'use client';
 import { Box, Container, Item } from '@/wrappers';
 import React from 'react';
 
@@ -10,44 +9,13 @@ import Carousel from '@/component/Carousel';
 import HomeCardsContainer from './HomeCardsContainer';
 import { get } from '@/utils/http';
 
-export default function Neighbourhoods() {
-	async function fetchData() {
-		try {
-			const url = '/complexes'; // Replace with your API endpoint
-			const response = await get(url);
-			console.log('Data from server:', response);
-		} catch (error) {
-			console.log('error');
-			console.error('Error fetching data:', error);
-		}
-	}
+export default async function Neighbourhoods() {
 
-	const dd = fetchData();
-	console.log(dd);
+		const url = '/complexes'; // Replace with your API endpoint
+		const response = await get(url);
+		console.log('Data from server:', response); // check data at terminal
+	
 
-	// async function fetchData() {
-	// 	try {
-	// 		const url = '/complexes'; // Replace with your API endpoint
-	// 		const response = await fetch(url); // Use fetch to make the HTTP request
-	// 		const data = await response.json(); // Parse the response JSON
-	// 		console.log('Data from server:', data);
-	// 		return data; // Return the data
-	// 	} catch (error) {
-	// 		console.error('Error fetching data:', error);
-	// 		throw error; // Rethrow the error if needed
-	// 	}
-	// }
-
-	// async function main() {
-	// 	try {
-	// 		const dd = await fetchData(); // Wait for fetchData to complete
-	// 		console.log(dd);
-	// 	} catch (error) {
-	// 		console.log('Error in main:', error);
-	// 	}
-	// }
-
-	// main(); //
 
 	const data = [
 		{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },

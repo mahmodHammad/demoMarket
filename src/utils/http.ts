@@ -7,9 +7,17 @@ type Options = {
 
 export const get = async (url: string, options: Options = {}) => {
 	const baseUrl = process.env.BASE_URL;
+	const xTenant = process.env.X_TENANT;
+	console.log('baseUrl', baseUrl)
+	console.log('xTenant', xTenant)
 
 	try {
-		let res = await fetch(`${baseUrl}${url}`);
+		const requestOptions: any = {
+			headers: {
+				'X-Tenant': xTenant,
+			}
+		};
+		let res = await fetch(`${baseUrl}${url}`, requestOptions);
 		res = await res.json();
 		options.onSuccess && options.onSuccess(res); // pass res.data or res
 		return res; // return res or res.data
@@ -70,3 +78,10 @@ http.interceptors.request.use(
 		Promise.reject(error);
 	},
 );
+
+
+export const setTokenInHeaders = () => {
+	const token = localStorage.getItem('token');
+	if (token) http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+	else delete http.defaults.headers.common['Authorization'];
+};
