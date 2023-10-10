@@ -7,17 +7,19 @@ import signupimg from '@/assets/images/herobg.png';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { OTPInput, PhoneInputController, TextInputController } from '@/component';
+import { PhoneInput, TextInputController } from '@/component';
 import { RadioGroupController as RadioGroup } from '@/component';
 import theme from '@/ThemeRegistry/theme';
 import OTPModal from '@/component/modals/OTPModal';
+import { post } from '@/utils/http';
+import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
-	fullName: yup.string().required('Full Name is required'),
-	number: yup.string().required('Phone number is required'),
+	name: yup.string().required('Full Name is required'),
+	// phone_number: yup.string().required('Phone number is required'),
 	email: yup.string().required('Email is required'),
 	gender: yup.string(),
-	intrested: yup.string(),
+	interested: yup.string(),
 });
 const RADIO_OPTIONS = [
 	{
@@ -45,25 +47,55 @@ const INTRESTED_OPTIONS = [
 ];
 const Signup = () => {
 	const {
+		getValues,
 		control,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			fullName: '',
-			number: '',
+			name: '',
+			// phone_number: '',
 			email: '',
 			gender: 'male',
-			intrested: 'invest',
+			interested: 'invest',
 		},
 		resolver: yupResolver(schema),
 	});
 
 	const [isOpen, setIsOpen] = useState(false);
+	const [phoneNumber, setPhoneNumber] = useState({});
 
-	const onSubmit = (data: any) => {
-		console.log('form data', data);
-		if (data?.number?.length) {
+	const signup = async (data: any) => {
+		await post('/register', {
+			...data,
+			phone_country_code: phoneNumber?.phone_country_code?.id,
+			dial_code: phoneNumber?.phone_country_code?.dial_code,
+			phone_number: phoneNumber?.phone_number,
+		})
+			.then((response) => {
+				console.log('success api signup', response);
+				toast('Signup Successful', { hideProgressBar: true, autoClose: 2000, type: 'success', position: 'top-right' });
+				return Promise.resolve('OK');
+			})
+			.catch((err) => {
+				toast(err.message, { hideProgressBar: true, autoClose: 2000, type: 'error', position: 'top-right' });
+				console.log('error api signup', err.message);
+				return Promise.reject('OK');
+			});
+	};
+
+	const onSubmit = async (data: any) => {
+		if (!phoneNumber?.phone_number) {
+			toast('Please enter phone number', {
+				hideProgressBar: true,
+				autoClose: 2000,
+				type: 'error',
+				position: 'top-right',
+			});
+			return;
+		}
+
+		if (phoneNumber?.phone_number) {
 			setIsOpen(true);
 		}
 	};
@@ -111,25 +143,25 @@ const Signup = () => {
 									<TextInputController
 										placeholder="Enter your Full Name"
 										label={'Full Name'}
-										name={'fullName'}
+										name={'name'}
 										control={control}
 									/>
 								</Item>
 								<Item xs={6}>
-									<TextInputController
-										placeholder="Enter your Phone number"
-										label={'Phone number'}
-										name={'number'}
-										type="number"
-										control={control}
-									/>
-									{/* <PhoneInputController
-										placeholder="Enter your Phone number"
-										label={'Phone number'}
-										name={'number'}
-										type="number"
-										control={control}
-									/>  */}
+									<Container column>
+										<Item>
+											<Text variant="caption" sx={{ float: 'left' }}>
+												Phone
+											</Text>
+										</Item>
+										<Item>
+											<PhoneInput
+												// value={phoneNumber}
+												label={'Phone Number'}
+												onChange={(e: any) => setPhoneNumber(e)}
+											/>
+										</Item>
+									</Container>
 								</Item>
 
 								<Item xs={12}>
@@ -145,7 +177,7 @@ const Signup = () => {
 								</Item>
 								<Item xs={12} md={9}>
 									<RadioGroup
-										name="intrested"
+										name="interested"
 										label="Intrested To"
 										options={INTRESTED_OPTIONS}
 										control={control}
@@ -169,7 +201,14 @@ const Signup = () => {
 								</Button>
 							</Item>
 						</Container>
-						{isOpen && <OTPModal isOpen={isOpen} setIsOpen={setIsOpen} mobile={'111'} />}
+						{isOpen && (
+							<OTPModal
+								successFunc={() => signup(getValues())}
+								isOpen={isOpen}
+								setIsOpen={setIsOpen}
+								mobile={`${phoneNumber?.phone_country_code?.dial_code} ${phoneNumber?.phone_number}`}
+							/>
+						)}
 					</Box>
 				</Item>
 			</Container>

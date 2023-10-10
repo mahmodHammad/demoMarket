@@ -6,15 +6,16 @@ import { OTPInput, InfoBox } from '@/component';
 import { useRouter } from 'next/navigation';
 import { Modal, IconButton } from '@mui/material';
 import { Close } from '@/assets';
-import { OTP_STATUS, STATIC_DATA, InfoBoxStates } from './LoginModal';
+import { OTP_STATUS, InfoBoxStates } from './LoginModal';
 
 interface Props {
 	isOpen: boolean;
 	mobile: string | number;
 	setIsOpen: any;
+	successFunc: any;
 }
 
-const OTPModal = ({ isOpen, mobile, setIsOpen }: Props) => {
+const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc }: Props) => {
 	const { push } = useRouter();
 	const [otpCode, setOtpCode] = useState('');
 	const [otpStatus, setOtpStatus] = useState(OTP_STATUS.PENDING);
@@ -85,11 +86,14 @@ const OTPModal = ({ isOpen, mobile, setIsOpen }: Props) => {
 		};
 	}, []);
 
-	const handleOtpVerification = () => {
+	const handleOtpVerification = async () => {
 		// TODO: verify API
-		if (+otpCode === +STATIC_DATA.otp) {
-			push('/my-bookings');
-			setTimeout(() => {}, 500);
+		if (+otpCode === 9999) {
+			await successFunc().then(()=>{
+				push('/my-bookings');
+				setTimeout(() => {}, 500);
+			})
+			
 		} else {
 			setOtpCode('');
 			setOtpStatus(OTP_STATUS.INCORRECT);
@@ -129,7 +133,7 @@ const OTPModal = ({ isOpen, mobile, setIsOpen }: Props) => {
 						</Text>
 
 						<Text center gray light s={16}>
-							We have sent a code to your number +966 {mobile}{' '}
+							We have sent a code to your number +{mobile}
 						</Text>
 					</Box>
 
