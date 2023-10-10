@@ -66,7 +66,7 @@ export default function UnitsCard({
 					},
 				}}>
 				<Box xcenter ycenter onClick={() => toggleLike(id)}>
-					{liked ? <FilledHeart  /> : <OutlineHeart />}
+					{liked ? <FilledHeart /> : <OutlineHeart />}
 				</Box>
 			</Box>
 			{/* <Box
@@ -118,7 +118,7 @@ export default function UnitsCard({
 							// fontSize: { xs: "14px", md: "18px" },
 							display: { xs: 'flex', md: 'none' },
 						}}>
-						{location || 'location'}
+						{location || '--'}
 					</Text>
 				</Box>
 
@@ -142,7 +142,7 @@ export default function UnitsCard({
 								// fontSize: { xs: "14px", md: "14px" },
 							}
 						}>
-						{location || 'location'}
+						{location || '--'}
 					</Text>
 				</Box>
 				<Box row center xbetween sx={{ mt: { xs: '8px', md: '12px' } }}>
@@ -163,7 +163,7 @@ export default function UnitsCard({
 									// fontSize: { xs: "14px", md: "24px" },
 								}
 							}>
-							{price || ' SAR 25,000.00'}
+							{'SAR ' + price || ' --'}
 						</Text>
 					</Box>
 
@@ -197,7 +197,7 @@ export default function UnitsCard({
 							sx={{
 								fontSize: { xs: '10px', md: '16px' },
 							}}>
-							{area || '23 Sqm'}
+							{area + ' Sqm' || '--'}
 						</Text>
 					</Box>
 				</Box>
