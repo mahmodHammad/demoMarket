@@ -13,7 +13,7 @@ const LoginModal = () => {
 	const { isLoginModalOpen, closeLoginModal, verifyNumber, login } = useAuth();
 
 	const [loading, setLoading] = useState(false);
-	const [phoneNumber, setPhoneNumber] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState<any>('');
 	const [vid, setVid] = useState(null);
 
 	const [currentStep, setCurrentStep] = useState(STEPS.LOGIN);
@@ -205,7 +205,7 @@ const LoginModal = () => {
 							</Text>
 
 							<Text center gray light s={16}>
-								We have sent a code to your number {phoneNumber}
+								We have sent a code to your number {phoneNumber?.phone_number}{' '}
 								<Text
 									onClick={changePhoneNumber}
 									primary
