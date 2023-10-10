@@ -15,10 +15,10 @@ export default async function MostViewed() {
 	const slicedDataArray = dataArray;
 	const data = slicedDataArray.map((item) => {
 		return {
-			title: item.name,
-			location: item.data.city_id && item.data.city_id.name,
+			title: item?.name || '--',
+			location: (item?.data?.city_id && item?.data?.city_id?.name) || '--',
 			img: neigbourhoodCover,
-			area: item.data.unit_size,
+			area: item?.data?.unit_size || '--',
 			price: '--',
 			link: '/',
 		};

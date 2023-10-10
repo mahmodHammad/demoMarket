@@ -14,14 +14,16 @@ export default async function RecentlyAdded() {
 		const name = item.name;
 		const location = item.data.city_id && item.data.city_id.name;
 		const area = item.data.unit_size;
+		console.log(name, location, area);
 	});
 	const slicedDataArray = dataArray;
+
 	const data = slicedDataArray.map((item) => {
 		return {
-			title: item.name,
-			location: item.data.city_id && item.data.city_id.name,
+			title: item?.name || '--',
+			location: (item?.data?.city_id && item?.data?.city_id?.name) || '--',
 			img: neigbourhoodCover,
-			area: item.data.unit_size,
+			area: item?.data?.unit_size || '--',
 			price: '--',
 			link: '/',
 		};
