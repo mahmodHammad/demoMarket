@@ -3,6 +3,7 @@ import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import AppLayout from '@/component/loggedInLayout/AppLayout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProtectedPagesWrapper from '@/wrappers/ProtectedPagesWrapper';
 
 export const metadata = {
 	title: 'Visitor dashboard',
@@ -13,8 +14,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeRegistry>
-			<ToastContainer />
-			<AppLayout type="visitor">{children}</AppLayout>
+			<ProtectedPagesWrapper>
+				<ToastContainer />
+				<AppLayout type="visitor">{children}</AppLayout>
+			</ProtectedPagesWrapper>
 		</ThemeRegistry>
 	);
 }

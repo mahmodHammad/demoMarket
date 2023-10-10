@@ -8,6 +8,7 @@ import InformationLine from '@/assets/icons/InformationLine';
 import NextIcon from '@/assets/icons/NextIcon';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
 
 const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 	return (
@@ -30,14 +31,16 @@ const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 	);
 };
 
-const OptionLink = ({ label, href, startIcon }: { label: string; href: string; startIcon: any }) => {
+const OptionLink = ({ label, href = '', startIcon, onClick }: { label: string; href?: string; startIcon: any, onClick?: any }) => {
 	return (
 		<Box
 			component={Link}
 			href={href}
+			onClick={onClick}
 			style={{
-				textDecoration: 'none',
-			}}>
+					textDecoration: 'none',
+				}}
+			>
 			<Box
 				ycenter
 				xbetween
@@ -61,6 +64,7 @@ const OptionLink = ({ label, href, startIcon }: { label: string; href: string; s
 };
 
 const ProfileDropDown = () => {
+	const { logout } = useAuth();
 	const [open, setOpen] = useState(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const myRef = React.useRef<HTMLDivElement>(null);
@@ -123,7 +127,12 @@ const ProfileDropDown = () => {
 											<OptionLink component={Link} href="/my-profile" label={'Edit'} startIcon={<Pencilline />} />
 											<OptionLink href="/my-profile" label={'Privacy Policy'} startIcon={<ShieldKeyholeLine />} />
 											<OptionLink href="/my-profile" label={'Terms And Conditions'} startIcon={<InformationLine />} />
-											<OptionLink href="/my-profile" label={'Logout'} startIcon={<LogoutBoxLine />} />
+											<OptionLink 
+												onClick={logout}
+												href='/'
+												label={'Logout'}
+												startIcon={<LogoutBoxLine />} 
+											/>
 										</Box>
 									</Box>
 								</Paper>
