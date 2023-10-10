@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Box, Text } from '@/wrappers';
 import { ButtonBase, IconButton } from '@mui/material';
 import theme from '@/ThemeRegistry/theme';
-import { Search, Location } from '@/assets';
+import { SearchIcon, Location } from '@/assets';
 import Link from 'next/link';
 
 export default function SearchBox({}) {
@@ -90,7 +90,12 @@ export default function SearchBox({}) {
 						borderRadius={'15px'}
 						center>
 						<IconButton size="large">
-							<Search />
+							<SearchIcon
+								sx={{
+									stroke: 'white',
+									color: 'white',
+								}}
+							/>
 						</IconButton>
 					</Box>
 				</Box>
