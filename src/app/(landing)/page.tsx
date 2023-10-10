@@ -5,14 +5,6 @@ import { Box } from '@/wrappers';
 import { Container } from '@mui/material';
 
 export default async function Home() {
-
-	const res = await fetch('http://193.122.88.9/api/property',{
-		headers: { "X-Tenant":"nagyTest" },
-	})
-	const jsonss = await res.json()
-	console.log("res*******jsononn",res)
-	console.log("resjsononn",jsonss)
-
 	return (
 		<Box>
 			<Hero />
@@ -23,5 +15,4 @@ export default async function Home() {
 			</Container>
 		</Box>
 	);
-} 
-
+}

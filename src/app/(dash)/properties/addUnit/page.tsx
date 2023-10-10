@@ -51,7 +51,7 @@ const Properties = () => {
 				button1={'hi'}
 				button2={'hi2'}
 				openPopup={openPopup}
-				//setopenPopup={setopenPopup}
+
 			/>
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
