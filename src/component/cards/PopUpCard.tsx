@@ -1,8 +1,9 @@
-import * as React from 'react';
+'use client';
+
 import Dialog from '@mui/material/Dialog';
 import { Box, Text } from '@/wrappers';
-import { useState } from 'react';
 import { Button } from '@mui/material';
+import React, { useState } from 'react';
 
 interface prop {
 	color: string;
@@ -16,7 +17,7 @@ interface prop {
 }
 
 export default function PopUpCard({ openPopup, setopenPopup, color, title, body, button1, button2, icon }: prop) {
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 
 	const handleClickOpen = () => {
 		setOpen(true);
