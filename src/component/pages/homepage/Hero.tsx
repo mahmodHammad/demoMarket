@@ -36,7 +36,7 @@ export default function Hero() {
 				center
 				column>
 				<Box sx={{ maxWidth: { xl: '720px', md: '60%', xs: '90%' } }}>
-					<Text variant="h2" align="center" sx={{ color: '#fff' }} component="h1">
+					<Text variant="h2" align="center" sx={{ color: '#fff', fontSize: { md: '48px', xs: '38px' } }} component="h1">
 						Buy, rent, or sell your property easily
 					</Text>
 					<Text
@@ -52,7 +52,7 @@ export default function Hero() {
 						ornare bibendum condimentum.
 					</Text>
 				</Box>
-				<Box center>
+				<Box center width={'100%'} px={1}>
 					<SearchBar />
 				</Box>
 			</Box>

@@ -20,6 +20,7 @@ interface Props {
 	imgHeight?: string;
 	toggleLike: (id: number) => void;
 	buttonName?: string;
+	onClick?: () => void;
 }
 export default function UnitsCard({
 	id,
@@ -33,15 +34,16 @@ export default function UnitsCard({
 	toggleLike,
 	imgHeight = '237px',
 	width = '100%',
-	height = '',
+	height = 'inherit',
 	buttonName = 'View Details',
+	onClick,
 }: Props) {
 	return (
 		<Box
 			relative
 			sx={{
 				width: width,
-				height: { xs: '', md: height },
+				height: { xs: height, md: height },
 				// position: "relative",
 				// overflow: "hidden",
 				borderRadius: '16px',
@@ -66,7 +68,7 @@ export default function UnitsCard({
 					},
 				}}>
 				<Box xcenter ycenter onClick={() => toggleLike(id)}>
-					{liked ? <FilledHeart  /> : <OutlineHeart />}
+					{liked ? <FilledHeart /> : <OutlineHeart />}
 				</Box>
 			</Box>
 			{/* <Box
@@ -203,22 +205,38 @@ export default function UnitsCard({
 				</Box>
 			</Box>
 			<Divider sx={{ mt: '16px', backgroundColor: '#F0F0F0', height: '1px', border: '0px' }}></Divider>
-			<Box sx={{ py: '16px', px: '24px' }}>
-				<Button
-					component={Link}
-					variant="outlined"
-					sx={{
-						display: 'dlex',
-						height: '20px',
-						padding: '16px 24px',
-						justifyContent: ' center',
-						alignItems: 'center',
-
-						fontSize: { xs: '12px', md: '14px' },
-					}}
-					href={link}>
-					{buttonName}
-				</Button>
+			<Box sx={{ py: '16px', px: '24px', width: '100%' }}>
+				{onClick ? (
+					<Button
+						variant="outlined"
+						sx={{
+							display: 'dlex',
+							height: '20px',
+							padding: '16px 24px',
+							justifyContent: ' center',
+							alignItems: 'center',
+							width: '100%',
+							fontSize: { xs: '12px', md: '14px' },
+						}}>
+						{buttonName}
+					</Button>
+				) : (
+					<Button
+						component={Link}
+						variant="outlined"
+						sx={{
+							display: 'dlex',
+							height: '20px',
+							padding: '16px 24px',
+							justifyContent: ' center',
+							alignItems: 'center',
+							width: '100%',
+							fontSize: { xs: '12px', md: '14px' },
+						}}
+						href={link}>
+						{buttonName}
+					</Button>
+				)}
 			</Box>
 		</Box>
 	);

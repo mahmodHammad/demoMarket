@@ -1,12 +1,12 @@
+import theme from '@/ThemeRegistry/theme';
+import { SearchIcon } from '@/assets';
 import { Box } from '@/wrappers';
-import SearchIcon from '@mui/icons-material/Search';
 import { TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
 const Search = ({ search, handleSearch }: { search: string; handleSearch: (value: string) => void }) => {
- 
-	const handleChange = (event: any) => { 
-		handleSearch(event.target.value); 
+	const handleChange = (event: any) => {
+		handleSearch(event.target.value);
 	};
 
 	return (
@@ -30,13 +30,15 @@ const Search = ({ search, handleSearch }: { search: string; handleSearch: (value
 					onChange={handleChange}
 					InputProps={{
 						startAdornment: (
-							<InputAdornment position="end">
+							<InputAdornment position="start">
 								<SearchIcon
-									color="primary"
 									sx={{
+										stroke: 'black',
+										color: 'black',
+										width: '14 ',
+										height: '14 ',
+										viewBox: '0 0 14 14 ',
 										cursor: 'pointer',
-										marginRight: '8px',
-										color: '#969798',
 									}}
 								/>
 							</InputAdornment>
