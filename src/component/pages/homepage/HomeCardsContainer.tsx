@@ -1,10 +1,8 @@
 'use client';
 import { Box, Container, Item } from '@/wrappers';
 import React from 'react';
-
 import HomeTitleBody from './HomeTitleBody';
 import NeighbourhoodCard from '@/component/cards/NeighbourhoodCard';
-
 import Carousel from '@/component/Carousel';
 import { UnitsCard } from '@/component';
 
