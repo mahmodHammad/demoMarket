@@ -21,6 +21,8 @@ type Props = {
 	setNoOfBedrooms: any;
 	noOfBathrooms: any;
 	setNoOfBathrooms: any;
+	noOfGuestrooms: any;
+	setNoOfGuestrooms: any;
 	petFriendly: any;
 	setPetFriendly: any;
 	areaSliderValues: any;
@@ -39,6 +41,8 @@ const PropertyFilters = ({
 	noOfBedrooms,
 	setNoOfBedrooms,
 	noOfBathrooms,
+	noOfGuestrooms,
+	setNoOfGuestrooms,
 	setNoOfBathrooms,
 	petFriendly,
 	setPetFriendly,
@@ -126,8 +130,8 @@ const PropertyFilters = ({
 						<CounterFilter
 							name="Bedrooms"
 							number={noOfBedrooms}
-							handleIncrement={() => setNoOfBedrooms((prev) => ++prev)}
-							handleDecrement={() => setNoOfBedrooms((prev) => (prev !== 0 ? --prev : prev))}
+							handleIncrement={() => setNoOfBedrooms((prev: number) => ++prev)}
+							handleDecrement={() => setNoOfBedrooms((prev: number) => (prev !== 0 ? --prev : prev))}
 						/>
 					)}
 				/>
@@ -139,8 +143,21 @@ const PropertyFilters = ({
 						<CounterFilter
 							name="Bathrooms"
 							number={noOfBathrooms}
-							handleIncrement={() => setNoOfBathrooms((prev) => ++prev)}
-							handleDecrement={() => setNoOfBathrooms((prev) => (prev !== 0 ? --prev : prev))}
+							handleIncrement={() => setNoOfBathrooms((prev: number) => ++prev)}
+							handleDecrement={() => setNoOfBathrooms((prev: number) => (prev !== 0 ? --prev : prev))}
+						/>
+					)}
+				/>
+
+				<Accordion
+					defaultExpanded={!isMobileView}
+					header="No. of  Guestrooms"
+					Content={() => (
+						<CounterFilter
+							name="Bathrooms"
+							number={noOfGuestrooms}
+							handleIncrement={() => setNoOfGuestrooms((prev: number) => ++prev)}
+							handleDecrement={() => setNoOfGuestrooms((prev: number) => (prev !== 0 ? --prev : prev))}
 						/>
 					)}
 				/>
