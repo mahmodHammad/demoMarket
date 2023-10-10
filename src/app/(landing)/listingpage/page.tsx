@@ -31,6 +31,9 @@ export default function page() {
 	const [noOfBathrooms, setNoOfBathrooms] = useState<number>(
 		(searchParams?.get('bathrooms') as unknown as number) || 0,
 	);
+	const [noOfGuestrooms, setNoOfGuestrooms] = useState<number>(
+		(searchParams?.get('guestrooms') as unknown as number) || 0,
+	);
 	const [petFriendly, setPetFriendly] = useState<boolean>(
 		(searchParams?.get('pet') as unknown as number) == 1 || false,
 	);
@@ -51,6 +54,7 @@ export default function page() {
 				params: {
 					noOfBathrooms,
 					noOfBedrooms,
+					noOfGuestrooms,
 					petFriendly: petFriendly ? '1' : '0',
 					// TODO: check rest of filters on BE, and pass params
 				},
@@ -76,6 +80,7 @@ export default function page() {
 
 		newSearchParams.set('bedrooms', noOfBedrooms.toString());
 		newSearchParams.set('bathrooms', noOfBathrooms.toString());
+		newSearchParams.set('guestrooms', noOfGuestrooms.toString());
 		newSearchParams.set('minBudget', budgetSliderValues[0].toString());
 		newSearchParams.set('maxBudget', budgetSliderValues[1].toString());
 		newSearchParams.set('minArea', areaSliderValues[0].toString());
@@ -88,6 +93,7 @@ export default function page() {
 	}, [
 		noOfBedrooms,
 		noOfBathrooms,
+		noOfGuestrooms,
 		budgetSliderValues,
 		areaSliderValues,
 		petFriendly,
@@ -113,6 +119,8 @@ export default function page() {
 							setNoOfBedrooms={setNoOfBedrooms}
 							noOfBathrooms={noOfBathrooms}
 							setNoOfBathrooms={setNoOfBathrooms}
+							noOfGuestrooms={noOfGuestrooms}
+							setNoOfGuestrooms={setNoOfGuestrooms}
 							petFriendly={petFriendly}
 							setPetFriendly={setPetFriendly}
 							areaSliderValues={areaSliderValues}
