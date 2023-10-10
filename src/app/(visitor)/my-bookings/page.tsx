@@ -118,11 +118,11 @@ const CELLS_TYPES = [
 	},
 	{
 		type: TYPES.LABEL,
-		dataKey: 'status',
+		dataKey: 'booking_status',
 		options: {
 			// label colors based on value, key is the label text (from data column), value is the colors
 			colorPalette: {
-				Pending: { color: '#8A6A16', bg: '#FCEDC7' },
+				'pending': { color: '#8A6A16', bg: '#FCEDC7' },
 				'Pay Down': { color: '#0A9458', bg: '#EDFAF4' },
 			},
 		},

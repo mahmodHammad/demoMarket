@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Text } from '@/wrappers';
-import { OTPInput, InfoBox, DateTimePicker } from '@/component';
 import { useRouter } from 'next/navigation';
-import { Modal, IconButton } from '@mui/material';
-import { Close } from '@/assets';
-import { OTP_STATUS, InfoBoxStates } from './LoginModal';
+import { Modal } from '@mui/material';
 import StaticDateTimePicker from '../forms/StaticDateTimePicker';
+import dayjs from 'dayjs';
+import { display } from '@mui/system';
+import { PickersActionBarProps } from '@mui/x-date-pickers/PickersActionBar';
 
 interface Props {
 	isOpen: boolean;
@@ -18,15 +18,17 @@ interface Props {
 }
 
 const DateTimeModal = ({ isOpen, setDate, date, setIsOpen, successFunc }: Props) => {
-	const { push } = useRouter();
-	const [otpCode, setOtpCode] = useState('');
-
 	const handleClose = () => {
 		setIsOpen(false);
 	};
 
-	const handleConfirm = async () => {};
-
+	const handleConfirm = async () => {
+		if (date) {
+			await successFunc();
+		} else {
+			setIsOpen(true);
+		}
+	};
 	return (
 		<Modal
 			open={isOpen}
@@ -36,20 +38,34 @@ const DateTimeModal = ({ isOpen, setDate, date, setIsOpen, successFunc }: Props)
 			<Box column sx={style}>
 				<Box column fullWidth>
 					<Box column gap={'12px'}>
-						<Text primary bold variant='h5'>
+						<Text primary bold variant="h5">
 							Choose Visit Date
 						</Text>
-						<Text variant='body' gray light>
-							Choose Visit Date
+						<Text variant="body" gray light>
+							Select available days and times for this booking
 						</Text>
 					</Box>
 					<Box>
-						<StaticDateTimePicker/>
+						<StaticDateTimePicker
+							disablePast
+							// onClose={handleClose}
+							slotProps={{
+								actionBar: {
+									actions: [],
+								},
+							}}
+							onChange={(e) => setDate(e)}
+							// onAccept={handleConfirm}
+						/>
 					</Box>
-{/* 
-					<Button onClick={handleConfirm} variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
-						Confirm
-					</Button> */}
+					<Box row gap={'10px'}>
+						<Button onClick={() => handleClose()} variant="text" fullWidth size="large" sx={{ mt: '24px' }}>
+							Close
+						</Button>
+						<Button onClick={() => handleConfirm()} variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
+							Done
+						</Button>
+					</Box>
 				</Box>
 			</Box>
 		</Modal>

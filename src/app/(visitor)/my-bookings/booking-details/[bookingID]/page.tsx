@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { AtarColoredLogo } from '@/assets';
 import {
@@ -12,60 +12,35 @@ import { Box, Button } from '@/wrappers';
 import { Container, Grid } from '@mui/material';
 import Link from 'next/link';
 import QR from '@/assets/images/QR.png';
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from '@/wrappers';
 import Image from 'next/image';
-import MapsView from '@/component/Maps/MapsView';
-import MapAdress from '@/component/Maps/MapAdress';
-import { getMyBooking } from '../../booking-service';
+import { editBooking, getMyBooking } from '../../booking-service';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
 import DateTimeModal from '@/component/modals/DateTimeModal';
 
-const photos = [{ src: '@/assets/images/photo1.png', width: 800, height: 600 }];
-
-interface Props {
-	id?: string;
-	photos?: any;
-	propertyName?: string;
-	logo?: any;
-	location?: string;
-	date?: string;
-	managedBy?: string;
-	rentPrice?: string;
-	rentType?: string;
-	aboutUnit?: string;
-	floorPlansCard?: any;
-	area?: string;
-	featuresAmenities?: any;
-	floorFeatures?: any;
-	map?: string;
-}
-const page = ({
-	id,
-	logo,
-	photos,
-	propertyName,
-	location,
-	date,
-	managedBy,
-	rentPrice,
-	rentType,
-	aboutUnit,
-	floorPlansCard,
-	featuresAmenities,
-	floorFeatures,
-	map,
-}: Props) => {
-	const params = useParams()
+const page = () => {
+	const params = useParams();
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [keys.MYBOOKING],
-		queryFn: () =>
-		getMyBooking(params?.bookingID),
+		queryFn: () => getMyBooking(params?.bookingID),
 	});
+	const [isOpen, setIsOpen] = useState(false);
+	const [bookingDate, setBookingDate] = useState(null);
+
+	const editBookings = async () => {
+		if (bookingDate) {
+			let payload = {
+				day: dayjs(bookingDate).format('L'),
+				time: dayjs(bookingDate).format('h:mm:ss'),
+				message: 'Static message',
+			};
+			await editBooking(params?.bookingID, payload);
+		}
+	};
 	return (
 		<>
 			<>
@@ -95,8 +70,8 @@ const page = ({
 										}}
 									/>
 								}
-								title={propertyName || 'Property Name'}
-								location={location || 'Location'}
+								title={data?.unit?.name || 'Property Name'}
+								location={data?.unit?.locationable?.name_en || 'Location'}
 							/>
 							<BookingDetails_timedate
 								logo={
@@ -110,7 +85,7 @@ const page = ({
 								title={''}
 								date={dayjs(data?.booking_date).format('llll')}
 							/>
-							<BookingDetailsInfo />
+							<BookingDetailsInfo data={data} />
 							<Box column mt={'24px'}>
 								<Text variant="h5">QR Code</Text>
 								<Text variant="body1">Scan QR Code to get booking details</Text>
@@ -126,7 +101,7 @@ const page = ({
 								/>
 							</Box>
 							<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
-								<LocationCard />
+								<LocationCard data={data} />
 							</Grid>
 							<Box row gap={'40px'} my="25px">
 								<Button
@@ -144,8 +119,7 @@ const page = ({
 								</Button>
 								<Button
 									variant="contained"
-									component={Link}
-									href="/"
+									onClick={() => setIsOpen(true)}
 									sx={{
 										mt: '24px',
 										height: '52px',
@@ -158,10 +132,16 @@ const page = ({
 							</Box>
 						</Grid>
 						<Grid item contaier xs={12} md={4} display={{ xs: 'none', md: 'flex' }}>
-							<LocationCard />
+							<LocationCard data={data} />
 						</Grid>
 					</Grid>
-					{/* <DateTimeModal isOpen={true}/> */}
+					<DateTimeModal
+						setDate={setBookingDate}
+						date={bookingDate}
+						setIsOpen={setIsOpen}
+						isOpen={isOpen}
+						successFunc={editBookings}
+					/>
 				</Container>
 			</>
 		</>

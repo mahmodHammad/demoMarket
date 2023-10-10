@@ -17,3 +17,13 @@ export const getMyBooking = async (id: any = null) => {
 		console.log('error in getProperties', error);
 	}
 };
+
+export const editBooking = async (id: any = null, payload: any = {}) => {
+	debugger;
+	try {
+		const res = await http.put(`/bookings/${id}`,payload);
+		return res.data.data;
+	} catch (error) {
+		console.log('error in getProperties', error);
+	}
+};
