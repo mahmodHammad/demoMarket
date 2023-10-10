@@ -19,8 +19,8 @@ const data = [
 		title: 'Al-Arid District',
 		img: neibourhoodcover2,
 		link: '/',
-		price: 'SAR 60,000',
-		area: '120 sqm',
+		price: '60,000',
+		area: '120',
 		location: 'Riyadh',
 	},
 	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
@@ -51,7 +51,6 @@ const Properties = () => {
 				button1={'hi'}
 				button2={'hi2'}
 				openPopup={openPopup}
-
 			/>
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
@@ -67,12 +66,12 @@ const Properties = () => {
 					{data?.map((d, index) => (
 						<Grid item xs={4} key={index}>
 							<UnitsCard
-								title={d?.title}
+								title={d?.title || '--'}
 								img={d?.img}
 								// link={d?.link}
-								price={d?.price}
-								area={d?.area}
-								location={d?.location}
+								price={d?.price || '--'}
+								area={d?.area || '--'}
+								location={d?.location || '--'}
 								buttonName="add"
 								onClick={handleClickOpen}
 							/>

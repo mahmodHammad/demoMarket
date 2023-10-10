@@ -205,16 +205,14 @@ export default function UnitsCard({
 				</Box>
 			</Box>
 			<Divider sx={{ mt: '16px', backgroundColor: '#F0F0F0', height: '1px', border: '0px' }}></Divider>
-			<Box sx={{ py: '16px', px: '24px', width: '100%' }}>
+			<Box center sx={{ py: '16px', px: '24px', width: '100%' }}>
 				{onClick ? (
 					<Button
 						variant="outlined"
 						sx={{
-							display: 'dlex',
 							height: '20px',
 							padding: '16px 24px',
-							justifyContent: ' center',
-							alignItems: 'center',
+
 							width: '100%',
 							fontSize: { xs: '12px', md: '14px' },
 						}}>
@@ -225,11 +223,9 @@ export default function UnitsCard({
 						component={Link}
 						variant="outlined"
 						sx={{
-							display: 'dlex',
 							height: '20px',
 							padding: '16px 24px',
-							justifyContent: ' center',
-							alignItems: 'center',
+
 							width: '100%',
 							fontSize: { xs: '12px', md: '14px' },
 						}}

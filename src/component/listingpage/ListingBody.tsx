@@ -79,9 +79,9 @@ const listingBody = ({ isMobileView, openFilterOnMobileView, data, isLoading }: 
 							title={d?.name}
 							img={neibourhoodcover2}
 							// link={d?.link}
-							price={d?.price}
-							area={d?.maps?.districtName}
-							location={d?.maps?.formattedAddress}
+							price={d?.price || '--'}
+							area={d?.maps?.districtName || '--'}
+							location={d?.maps?.formattedAddress || '--'}
 							liked={d?.liked}
 							toggleLike={(id) => {
 								// TODO: handle like and dispatch post req
