@@ -7,7 +7,7 @@ import signupimg from '@/assets/images/herobg.png';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { OTPInput, PhoneInput, PhoneInputController, TextInputController } from '@/component';
+import { PhoneInput, TextInputController } from '@/component';
 import { RadioGroupController as RadioGroup } from '@/component';
 import theme from '@/ThemeRegistry/theme';
 import OTPModal from '@/component/modals/OTPModal';
@@ -47,6 +47,7 @@ const INTRESTED_OPTIONS = [
 ];
 const Signup = () => {
 	const {
+		getValues,
 		control,
 		handleSubmit,
 		formState: { errors },
@@ -64,6 +65,25 @@ const Signup = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [phoneNumber, setPhoneNumber] = useState({});
 
+	const signup = async (data: any) => {
+		await post('/register', {
+			...data,
+			phone_country_code: phoneNumber?.phone_country_code?.id,
+			dial_code: phoneNumber?.phone_country_code?.dial_code,
+			phone_number: phoneNumber?.phone_number,
+		})
+			.then((response) => {
+				console.log('success api signup', response);
+				toast('Signup Successful', { hideProgressBar: true, autoClose: 2000, type: 'success', position: 'top-right' });
+				return Promise.resolve('OK');
+			})
+			.catch((err) => {
+				toast(err.message, { hideProgressBar: true, autoClose: 2000, type: 'error', position: 'top-right' });
+				console.log('error api signup', err.message);
+				return Promise.reject('OK');
+			});
+	};
+
 	const onSubmit = async (data: any) => {
 		if (!phoneNumber?.phone_number) {
 			toast('Please enter phone number', {
@@ -74,21 +94,8 @@ const Signup = () => {
 			});
 			return;
 		}
-		await post('/register', {
-			...data,
-			phone_country_code: phoneNumber?.phone_country_code?.id,
-			dial_code: phoneNumber?.phone_country_code?.dial_code,
-			phone_number: phoneNumber?.phone_number,
-		})
-			.then((response) => {
-				console.log('success api signup', response);
-				toast('Signup Successful', { hideProgressBar: true, autoClose: 2000, type: 'success', position: 'top-right' });
-			})
-			.catch((err) => {
-				toast(err.message, { hideProgressBar: true, autoClose: 2000, type: 'error', position: 'top-right' });
-				console.log('error api signup', err.message);
-			});
-		if (data?.phone_number?.length) {
+
+		if (phoneNumber?.phone_number) {
 			setIsOpen(true);
 		}
 	};
@@ -141,11 +148,20 @@ const Signup = () => {
 									/>
 								</Item>
 								<Item xs={6}>
-									<PhoneInput
-										// value={phoneNumber}
-										label={'Phone Number'}
-										onChange={(e: any) => setPhoneNumber(e)}
-									/>
+									<Container column>
+										<Item>
+											<Text variant="caption" sx={{ float: 'left' }}>
+												Phone
+											</Text>
+										</Item>
+										<Item>
+											<PhoneInput
+												// value={phoneNumber}
+												label={'Phone Number'}
+												onChange={(e: any) => setPhoneNumber(e)}
+											/>
+										</Item>
+									</Container>
 								</Item>
 
 								<Item xs={12}>
@@ -185,7 +201,14 @@ const Signup = () => {
 								</Button>
 							</Item>
 						</Container>
-						{isOpen && <OTPModal isOpen={isOpen} setIsOpen={setIsOpen} mobile={'111'} />}
+						{isOpen && (
+							<OTPModal
+								successFunc={() => signup(getValues())}
+								isOpen={isOpen}
+								setIsOpen={setIsOpen}
+								mobile={`${phoneNumber?.phone_country_code?.dial_code} ${phoneNumber?.phone_number}`}
+							/>
+						)}
 					</Box>
 				</Item>
 			</Container>

@@ -17,9 +17,9 @@ const PhoneInput = ({ value, onChange = () => null, disabled, label, ...otherPro
 	// TODO: customize style
 	return (
 		<>
-			<Text variant="caption" sx={{ float: 'left', mb: '8px', color: `${disabled ? '#CACACA' : ''}` }}>
+			{/* <Text variant="caption" sx={{ float: 'left', mb: '8px', color: `${disabled ? '#CACACA' : ''}` }}>
 				{label}
-			</Text>
+			</Text> */}
 			<div>
 				<ReactPhoneInput
 					// inputStyle={{
