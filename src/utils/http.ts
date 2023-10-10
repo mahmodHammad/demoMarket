@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const baseUrl = process.env.BASE_URL;
+
 type Options = {
 	onSuccess?: (data: any) => void;
 	onError?: (error: Error) => void;

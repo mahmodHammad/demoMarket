@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: any) => {
 
 	const verifyNumber = async (phoneNumber: any) => {
 		const body = {
-			phone_number: phoneNumber.number,
+			phone_number: phoneNumber.phone_number,
 			phone_country_code: phoneNumber.phone_country_code.id,
 			// TODO: integrate privacy and recaptcha_token
 			// privacy_policy_accept :true,
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: any) => {
 
 	const login = async (phoneNumber: any, code: string, vid: string | null) => {
 		const body = {
-			phone_number: phoneNumber.number,
+			phone_number: phoneNumber.phone_number,
 			phone_country_code: phoneNumber.phone_country_code.id,
 			code,
 			vid,

@@ -9,6 +9,9 @@ import neibourhoodcover2 from '@/assets/images/Rectangle 45351.png';
 import UpcomingVisitPlaceholder from '@/assets/icons/UpcomingVisitPlaceholder';
 import UpcomingVisitsCard from '@/component/cards/UpcomingVisitsCard';
 import { data } from './mock'
+import { getMyBookings } from './booking-service';
+import { useQuery } from '@tanstack/react-query';
+import { keys } from '@/utils/keys';
 
 export default function MyBookings() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -24,6 +27,11 @@ export default function MyBookings() {
 	const handleFilter = (id: string) => setFilter(id);
 	const handleSort = (id: string) => setSort(id);
 
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: [keys.MYBOOKINGS],
+		queryFn: () =>
+			getMyBookings(),
+	});
 	useEffect(() => {
 		console.log('bookings table state changed', {
 			search,
@@ -63,7 +71,7 @@ export default function MyBookings() {
 				<Table
 					headers={HEADERS}
 					cellsTypes={CELLS_TYPES}
-					data={data?.data?.data}
+					data={data}
 					filterValues={FilterValues}
 					loading={loading}
 					search={search}
@@ -98,7 +106,7 @@ const HEADERS = ['Property Name', 'Visit Type', 'Visit Date & Time', 'Status', '
 const CELLS_TYPES = [
 	{
 		type: TYPES.STRING, // Type of cell
-		dataKey: 'tenant', // data access key of cell
+		dataKey: 'id', // data access key of cell
 	},
 	{
 		type: TYPES.STRING,
@@ -106,7 +114,7 @@ const CELLS_TYPES = [
 	},
 	{
 		type: TYPES.DATE,
-		dataKey: 'day', // need to add 'time'
+		dataKey: 'booking_date', // need to add 'time'
 	},
 	{
 		type: TYPES.LABEL,
@@ -127,6 +135,7 @@ const CELLS_TYPES = [
 			textColor: 'primary', // OPTIONAL, either semantic or hexa, default is black
 			isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
 			href: '/my-bookings/booking-details', // OPTIONAL: pass it in case it's link,
+			appendID: true, // OPTIONAL: pass it in case it's link,
 			onClick: () => console.log('clicked'), // pass it in case it's not link,
 			sx: { py: 2 },
 		},
