@@ -1,37 +1,44 @@
 'use client';
-
 import { Box, Button, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
 import Link from 'next/link';
-
+import { get } from '@/utils/http';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
-// import { UnitsCard } from '@/component';
-// import { Delete } from '@/assets';
-
 import React, { useState } from 'react';
-import { PopUpCard, UnitsCard } from '@/component';
-import NotificationIcon from '@/assets/icons/Notifications';
+import { AdminPropertiesList, PopUpCard, UnitsCard } from '@/component';
 import Succesgreen from '@/assets/icons/Succesgreen';
 
 const data = [
 	{
-		title: 'Al-Arid District',
+		title: 'Yarmouk Neighbourhood',
+		location: 'AL-khobar',
+		area: '132',
+		price: '250000',
 		img: neibourhoodcover2,
 		link: '/',
-		price: '60,000',
-		area: '120',
-		location: 'Riyadh',
 	},
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
+	{
+		title: 'Yarmouk Neighbourhood',
+		location: 'AL-khobar',
+		area: '132',
+		price: '250000',
+		img: neibourhoodcover2,
+		link: '/',
+	},
+	{
+		title: 'Yarmouk Neighbourhood',
+		location: 'AL-khobar',
+		area: '132',
+		price: '250000',
+		img: neibourhoodcover2,
+		link: '/',
+	},
 	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
 	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
 ];
-const Properties = () => {
+export default function Properties() {
 	const [openPopup, setopenPopup] = useState(false);
 	const handleClickOpen = () => {
 		setopenPopup(true);
@@ -63,6 +70,7 @@ const Properties = () => {
 				</Box>
 
 				<Grid container mt={'25px'} spacing={'28px'}>
+					{/* <AdminPropertiesList /> */}
 					{data?.map((d, index) => (
 						<Grid item xs={4} key={index}>
 							<UnitsCard
@@ -81,5 +89,4 @@ const Properties = () => {
 			</Box>
 		</>
 	);
-};
-export default Properties;
+}
