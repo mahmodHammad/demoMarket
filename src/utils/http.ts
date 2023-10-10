@@ -1,4 +1,5 @@
 import axios from 'axios';
+const baseUrl = process.env.BASE_URL;
 
 type Options = {
 	onSuccess?: (data: any) => void;
@@ -8,9 +9,6 @@ type Options = {
 export const get = async (url: string, options: Options = {}) => {
 	const baseUrl = process.env.BASE_URL;
 	const xTenant = process.env.X_TENANT;
-	console.log('baseUrl', baseUrl)
-	console.log('xTenant', xTenant)
-
 	try {
 		const requestOptions: any = {
 			headers: {

@@ -89,7 +89,7 @@ const TableBody = ({ data, cellsTypes }: any) => (
 							<Button
 								variant={c.options?.variant}
 								component={c.options?.isLink ? Link : 'button'}
-								href={c.options?.isLink && c.options?.href}
+								href={c.options?.isLink && `${c.options?.href}${c.options?.appendID && '/'+row?.id }`}
 								onClick={!c.options?.isLink && c.options?.onClick}
 								fullWidth={false}
 								sx={{ height: '38px', ...c.options?.sx }}>

@@ -1,15 +1,15 @@
+'use client'
+
 import { AtarColoredLogo } from '@/assets';
 import {
 	BookingDetails_timedate,
 	BookingDetails_uhitHeader,
 	BookingDetailsInfo,
-	BuyNowCard,
-	date,
 	LocationCard,
 	QuiltedImageList,
 } from '@/component';
-import { Box, Button, Item } from '@/wrappers';
-import { Card, Container, Grid } from '@mui/material';
+import { Box, Button } from '@/wrappers';
+import { Container, Grid } from '@mui/material';
 import Link from 'next/link';
 import QR from '@/assets/images/QR.png';
 
@@ -18,6 +18,13 @@ import { Text } from '@/wrappers';
 import Image from 'next/image';
 import MapsView from '@/component/Maps/MapsView';
 import MapAdress from '@/component/Maps/MapAdress';
+import { getMyBooking } from '../../booking-service';
+import { useQuery } from '@tanstack/react-query';
+import { keys } from '@/utils/keys';
+import { useParams } from 'next/navigation';
+import dayjs from 'dayjs';
+import DateTimeModal from '@/component/modals/DateTimeModal';
+
 const photos = [{ src: '@/assets/images/photo1.png', width: 800, height: 600 }];
 
 interface Props {
@@ -53,6 +60,12 @@ const page = ({
 	floorFeatures,
 	map,
 }: Props) => {
+	const params = useParams()
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: [keys.MYBOOKING],
+		queryFn: () =>
+		getMyBooking(params?.bookingID),
+	});
 	return (
 		<>
 			<>
@@ -95,7 +108,7 @@ const page = ({
 									/>
 								}
 								title={''}
-								date={date || 'Today at 11:00 PM'}
+								date={dayjs(data?.booking_date).format('llll')}
 							/>
 							<BookingDetailsInfo />
 							<Box column mt={'24px'}>
@@ -148,6 +161,7 @@ const page = ({
 							<LocationCard />
 						</Grid>
 					</Grid>
+					{/* <DateTimeModal isOpen={true}/> */}
 				</Container>
 			</>
 		</>

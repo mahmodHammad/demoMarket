@@ -1,3 +1,5 @@
-export const keys =  {
-  properties: "properties"
-}
+export const keys = {
+	properties: 'properties',
+	MYBOOKINGS: 'MYBOOKINGS',
+	MYBOOKING: 'MYBOOKING',
+};

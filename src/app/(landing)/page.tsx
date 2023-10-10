@@ -4,7 +4,7 @@ import RecentlyAdded from '@/component/pages/homepage/RecentlyAdded';
 import { Box } from '@/wrappers';
 import { Container } from '@mui/material';
 
-export default function Home() {
+export default async function Home() {
 	return (
 		<Box>
 			<Hero />
