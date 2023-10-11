@@ -8,6 +8,7 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import { Filter } from '@/assets';
 import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { useAuth } from '@/contexts/AuthContext';
+import CardSkeleton from '../cards/CardSkeleton';
 
 type Props = {
 	isMobileView?: boolean;
@@ -44,7 +45,6 @@ const listingBody = ({
 		toggleLike(body);
 	};
 
-	if (isLoading) return <Loading />;
 	return (
 		<Box column fullWidth>
 			<Text variant="h4">Properties in Saudi Arabia</Text>
@@ -63,23 +63,34 @@ const listingBody = ({
 				</Box>
 			)}
 			{/* // TODO: map data to UI card */}
-			<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
-				{data?.list?.map((d: any, index: number) => (
-					<Grid item xs={12} md={6} key={index}>
-						<UnitsCard
-							id={d?.id}
-							title={d?.name}
-							img={neibourhoodcover2}
-							// link={d?.link}
-							price={d?.price}
-							area={d?.maps?.districtName}
-							location={d?.maps?.formattedAddress}
-							liked={d?.is_fav}
-							toggleLike={handleLikeToggle}
-						/>
-					</Grid>
-				))}
-			</Grid>
+			{isLoading ? (
+				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
+					{Array.from({ length: 8 }).map((_, index: number) => (
+						<Grid item xs={12} md={6} key={index}>
+							<CardSkeleton height={'inherit'} />
+						</Grid>
+					))}
+				</Grid>
+			) : (
+				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
+					{data?.list?.map((d: any, index: number) => (
+						<Grid item xs={12} md={6} key={index}>
+							<UnitsCard
+								id={d?.id}
+								title={d?.name}
+								img={neibourhoodcover2}
+								// link={d?.link}
+								price={d?.price}
+								area={d?.maps?.districtName}
+								location={d?.maps?.formattedAddress}
+								liked={d?.is_fav}
+								toggleLike={handleLikeToggle}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			)}
+
 			{data?.paginator && (
 				<Pagination
 					page={+page}
