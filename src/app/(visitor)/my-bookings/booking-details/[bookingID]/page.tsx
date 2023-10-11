@@ -10,27 +10,52 @@ import {
 } from '@/component';
 import { Box, Button } from '@/wrappers';
 import { Container, Grid } from '@mui/material';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import QR from '@/assets/images/QR.png';
 import React, { useState } from 'react';
 import { Text } from '@/wrappers';
 import Image from 'next/image';
-import { editBooking, getMyBooking } from '../../booking-service';
+import { cancelBooking, editBooking, getMyBooking } from '../../booking-service';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
 import DateTimeModal from '@/component/modals/DateTimeModal';
+import { toast } from 'react-toastify';
+import ConfirmAction from '@/component/modals/ConfirmAction';
 
 const page = () => {
+	const { push } = useRouter();
 	const params = useParams();
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [keys.MYBOOKING],
 		queryFn: () => getMyBooking(params?.bookingID),
 	});
 	const [isOpen, setIsOpen] = useState(false);
+	const [cancelConfirmOpen, setCancelConfirmOpen] = useState(false);
 	const [bookingDate, setBookingDate] = useState(null);
 
+	const cancelBookings = async () => {
+		await cancelBooking(params?.bookingID)
+			.then((response) => {
+				toast('Booking Cancelled Successful', {
+					hideProgressBar: true,
+					autoClose: 2000,
+					type: 'success',
+					position: 'top-right',
+				});
+				setCancelConfirmOpen(false);
+				push('/my-bookings');
+			})
+			.catch((err) => {
+				toast('Please try later', {
+					hideProgressBar: true,
+					autoClose: 2000,
+					type: 'error',
+					position: 'top-right',
+				});
+			});
+	};
 	const editBookings = async () => {
 		if (bookingDate) {
 			let payload = {
@@ -38,7 +63,23 @@ const page = () => {
 				time: dayjs(bookingDate).format('h:mm:ss'),
 				message: 'Static message',
 			};
-			await editBooking(params?.bookingID, payload);
+			await editBooking(params?.bookingID, payload)
+				.then((response) => {
+					toast('Booking Edited Successful', {
+						hideProgressBar: true,
+						autoClose: 2000,
+						type: 'success',
+						position: 'top-right',
+					});
+				})
+				.catch((err) => {
+					toast('Please try later', {
+						hideProgressBar: true,
+						autoClose: 2000,
+						type: 'error',
+						position: 'top-right',
+					});
+				});
 		}
 	};
 	return (
@@ -106,8 +147,7 @@ const page = () => {
 							<Box row gap={'40px'} my="25px">
 								<Button
 									variant="dangerOutlined"
-									component={Link}
-									href="/"
+									onClick={() => setCancelConfirmOpen(true)}
 									sx={{
 										mt: '24px',
 										height: '52px',
@@ -141,6 +181,13 @@ const page = () => {
 						setIsOpen={setIsOpen}
 						isOpen={isOpen}
 						successFunc={editBookings}
+					/>
+					<ConfirmAction
+						handleClose={() => setCancelConfirmOpen(false)}
+						title={'Confirm Cancel Action'}
+						body={'Please confirm to cancel this booking.'}
+						isOpen={cancelConfirmOpen}
+						confirmFunc={cancelBookings}
 					/>
 				</Container>
 			</>

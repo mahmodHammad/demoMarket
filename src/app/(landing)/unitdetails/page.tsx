@@ -11,7 +11,7 @@ import {
 	UnitMap,
 } from '@/component';
 import { Container, Grid } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
@@ -83,9 +83,8 @@ export default function page({
 	floorFeatures,
 	map,
 }: Props) {
-	const [open, setOpen] = React.useState(false);
-	const [index, setIndex] = React.useState(-1);
-
+	const [open, setOpen] = useState(false);
+	const [index, setIndex] = useState(-1);
 	return (
 		<>
 			<Container maxWidth="xl">
