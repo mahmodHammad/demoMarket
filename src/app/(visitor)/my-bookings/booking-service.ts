@@ -43,7 +43,6 @@ export const cancelBooking = async (id: any = null) => {
 export const createBooking = async (payload: any = {}) => {
 	try {
 		const res = await http.post(`/bookings`, payload);
-		console.log(res);
 		return res.data.data;
 	} catch (error) {
 		console.log('error in getProperties', error);

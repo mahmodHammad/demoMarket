@@ -60,7 +60,7 @@ const page = () => {
 		if (bookingDate) {
 			let payload = {
 				day: dayjs(bookingDate).format('L'),
-				time: dayjs(bookingDate).format('h:mm:ss'),
+				time: dayjs(bookingDate).format('HH:mm:ss'),
 				message: 'Static message',
 			};
 			await editBooking(params?.bookingID, payload)
@@ -71,6 +71,8 @@ const page = () => {
 						type: 'success',
 						position: 'top-right',
 					});
+					setIsOpen(false);
+					refetch();
 				})
 				.catch((err) => {
 					toast('Please try later', {

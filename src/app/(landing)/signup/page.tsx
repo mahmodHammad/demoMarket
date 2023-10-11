@@ -11,8 +11,10 @@ import { PhoneInput, TextInputController } from '@/component';
 import { RadioGroupController as RadioGroup } from '@/component';
 import theme from '@/ThemeRegistry/theme';
 import OTPModal from '@/component/modals/OTPModal';
-import { post } from '@/utils/http';
 import { toast } from 'react-toastify';
+import { register, sendVerificationSignup } from './signup-services';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const schema = yup.object().shape({
 	name: yup.string().required('Full Name is required'),
@@ -63,25 +65,61 @@ const Signup = () => {
 	});
 
 	const [isOpen, setIsOpen] = useState(false);
+	const [vid, setVid] = useState(null);
 	const [phoneNumber, setPhoneNumber] = useState({});
+	const { login } = useAuth();
+	const { push } = useRouter();
 
-	const signup = async (data: any) => {
-		await post('/register', {
-			...data,
-			phone_country_code: phoneNumber?.phone_country_code?.id,
-			dial_code: phoneNumber?.phone_country_code?.dial_code,
-			phone_number: phoneNumber?.phone_number,
-		})
+	const verifyAndSendOTP = async (payload: {}) => {
+		await sendVerificationSignup(payload)
 			.then((response) => {
-				console.log('success api signup', response);
+				setVid(response?.data?.id);
+				setIsOpen(true);
+			})
+			.catch((err) => {
+				let msg = err?.response?.data?.message || 'Please try later';
+				toast(msg, {
+					hideProgressBar: true,
+					autoClose: 2000,
+					type: 'error',
+					position: 'top-right',
+				});
+				return;
+			});
+	};
+
+	const verifyOTPandRegister = async (payload, otp) => {
+		await register(payload)
+			.then(async (response) => {
 				toast('Signup Successful', { hideProgressBar: true, autoClose: 2000, type: 'success', position: 'top-right' });
+				await login(phoneNumber, otp, vid).then((response) => {
+					push('/my-bookings');
+				});
 				return Promise.resolve('OK');
 			})
 			.catch((err) => {
-				toast(err.message, { hideProgressBar: true, autoClose: 2000, type: 'error', position: 'top-right' });
+				toast(err?.response?.data?.message || 'Please try later', {
+					hideProgressBar: true,
+					autoClose: 2000,
+					type: 'error',
+					position: 'top-right',
+				});
 				console.log('error api signup', err.message);
 				return Promise.reject('OK');
 			});
+	};
+
+	const signup = async (otp: any) => {
+		const data = getValues();
+		let payload = {
+			...data,
+			code: otp,
+			vid,
+			phone_country_code: phoneNumber?.phone_country_code?.id,
+			dial_code: phoneNumber?.phone_country_code?.dial_code,
+			phone_number: phoneNumber?.phone_number,
+		};
+		await verifyOTPandRegister(payload, otp);
 	};
 
 	const onSubmit = async (data: any) => {
@@ -94,10 +132,12 @@ const Signup = () => {
 			});
 			return;
 		}
-
-		if (phoneNumber?.phone_number) {
-			setIsOpen(true);
-		}
+		let payload = {
+			phone_country_code: phoneNumber?.phone_country_code?.id,
+			phone_number: phoneNumber?.phone_number,
+			...data,
+		};
+		await verifyAndSendOTP(payload);
 	};
 
 	return (
@@ -163,7 +203,6 @@ const Signup = () => {
 											/>
 										</Item>
 									</Container>
-
 								</Item>
 
 								<Item xs={12}>
@@ -196,7 +235,6 @@ const Signup = () => {
 									<b> Terms of Use </b> and <b> Privacy Policy</b>
 								</Text>
 							</Item>
-
 							<Item xs={12} md={12}>
 								<Button type="submit" variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
 									sign up
@@ -205,10 +243,11 @@ const Signup = () => {
 						</Container>
 						{isOpen && (
 							<OTPModal
-								successFunc={() => signup(getValues())}
+								resendOtp={() => onSubmit(getValues())}
+								successFunc={signup}
 								isOpen={isOpen}
 								setIsOpen={setIsOpen}
-								mobile={`${phoneNumber?.phone_country_code?.dial_code} ${phoneNumber?.phone_number}`}
+								mobile={phoneNumber}
 							/>
 						)}
 					</Box>

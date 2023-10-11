@@ -22,7 +22,7 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 		if (bookingDate) {
 			let payload = {
 				day: dayjs(bookingDate).format('L'),
-				time: dayjs(bookingDate).format('h:mm:ss'),
+				time: dayjs(bookingDate).format('HH:mm:ss'),
 				message: 'Static message',
 			};
 			await createBooking(payload)
@@ -33,6 +33,7 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 						type: 'success',
 						position: 'top-right',
 					});
+					setBookingDateOpen(false);
 				})
 				.catch((err) => {
 					toast('Please try later', {
