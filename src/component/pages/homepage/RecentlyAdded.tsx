@@ -9,15 +9,11 @@ import { get } from '@/utils/http';
 export default async function RecentlyAdded() {
 	const url = '/properties';
 	const response = await get(url);
-	const dataArray = response.data.data; // Get the array of objects
-	dataArray.forEach((item, index) => {
-		const name = item.name;
-		const location = item.data.city_id && item.data.city_id.name;
-		const area = item.data.unit_size;
-	});
+	const dataArray = response?.data?.data; // Get the array of objects
+
 	const slicedDataArray = dataArray;
 
-	const data = slicedDataArray.map((item) => {
+	const data = slicedDataArray?.map((item) => {
 		return {
 			title: item?.name || '--',
 			location: (item?.data?.city_id && item?.data?.city_id?.name) || '--',

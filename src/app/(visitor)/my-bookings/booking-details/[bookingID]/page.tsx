@@ -146,32 +146,34 @@ const page = () => {
 							<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
 								<LocationCard data={data} />
 							</Grid>
-							<Box row gap={'40px'} my="25px">
-								<Button
-									variant="dangerOutlined"
-									onClick={() => setCancelConfirmOpen(true)}
-									sx={{
-										mt: '24px',
-										height: '52px',
-										padding: '12px 24px',
-										width: '255px',
-										borderRadius: '8px',
-									}}>
-									Cancel Booking
-								</Button>
-								<Button
-									variant="contained"
-									onClick={() => setIsOpen(true)}
-									sx={{
-										mt: '24px',
-										height: '52px',
-										padding: '12px 24px',
-										width: '255px',
-										borderRadius: '8px',
-									}}>
-									Edit Booking
-								</Button>
-							</Box>
+							{data?.booking_status !== 'cancel' && (
+								<Box row gap={'40px'} my="25px">
+									<Button
+										variant="dangerOutlined"
+										onClick={() => setCancelConfirmOpen(true)}
+										sx={{
+											mt: '24px',
+											height: '52px',
+											padding: '12px 24px',
+											width: '255px',
+											borderRadius: '8px',
+										}}>
+										Cancel Booking
+									</Button>
+									<Button
+										variant="contained"
+										onClick={() => setIsOpen(true)}
+										sx={{
+											mt: '24px',
+											height: '52px',
+											padding: '12px 24px',
+											width: '255px',
+											borderRadius: '8px',
+										}}>
+										Edit Booking
+									</Button>
+								</Box>
+							)}
 						</Grid>
 						<Grid item contaier xs={12} md={4} display={{ xs: 'none', md: 'flex' }}>
 							<LocationCard data={data} />

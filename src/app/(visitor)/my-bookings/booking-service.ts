@@ -32,7 +32,7 @@ export const editBooking = async (id: any = null, payload: any = {}) => {
 
 export const cancelBooking = async (id: any = null) => {
 	try {
-		const res = await http.delete(`/bookings/${id}`);
+		const res = await http.put(`/bookings/cancel/${id}`);
 		return res.data.data;
 	} catch (error) {
 		console.log('error in getProperties', error);

@@ -17,7 +17,7 @@ const Carousel = ({ items }: Props) => {
   const [thumbAnimation, setThumbAnimation] = useState(false);
 
   const thumbItems = (items: any, [setThumbIndex, setThumbAnimation]: any) => {
-    return items.map((item: any, i: number) => (
+    return items?.map((item: any, i: number) => (
       <div
         key={i}
         className="thumb"
@@ -100,7 +100,7 @@ const Carousel = ({ items }: Props) => {
           <LeftIcon sx={{ fontSize: "30px" }} />
         </IconButton>
 
-        {thumbIndex < items.length - 2 && (
+        {thumbIndex < items?.length - 2 && (
           <IconButton
             aria-label="slide right to see properties"
             aria-haspopup="true"
