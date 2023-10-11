@@ -32,7 +32,7 @@ export default function HomeCardsContainer({ title, body, link, data, hasneighbo
 					mt: { md: '34px', xs: '22px', width: '100%' },
 				}}>
 				<Carousel
-					items={data.map((d: any, index: number) => (
+					items={data?.map((d: any, index: number) => (
 						<Box
 							key={index}
 							sx={{

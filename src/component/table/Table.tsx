@@ -47,14 +47,14 @@ export default function Table({
 	handleSort = () => null,
 }: TableProps) {
 	return (
-		<Box sx={{  }}>
+		<Box sx={{}}>
 			<PaginatedResourcesTable
 				Table={() => (
 					<DataTable
 						headerData={headers}
 						isLoading={loading}
 						isEmpty={!data?.length}
-						Pagination={() => <PaginationWrapper count={data?.length} page={currentPage} handler={handlePagination} />}
+						Pagination={() => <PaginationWrapper count={data?.paginator?.last_page} page={currentPage} handler={handlePagination} />}
 						Filters={() => (
 							<>
 								<Search search={search} handleSearch={handleSearch} />
@@ -89,11 +89,10 @@ const TableBody = ({ data, cellsTypes }: any) => (
 							<Button
 								variant={c.options?.variant}
 								component={c.options?.isLink ? Link : 'button'}
-								href={c.options?.isLink && `${c.options?.href}${c.options?.appendID && '/'+row?.id }`}
+								href={c.options?.isLink && `${c.options?.href}${c.options?.appendID && '/' + row?.id}`}
 								onClick={!c.options?.isLink && c.options?.onClick}
 								fullWidth={false}
 								sx={{ height: '38px', ...c.options?.sx }}>
-
 								<Text color={c.options?.textColor} sx={{ fontWeight: 'bold' }}>
 									{c.options?.title}
 								</Text>
@@ -115,6 +114,6 @@ const Label = ({ status, labelPalette }: { status: string; labelPalette: any }) 
 			padding: '10px',
 			fontWeight: 500,
 		}}>
-		{status}
+		<span style={{ textTransform: 'capitalize' }}>{status}</span>
 	</span>
 );

@@ -71,7 +71,7 @@ export default function ForSale() {
 						width: '100%',
 					}}
 					column>
-					<Text
+					{/* <Text
 						variant="small"
 						sx={{
 							color: '#fff',
@@ -107,7 +107,7 @@ export default function ForSale() {
 							fontWeight: '700',
 						}}>
 						Schedule a Visit
-					</Button>
+					</Button> 
 				</Box> */}
 			</Box>
 		</>

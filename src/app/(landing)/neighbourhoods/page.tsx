@@ -9,16 +9,9 @@ export default async function Home() {
 	const url = '/complexes';
 	const response = await get(url);
 	// console.log('Data from server:', response); // check data at terminal
-	const dataArray = response.data.data; // Get the array of objects
-	dataArray.forEach((item, index) => {
-		const name = item.name;
-		// Pretty-print each object using JSON.stringify
-		const objectAsString = JSON.stringify(item, null, 2);
-		//console.log(`Object ${index + 1}:`);
-		//console.log(name);
-	});
+	const dataArray = response?.data?.data; // Get the array of objects
 
-	const data = dataArray.map((item) => {
+	const data = dataArray?.map((item) => {
 		return { title: item.name, img: neigbourhoodCover, link: '/' };
 	});
 
@@ -30,7 +23,7 @@ export default async function Home() {
 					<Text variant="h3">
 						Neighbourhoods
 						<Text variant="body" component="span" sx={{ display: 'inline' }}>
-							({data.length})
+							({data?.length})
 						</Text>
 					</Text>
 					<Button
@@ -50,7 +43,7 @@ export default async function Home() {
 						mt: { md: '53px', xs: '22px' },
 						px: { md: '0px', xs: '12px' },
 					}}>
-					{data.map((d, index) => (
+					{data?.map((d, index) => (
 						<Item md={4} xs={6} key={index}>
 							<NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
 						</Item>
