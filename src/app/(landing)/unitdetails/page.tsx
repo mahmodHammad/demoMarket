@@ -38,17 +38,7 @@ const amenityData = [
 	{ title: 'Pool', icon: <Room />, value: data?.data?.data?.bedrooms },
 	{ title: 'Pool', icon: <Room />, value: data?.data?.data?.lounges },
 ];
-const images = [
-	photo1,
-	photo2,
-	photo3,
-	photo3,
-	photo3,
-	photo3,
-	photo3,
-	photo3,
-	// ...
-];
+const images = [photo1, photo2, photo3, photo3];
 
 interface Props {
 	id?: string;

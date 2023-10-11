@@ -23,7 +23,7 @@ export default async function Neighbourhoods() {
 	});
 	const slicedDataArray = dataArray.slice(0, 6);
 	const data = slicedDataArray.map((item) => {
-		return { title: item.name, img: neigbourhoodCover, link: '/' };
+		return { title: item?.name, img: neigbourhoodCover, link: '/' };
 	});
 
 	return (

@@ -1,9 +1,12 @@
-import React from 'react';
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
-import HomeCardsContainer from './HomeCardsContainer';
-import { get } from '@/utils/http';
+'use client';
 
-export default async function MostViewed() {
+import React from 'react';
+import { get } from '@/utils/http';
+import { Grid } from '@mui/material';
+import UnitsCard from '../cards/UnitsCard';
+import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
+
+export default async function AdminPropertiesList() {
 	const url = '/properties/most-view';
 	const response = await get(url);
 	const dataArray = response.data.data; // Get the array of objects
@@ -24,11 +27,21 @@ export default async function MostViewed() {
 		};
 	});
 	return (
-		<HomeCardsContainer
-			data={data}
-			title="Most Viewed Properties"
-			body="Discover our most viewed exclusive selection in properties  "
-			link="/"
-		/>
+		<>
+			{data?.map((d, index) => (
+				<Grid item xs={4} key={index}>
+					<UnitsCard
+						title={d?.title || '--'}
+						img={d?.img}
+						// link={d?.link}
+						price={d?.price || '--'}
+						area={d?.area || '--'}
+						location={d?.location || '--'}
+						buttonName="add"
+						// onClick={handleClickOpen}
+					/>
+				</Grid>
+			))}
+		</>
 	);
 }
