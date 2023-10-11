@@ -11,10 +11,10 @@ import { PhoneInput, TextInputController } from '@/component';
 import { RadioGroupController as RadioGroup } from '@/component';
 import theme from '@/ThemeRegistry/theme';
 import OTPModal from '@/component/modals/OTPModal';
-import { toast } from 'react-toastify';
 import { register, sendVerificationSignup } from './signup-services';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { globalToast } from '@/utils/toast';
 
 const schema = yup.object().shape({
 	name: yup.string().required('Full Name is required'),
@@ -73,17 +73,12 @@ const Signup = () => {
 	const verifyAndSendOTP = async (payload: {}) => {
 		await sendVerificationSignup(payload)
 			.then((response) => {
-				setVid(response?.data?.id);
+				setVid(response?.id);
 				setIsOpen(true);
 			})
 			.catch((err) => {
 				let msg = err?.response?.data?.message || 'Please try later';
-				toast(msg, {
-					hideProgressBar: true,
-					autoClose: 2000,
-					type: 'error',
-					position: 'top-right',
-				});
+				globalToast(msg, 'error');
 				return;
 			});
 	};
@@ -91,19 +86,15 @@ const Signup = () => {
 	const verifyOTPandRegister = async (payload, otp) => {
 		await register(payload)
 			.then(async (response) => {
-				toast('Signup Successful', { hideProgressBar: true, autoClose: 2000, type: 'success', position: 'top-right' });
+				globalToast('Signup Successful', 'success');
 				await login(phoneNumber, otp, vid).then((response) => {
 					push('/my-bookings');
 				});
 				return Promise.resolve('OK');
 			})
 			.catch((err) => {
-				toast(err?.response?.data?.message || 'Please try later', {
-					hideProgressBar: true,
-					autoClose: 2000,
-					type: 'error',
-					position: 'top-right',
-				});
+				let msg = err?.response?.data?.message || 'Please try later';
+				globalToast(msg, 'error');
 				console.log('error api signup', err.message);
 				return Promise.reject('OK');
 			});
@@ -124,12 +115,7 @@ const Signup = () => {
 
 	const onSubmit = async (data: any) => {
 		if (!phoneNumber?.phone_number) {
-			toast('Please enter phone number', {
-				hideProgressBar: true,
-				autoClose: 2000,
-				type: 'error',
-				position: 'top-right',
-			});
+			globalToast('Please enter phone number', 'error');
 			return;
 		}
 		let payload = {

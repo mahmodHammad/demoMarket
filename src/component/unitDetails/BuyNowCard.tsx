@@ -7,8 +7,8 @@ import { Divider } from '@mui/material';
 import { BuyNowIcon } from '@/assets';
 import DateTimeModal from '../modals/DateTimeModal';
 import dayjs from 'dayjs';
-import { toast } from 'react-toastify';
 import { createBooking } from '@/app/(visitor)/my-bookings/booking-service';
+import { globalToast } from '@/utils/toast';
 
 interface proptypes {
 	price: string;
@@ -27,21 +27,11 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 			};
 			await createBooking(payload)
 				.then((response) => {
-					toast('Booking Edited Successful', {
-						hideProgressBar: true,
-						autoClose: 2000,
-						type: 'success',
-						position: 'top-right',
-					});
+					globalToast('Booking Edited Successful', 'success');
 					setBookingDateOpen(false);
 				})
 				.catch((err) => {
-					toast('Please try later', {
-						hideProgressBar: true,
-						autoClose: 2000,
-						type: 'error',
-						position: 'top-right',
-					});
+					globalToast('Please try later', 'error');
 				});
 		}
 	};

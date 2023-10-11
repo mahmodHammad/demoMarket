@@ -21,8 +21,8 @@ import { keys } from '@/utils/keys';
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
 import DateTimeModal from '@/component/modals/DateTimeModal';
-import { toast } from 'react-toastify';
 import ConfirmAction from '@/component/modals/ConfirmAction';
+import { globalToast } from '@/utils/toast';
 
 const page = () => {
 	const { push } = useRouter();
@@ -38,22 +38,12 @@ const page = () => {
 	const cancelBookings = async () => {
 		await cancelBooking(params?.bookingID)
 			.then((response) => {
-				toast('Booking Cancelled Successful', {
-					hideProgressBar: true,
-					autoClose: 2000,
-					type: 'success',
-					position: 'top-right',
-				});
+				globalToast('Booking Cancelled Successful', 'success');
 				setCancelConfirmOpen(false);
 				push('/my-bookings');
 			})
 			.catch((err) => {
-				toast('Please try later', {
-					hideProgressBar: true,
-					autoClose: 2000,
-					type: 'error',
-					position: 'top-right',
-				});
+				globalToast('Please try later', 'error');
 			});
 	};
 	const editBookings = async () => {
@@ -65,22 +55,12 @@ const page = () => {
 			};
 			await editBooking(params?.bookingID, payload)
 				.then((response) => {
-					toast('Booking Edited Successful', {
-						hideProgressBar: true,
-						autoClose: 2000,
-						type: 'success',
-						position: 'top-right',
-					});
+					globalToast('Booking Edited Successful', 'success');
 					setIsOpen(false);
 					refetch();
 				})
 				.catch((err) => {
-					toast('Please try later', {
-						hideProgressBar: true,
-						autoClose: 2000,
-						type: 'error',
-						position: 'top-right',
-					});
+					globalToast('Please try later', 'error');
 				});
 		}
 	};

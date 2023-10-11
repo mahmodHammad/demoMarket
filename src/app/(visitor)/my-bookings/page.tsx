@@ -144,7 +144,7 @@ const CELLS_TYPES = [
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {
 	'Filter by status': [
-		{ name: 'Pay Down', value: true, id: 'Pay Down', status: 18 },
-		{ name: 'Pending', value: true, id: 'Completed', status: 3 },
+		{ name: 'Cancel', value: true, id: 'Cancel', status: 18 },
+		{ name: 'Pending', value: true, id: 'Pending', status: 3 },
 	],
 };
