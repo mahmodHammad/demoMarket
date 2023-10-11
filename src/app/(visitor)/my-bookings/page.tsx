@@ -39,7 +39,8 @@ export default function MyBookings() {
 			filter,
 			sort,
 		});
-	}, [search, currentPage, status, filter, sort]);
+		console.log(data,'shreyas')
+	}, [search, currentPage, status, filter, sort, data]);
 
 	return (
 		<>
@@ -69,7 +70,7 @@ export default function MyBookings() {
 				<Table
 					headers={HEADERS}
 					cellsTypes={CELLS_TYPES}
-					data={data}
+					data={data?.list}
 					filterValues={FilterValues}
 					loading={loading}
 					search={search}
@@ -121,7 +122,7 @@ const CELLS_TYPES = [
 			// label colors based on value, key is the label text (from data column), value is the colors
 			colorPalette: {
 				'pending': { color: '#8A6A16', bg: '#FCEDC7' },
-				'Pay Down': { color: '#0A9458', bg: '#EDFAF4' },
+				'cancel': { color: '#FF4242', bg: '#FFE5E5' },
 			},
 		},
 	},

@@ -54,7 +54,7 @@ export default function Table({
 						headerData={headers}
 						isLoading={loading}
 						isEmpty={!data?.length}
-						Pagination={() => <PaginationWrapper count={data?.length} page={currentPage} handler={handlePagination} />}
+						Pagination={() => <PaginationWrapper count={data?.paginator?.last_page} page={currentPage} handler={handlePagination} />}
 						Filters={() => (
 							<>
 								<Search search={search} handleSearch={handleSearch} />
