@@ -27,6 +27,8 @@ type Props = {
 	setPetFriendly: any;
 	areaSliderValues: any;
 	setAreaSliderValues: any;
+	availabilityFilters: any;
+	setAvailabilityFilters: any;
 };
 
 const PropertyFilters = ({
@@ -48,6 +50,8 @@ const PropertyFilters = ({
 	setPetFriendly,
 	areaSliderValues,
 	setAreaSliderValues,
+	availabilityFilters,
+	setAvailabilityFilters,
 }: Props) => {
 	const theme: any = useTheme();
 
@@ -214,8 +218,12 @@ const PropertyFilters = ({
 					defaultExpanded={!isMobileView}
 					header="Availability"
 					filterName="availability"
-					filters={AccordionFilters.availability}
-					onFilterStateChange={handleFiltersState}
+					filters={availabilityFilters}
+					onFilterStateChange={(_, v) =>
+						setAvailabilityFilters((prev: any) =>
+							prev.map((f: any) => (+f.id === +v ? { ...f, checked: !f.checked } : f)),
+						)
+					}
 				/>
 			</Box>
 

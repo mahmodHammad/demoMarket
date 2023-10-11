@@ -5,7 +5,6 @@ import { Grid, Container, Slide } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ListingBody, PropertyFilters } from '@/component';
-// import { data } from './mock';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
 import { getProperties } from './listing-service';
@@ -22,7 +21,13 @@ export default function page() {
 
 	const searchParams = useSearchParams();
 
+	const [renderedData, setRenderedData] = useState(null);
+
 	const [AccordionFilters, setAccordionFilters] = useState(FILTERS);
+
+	const [availabilityFilters, setAvailabilityFilters] = useState(FILTERS.availability);
+
+	const [page, setPage] = useState<number>((searchParams?.get('page') as unknown as number) || 1);
 
 	const [locationSearch, setLocationSearch] = useState<string>(
 		(searchParams?.get('locationSearch') as unknown as string) || '',
@@ -52,32 +57,27 @@ export default function page() {
 		queryFn: () =>
 			getProperties({
 				params: {
-					noOfBathrooms,
-					noOfBedrooms,
-					noOfGuestrooms,
+					page,
+					noOfBathrooms: +noOfBathrooms === 0 ? null : noOfBathrooms,
+					noOfBedrooms: +noOfBedrooms === 0 ? null : noOfBedrooms,
+					noOfGuestrooms: +noOfGuestrooms === 0 ? null : noOfGuestrooms,
 					petFriendly: petFriendly ? '1' : '0',
+					availability: availabilityFilters.filter((f) => f.checked).map((f) => f.value),
+					budgeRange: budgetSliderValues,
+					areaRange: areaSliderValues,
 					// TODO: check rest of filters on BE, and pass params
 				},
 			}),
 	});
 
 	useEffect(() => {
-		// const filtersState = {
-		// 	noOfBedrooms,
-		// 	noOfBathrooms,
-		// 	petFriendly,
-		// 	budgeRange: budgetSliderValues,
-		// 	areaRange: areaSliderValues,
-		// 	location: AccordionFilters.location.filter((f) => f.checked).map((f) => f.id),
-		// 	propertyType: AccordionFilters.propertyType.filter((f) => f.checked).map((f) => f.id),
-		// 	amenities: AccordionFilters.amenities.filter((f) => f.checked).map((f) => f.id),
-		// 	furnishingStatus: AccordionFilters.furnishingStatus.filter((f) => f.checked).map((f) => f.id),
-		// 	dateListed: AccordionFilters.dateListed.filter((f) => f.checked).map((f) => f.id),
-		// 	availability: AccordionFilters.availability.filter((f) => f.checked).map((f) => f.id),
-		// };
+		setRenderedData(data);
+	}, [data]);
 
+	useEffect(() => {
 		const newSearchParams = new URLSearchParams(searchParams?.toString());
 
+		newSearchParams.set('page', page.toString());
 		newSearchParams.set('bedrooms', noOfBedrooms.toString());
 		newSearchParams.set('bathrooms', noOfBathrooms.toString());
 		newSearchParams.set('guestrooms', noOfGuestrooms.toString());
@@ -91,6 +91,7 @@ export default function page() {
 		window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams.toString()}`);
 		refetch();
 	}, [
+		page,
 		noOfBedrooms,
 		noOfBathrooms,
 		noOfGuestrooms,
@@ -99,6 +100,7 @@ export default function page() {
 		petFriendly,
 		AccordionFilters,
 		locationSearch,
+		availabilityFilters,
 	]);
 
 	return (
@@ -125,16 +127,21 @@ export default function page() {
 							setPetFriendly={setPetFriendly}
 							areaSliderValues={areaSliderValues}
 							setAreaSliderValues={setAreaSliderValues}
+							availabilityFilters={availabilityFilters}
+							setAvailabilityFilters={setAvailabilityFilters}
 						/>
 					</Grid>
 				</SlideTransitions>
 
 				<Grid item xs={12} md={8} display={{ xs: showFiltersOnMob ? 'none' : 'flex', md: 'flex' }}>
 					<ListingBody
-						data={data}
+						data={renderedData}
+						setRenderedData={setRenderedData}
 						isLoading={isLoading}
 						isMobileView={isMobileView}
 						openFilterOnMobileView={() => setShowFiltersOnMob(true)}
+						page={page}
+						setPage={setPage}
 					/>
 				</Grid>
 			</Grid>
@@ -184,17 +191,14 @@ const FILTERS = {
 	propertyType: [
 		{
 			id: 4,
-			label: 'Property Type',
+			label: 'Commercial',
+			value: 1,
 			checked: false,
 		},
 		{
-			id: 5,
-			label: 'Property Type',
-			checked: true,
-		},
-		{
 			id: 6,
-			label: 'Property Type',
+			label: 'Residential',
+			value: 2,
 			checked: false,
 		},
 	],
@@ -232,11 +236,6 @@ const FILTERS = {
 			checked: false,
 		},
 		{
-			id: 13,
-			label: 'Semifinished',
-			checked: true,
-		},
-		{
 			id: 14,
 			label: 'Furnished',
 			checked: false,
@@ -262,13 +261,21 @@ const FILTERS = {
 	availability: [
 		{
 			id: 18,
-			label: 'Immediately',
+			label: 'Vacant',
+			value: 1,
 			checked: false,
 		},
 		{
 			id: 19,
-			label: 'Within a month',
-			checked: true,
+			label: 'Leased',
+			value: 3,
+			checked: false,
+		},
+		{
+			id: 20,
+			label: 'SoldAndLease',
+			value: 6,
+			checked: false,
 		},
 	],
 };
