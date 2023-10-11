@@ -1,31 +1,29 @@
-"use client";
-import { Box, Container, Item } from "@/wrappers";
-import React from "react";
+import React from 'react';
+import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
+import HomeCardsContainer from './HomeCardsContainer';
+import { get } from '@/utils/http';
 
-import HomeTitleBody from "./HomeTitleBody";
-import NeighbourhoodCard from "@/component/cards/NeighbourhoodCard";
-import neigbourhoodCover from "@/assets/images/neigbourhoodCover.png";
-import neibourhoodcover2 from "@/assets/images/neibourhoodcover2.png";
-import Carousel from "@/component/Carousel";
-import HomeCardsContainer from "./HomeCardsContainer";
-
-export default function MostViewed() {
-  const data = [
-      { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-    { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-    { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-    { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-  ];
-  return (
-    <HomeCardsContainer
-      data={data}
-      title="Most Viewed Properties"
-      body="Discover our most viewed exclusive selection in properties  "
-      link="/"
-    />
-  );
+export default async function MostViewed() {
+	const url = '/properties/most-view';
+	const response = await get(url);
+	const dataArray = response?.data?.data; // Get the array of objects
+	const slicedDataArray = dataArray;
+	const data = slicedDataArray?.map((item) => {
+		return {
+			title: item?.name || '--',
+			location: (item?.data?.city_id && item?.data?.city_id?.name) || '--',
+			img: neigbourhoodCover,
+			area: item?.data?.unit_size || '--',
+			price: '--',
+			link: '/',
+		};
+	});
+	return (
+		<HomeCardsContainer
+			data={data}
+			title="Most Viewed Properties"
+			body="Discover our most viewed exclusive selection in properties  "
+			link="/"
+		/>
+	);
 }

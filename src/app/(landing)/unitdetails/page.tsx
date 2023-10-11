@@ -11,7 +11,7 @@ import {
 	UnitMap,
 } from '@/component';
 import { Container, Grid } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
@@ -38,17 +38,7 @@ const amenityData = [
 	{ title: 'Pool', icon: <Room />, value: data?.data?.data?.bedrooms },
 	{ title: 'Pool', icon: <Room />, value: data?.data?.data?.lounges },
 ];
-const images = [
-	photo1,
-	photo2,
-	photo3,
-	photo3,
-	photo3,
-	photo3,
-	photo3,
-	photo3,
-	// ...
-];
+const images = [photo1, photo2, photo3, photo3];
 
 interface Props {
 	id?: string;
@@ -83,9 +73,8 @@ export default function page({
 	floorFeatures,
 	map,
 }: Props) {
-	const [open, setOpen] = React.useState(false);
-	const [index, setIndex] = React.useState(-1);
-
+	const [open, setOpen] = useState(false);
+	const [index, setIndex] = useState(-1);
 	return (
 		<>
 			<Container maxWidth="xl">

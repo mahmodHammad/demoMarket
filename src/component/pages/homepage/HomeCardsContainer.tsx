@@ -1,10 +1,8 @@
 'use client';
 import { Box, Container, Item } from '@/wrappers';
 import React from 'react';
-
 import HomeTitleBody from './HomeTitleBody';
 import NeighbourhoodCard from '@/component/cards/NeighbourhoodCard';
-
 import Carousel from '@/component/Carousel';
 import { UnitsCard } from '@/component';
 
@@ -34,7 +32,7 @@ export default function HomeCardsContainer({ title, body, link, data, hasneighbo
 					mt: { md: '34px', xs: '22px', width: '100%' },
 				}}>
 				<Carousel
-					items={data.map((d: any, index: number) => (
+					items={data?.map((d: any, index: number) => (
 						<Box
 							key={index}
 							sx={{
@@ -46,7 +44,7 @@ export default function HomeCardsContainer({ title, body, link, data, hasneighbo
 							{hasneighbourhoods ? (
 								<NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
 							) : (
-								<UnitsCard title={d.title} img={d.img} price={''} area={''} location={''} />
+								<UnitsCard title={d.title} img={d.img} price={d.price} area={d.area} location={d.location} />
 							)}
 						</Box>
 					))}

@@ -8,7 +8,7 @@ import ForSale from '@/component/ForSale';
 import neibourhoodcover2 from '@/assets/images/Rectangle 45351.png';
 import UpcomingVisitPlaceholder from '@/assets/icons/UpcomingVisitPlaceholder';
 import UpcomingVisitsCard from '@/component/cards/UpcomingVisitsCard';
-import { data } from './mock'
+import { data } from './mock';
 import { getMyBookings } from './booking-service';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
@@ -29,8 +29,7 @@ export default function MyBookings() {
 
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [keys.MYBOOKINGS],
-		queryFn: () =>
-			getMyBookings(),
+		queryFn: () => getMyBookings(),
 	});
 	useEffect(() => {
 		console.log('bookings table state changed', {
@@ -40,14 +39,13 @@ export default function MyBookings() {
 			filter,
 			sort,
 		});
-	}, [search, currentPage, status, filter, sort]);
+		console.log(data,'shreyas')
+	}, [search, currentPage, status, filter, sort, data]);
 
 	return (
 		<>
 			<Box pb={8}>
-				<Text variant="h4"  >
-					My Bookings
-				</Text>
+				<Text variant="h4">My Bookings</Text>
 				<Box
 					sx={{
 						display: 'grid',
@@ -56,6 +54,7 @@ export default function MyBookings() {
 						padding: '25px 36px 36px 0',
 					}}>
 					<ForSale />
+
 					<Box>
 						<Text variant="h5" sx={{ mb: '10px' }}>
 							Upcoming Visits
@@ -71,7 +70,7 @@ export default function MyBookings() {
 				<Table
 					headers={HEADERS}
 					cellsTypes={CELLS_TYPES}
-					data={data}
+					data={data?.list}
 					filterValues={FilterValues}
 					loading={loading}
 					search={search}
@@ -118,12 +117,12 @@ const CELLS_TYPES = [
 	},
 	{
 		type: TYPES.LABEL,
-		dataKey: 'status',
+		dataKey: 'booking_status',
 		options: {
 			// label colors based on value, key is the label text (from data column), value is the colors
 			colorPalette: {
-				Pending: { color: '#8A6A16', bg: '#FCEDC7' },
-				'Pay Down': { color: '#0A9458', bg: '#EDFAF4' },
+				'pending': { color: '#8A6A16', bg: '#FCEDC7' },
+				'cancel': { color: '#FF4242', bg: '#FFE5E5' },
 			},
 		},
 	},

@@ -80,9 +80,9 @@ const listingBody = ({
 								title={d?.name}
 								img={neibourhoodcover2}
 								// link={d?.link}
-								price={d?.price}
-								area={d?.maps?.districtName}
-								location={d?.maps?.formattedAddress}
+								price={d?.price || '--'}
+								area={d?.maps?.districtName || '--'}
+								location={d?.maps?.formattedAddress || '--'}
 								liked={d?.is_fav}
 								toggleLike={handleLikeToggle}
 							/>

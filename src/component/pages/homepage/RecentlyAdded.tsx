@@ -1,31 +1,28 @@
-"use client";
-import { Box, Container, Item } from "@/wrappers";
-import React from "react";
+import { Box, Container, Item } from '@/wrappers';
+import React from 'react';
+import HomeTitleBody from './HomeTitleBody';
+import NeighbourhoodCard from '@/component/cards/NeighbourhoodCard';
+import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
+import HomeCardsContainer from './HomeCardsContainer';
+import { get } from '@/utils/http';
 
-import HomeTitleBody from "./HomeTitleBody";
-import NeighbourhoodCard from "@/component/cards/NeighbourhoodCard";
-import neigbourhoodCover from "@/assets/images/neigbourhoodCover.png";
-import neibourhoodcover2 from "@/assets/images/neibourhoodcover2.png";
-import Carousel from "@/component/Carousel";
-import HomeCardsContainer from "./HomeCardsContainer";
+export default async function RecentlyAdded() {
+	const url = '/properties';
+	const response = await get(url);
+	const dataArray = response?.data?.data; // Get the array of objects
 
-export default function RecentlyAdded() {
-  const data = [
-      { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-      { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-    { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-    { title: "Al-Arid District", img: neibourhoodcover2, link: "/" },
-    { title: "Yarmouk Neighbourhood", img: neigbourhoodCover, link: "/" },
-  ];
-  return (
-    <HomeCardsContainer
-      data={data}
-      title="Recently Added"
-      body="Discover our exclusive selection "
-      link="/"
-    />
-  );
+	const slicedDataArray = dataArray;
+
+	const data = slicedDataArray?.map((item) => {
+		return {
+			title: item?.name || '--',
+			location: (item?.data?.city_id && item?.data?.city_id?.name) || '--',
+			img: neigbourhoodCover,
+			area: item?.data?.unit_size || '--',
+			price: '--',
+			link: '/',
+		};
+	});
+
+	return <HomeCardsContainer data={data} title="Recently Added" body="Discover our exclusive selection " link="/" />;
 }

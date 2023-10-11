@@ -3,22 +3,22 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Text } from '@/wrappers';
 import { OTPInput, InfoBox } from '@/component';
-import { useRouter } from 'next/navigation';
 import { Modal, IconButton } from '@mui/material';
 import { Close } from '@/assets';
 import { OTP_STATUS, InfoBoxStates } from './LoginModal';
 
 interface Props {
 	isOpen: boolean;
-	mobile: string | number;
+	mobile: {};
 	setIsOpen: any;
 	successFunc: any;
+	resendOtp: any;
 }
 
-const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc }: Props) => {
-	const { push } = useRouter();
+const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc, resendOtp }: Props) => {
 	const [otpCode, setOtpCode] = useState('');
 	const [otpStatus, setOtpStatus] = useState(OTP_STATUS.PENDING);
+	const [loading, setLoading] = useState(false);
 
 	const [isTimerRunning, setIsTimerRunning] = useState(false);
 	const [seconds, setSeconds] = useState(30);
@@ -73,8 +73,6 @@ const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc }: Props) => {
 	};
 
 	const handlePhoneVerification = () => {
-		// TODO: verify API
-		// TODO: phone validation
 		startTimer();
 	};
 
@@ -87,26 +85,23 @@ const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc }: Props) => {
 	}, []);
 
 	const handleOtpVerification = async () => {
-		// TODO: verify API
-		if (+otpCode === 9999) {
-			await successFunc().then(()=>{
-				push('/my-bookings');
-				setTimeout(() => {}, 500);
+		setLoading(true);
+		const res = await successFunc(+otpCode)
+			.catch((err) => {
+				setOtpCode('');
+				setOtpStatus(OTP_STATUS.INCORRECT);
 			})
-			
-		} else {
-			setOtpCode('');
-			setOtpStatus(OTP_STATUS.INCORRECT);
-			// TODO: set count for number of trials
-		}
+			.finally(() => setLoading(false));
 	};
 
-	const handleResendOtp = () => {
+	const handleResendOtp = async () => {
 		// TODO: resend API
-		setOtpCode('');
-		resetTimer();
-		setOtpStatus(OTP_STATUS.RESENT);
-		startTimer();
+		await resendOtp().then(() => {
+			setOtpCode('');
+			resetTimer();
+			setOtpStatus(OTP_STATUS.RESENT);
+			startTimer();
+		});
 		// TODO: auto focus of otp input
 	};
 
@@ -133,12 +128,10 @@ const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc }: Props) => {
 						</Text>
 
 						<Text center gray light s={16}>
-							We have sent a code to your number +{mobile}
+							We have sent a code to your number +{mobile?.phone_country_code?.dial_code} {mobile?.phone_number}
 						</Text>
 					</Box>
-
 					<OTPInput value={otpCode} onChange={setOtpCode} hasError={false} />
-
 					{otpStatus !== OTP_STATUS.PENDING && (
 						<InfoBox
 							type={InfoBoxStates[otpStatus].type}
@@ -146,8 +139,8 @@ const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc }: Props) => {
 							description={InfoBoxStates[otpStatus].description}
 						/>
 					)}
-
 					<Button
+						loading={loading}
 						onClick={handleOtpVerification}
 						disabled={
 							(+otpCode.length !== 4 && otpStatus === OTP_STATUS.RESENT) ||
@@ -161,7 +154,6 @@ const OTPModal = ({ isOpen, mobile, setIsOpen, successFunc }: Props) => {
 						sx={{ mt: '24px' }}>
 						Confirm
 					</Button>
-
 					{otpStatus === OTP_STATUS.PENDING || otpStatus === OTP_STATUS.RESENT || otpStatus === OTP_STATUS.INCORRECT ? (
 						<Box row center gap={0.5} mt={'24px'}>
 							<Text gray s={14}>
