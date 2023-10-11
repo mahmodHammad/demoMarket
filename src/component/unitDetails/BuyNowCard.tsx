@@ -1,14 +1,22 @@
 import React from 'react';
 import { Box, Button, Text } from '@/wrappers';
-import Link from 'next/link';
 import { Divider } from '@mui/material';
 import { BuyNowIcon } from '@/assets';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface proptypes {
   price: string;
   PriceType: string;
 }
 export default function BuyNowCard({ price, PriceType }: proptypes) {
+	const { isAuthed, openLoginModal } = useAuth();
+
+  const handleButton = () => {
+    if (!isAuthed) {
+			openLoginModal();
+			return;
+		}
+  }
   return (
     <Box
       column
@@ -32,8 +40,7 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 
       <Button
         variant="contained"
-        component={Link}
-        href="/"
+        onClick={handleButton}
         sx={{ mt: '24px', height: '52px', width: '100%' }}
         startIcon={<BuyNowIcon />}>
         Buy Now
@@ -45,8 +52,7 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 
       <Button
         variant="outlined"
-        component={Link}
-        href="/"
+        onClick={handleButton}
         sx={{
           mt: '24px',
           height: '52px',
