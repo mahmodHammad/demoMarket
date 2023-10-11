@@ -77,7 +77,7 @@ http.interceptors.request.use(
 	},
 );
 
-export const PUTJSON = async (URI: string, payload?: any) => {
+export const PUT = async (URI: string, payload?: any) => {
 	try {
 		const res = await http.put(URI, payload);
 		return res.data.data;
@@ -86,7 +86,7 @@ export const PUTJSON = async (URI: string, payload?: any) => {
 	}
 };
 
-export const POSTJSON = async (URI: string, payload?: any) => {
+export const POST = async (URI: string, payload?: any) => {
 	try {
 		const res = await http.post(URI, payload);
 		return res.data.data;
@@ -95,7 +95,7 @@ export const POSTJSON = async (URI: string, payload?: any) => {
 	}
 };
 
-export const GETJSON = async (URI: string, payload?: any) => {
+export const GET = async (URI: string, payload?: any) => {
 	try {
 		const res = await http.get(URI, payload);
 		return res.data.data;

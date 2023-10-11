@@ -1,9 +1,9 @@
-import { POSTJSON } from '@/utils/http';
+import { POST } from '@/utils/http';
 
-export const sendVerificationSignup = async (payload: any = {}) => {
-	return POSTJSON(`/register/send-verification`, payload);
+export const sendVerificationSignup = (payload: any = {}) => {
+	return POST(`/register/send-verification`, payload);
 };
 
-export const register = async (payload: any = {}) => {
-	return POSTJSON(`/register`, payload);
+export const register = (payload: any = {}) => {
+	return POST(`/register`, payload);
 };
