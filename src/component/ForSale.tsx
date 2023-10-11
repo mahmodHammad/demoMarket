@@ -1,31 +1,65 @@
 import { Box, Button, Text } from '@/wrappers';
 import Image from 'next/image';
-import neibourhoodcover2 from '@/assets/images/Rectangle 4535.png';
+import neibourhoodcover1 from '@/assets/images/Rectangle 4535.png';
+import ReactSwipe from 'react-swipe';
+import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
+import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
+import photo3 from '@/assets/images/photo3.png';
 
 export default function ForSale() {
+	let reactSwipeEl;
+
 	return (
 		<>
 			<Box
 				sx={{
 					width: '100%',
-					height: '100%',
-					position: 'relative',
+					height: '290px',
 					overflow: 'hidden',
 					borderRadius: '16px',
 				}}>
-				<Box
-					sx={{
-						width: '100%',
-						height: '100%',
-						objectFit: 'cover',
-						objectPosition: 'bottom',
-						position: 'absolute',
+				<ReactSwipe
+					className="carousel"
+					swipeOptions={{
+						auto: 3000,
+						speed: 2000,
+						continuous: true,
+						disableScroll: true,
 					}}
-					component={Image}
-					alt="houses and properties for rent"
-					src={neibourhoodcover2}
-				/>
-				<Box
+					ref={(el) => (reactSwipeEl = el)}>
+					<Box
+						sx={{
+							width: '100%',
+							height: '100%',
+							objectFit: 'cover',
+						}}
+						component={Image}
+						alt="houses and properties for rent"
+						src={neibourhoodcover2}
+					/>
+					<Box
+						sx={{
+							width: '100%',
+							height: '100%',
+							objectFit: 'cover',
+						}}
+						component={Image}
+						alt="houses and properties for rent"
+						src={neigbourhoodCover}
+					/>
+					<Box
+						sx={{
+							width: '100%',
+							height: '100%',
+							objectFit: 'cover',
+						}}
+						component={Image}
+						alt="houses and properties for rent"
+						src={neigbourhoodCover}
+					/>
+				</ReactSwipe>
+
+				{/* <Box
 					sx={{
 						// background: 'orange',
 						height: '100%',
@@ -74,7 +108,7 @@ export default function ForSale() {
 						}}>
 						Schedule a Visit
 					</Button>
-				</Box>
+				</Box> */}
 			</Box>
 		</>
 	);
