@@ -13,7 +13,7 @@ export default async function Neighbourhoods() {
 	const url = '/complexes';
 	const response = await get(url);
 	// console.log('Data from server:', response); // check data at terminal
-	const dataArray = response?.data?.data; // Get the array of objects
+	const dataArray = response?.data?.list; // Get the array of objects
 
 	const slicedDataArray = dataArray?.slice(0, 6);
 	const data = slicedDataArray?.map((item) => {
