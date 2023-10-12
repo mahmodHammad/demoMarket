@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { Box, Button, Text } from '@/wrappers';
-import Link from 'next/link';
 import { Divider } from '@mui/material';
 import { BuyNowIcon } from '@/assets';
+import { useAuth } from '@/contexts/AuthContext';
 import DateTimeModal from '../modals/DateTimeModal';
 import dayjs from 'dayjs';
 import { toast } from 'react-toastify';
@@ -16,8 +16,11 @@ interface proptypes {
 }
 
 export default function BuyNowCard({ price, PriceType }: proptypes) {
+	const { isAuthed, openLoginModal } = useAuth();
+
 	const [bookingDateOpen, setBookingDateOpen] = useState(false);
 	const [bookingDate, setBookingDate] = useState(null);
+
 	const bookVisit = async () => {
 		if (bookingDate) {
 			let payload = {
@@ -45,6 +48,15 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 				});
 		}
 	};
+
+	const handleBookingButton = () => {
+		if (!isAuthed) {
+			openLoginModal();
+			return;
+		}
+		setBookingDateOpen(true);
+	};
+
 	return (
 		<Box
 			column
@@ -68,8 +80,14 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 
 			<Button
 				variant="contained"
-				component={Link}
-				href="/"
+				// component={Link}
+				// href="/"
+				onClick={() => {
+					if (!isAuthed) {
+						openLoginModal();
+						return;
+					}
+				}}
 				sx={{ mt: '24px', height: '52px', width: '100%' }}
 				startIcon={<BuyNowIcon />}>
 				Buy Now
@@ -81,7 +99,7 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 
 			<Button
 				variant="outlined"
-				onClick={() => setBookingDateOpen(true)}
+				onClick={handleBookingButton}
 				sx={{
 					mt: '24px',
 					height: '52px',
@@ -90,7 +108,6 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 				}}>
 				Book a Visit
 			</Button>
-
 			<Text mt={'24px'} gray s={14}>
 				It's free, with no obligation - cancel anytime.
 			</Text>
