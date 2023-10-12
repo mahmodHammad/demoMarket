@@ -13,7 +13,7 @@ export const get = async (url: string, options: Options = {}) => {
 		const requestOptions: any = {
 			headers: {
 				'X-Tenant': xTenant,
-			}
+			},
 		};
 		let res = await fetch(`${baseUrl}${url}`, requestOptions);
 		res = await res.json();
@@ -77,6 +77,37 @@ http.interceptors.request.use(
 	},
 );
 
+export const PUT = async (URI: string, payload?: any) => {
+	try {
+		const res = await http.put(URI, payload);
+		return res.data.data;
+	} catch (error) {
+		return handleError(error);
+	}
+};
+
+export const POST = async (URI: string, payload?: any) => {
+	try {
+		const res = await http.post(URI, payload);
+		return res.data.data;
+	} catch (error) {
+		return handleError(error);
+	}
+};
+
+export const GET = async (URI: string, payload?: any) => {
+	try {
+		const res = await http.get(URI, payload);
+		return res.data.data;
+	} catch (error) {
+		return handleError(error);
+	}
+};
+
+const handleError = (error: any) => {
+	console.log('error in GET', error);
+	return Promise.reject(error);
+};
 
 export const setTokenInHeaders = () => {
 	const token = localStorage.getItem('token');
