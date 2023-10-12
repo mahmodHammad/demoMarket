@@ -23,6 +23,7 @@ import dayjs from 'dayjs';
 import DateTimeModal from '@/component/modals/DateTimeModal';
 import ConfirmAction from '@/component/modals/ConfirmAction';
 import { globalToast } from '@/utils/toast';
+import ReturnQrCode from '@/component/ReturnQrCode';
 
 const page = () => {
 	const { push } = useRouter();
@@ -118,10 +119,9 @@ const page = () => {
 										width: '200px',
 										height: '200px',
 										objectFit: 'cover',
-									}}
-									component={Image}
-									src={QR}
-								/>
+									}}>
+									<ReturnQrCode text={`http://localhost:3000/my-bookings/booking-details/${params?.bookingID}`} />
+								</Box>
 							</Box>
 							<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
 								<LocationCard data={data} />
