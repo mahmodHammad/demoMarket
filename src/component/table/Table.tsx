@@ -46,6 +46,28 @@ export default function Table({
 	sort,
 	handleSort = () => null,
 }: TableProps) {
+	const getPropByString = (obj, propString) => {
+		if (!propString) return obj;
+		var prop,
+			props = propString.split('.');
+		if (props?.length === 1) {
+			return obj[props[0]];
+		} else {
+			for (var i = 0, iLen = props.length - 1; i < iLen; i++) {
+				prop = props[i];
+				if (iLen === i) {
+				} else {
+					var candidate = obj[prop];
+					if (candidate !== undefined) {
+						obj = candidate;
+					} else {
+						break;
+					}
+				}
+			}
+			return obj[props[i]];
+		}
+	};
 	return (
 		<Box sx={{}}>
 			<PaginatedResourcesTable
@@ -54,7 +76,9 @@ export default function Table({
 						headerData={headers}
 						isLoading={loading}
 						isEmpty={!data?.length}
-						Pagination={() => <PaginationWrapper count={data?.paginator?.last_page} page={currentPage} handler={handlePagination} />}
+						Pagination={() => (
+							<PaginationWrapper count={data?.paginator?.last_page} page={currentPage} handler={handlePagination} />
+						)}
 						Filters={() => (
 							<>
 								<Search search={search} handleSearch={handleSearch} />
@@ -68,7 +92,7 @@ export default function Table({
 								{/* // TODO: implement sort */}
 							</>
 						)}>
-						<TableBody data={data} cellsTypes={cellsTypes} />
+						<TableBody data={data} cellsTypes={cellsTypes} getPropByString={getPropByString} />
 					</DataTable>
 				)}
 			/>
@@ -76,21 +100,28 @@ export default function Table({
 	);
 }
 
-const TableBody = ({ data, cellsTypes }: any) => (
+const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 	<>
 		{data?.map((row: any) => (
 			<StyledTableRow key={row?.id}>
 				{cellsTypes?.map((c: any, i: number) => (
 					<StyledTableCell key={i}>
-						{c.type === TYPES.STRING && <>{row[c.dataKey]}</>}
-						{c.type === TYPES.DATE && <>{row[c.dataKey]}</>}
-						{c.type === TYPES.LABEL && <Label status={row[c.dataKey]} labelPalette={c.options?.colorPalette} />}
+						{c.type === TYPES.STRING && <>{c?.dataKey && getPropByString(row, c?.dataKey)} </>}
+						{c.type === TYPES.DATE && <>{c?.dataKey && getPropByString(row, c?.dataKey)}</>}
+						{c.type === TYPES.LABEL && (
+							<Label status={c?.dataKey && getPropByString(row, c?.dataKey)} labelPalette={c.options?.colorPalette} />
+						)}
+						{c.type === TYPES.ENUM_STRING && <>{c?.dataKey && c.options[getPropByString(row, c?.dataKey)]}</>}
 						{c.type === TYPES.BUTTON && (
 							<Button
 								variant={c.options?.variant}
 								component={c.options?.isLink ? Link : 'button'}
 								href={c.options?.isLink && `${c.options?.href}${c.options?.appendID && '/' + row?.id}`}
-								onClick={!c.options?.isLink && c.options?.onClick}
+								onClick={() => {
+									!c.options?.isLink && !c.options?.passParams
+										? c.options?.onClick()
+										: !c.options?.isLink && c.options?.passParams && c.options?.onClick(row?.id, c.options?.title);
+								}}
 								fullWidth={false}
 								sx={{ height: '38px', ...c.options?.sx }}>
 								<Text color={c.options?.textColor} sx={{ fontWeight: 'bold' }}>
