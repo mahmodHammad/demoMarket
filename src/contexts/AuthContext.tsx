@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
-import { loginReq, verifyNumberReq, getUserInfoReg } from '@/utils/httpServices/auth';
+import { loginReq, verifyNumberReq, getUserInfoReg, logoutReq } from '@/utils/httpServices/auth';
 import { setTokenInHeaders } from '@/utils/http';
 
 type AuthContextType = {
@@ -44,7 +44,6 @@ export const AuthProvider = ({ children }: any) => {
 		if (storedUser) setUser(JSON.parse(storedUser));
 	}, []);
 
-
 	const verifyNumber = async (phoneNumber: any) => {
 		const body = {
 			phone_number: phoneNumber.phone_number,
@@ -86,6 +85,7 @@ export const AuthProvider = ({ children }: any) => {
 		setToken(null);
 		setUser(null);
 		localStorage.clear();
+		logoutReq();
 	};
 
 	const openLoginModal = () => setIsLoginModalOpen(true);

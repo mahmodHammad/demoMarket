@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import Text from './Text';
-import { Box } from './layouts';
+import Loading from './Loading';
 
 const ProtectedPagesWrapper = ({ children }: { children: React.ReactNode }) => {
 	const { openLoginModal } = useAuth();
@@ -22,13 +21,7 @@ const ProtectedPagesWrapper = ({ children }: { children: React.ReactNode }) => {
 		}
 	}, [pathname]);
 
-	// TODO: implement loading
-	if (!token)
-		return (
-			<Box fullWidth center sx={{ height: '100vh' }}>
-				<Text>Loading...</Text>
-			</Box>
-		);
+	if (!token) return <Loading />;
 
 	return <>{children}</>;
 };

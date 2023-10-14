@@ -1,8 +1,7 @@
 import { Favorite, Share } from '@/assets';
+import { useAuth } from '@/contexts/AuthContext';
 import { Box, Button, Text } from '@/wrappers';
 import { IconButton } from '@mui/material';
-import Link from 'next/link';
-import Image from 'next/image';
 
 interface Props {
   logo: any;
@@ -10,6 +9,14 @@ interface Props {
   location: string;
 }
 export default function UnitHeader({ logo, title, location }: Props) {
+  const { isAuthed, openLoginModal } = useAuth();
+
+  const handleButton = () => {
+    if (!isAuthed) {
+			openLoginModal();
+			return;
+		}
+  }
   return (
     <Box row xbetween>
       <Box center row gap={'6px'}>
@@ -51,8 +58,6 @@ export default function UnitHeader({ logo, title, location }: Props) {
         </IconButton>
         <Button
           variant="outlined"
-          component={Link}
-          href="/"
           sx={{
             display: { xs: 'none', md: 'flex' },
             height: '42px',
@@ -68,8 +73,7 @@ export default function UnitHeader({ logo, title, location }: Props) {
 
         <Button
           variant="outlined"
-          component={Link}
-          href="/"
+          onClick={handleButton}
           sx={{
             display: { xs: 'none', md: 'flex' },
             height: '42px',
@@ -80,8 +84,6 @@ export default function UnitHeader({ logo, title, location }: Props) {
             borderColor: '#E3E3E3',
           }}
           startIcon={<Favorite />}
-
-          //   color="black"
         >
           Favorite
         </Button>

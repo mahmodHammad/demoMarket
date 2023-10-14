@@ -1,58 +1,50 @@
 'use client';
 
-import { Box, Button, Text } from '@/wrappers';
+import { Box, Button, Loading, Text } from '@/wrappers';
 import { Grid, Pagination } from '@mui/material';
-import React, { useState } from 'react';
 import UnitsCard from '../cards/UnitsCard';
 import SearchBox from './SearchBox';
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import { Filter } from '@/assets';
-
-const DATA = [
-	{
-		id: 1,
-		liked: false,
-		title: 'Al-Arid District',
-		img: neibourhoodcover2,
-		link: '/',
-		price: 'SAR 60,000',
-		area: '120 sqm',
-		location: 'Riyadh',
-	},
-	{ id: 2, liked: false, title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-	{ id: 3, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ id: 4, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ id: 5, liked: false, title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-	{ id: 6, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ id: 7, liked: false, title: 'Al-Arid District', img: neibourhoodcover2, link: '/' },
-	{ id: 8, liked: false, title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-];
-
-// interface proptypes {
-//   data: [
-//     {
-//       title: string;
-//       img: string;
-//       link: string;
-//       price: string;
-//       area: string;
-//       location: string;
-//     }
-//   ];
-// }
-// const listingBodey = ({ data }: proptypes) => {
+import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
+import { useAuth } from '@/contexts/AuthContext';
+import CardSkeleton from '../cards/CardSkeleton';
 
 type Props = {
 	isMobileView?: boolean;
 	openFilterOnMobileView?: () => void;
 	data: any;
 	isLoading: boolean;
+	page: number;
+	setPage: (page: number) => void;
+	setRenderedData: (data: any) => void;
 };
 
-const listingBody = ({ isMobileView, openFilterOnMobileView, data, isLoading }: Props) => {
-	// TODO: handle loading
-	if (isLoading) return <Text>Loading...</Text>;
+const listingBody = ({
+	isMobileView,
+	openFilterOnMobileView,
+	data,
+	isLoading,
+	page = 1,
+	setPage,
+	setRenderedData,
+}: Props) => {
+	const { isAuthed, openLoginModal } = useAuth();
+	const handleLikeToggle = (id: number) => {
+		if (!isAuthed) {
+			openLoginModal();
+			return;
+		}
+		setRenderedData((prev: any) => ({
+			...prev,
+			list: prev.list.map((d: any) => (+d.id === +id ? { ...d, is_fav: !d.is_fav } : d)),
+		}));
+		const body = {
+			property_id: id,
+		};
+		toggleLike(body);
+	};
+
 	return (
 		<Box column fullWidth>
 			<Text variant="h4">Properties in Saudi Arabia</Text>
@@ -70,29 +62,50 @@ const listingBody = ({ isMobileView, openFilterOnMobileView, data, isLoading }: 
 					</Button>
 				</Box>
 			)}
-			// TODO: map data to UI card
-			<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
-				{data?.data?.map((d, index) => (
-					<Grid item xs={12} md={6} key={index}>
-						<UnitsCard
-							id={d?.id}
-							title={d?.name}
-							img={neibourhoodcover2}
-							// link={d?.link}
-							price={d?.price || '--'}
-							area={d?.maps?.districtName || '--'}
-							location={d?.maps?.formattedAddress || '--'}
-							liked={d?.liked}
-							toggleLike={(id) => {
-								// TODO: handle like and dispatch post req
-								// setData((prev) => prev.map((d: any) => (d.id === id ? { ...d, liked: !d.liked } : d)))
-							}}
-						/>
-					</Grid>
-				))}
-			</Grid>
-			{/* // TODO: integrate pagination */}
-			<Pagination count={10} color="primary" sx={{ mt: 5, alignSelf: 'center' }} />
+			{/* // TODO: map data to UI card */}
+			{isLoading ? (
+				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
+					{Array.from({ length: 8 }).map((_, index: number) => (
+						<Grid item xs={12} md={6} key={index}>
+							<CardSkeleton height={'inherit'} />
+						</Grid>
+					))}
+				</Grid>
+			) : (
+				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
+					{data?.list?.map((d: any, index: number) => (
+						<Grid item xs={12} md={6} key={index}>
+							<UnitsCard
+								id={d?.id}
+								title={d?.name}
+								img={neibourhoodcover2}
+								// link={d?.link}
+								price={d?.price || '--'}
+								area={d?.maps?.districtName || '--'}
+								location={d?.maps?.formattedAddress || '--'}
+								liked={d?.is_fav}
+								toggleLike={handleLikeToggle}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			)}
+
+			{data?.paginator && (
+				<Pagination
+					page={+page}
+					onChange={(_, value) => {
+						window.scrollTo({
+							top: 0,
+							behavior: 'smooth',
+						});
+						setPage(value);
+					}}
+					count={+data.paginator.last_page}
+					color="primary"
+					sx={{ mt: 5, alignSelf: 'center' }}
+				/>
+			)}
 		</Box>
 	);
 };

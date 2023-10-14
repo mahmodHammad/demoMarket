@@ -8,3 +8,11 @@ export const getProperties = async (options: any = {}) => {
 		console.log('error in getProperties', error);
 	}
 };
+
+export const toggleLike = async (body: any) => {
+	try {
+		return await http.post(`/favorites`, body);
+	} catch (error: any) {
+		return error.response;
+	}
+};

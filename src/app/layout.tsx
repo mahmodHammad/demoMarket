@@ -1,6 +1,8 @@
 import * as React from 'react';
 import TanstackProvider from '@/utils/TanstackProvider';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
 	title: 'Atar Market place',
@@ -13,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en">
 			<body>
 				<AuthProvider>
+					<ToastContainer />
 					<TanstackProvider>{children}</TanstackProvider>
 				</AuthProvider>
 			</body>
