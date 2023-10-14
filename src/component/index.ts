@@ -69,3 +69,4 @@ export { default as NotificationCard } from './cards/NotificationCard';
 export { default as Table } from './table/Table';
 export { default as PopUpCard } from './cards/PopUpCard';
 export { default as AdminPropertiesList } from './admin/AdminPropertiesList';
+export { default as AdminVisitors } from './dashboard/AdminVisitors';

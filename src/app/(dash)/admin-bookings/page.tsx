@@ -106,16 +106,15 @@ const CELLS_TYPES = [
 		type: TYPES.STRING,
 		dataKey: 'user',
 	},
-  {
+	{
 		type: TYPES.STRING,
 		dataKey: 'RequestType',
 	},
- 
+
 	{
 		type: TYPES.STRING,
 		dataKey: 'BookingDate',
 	},
-	
 
 	{
 		type: TYPES.BUTTON,
