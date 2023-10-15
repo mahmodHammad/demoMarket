@@ -1,8 +1,6 @@
 'use client';
 import { Box, Button, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
-import Link from 'next/link';
-import { get } from '@/utils/http';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import React, { useState } from 'react';
