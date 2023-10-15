@@ -39,7 +39,6 @@ export default function MyBookings() {
 			filter,
 			sort,
 		});
-		console.log(data,'shreyas')
 	}, [search, currentPage, status, filter, sort, data]);
 
 	return (
@@ -91,15 +90,6 @@ export default function MyBookings() {
 
 // -------------------HOW TO DESCRIBE THE TABLE AND ITS FUNCTIONALITY---------------------------
 
-// actual table data
-const DATA = [
-	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Pay down', method: 'Net Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-];
-
 const HEADERS = ['Property Name', 'Visit Type', 'Visit Date & Time', 'Status', ''];
 
 const CELLS_TYPES = [
@@ -108,8 +98,11 @@ const CELLS_TYPES = [
 		dataKey: 'id', // data access key of cell
 	},
 	{
-		type: TYPES.STRING,
+		type: TYPES.ENUM_STRING,
 		dataKey: 'visit_type',
+		options: {
+			in_person: 'In Person',
+		},
 	},
 	{
 		type: TYPES.DATE,
@@ -121,8 +114,8 @@ const CELLS_TYPES = [
 		options: {
 			// label colors based on value, key is the label text (from data column), value is the colors
 			colorPalette: {
-				'pending': { color: '#8A6A16', bg: '#FCEDC7' },
-				'cancel': { color: '#FF4242', bg: '#FFE5E5' },
+				pending: { color: '#8A6A16', bg: '#FCEDC7' },
+				cancel: { color: '#FF4242', bg: '#FFE5E5' },
 			},
 		},
 	},

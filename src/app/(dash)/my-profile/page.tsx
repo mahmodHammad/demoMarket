@@ -14,9 +14,11 @@ import {
 import dayjs from 'dayjs';
 import { Avatar } from '@mui/material';
 import FileUploadController from '@/component/forms/controlled/FileUploadController';
+import { useAuth } from '@/contexts/AuthContext';
+import { http } from '@/utils/http';
 
 const schema = yup.object().shape({
-	firstName: yup.string().required('First Name is required'),
+	name: yup.string().required('Name is required'),
 	lastName: yup.string().required('Last Name is required'),
 	NationalID: yup.string().required('National ID is required'),
 	email: yup.string().required('Email is required'),
@@ -36,6 +38,7 @@ const RADIO_OPTIONS = [
 	},
 ];
 export default function MyProfile() {
+	const { user, getUserInfo } = useAuth();
 	const {
 		control,
 		handleSubmit,
@@ -43,23 +46,37 @@ export default function MyProfile() {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			firstName: 'Shreyas',
-			lastName: 'kanzarkar',
-			NationalID: '7373727',
-			email: 'sksj@jsjs.com',
+			name: user?.name,
+			// lastName: 'kanzarkar',
+			// NationalID: '7373727',
+			email: user?.email,
 			Hijari: true,
 			date: dayjs('2023-09-20') as unknown as Date,
-			gender: 'male',
+			gender: user?.gender,
 			image: [],
 		},
 		resolver: yupResolver(schema),
 	});
 	const image = watch('image');
+	useEffect(() => {
+		if (image?.length) {
+			const formData = new FormData();
+			formData.append('profile_image', image[0]);
+			http.post('/profile/change-profile-image', formData, {
+				headers: {
+					'content-type': 'multipart/form-data',
+					'Access-Control-Allow-Origin': '*',
+				},
+			}).then(()=>{
+				getUserInfo()
+			});
+		}
+	}, [image]);
 	const onSubmit = (data: any) => {
 		console.log('form data', data);
 	};
 	const readFileData = (fl: any) => {
-		const file = URL.createObjectURL(fl);;
+		const file = URL.createObjectURL(fl);
 		return file;
 	};
 	return (
@@ -73,7 +90,8 @@ export default function MyProfile() {
 						<Item xs={12}>
 							<Avatar
 								alt={'Image'}
-								src={`${image?.length ? readFileData(image[0]) : ''}`}
+								src={`${image?.length ? readFileData(image[0]) : user?.profile_image}`}
+								// src={`${image?.length ? readFileData(image[0]) : ''}`}
 								sx={{ width: 80, height: 80, mb: '12px' }}
 							/>
 							<FileUploadController label={'Update Photo'} name={'image'} accept="image/*" control={control} />
@@ -81,19 +99,19 @@ export default function MyProfile() {
 						<Item xs={9}>
 							<Container rowGap={'16px'} columnGap={'36px'}>
 								<Item xs={5}>
-									<TextInputController label={'First Name'} name={'firstName'} control={control} />
+									<TextInputController label={'Name'} name={'name'} control={control} />
 								</Item>
-								<Item xs={5}>
+								{/* <Item xs={5}>
 									<TextInputController label={'Last Name'} name={'lastName'} control={control} />
-								</Item>
-								<Item xs={5}>
+								</Item> */}
+								{/* <Item xs={5}>
 									<TextInputController
 										disabled
 										label={'National ID / Residence Permit No.'}
 										name={'NationalID'}
 										control={control}
 									/>
-								</Item>
+								</Item> */}
 								<Item xs={4}>
 									<RadioGroup name="gender" label="Gender" options={RADIO_OPTIONS} control={control} errors={errors} />
 								</Item>
