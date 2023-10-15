@@ -9,6 +9,7 @@ type AuthContextType = {
 	isLoginModalOpen: boolean;
 	openLoginModal: () => void;
 	closeLoginModal: () => void;
+	getUserInfo: () => void;
 	token: string | null;
 	user: any;
 	login: (phoneNumber: any, code: string, vid: string | null) => any;
@@ -103,6 +104,7 @@ export const AuthProvider = ({ children }: any) => {
 				login,
 				logout,
 				verifyNumber,
+				getUserInfo
 			}}>
 			{children}
 		</AuthContext.Provider>

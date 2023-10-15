@@ -70,6 +70,8 @@ export const http = axios.create({
 http.interceptors.request.use(
 	(config) => {
 		config.headers['X-Tenant'] = 'testDemoOne';
+		config.headers['Access-Control-Allow-Origin'] = '*';
+		config.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
 		return config;
 	},
 	(error) => {
