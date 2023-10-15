@@ -187,7 +187,6 @@ const theme = responsiveFontSizes(
 							[initTheme.breakpoints.down('md')]: {
 								fontSize: '48px',
 							},
-							
 						},
 					},
 					{

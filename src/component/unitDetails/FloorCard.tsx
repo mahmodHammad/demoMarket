@@ -36,7 +36,7 @@ export default function FloorCard({ name, img, area, floorFeatures }: Props) {
         <Grid container mt={"25px"}>
           {floorFeatures?.map((item: any, index: any) => (
             <Grid item xs={6} key={index}>
-              <BuildingSchemeIcons title={item.title} icon={item.icon} />
+              <BuildingSchemeIcons title={item.title} icon={item.icon} value={item.value} />
             </Grid>
           ))}
         </Grid>
