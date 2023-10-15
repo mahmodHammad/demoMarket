@@ -161,6 +161,52 @@ export default function AdminBookings() {
 
 const HEADERS = ['Unit Number', 'User', 'Request Type', 'Booking Date', '', ''];
 
+const CELLS_TYPES = [
+	{
+		type: TYPES.STRING, // Type of cell
+		dataKey: 'type', // data access key of cell
+	},
+	{
+		type: TYPES.STRING,
+		dataKey: 'user',
+	},
+	{
+		type: TYPES.STRING,
+		dataKey: 'RequestType',
+	},
+
+	{
+		type: TYPES.STRING,
+		dataKey: 'BookingDate',
+	},
+
+	{
+		type: TYPES.BUTTON,
+		options: {
+			title: 'Accept',
+			variant: 'contained', // OPTIONAL: buttons variants, default is text
+			textColor: '#fff', // OPTIONAL, either semantic or hexa, default is black
+
+			// isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
+			// href: '/payment-details', // OPTIONAL: pass it in case it's link,
+			onClick: () => console.log('clicked'), // pass it in case it's not link,
+			sx: { py: 2 },
+		},
+	},
+	{
+		type: TYPES.BUTTON,
+		options: {
+			title: 'Reject',
+			variant: 'text', // OPTIONAL: buttons variants, default is text
+			textColor: '#FF4242', // OPTIONAL, either semantic or hexa, default is black
+			// isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
+			// href: '/payment-details', // OPTIONAL: pass it in case it's link,
+			onClick: () => console.log('clicked'), // pass it in case it's not link,
+			sx: { py: 2 },
+		},
+	},
+];
+
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {
 	'Filter by status': [

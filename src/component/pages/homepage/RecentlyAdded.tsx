@@ -9,7 +9,7 @@ import { get } from '@/utils/http';
 export default async function RecentlyAdded() {
 	const url = '/properties';
 	const response = await get(url);
-	const dataArray = response?.data?.data; // Get the array of objects
+	const dataArray = response?.data?.list; // Get the array of objects
 
 	const slicedDataArray = dataArray;
 

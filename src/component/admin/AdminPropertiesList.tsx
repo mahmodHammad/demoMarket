@@ -9,7 +9,7 @@ import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 export default async function AdminPropertiesList() {
 	const url = '/properties/most-view';
 	const response = await get(url);
-	const dataArray = response?.data?.data; // Get the array of objects
+	const dataArray = response?.data?.list; // Get the array of objects
 
 	const slicedDataArray = dataArray;
 	const data = slicedDataArray?.map((item) => {

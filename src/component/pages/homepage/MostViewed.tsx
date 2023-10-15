@@ -6,7 +6,7 @@ import { get } from '@/utils/http';
 export default async function MostViewed() {
 	const url = '/properties/most-view';
 	const response = await get(url);
-	const dataArray = response?.data?.data; // Get the array of objects
+	const dataArray = response?.data?.list; // Get the array of objects
 	const slicedDataArray = dataArray;
 	const data = slicedDataArray?.map((item) => {
 		return {
