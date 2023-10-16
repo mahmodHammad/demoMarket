@@ -171,6 +171,7 @@ const page = () => {
 						title={'Confirm Cancel Action'}
 						body={'Please confirm to cancel this booking.'}
 						isOpen={cancelConfirmOpen}
+						isPrimary={false}
 						confirmFunc={cancelBookings}
 					/>
 				</Container>

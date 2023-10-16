@@ -16,11 +16,12 @@ import { Avatar } from '@mui/material';
 import FileUploadController from '@/component/forms/controlled/FileUploadController';
 import { useAuth } from '@/contexts/AuthContext';
 import { http } from '@/utils/http';
+import { globalToast } from '@/utils/toast';
+import { editProfile } from './profileService';
 
 const schema = yup.object().shape({
 	name: yup.string().required('Name is required'),
-	lastName: yup.string().required('Last Name is required'),
-	NationalID: yup.string().required('National ID is required'),
+	// NationalID: yup.string().required('National ID is required'),
 	email: yup.string().required('Email is required'),
 	Hijari: yup.boolean(),
 	date: yup.date().required('Date required'),
@@ -62,18 +63,27 @@ export default function MyProfile() {
 		if (image?.length) {
 			const formData = new FormData();
 			formData.append('profile_image', image[0]);
-			http.post('/profile/change-profile-image', formData, {
-				headers: {
-					'content-type': 'multipart/form-data',
-					'Access-Control-Allow-Origin': '*',
-				},
-			}).then(()=>{
-				getUserInfo()
-			});
+			http
+				.post('/profile/change-profile-image', formData, {
+					headers: {
+						'content-type': 'multipart/form-data',
+						'Access-Control-Allow-Origin': '*',
+					},
+				})
+				.then(() => {
+					getUserInfo();
+				});
 		}
 	}, [image]);
-	const onSubmit = (data: any) => {
-		console.log('form data', data);
+
+	const onSubmit = async (data: any) => {
+		await editProfile(data)
+			.then(() => {
+				globalToast('Profile updated successfully', 'success');
+			})
+			.catch((err) => {
+				globalToast('Please try later', 'error');
+			});
 	};
 	const readFileData = (fl: any) => {
 		const file = URL.createObjectURL(fl);

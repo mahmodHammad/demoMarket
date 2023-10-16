@@ -9,28 +9,54 @@ import neibourhoodcover2 from '@/assets/images/Rectangle 45351.png';
 import UpcomingVisitPlaceholder from '@/assets/icons/UpcomingVisitPlaceholder';
 import UpcomingVisitsCard from '@/component/cards/UpcomingVisitsCard';
 import { data } from './mock';
-import { getMyBookings } from './booking-service';
+import { bookingHistory, getMyBookings } from './booking-service';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
+import { Tab, Tabs } from '@mui/material';
+
+interface TabPanelProps {
+	children?: React.ReactNode;
+	index: number;
+	value: number;
+}
 
 export default function MyBookings() {
-	const [loading, setLoading] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [status, setStatus] = useState<number[]>([]);
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
-
+	const [value, setValue] = React.useState(0);
 	const handleSearch = (v: string) => setSearch(v);
 	const handlePagination = (v: number) => setCurrentPage(v);
 	const handleStatusChange = (v: number[]) => setStatus(v);
 	const handleFilter = (id: string) => setFilter(id);
 	const handleSort = (id: string) => setSort(id);
 
-	const { data, isLoading, refetch } = useQuery({
-		queryKey: [keys.MYBOOKINGS],
+	const {
+		data: upcomingList,
+		isLoading: upcomingListLoading,
+		refetch: upcomingListRefetch,
+	} = useQuery({
+		queryKey: [keys.MYBOOKINGS, search, currentPage, status, filter, sort,],
 		queryFn: () => getMyBookings(),
+		refetchInterval: false,
+		retry: false,
+		enabled: value === 0,
 	});
+
+	const {
+		data: completedList,
+		isLoading,
+		refetch,
+	} = useQuery({
+		queryKey: [keys.MYBOOKINGSHISTORY, search, currentPage, status, filter, sort,],
+		queryFn: () => bookingHistory({ type: 'history' }),
+		refetchInterval: false,
+		retry: false,
+		enabled: value === 1,
+	});
+
 	useEffect(() => {
 		console.log('bookings table state changed', {
 			search,
@@ -41,6 +67,41 @@ export default function MyBookings() {
 		});
 	}, [search, currentPage, status, filter, sort, data]);
 
+	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+		setValue(newValue);
+		setSearch('');
+		setCurrentPage(1);
+		setStatus([]);
+		setFilter('0');
+		setSort('');
+		if (Number(newValue)) refetch();
+		else upcomingListRefetch();
+	};
+
+	function a11yProps(index: number) {
+		return {
+			id: `simple-tab-${index}`,
+			'aria-controls': `simple-tabpanel-${index}`,
+		};
+	}
+	function CustomTabPanel(props: TabPanelProps) {
+		const { children, value, index, ...other } = props;
+
+		return (
+			<div
+				role="tabpanel"
+				hidden={value !== index}
+				id={`simple-tabpanel-${index}`}
+				aria-labelledby={`simple-tab-${index}`}
+				{...other}>
+				{value === index && (
+					<Box sx={{ p: 3 }}>
+						<Text>{children}</Text>
+					</Box>
+				)}
+			</div>
+		);
+	}
 	return (
 		<>
 			<Box pb={8}>
@@ -66,23 +127,50 @@ export default function MyBookings() {
 						/>
 					</Box>
 				</Box>
-				<Table
-					headers={HEADERS}
-					cellsTypes={CELLS_TYPES}
-					data={data?.list}
-					filterValues={FilterValues}
-					loading={loading}
-					search={search}
-					handleSearch={handleSearch}
-					currentPage={currentPage}
-					handlePagination={handlePagination}
-					status={status}
-					handleStatusChange={handleStatusChange}
-					filter={filter}
-					handleFilter={handleFilter}
-					sort={sort}
-					handleSort={handleSort}
-				/>
+				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+					<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+						<Tab value={0} label="Upcoming" {...a11yProps(0)} />
+						<Tab value={1} label="Completed" {...a11yProps(1)} />
+					</Tabs>
+				</Box>
+				<CustomTabPanel value={value} index={0}>
+					<Table
+						headers={HEADERS}
+						cellsTypes={CELLS_TYPES}
+						data={upcomingList?.list}
+						filterValues={FilterValues}
+						loading={upcomingListLoading}
+						search={search}
+						handleSearch={handleSearch}
+						currentPage={currentPage}
+						handlePagination={handlePagination}
+						status={status}
+						handleStatusChange={handleStatusChange}
+						filter={filter}
+						handleFilter={handleFilter}
+						sort={sort}
+						handleSort={handleSort}
+					/>
+				</CustomTabPanel>
+				<CustomTabPanel value={value} index={1}>
+					<Table
+						headers={HEADERS}
+						cellsTypes={CELLS_TYPES}
+						data={completedList?.list}
+						filterValues={FilterValues}
+						loading={isLoading}
+						search={search}
+						handleSearch={handleSearch}
+						currentPage={currentPage}
+						handlePagination={handlePagination}
+						status={status}
+						handleStatusChange={handleStatusChange}
+						filter={filter}
+						handleFilter={handleFilter}
+						sort={sort}
+						handleSort={handleSort}
+					/>
+				</CustomTabPanel>
 			</Box>
 		</>
 	);

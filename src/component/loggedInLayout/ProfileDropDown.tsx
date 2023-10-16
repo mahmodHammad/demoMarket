@@ -68,6 +68,7 @@ const ProfileDropDown = () => {
 	const [open, setOpen] = useState(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const myRef = React.useRef<HTMLDivElement>(null);
+	const { user } = useAuth();
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -83,7 +84,7 @@ const ProfileDropDown = () => {
 	return (
 		<Box ref={myRef}>
 			<ButtonBase aria-describedby={id} className="rounded-full" onClick={handleClick}>
-				<Avatar alt={'Image'} src={'https://mui.com/static/images/avatar/2.jpg'} sx={{ width: 40, height: 40 }} />
+				<Avatar alt={'Image'} src={user?.profile_image} sx={{ width: 40, height: 40 }} />
 			</ButtonBase>
 			{open && (
 				<ClickAwayListener onClickAway={handleClickAway}>

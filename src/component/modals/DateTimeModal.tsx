@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { Box, Button, Text } from '@/wrappers';
 import { Modal } from '@mui/material';
 import StaticDateTimePicker from '../forms/StaticDateTimePicker';
-// import { useQuery } from '@tanstack/react-query';
-// import { keys } from '@/utils/keys';
-// import { getBookingSettings } from '@/app/(dash)/admin-bookings/booking-service';
-// import dayjs from 'dayjs';
+import { useQuery } from '@tanstack/react-query';
+import { keys } from '@/utils/keys';
+import { getBookingSettings } from '@/app/(dash)/admin-bookings/booking-service';
+import dayjs from 'dayjs';
 
 interface Props {
 	isOpen: boolean;
@@ -17,38 +17,40 @@ interface Props {
 	successFunc: any;
 }
 
+const days = { 0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday' };
+
 const DateTimeModal = ({ isOpen, setDate, date, setIsOpen, successFunc }: Props) => {
 	const handleClose = () => {
 		setIsOpen(false);
 	};
 
-	//Disabling 
-	// const [startTime, setStartTime] = useState();
-	// const [endTime, setEndTime] = useState();
-	// const { data, refetch } = useQuery({
-	// 	queryKey: [keys.MYBOOKING],
-	// 	queryFn: () =>
-	// 		getBookingSettings().then((response) => {
-	// 			// var start = dayjs(),
-	// 			// 	end = dayjs('2016-11-02'), // Nov. 2nd
-	// 			// 	day = 0; // Sunday
-	// 			// var result = [];
-	// 			// var current = start.clone();
-	// 			// while (current.day(7 + day).isBefore(end)) {
-	// 			// 	result.push(current.clone());
-	// 			// }
-	// 			// console.log(result.map((m) => m.format('LLLL')));
-	// 			// setValue(
-	// 			// 	'days',
-	// 			// 	perms.map((perm: {}) => (response?.days?.includes(perm.name) ? perm.name : false)),
-	// 			// );
-	// 			setStartTime(dayjs('2016-11-02' + response?.start_time));
-	// 			console.log(startTime);
-	// 			console.log(dayjs('2016-11-02' + response?.start_time),'shreyas')
-	// 			setEndTime(dayjs('2016-11-02' + response?.end_time));
-	// 			return response;
-	// 		}),
-	// });
+	// Disabling
+	const { data, refetch } = useQuery({
+		queryKey: [keys.MYBOOKING],
+		queryFn: () =>
+			getBookingSettings().then((response) => {
+				return response;
+			}),
+		refetchOnMount: true,
+		refetchInterval: false,
+	});
+	const disbaleDate = (date) => {
+		if (data?.days?.includes(days[date?.day()])) {
+			return false;
+		} else {
+			return true;
+		}
+	};
+
+	const disbaleTime = (time) => {
+		if (
+			time?.hour() >= dayjs('2023-11-22' + data?.start_time)?.hour() &&
+			time?.hour() <= dayjs('2023-11-22' + data?.end_time)?.hour()
+		)
+			return false;
+		return true;
+	};
+
 	const handleConfirm = async () => {
 		if (date) {
 			await successFunc();
@@ -72,29 +74,34 @@ const DateTimeModal = ({ isOpen, setDate, date, setIsOpen, successFunc }: Props)
 							Select available days and times for this booking
 						</Text>
 					</Box>
-					<Box>
-						<StaticDateTimePicker
-							disablePast
-							// onClose={handleClose}
-							slotProps={{
-								actionBar: {
-									actions: [],
-								},
-							}}
-							// maxTime={startTime}
-							// minTime={endTime}
-							onChange={(e) => setDate(e)}
-							// onAccept={handleConfirm}
-						/>
-					</Box>
-					<Box row gap={'10px'}>
-						<Button onClick={() => handleClose()} variant="text" fullWidth size="large" sx={{ mt: '24px' }}>
-							Close
-						</Button>
-						<Button onClick={() => handleConfirm()} variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
-							Done
-						</Button>
-					</Box>
+					{data?.days?.length && (
+						<>
+							<Box>
+								<StaticDateTimePicker
+									shouldDisableDate={(date) => disbaleDate(date)}
+									shouldDisableTime={(date) => disbaleTime(date)}
+									disablePast
+									// onClose={handleClose}
+									slotProps={{
+										actionBar: {
+											actions: [],
+										},
+									}}
+									onChange={(e) => setDate(e)}
+									// onAccept={handleConfirm}
+								/>
+							</Box>
+
+							<Box row gap={'10px'}>
+								<Button onClick={() => handleClose()} variant="text" fullWidth size="large" sx={{ mt: '24px' }}>
+									Close
+								</Button>
+								<Button onClick={() => handleConfirm()} variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
+									Done
+								</Button>
+							</Box>
+						</>
+					)}
 				</Box>
 			</Box>
 		</Modal>

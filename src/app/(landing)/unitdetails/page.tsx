@@ -145,7 +145,7 @@ export default async function page({
 					</Grid>
 
 					<Grid item xs={12} md={4} height={'518px'} display={{ xs: 'none', md: 'flex' }}>
-						<BuyNowCard price={'SAR ' + unit?.price || '--'} PriceType={rentType || 'monthly'} />
+						<BuyNowCard unitId={unit?.id || undefined} price={'SAR ' + unit?.price || '--'} PriceType={rentType || 'monthly'} />
 					</Grid>
 				</Grid>
 			</Container>
