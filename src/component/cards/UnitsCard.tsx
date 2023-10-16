@@ -237,7 +237,7 @@ export default function UnitsCard({
 							width: '100%',
 							fontSize: { xs: '12px', md: '14px' },
 						}}
-						href={link}>
+						href={`/unitdetails/${id}`}>
 						{buttonName}
 					</Button>
 				)}
