@@ -3,6 +3,9 @@ import { GET, POST, PUT } from '@/utils/http';
 export const getMyBookings = (options: any = {}) => {
 	return GET(`/bookings`, options);
 };
+export const bookingHistory = (options: any = {}) => {
+	return GET(`/bookings?type=history`, options);
+};
 
 export const getMyBooking = (id: any = null) => {
 	return GET(`/bookings/${id}`);
