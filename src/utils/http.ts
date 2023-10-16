@@ -7,8 +7,9 @@ type Options = {
 };
 
 export const get = async (url: string, options: Options = {}) => {
-	const baseUrl = process.env.BASE_URL;
-	const xTenant = process.env.X_TENANT;
+	const baseUrl = "http://193.122.88.9/api";
+	// const xTenant = process.env.X_TENANT
+	const xTenant = "testDemoOne"
 	try {
 		const requestOptions: any = {
 			headers: {
