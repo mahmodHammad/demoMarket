@@ -18,7 +18,7 @@ export default async function AdminPropertiesList() {
 			location: (item?.data?.city_id && item?.data?.city_id?.name) || '--',
 			img: neigbourhoodCover,
 			area: item?.data?.unit_size || '--',
-			price: '--',
+			price: item?.data?.price || '--',
 			link: '/',
 		};
 	});

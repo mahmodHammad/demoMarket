@@ -25,6 +25,7 @@ import PhotoAlbum from 'react-photo-album';
 import { Box } from '@/wrappers';
 import { data } from './mock';
 import { get } from '@/utils/http';
+import { AcTypes, FurnishedTypes, ParkingTypes, stringifyNumber } from '@/component/unitDetails/PropertySpecification';
 
 const images = [photo1, photo2, photo3, photo3];
 
@@ -63,23 +64,48 @@ export default async function page({
 }: Props) {
 	// const [index, setIndex] = useState(-1);
 
-	const url = '/properties/2780';
+	const url = '/properties/6';
 	const response = await get(url);
 	const unit = response?.data; // Get the array of objects
 
+	const renderLocation = [unit?.city?.name, unit?.district?.name];
+	const newlocation = unit?.city ? renderLocation?.join(', ') : '';
+
 	const amenityData = [
-		{ title: 'floor', icon: <Room />, value: unit?.features?.floor },
-		{ title: 'status', icon: <Room />, value: unit?.features?.status },
-		{ title: 'ac_type', icon: <Room />, value: unit?.features?.ac_type },
-		{ title: 'kitchen', icon: <Room />, value: unit?.features?.kitchen },
-		{ title: 'lounges', icon: <Room />, value: unit?.features?.lounges },
-		{ title: 'bedrooms', icon: <Room />, value: unit?.features?.bedrooms },
-		{ title: 'bathrooms', icon: <Room />, value: unit?.features?.bathrooms },
-		{ title: 'floor', icon: <Room />, value: unit?.features?.floor },
-		{ title: 'guest rooms', icon: <FrontSide />, value: unit?.features?.guest_rooms },
+		{ title: 'Kitchens', icon: <Room />, value: unit?.features?.kitchen && unit?.features?.kitchen + ' ' + '' },
+		{ title: 'Lounges', icon: <Room />, value: unit?.features?.lounges && unit?.features?.lounges + ' ' + '' },
+		{ title: 'bedrooms', icon: <Room />, value: unit?.features?.bedrooms && unit?.features?.bedrooms + ' ' + '' },
+		{ title: 'bathrooms', icon: <Room />, value: unit?.features?.bathrooms && unit?.features?.bathrooms + ' ' + '' },
+		{
+			title: 'guest rooms',
+			icon: <FrontSide />,
+			value: unit?.features?.guest_rooms && unit?.features?.guest_rooms + ' ' + '',
+		},
+		{
+			title: 'Floor',
+			icon: <Room />,
+			value: unit?.features?.floor?.toString() && stringifyNumber(unit?.features?.floor) + ' ' + 'Floor',
+		},
+
+		{ title: 'AC type', icon: <Room />, value: unit?.features?.ac_type && AcTypes[unit?.features?.ac_type] + ' ' + '' },
+
+		{
+			title: 'Parking',
+			icon: <GroundFloor />,
+			value: unit?.features?.parking?.toString() && ParkingTypes[unit?.features?.parking] + ' ' + '',
+		},
+
 		{ title: 'unit size', icon: <GroundFloor />, value: unit?.features?.unit_size },
-		{ title: 'year built', icon: <GroundFloor />, value: unit?.features?.year_built },
-		{ title: 'is furnished', icon: <GroundFloor />, value: unit?.features?.is_furnished },
+		{
+			title: 'year built',
+			icon: <GroundFloor />,
+			value: unit?.features?.year_built && unit?.features?.year_built + ' ' + '',
+		},
+		{
+			title: 'Furnished Type',
+			icon: <GroundFloor />,
+			value: unit?.features?.is_furnished?.toString() && FurnishedTypes[unit?.features?.is_furnished] + ' ' + '',
+		},
 	];
 	return (
 		<>
@@ -118,7 +144,7 @@ export default async function page({
 								/>
 							}
 							title={unit?.name || '--'}
-							location={unit?.city.name || '--'}
+							location={newlocation}
 						/>
 						<ConstructionStatus
 							logo={
@@ -133,13 +159,18 @@ export default async function page({
 							status={unit?.status.description || '--'}
 							managedBy={unit?.managed_by || '--'}
 						/>
-						<AboutUnit description={aboutUnit || '--'} />
+						<AboutUnit
+							description={
+								aboutUnit ||
+								'Check out that Custom Backyard Entertaining space! 3237sqft, 4 Bedrooms, 2 Bathrooms house on a Lake Villa  street in the Palm Harbor neighborhood of Texas. Well cared for with tons of upgrades! Newer stainless steel appliances will stay with the unit, including dishwasher, fridge, stove, microwave, and washer and dryer. Tenant pays electricity and gas bills. Water, Sewer, and Trash are covered by Landlord. Tenant is responsible for lawncare and snow removal. Landlord provides lawn mower. Minimum one year lease.'
+							}
+						/>
 
 						<Grid item xs={12} md={4} display={{ xs: 'flex', md: 'none' }} mt={3}>
 							<BuyNowCard price={'SAR ' + unit?.price || '--'} PriceType={rentType || 'monthly'} />
 						</Grid>
 
-						<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size} />
+						<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
 						<Features Feature={amenityData} />
 						<UnitMap location={location} />
 					</Grid>

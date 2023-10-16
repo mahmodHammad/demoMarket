@@ -86,18 +86,26 @@ export default function UnitsCard({
       >
         Hart Icon
       </Box> */}
+
 			<Box
 				sx={{
 					width: '100%',
 					height: { xs: '150px', md: imgHeight },
-					borderRadius: '16px 16px 0 0',
+					borderRadius: '16px 16px 16px 16px',
 					objectFit: 'cover',
+					position: 'relative',
+					overflow: 'hidden',
 				}}
-				component={Image}
-				placeholder="blur"
-				alt="houses and properties for rent"
-				src={img}
-			/>
+				// component={Image}
+				// loader={imageLoader}
+				// alt="houses and properties for rent"
+				// src={img}
+				// width={500}
+				// height={500}
+			>
+				<Image src={img} alt="Picture of the author" fill />
+			</Box>
+
 			<Box
 				column
 				sx={{
@@ -112,7 +120,7 @@ export default function UnitsCard({
 						sx={{
 							fontSize: { xs: '14px', md: '18px' },
 						}}>
-						{title}
+						{title.slice(0, 20)}
 					</Text>
 					<Text
 						variant="small"

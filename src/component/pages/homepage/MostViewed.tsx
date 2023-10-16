@@ -9,12 +9,14 @@ export default async function MostViewed() {
 	const dataArray = response?.data?.list; // Get the array of objects
 	const slicedDataArray = dataArray;
 	const data = slicedDataArray?.map((item) => {
+		const renderLocation = [item?.city?.name, item?.district?.name];
+		const newlocation = item?.city ? renderLocation?.join(', ') : '';
 		return {
 			title: item?.name || '--',
-			location: (item?.data?.city_id && item?.data?.city_id?.name) || '--',
-			img: neigbourhoodCover,
-			area: item?.data?.unit_size || '--',
-			price: '--',
+			location: newlocation || '--',
+			img: item?.images && item.images[0]?.url ? item.images[0].url : neigbourhoodCover,
+			area: item?.unit_size || '--',
+			price: item?.price || '--',
 			link: '/',
 		};
 	});
