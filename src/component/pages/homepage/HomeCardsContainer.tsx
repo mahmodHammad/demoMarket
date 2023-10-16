@@ -42,7 +42,7 @@ export default function HomeCardsContainer({ title, body, link, data, hasneighbo
 								mb: '15px',
 							}}>
 							{hasneighbourhoods ? (
-								<NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
+								<NeighbourhoodCard id={d.id} title={d.title} img={d.img} link={d.link} />
 							) : (
 								<UnitsCard title={d.title} img={d.img} price={d.price} area={d.area} location={d.location} />
 							)}
