@@ -25,7 +25,7 @@ export default function page() {
 
 	const [filtersInfo, setFiltersInfo] = useState(null);
 
-	const [isRent, setIsRent] = useState<any>((searchParams?.get('isRent') as unknown as boolean) || true);
+	const [isRent, setIsRent] = useState<any>(searchParams?.get('isRent') === 'true' ? true : false);
 
 	const [availabilityFilters, setAvailabilityFilters] = useState<any>([]);
 
