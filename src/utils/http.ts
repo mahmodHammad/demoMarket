@@ -106,8 +106,16 @@ export const GET = async (URI: string, payload?: any) => {
 		return handleError(error);
 	}
 };
+export const DELETE = async (URI: string, payload?: any) => {
+	try {
+		const res = await http.delete(URI, { params: payload });
+		return res.data;
+	} catch (error) {
+		return handleError(error);
+	}
+};
 
-const handleError = (error: any) => {
+export const handleError = (error: any) => {
 	console.log('error in GET', error);
 	return Promise.reject(error);
 };

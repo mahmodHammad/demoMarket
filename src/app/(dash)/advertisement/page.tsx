@@ -8,6 +8,9 @@ import { AdvertisementsCard } from '@/component';
 import photo1 from '@/assets/images/photo1.png';
 import photo2 from '@/assets/images/photo2.png';
 import photo3 from '@/assets/images/photo3.png';
+import { keys } from '@/utils/keys';
+import { useQuery } from '@tanstack/react-query';
+import { getAdvertisements } from './advertisement-service';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -60,9 +63,18 @@ function a11yProps(index: number) {
 const Advertisement = () => {
 	const [value, setValue] = React.useState(0);
 
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue);
+	const handleChange = async (event: React.SyntheticEvent, newValue: number) => {
+		await setValue(newValue);
+		refetch();
 	};
+
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: [keys.ADVERTISEMENT],
+		queryFn: () => getAdvertisements({ ...(Number(value) === 1 && { type: 'history' }) }),
+		refetchInterval: false,
+		retry: false,
+	});
+
 	return (
 		<>
 			<Box column width={'100%'}>
@@ -81,16 +93,19 @@ const Advertisement = () => {
 				<Box sx={{ width: '100%' }}>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-							<Tab label="On going" {...a11yProps(0)} />
-							<Tab label="history" {...a11yProps(1)} />
+							<Tab value={0} label="On going" {...a11yProps(0)} />
+							<Tab value={1} label="history" {...a11yProps(1)} />
 						</Tabs>
 					</Box>
 					<CustomTabPanel value={value} index={0}>
 						<Grid container mt={'25px'} spacing={'28px'}>
-							{data?.map((d, index) => (
+							{data?.list?.map((d, index) => (
 								<Grid item xs={4} key={index}>
-									<ButtonBase component={Link} sx={{ width: '100%' }} href="advertisement/advertisment-Details">
-										<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
+									<ButtonBase
+										component={Link}
+										sx={{ width: '100%' }}
+										href={`advertisement/advertisment-Details/${d?.id}`}>
+										<AdvertisementsCard title={d?.title} duration={[d?.start_at, d?.end_at]} img={d?.image} />
 									</ButtonBase>
 								</Grid>
 							))}
@@ -98,10 +113,13 @@ const Advertisement = () => {
 					</CustomTabPanel>
 					<CustomTabPanel value={value} index={1}>
 						<Grid container mt={'25px'} spacing={'28px'}>
-							{data2?.map((d, index) => (
+							{data?.list?.map((d, index) => (
 								<Grid item xs={4} key={index}>
-									<ButtonBase component={Link} sx={{ width: '100%' }} href="advertisement/advertisment-Details">
-										<AdvertisementsCard title={d?.title} duration={d?.duration} img={d?.img} />
+									<ButtonBase
+										component={Link}
+										sx={{ width: '100%' }}
+										href={`advertisement/advertisment-Details/${d?.id}`}>
+										<AdvertisementsCard title={d?.title_en} duration={[d?.start_at, d?.end_at]} img={d?.image} />
 									</ButtonBase>
 								</Grid>
 							))}
