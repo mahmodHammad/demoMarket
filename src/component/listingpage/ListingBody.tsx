@@ -83,11 +83,13 @@ const listingBody = ({
 				</Box>
 			)}
 
-			{/* // TODO: Style the select with Figma style */}
 			<SimpleSelect
 				items={sortingFilters}
 				value={currentSortFilter}
 				onChange={(e) => setCurrentSortFilter(e.target.value)}
+				disabled={!!!sortingFilters.length}
+				placeholder="Sort By"
+				sx={sortSX}
 			/>
 
 			{/* // TODO: map data to UI card */}
@@ -139,3 +141,28 @@ const listingBody = ({
 };
 
 export default listingBody;
+
+const sortSX = {
+	fontSize: '14px',
+	color: '#232425',
+	fontWeight: 'bold',
+	minWidth: '107px',
+	marginTop: '24px',
+	marginBottom: '-40px',
+	alignSelf: 'flex-end',
+	height: '42px',
+	backgroundColor: 'transparent',
+	boxShadow: 'none',
+	borderRadius: '8px',
+	'.MuiOutlinedInput-notchedOutline': { border: '1px solid #E3E3E3' },
+	'&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+		border: '1px solid #E3E3E3',
+	},
+	'&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+		border: '1px solid #E3E3E3',
+	},
+	'& > svg': {
+		fill: '#000',
+		color: '#000',
+	},
+};
