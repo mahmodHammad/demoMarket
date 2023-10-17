@@ -99,7 +99,7 @@ export const POST = async (URI: string, payload?: any) => {
 
 export const GET = async (URI: string, payload?: any) => {
 	try {
-		const res = await http.get(URI, payload);
+		const res = await http.get(URI, { params: payload });
 		return res.data.data;
 	} catch (error) {
 		return handleError(error);

@@ -38,8 +38,8 @@ export default function MyBookings() {
 		isLoading: upcomingListLoading,
 		refetch: upcomingListRefetch,
 	} = useQuery({
-		queryKey: [keys.MYBOOKINGS, search, currentPage, status, filter, sort,],
-		queryFn: () => getMyBookings(),
+		queryKey: [keys.MYBOOKINGS, { search, currentPage, status, filter, sort }],
+		queryFn: () => getMyBookings({ search, currentPage, status, filter, sort }),
 		refetchInterval: false,
 		retry: false,
 		enabled: value === 0,
@@ -50,7 +50,7 @@ export default function MyBookings() {
 		isLoading,
 		refetch,
 	} = useQuery({
-		queryKey: [keys.MYBOOKINGSHISTORY, search, currentPage, status, filter, sort,],
+		queryKey: [keys.MYBOOKINGSHISTORY, { search, currentPage, status, filter, sort }],
 		queryFn: () => bookingHistory({ type: 'history' }),
 		refetchInterval: false,
 		retry: false,
