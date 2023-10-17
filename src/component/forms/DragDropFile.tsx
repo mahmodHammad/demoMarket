@@ -100,7 +100,7 @@ const DragDropFile = ({ name, onChange, value }: { name: string; value?: any; on
 					</Grid>
 				</Grid>
 			))}
-			{typeof value[0] === 'string' && (
+			{typeof value?.[0] === 'string' && (
 				<>
 					<Grid container alignItems="center">
 						<Grid item xs={10}>
