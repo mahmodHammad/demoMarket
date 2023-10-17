@@ -11,14 +11,14 @@ const nextConfig = {
 	},
 	reactStrictMode: true,
 	images: {
-		// remotePatterns: [
-		// 	{
-		// 		protocol: 'https',
-		// 		hostname: 'api-dev.hectare.app',
-		// 		// port: '',
-		// 		// pathname: '/account123/**',
-		// 	},
-		// ],
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'api-dev.hectare.app',
+				// port: '',
+				// pathname: '/account123/**',
+			},
+		],
 		domains: ['193.122.88.9', 'localhost','api-dev.hectare.app'],
 	},
 };
