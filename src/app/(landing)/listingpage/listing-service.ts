@@ -9,6 +9,15 @@ export const getProperties = async (options: any = {}) => {
 	}
 };
 
+export const getFilters = async (options: any = {}) => {
+	try {
+		const res = await http.get(`/get-filters`, options);
+		return res.data.data;
+	} catch (error) {
+		console.log('error in getFilters', error);
+	}
+};
+
 export const toggleLike = async (body: any) => {
 	try {
 		return await http.post(`/favorites`, body);
