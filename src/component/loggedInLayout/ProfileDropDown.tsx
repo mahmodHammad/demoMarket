@@ -68,6 +68,7 @@ const ProfileDropDown = () => {
 	const [open, setOpen] = useState(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const myRef = React.useRef<HTMLDivElement>(null);
+	const { user } = useAuth();
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);

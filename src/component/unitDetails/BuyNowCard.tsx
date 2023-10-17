@@ -13,9 +13,10 @@ import { globalToast } from '@/utils/toast';
 interface proptypes {
 	price: string;
 	PriceType: string;
+	unitId?: string | number | undefined;
 }
 
-export default function BuyNowCard({ price, PriceType }: proptypes) {
+export default function BuyNowCard({ price, PriceType, unitId }: proptypes) {
 	const { isAuthed, openLoginModal } = useAuth();
 
 	const [bookingDateOpen, setBookingDateOpen] = useState(false);
@@ -27,10 +28,11 @@ export default function BuyNowCard({ price, PriceType }: proptypes) {
 				day: dayjs(bookingDate).format('L'),
 				time: dayjs(bookingDate).format('HH:mm:ss'),
 				message: 'Static message',
+				property_id: unitId,
 			};
 			await createBooking(payload)
 				.then((response) => {
-					globalToast('Booking Edited Successful', 'success');
+					globalToast('Booking Created Successful', 'success');
 					setBookingDateOpen(false);
 				})
 				.catch((err) => {

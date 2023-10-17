@@ -51,7 +51,8 @@ export default function AdminBookings() {
 			id,
 			type,
 			title: `${type} Booking`,
-			body: `Please confirm to ${type} this Booking.`,
+			body: `Are you sure you want to ${type} this Booking.`,
+			isPrimary: type === 'Reject' ? false : true,
 		});
 		setIsOpen(true);
 	};
@@ -151,6 +152,7 @@ export default function AdminBookings() {
 				title={modalOptions?.title}
 				body={modalOptions?.body}
 				isOpen={isOpen}
+				isPrimary={modalOptions?.isPrimary}
 				confirmFunc={acceptOrRejectBookings}
 			/>
 		</>

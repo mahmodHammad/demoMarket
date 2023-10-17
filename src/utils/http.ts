@@ -7,8 +7,9 @@ type Options = {
 };
 
 export const get = async (url: string, options: Options = {}) => {
-	const baseUrl = process.env.BASE_URL;
-	const xTenant = process.env.X_TENANT;
+	const baseUrl = "http://193.122.88.9/api";
+	// const xTenant = process.env.X_TENANT
+	const xTenant = "testDemoOne"
 	try {
 		const requestOptions: any = {
 			headers: {
@@ -64,7 +65,7 @@ export const post = async (url: string, payload: {}) => {
 // TODO: get base and xTenant from env
 export const http = axios.create({
 	baseURL: 'http://193.122.88.9/api',
-	timeout: 5000,
+	timeout: 10000,
 });
 
 http.interceptors.request.use(
