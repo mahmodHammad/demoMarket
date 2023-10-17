@@ -77,16 +77,18 @@ const AdvertismentDetails = () => {
 							borderRadius: '16px 16px 0 0',
 							position: 'relative',
 						}}>
-						<Image
-							style={{
-								objectFit: 'cover',
-								position: 'absolute',
-								borderRadius: '16px 16px 0 0',
-							}}
-							layout="fill"
-							alt={'ssss'}
-							src={data?.image}
-						/>
+						{data?.img && (
+							<Image
+								style={{
+									objectFit: 'cover',
+									position: 'absolute',
+									borderRadius: '16px 16px 0 0',
+								}}
+								layout="fill"
+								alt={'ssss'}
+								src={data?.image}
+							/>
+						)}
 					</div>
 					<Box column sx={{ p: ' 16px' }}>
 						<Box xstart>
