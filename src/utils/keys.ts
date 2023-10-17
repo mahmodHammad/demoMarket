@@ -1,5 +1,6 @@
 export const keys = {
-	properties: 'properties',
+	PROPERTIES: 'PROPERTIES',
+	FILTERS: 'FILTERS',
 	MYBOOKINGS: 'MYBOOKINGS',
 	MYBOOKING: 'MYBOOKING',
 	EDITBOOKING: 'EDITBOOKING',

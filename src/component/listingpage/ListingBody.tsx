@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Loading, Text } from '@/wrappers';
+import { Box, Button, Text } from '@/wrappers';
 import { Grid, Pagination } from '@mui/material';
 import UnitsCard from '../cards/UnitsCard';
 import SearchBox from './SearchBox';
@@ -9,6 +9,7 @@ import { Filter } from '@/assets';
 import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { useAuth } from '@/contexts/AuthContext';
 import CardSkeleton from '../cards/CardSkeleton';
+import SimpleSelect from '../forms/SimpleSelect';
 
 type Props = {
 	isMobileView?: boolean;
@@ -18,6 +19,13 @@ type Props = {
 	page: number;
 	setPage: (page: number) => void;
 	setRenderedData: (data: any) => void;
+	sortingFilters: any;
+	currentSortFilter: any;
+	setCurrentSortFilter: any;
+	propertySearch: any;
+	setPropertySearch: any;
+	isRent: any;
+	setIsRent: any;
 };
 
 const listingBody = ({
@@ -28,6 +36,13 @@ const listingBody = ({
 	page = 1,
 	setPage,
 	setRenderedData,
+	sortingFilters,
+	currentSortFilter,
+	setCurrentSortFilter,
+	propertySearch,
+	setPropertySearch,
+	isRent,
+	setIsRent,
 }: Props) => {
 	const { isAuthed, openLoginModal } = useAuth();
 	const handleLikeToggle = (id: number) => {
@@ -48,7 +63,12 @@ const listingBody = ({
 	return (
 		<Box column fullWidth>
 			<Text variant="h4">Properties in Saudi Arabia</Text>
-			<SearchBox />
+			<SearchBox
+				propertySearch={propertySearch}
+				setPropertySearch={setPropertySearch}
+				isRent={isRent}
+				setIsRent={setIsRent}
+			/>
 			{isMobileView && (
 				<Box fullWidth row xbetween ycenter mt={'30px'}>
 					<Text>Total Properties: {data?.data?.length}</Text>
@@ -62,6 +82,14 @@ const listingBody = ({
 					</Button>
 				</Box>
 			)}
+
+			{/* // TODO: Style the select with Figma style */}
+			<SimpleSelect
+				items={sortingFilters}
+				value={currentSortFilter}
+				onChange={(e) => setCurrentSortFilter(e.target.value)}
+			/>
+
 			{/* // TODO: map data to UI card */}
 			{isLoading ? (
 				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
