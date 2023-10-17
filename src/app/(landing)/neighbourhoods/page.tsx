@@ -9,7 +9,7 @@ export default async function Home() {
 	const url = '/complexes';
 	const response = await get(url);
 	const dataArray = response?.data?.list; // Get the array of objects
-	
+
 	const data = dataArray?.map((item) => {
 		return { title: item.name, img: neigbourhoodCover, link: '/' };
 	});
@@ -25,14 +25,6 @@ export default async function Home() {
 							({data?.length})
 						</Text>
 					</Text>
-					<Button
-						variant="outlined"
-						sx={{
-							borderColor: '#E3E3E3',
-							color: '#232425',
-						}}>
-						Sort By
-					</Button>
 				</Box>
 				<GridContainer
 					xstart

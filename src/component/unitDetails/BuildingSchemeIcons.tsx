@@ -8,17 +8,20 @@ interface Props {
 	value?: string;
 }
 export default function BuildingSchemeIcons({ icon, title, value }: Props) {
+	if (value === null || value === 'undefined' || value === undefined) return null;
 	return (
 		<Box row gap={'8px'} sx={{ mt: { xs: '5px', md: '10px' } }}>
 			<Box row center>
 				{icon}
-				<Text variant="label" gray>
-					{title}
-				</Text>
+				<Box column ml={'1px'}>
+					<Text variant="label" gray>
+						{title}
+					</Text>
 
-				<Text variant="label" gray sx={{ ml: '3px' }}>
-					{' ' + value}
-				</Text>
+					<Text variant="small" gray>
+						{value}
+					</Text>
+				</Box>
 			</Box>
 		</Box>
 	);
