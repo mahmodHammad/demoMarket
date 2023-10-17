@@ -23,7 +23,7 @@ export default async function MostViewed() {
 			data={data}
 			title="Most Viewed Properties"
 			body="Discover our most viewed exclusive selection in properties  "
-			link="/"
+			link="/listingpage?sort=5"
 		/>
 	);
 }
