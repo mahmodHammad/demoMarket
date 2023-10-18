@@ -1,85 +1,69 @@
 'use client';
-import { Box, Button, Text } from '@/wrappers';
-import React, { useState } from 'react';
+
+import { Box, Text } from '@/wrappers';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
 	Autocomplete,
 	ButtonBase,
 	Checkbox,
 	Divider,
-	FormControl,
 	IconButton,
-	InputLabel,
 	ListItemText,
 	MenuItem,
 	OutlinedInput,
 	Select,
 	SelectChangeEvent,
-	Slider,
 	TextField,
 } from '@mui/material';
 import { Location, SearchIcon } from '@/assets';
 import theme from '@/ThemeRegistry/theme';
-
-function valuetext(value: number) {
-	return `${value}°C`;
-}
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-	PaperProps: {
-		style: {
-			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-			width: 250,
-		},
-	},
-};
-
-const names = ['Residential Apartment', 'Residential Land', 'Independent House/Villa'];
+import { useQuery } from '@tanstack/react-query';
+import { keys } from '@/utils/keys';
+import { getFilters } from '@/app/(landing)/listingpage/listing-service';
 
 const SearchBar = () => {
-	const [age, setAge] = React.useState('');
+	const [selectedPropertyTypes, setSelectedPropertyTypes] = React.useState<string[]>([]);
+	const [isRent, setIsRent] = useState(false);
+	const [propertyTypes, setPropertyTypes] = useState<any>([]);
+	const [locations, setLocations] = useState<any>([]);
 
-	const handleChangee = (event: SelectChangeEvent) => {
-		setAge(event.target.value);
-	};
+	const { data: filtersData } = useQuery({
+		queryKey: [keys.FILTERS],
+		queryFn: getFilters,
+	});
 
-	const [values, setValues] = React.useState<number[]>([20, 37]);
+	useEffect(() => {
+		console.log('filtersData', filtersData);
 
-	const handleChanges = (event: Event, newValue: number | number[]) => {
-		setValues(newValue as number[]);
-	};
-	const [personName, setPersonName] = React.useState<string[]>([]);
+		if (filtersData?.property_type)
+			setPropertyTypes(
+				Object.entries(filtersData?.property_type).map(([label, id]: any) => ({
+					id,
+					label,
+				})),
+			);
 
-	const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+		if (filtersData?.location)
+			setLocations(
+				filtersData?.locations.map((location: any) => ({
+					id: location.id,
+					label: location.name,
+				})),
+			);
+	}, [filtersData]);
+
+	const handlePropertyTypeFilterChange = (event: SelectChangeEvent<typeof selectedPropertyTypes>) => {
+		console.log('e', event.target.value);
 		const {
 			target: { value },
 		} = event;
-		setPersonName(
-			// On autofill we get a stringified value.
-			typeof value === 'string' ? value.split(',') : value,
-		);
+
+		setSelectedPropertyTypes(typeof value === 'string' ? value.split(',') : value);
 	};
 
-	const defaultProps = {
-		options: Locations,
-		getOptionLabel: (option: FilmOptionType) => option.title,
-	};
-	const flatProps = {
-		options: Locations.map((option) => option.title),
-	};
-	const [value, setValue] = React.useState<FilmOptionType | null>(null);
-
-	const [isRent, setIsRent] = useState(false);
-
-	const handleClick = () => {
-		setIsRent(false);
-	};
-
-	const handleClickRent = () => {
-		setIsRent(true);
-	};
+	const handleClick = () => setIsRent(false);
+	const handleClickRent = () => setIsRent(true);
 
 	return (
 		<Box sx={{ mt: { xs: '20px ', md: '60px' }, width: { xs: '100%', md: 'initial' } }}>
@@ -135,6 +119,7 @@ const SearchBar = () => {
 					p: { xs: '12px', md: '24px' },
 				}}>
 				<Box xbetween width={'100%'}>
+					{/* mobile */}
 					<Box center width={'100%'} sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'space-around' }}>
 						<Box width={'100%'}>
 							<Autocomplete
@@ -194,6 +179,7 @@ const SearchBar = () => {
 								)}
 							/>
 						</Box>
+
 						<Box column width={'100%'}>
 							<Autocomplete
 								{...defaultProps}
@@ -224,12 +210,14 @@ const SearchBar = () => {
 						</Box>
 					</Box>
 
+					{/* location filter web */}
 					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box column mr={'30px'} width={'100%'}>
 							<Text variant="label">Location</Text>
 							<Autocomplete
 								popupIcon={null}
-								{...defaultProps}
+								options={locations}
+								getOptionLabel={(option: Option) => option.label}
 								id="disable-close-on-select"
 								disableCloseOnSelect
 								renderInput={(params) => (
@@ -258,6 +246,8 @@ const SearchBar = () => {
 							/>
 						</Box>
 					</Box>
+
+					{/* property types filter web */}
 					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box column mr={'20px'} width={'100%'}>
 							<Text variant="label">Property Type</Text>
@@ -272,23 +262,24 @@ const SearchBar = () => {
 								id="demo-multiple-checkbox"
 								displayEmpty
 								multiple
-								value={personName}
-								onChange={handleChange}
+								value={selectedPropertyTypes}
+								onChange={handlePropertyTypeFilterChange}
 								input={<OutlinedInput />}
 								renderValue={(selected) => {
-									if (selected.length === 0) {
-										return <Text sx={{ opacity: 0.5 }}> Choose Property Type</Text>;
-									}
-									if (selected.length > 1) {
-										return selected.at(0) + '...';
-									}
-									return selected;
+									const selectedFilters = propertyTypes
+										.filter((t: any) => selected.includes(t.id))
+										.map((t: any) => t.label);
+
+									if (!!!selected.length) return 'Choose Property Type';
+									else if (selected.length === 1) return selectedFilters[0];
+									else return selectedFilters.map((t: any) => `${t.substring(0, 8)}...`).join(' , ');
 								}}
+								disabled={!!!propertyTypes.length}
 								MenuProps={MenuProps}>
-								{names.map((name) => (
-									<MenuItem key={name} value={name}>
-										<Checkbox checked={personName.indexOf(name) > -1} />
-										<ListItemText primary={name} />
+								{propertyTypes?.map(({ id, label }: any) => (
+									<MenuItem key={id} value={id}>
+										<Checkbox checked={selectedPropertyTypes.includes(id)} />
+										<ListItemText primary={label} />
 									</MenuItem>
 								))}
 							</Select>
@@ -305,12 +296,15 @@ const SearchBar = () => {
 							/>
 						</Box>
 					</Box>
+
+					{/* price range filter web */}
 					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box column width={'100%'}>
 							<Text variant="label">Price Range</Text>
 							<Autocomplete
 								popupIcon={null}
-								{...defaultProps}
+								options={locations}
+								getOptionLabel={(option: Option) => option.label}
 								id="disable-close-on-select"
 								disableCloseOnSelect
 								renderInput={(params) => (
@@ -329,13 +323,18 @@ const SearchBar = () => {
 					</Box>
 				</Box>
 
+				{/* search button  */}
 				<Box
 					width={{ xs: '30px', md: '54px' }}
 					height={{ xs: '30px', md: '54px' }}
 					bgcolor={theme.palette.primary.main}
 					borderRadius={{ xs: '8px', md: '15px' }}
 					center>
-					<IconButton component={Link} aria-label="delete" size="small" href="/listingpage">
+					<IconButton
+						component={Link}
+						aria-label="delete"
+						size="small"
+						href={`/listingpage?isRent=${isRent}&${selectedPropertyTypes.map((f) => `type=${f}`).join('&')}`}>
 						<SearchIcon
 							sx={{
 								stroke: 'white',
@@ -351,13 +350,20 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-interface FilmOptionType {
-	title: string;
-	year: number;
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+	PaperProps: {
+		style: {
+			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+			width: 250,
+		},
+	},
+};
+
+interface Option {
+	label: string;
+	id: number;
 }
 
-const Locations = [
-	{ title: 'Ryiadh', year: 1994 },
-	{ title: 'Khobar', year: 1972 },
-	{ title: 'Mecca', year: 1974 },
-];
+const defaultProps = {};
