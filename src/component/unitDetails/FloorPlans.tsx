@@ -26,8 +26,8 @@ export default function FloorPlans({ floorFeatures, area, unitName }: proptypes)
 	];
 	return (
 		<Box>
-			<Text variant="h5" mt={'40px'}>
-				Floor Plans & Pricing (Units)
+			<Text variant="h4" mt={'52px'}>
+				Floor Plans
 			</Text>
 
 			<Box

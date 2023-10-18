@@ -28,6 +28,7 @@ import { AcTypes, FurnishedTypes, ParkingTypes, stringifyNumber } from '@/compon
 import { useParams } from 'next/navigation';
 import { keys } from '@/utils/keys';
 import { useQuery } from '@tanstack/react-query';
+import UnitSpecifications from '@/component/unitDetails/UnitSpecifications';
 
 interface Props {
 	id?: string;
@@ -47,22 +48,7 @@ interface Props {
 	map?: string;
 }
 
-export default function Unitdetails({
-	id,
-	logo,
-	photos,
-	propertyName,
-	location,
-	constructionStatus,
-	managedBy,
-	rentPrice,
-	rentType,
-	aboutUnit,
-	floorPlansCard,
-	featuresAmenities,
-	floorFeatures,
-	map,
-}: Props) {
+export default function Unitdetails({ photos, location, rentType }: Props) {
 	const [index, setIndex] = useState(-1);
 	const params = useParams();
 	console.log('params', params);
@@ -214,19 +200,19 @@ export default function Unitdetails({
 								/>
 							}
 							title={''}
-							status={unit?.status.description || '--'}
+							status={'Ready To Move'}
 							managedBy={unit?.managed_by || '--'}
 						/>
-						<AboutUnit description={aboutUnit || '--'} />
+						<AboutUnit description={unit?.info || '--'} />
 
 						<Grid item xs={12} md={4} display={{ xs: 'flex', md: 'none' }} mt={3}>
 							<BuyNowCard price={'SAR ' + unit?.price || '--'} PriceType={rentType || 'monthly'} />
 						</Grid>
 
 						<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
-						<Features Feature={amenityData} />
-
-						<UnitMap location={location} />
+						{/* <Features Feature={amenityData} /> */}
+						<UnitSpecifications Feature={amenityData} />
+						<UnitMap location={unit?.map} />
 					</Grid>
 
 					<Grid item xs={12} md={4} height={'518px'} display={{ xs: 'none', md: 'flex' }}>

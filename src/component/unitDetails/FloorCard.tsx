@@ -26,13 +26,13 @@ export default function FloorCard({ name, img, area, floorFeatures }: Props) {
 				<Box center>
 					<Image src={img} alt="logo" width="197" height="236" />
 				</Box>
-				<Box column xcenter mt={'50px'}>
+				{/* <Box column xcenter mt={'50px'}>
 					<Text variant="h5"> {name}</Text>
 					<Text variant="small" gray>
 						{area} Sqm
 					</Text>
-				</Box>
-				<Grid container mt={'25px'}>
+				</Box> */}
+				{/* <Grid container mt={'25px'}>
 					{floorFeatures?.map((item: any, index: any) => {
 						if (item?.value === null || item?.value === 'undefined' || item?.value === undefined) return null;
 						return (
@@ -41,7 +41,7 @@ export default function FloorCard({ name, img, area, floorFeatures }: Props) {
 							</Grid>
 						);
 					})}
-				</Grid>
+				</Grid> */}
 			</Box>
 		</>
 	);
