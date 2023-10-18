@@ -36,7 +36,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 								}}
 								alt={item.title}
 							/>
-							{index === imagesList?.length - 1 && (
+							{/* {index === imagesList?.length >3 && (
 								<ImageListItemBar
 									sx={{ background: 'transparent', margin: '25px 15px' }}
 									actionIcon={
@@ -53,7 +53,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 										</span>
 									}
 								/>
-							)}
+							)} */}
 						</ImageListItem>
 					))}
 				</ImageList>
@@ -65,7 +65,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 						<Box
 							key={index}
 							sx={{
-								background:"red",
+								background: 'red',
 								width: '330px',
 								height: { xs: '240px', md: '273px' },
 								position: 'relative',
@@ -73,6 +73,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 								borderRadius: '16px',
 							}}>
 							<Box
+								fill
 								sx={{
 									marginLeft: index > 0 ? '20px' : '20px',
 									width: '100%',
