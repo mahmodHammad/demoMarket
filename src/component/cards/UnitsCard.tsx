@@ -5,7 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from '@mui/material';
 import { FilledHeart, OutlineHeart } from '@/assets';
+import neibourhoodcover1 from '@/assets/images/Rectangle 4535.png';
 
+import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 interface Props {
 	id: number;
 	img: string;
@@ -37,7 +39,13 @@ export default function UnitsCard({
 	height = 'inherit',
 	buttonName = 'View Details',
 	onClick,
+	city, 
+	district
 }: Props) {
+	const image = img && img[0]?.url ? img[0].url : neigbourhoodCover
+ 
+	const renderLocation = [city, district];
+	const newlocation = city ? renderLocation?.join(', ') : '--';
 	return (
 		<Box
 			relative
@@ -96,14 +104,14 @@ export default function UnitsCard({
 					position: 'relative',
 					overflow: 'hidden',
 				}}
-				// component={Image}
-				// loader={imageLoader}
-				// alt="houses and properties for rent"
-				// src={img}
-				// width={500}
-				// height={500}
+			// component={Image}
+			// loader={imageLoader}
+			// alt="houses and properties for rent"
+			// src={img}
+			// width={500}
+			// height={500}
 			>
-				<Image src={img} alt="Picture of the author" fill />
+				<Image src={image || neibourhoodcover1} alt="Picture of the author" fill />
 			</Box>
 
 			<Box
@@ -122,14 +130,14 @@ export default function UnitsCard({
 						}}>
 						{title.slice(0, 20)}
 					</Text>
-					<Text
+					{/* <Text
 						variant="small"
 						sx={{
 							// fontSize: { xs: "14px", md: "18px" },
 							display: { xs: 'flex', md: 'none' },
 						}}>
 						{location}
-					</Text>
+					</Text> */}
 				</Box>
 
 				<Box
@@ -152,7 +160,7 @@ export default function UnitsCard({
 								// fontSize: { xs: "14px", md: "14px" },
 							}
 						}>
-						{location}
+						{newlocation}
 					</Text>
 				</Box>
 				<Box row center xbetween sx={{ mt: { xs: '8px', md: '12px' } }}>
