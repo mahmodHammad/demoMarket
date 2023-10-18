@@ -11,10 +11,8 @@ import {
 import { Box, Button } from '@/wrappers';
 import { Container, Grid } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import QR from '@/assets/images/QR.png';
 import React, { useState } from 'react';
 import { Text } from '@/wrappers';
-import Image from 'next/image';
 import { cancelBooking, editBooking, getMyBooking } from '../../booking-service';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';

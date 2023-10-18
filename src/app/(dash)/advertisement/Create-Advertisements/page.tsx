@@ -1,42 +1,97 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Container, Item, Text } from '@/wrappers';
 import TextInputController from '@/component/forms/controlled/TextInputController';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import dayjs from 'dayjs';
-import DragDropFile from '@/component/forms/DragDropFile';
 import DateTimePickerController from '@/component/forms/controlled/DateTimePickerController';
 import DragDropController from '@/component/forms/controlled/DragAndDropController';
+import { createEditAdvertisement, getAdvertisementByID } from '../advertisement-service';
+import { globalToast } from '@/utils/toast';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { keys } from '@/utils/keys';
 
 const schema = yup.object().shape({
-	title: yup.string().required('Title is required'),
-	description: yup.string().required('Description is required'),
-	file: yup.array(),
-	endDateTime: yup.date().required('End Date & Time required'),
-	startDateTime: yup.date().required('Start Date & Time required'),
+	title_en: yup.string().required('Title is required'),
+	description_en: yup.string().required('Description is required'),
+	image: yup.array(),
+	start_at: yup.date().required('End Date & Time required'),
+	end_at: yup.date().required('Start Date & Time required'),
 });
 
 export default function CreateAdvertisement() {
+	const { push } = useRouter();
+	const searchParams = useSearchParams();
+
+	const ID = searchParams.get('id');
+	const { data } = useQuery({
+		queryKey: [keys.ADVERTISEMENTID],
+		queryFn: () =>
+			getAdvertisementByID(ID).then((response) => {
+				return response;
+			}),
+		refetchInterval: false,
+		retry: false,
+		enabled: Number(ID) ? true : false,
+	});
+
 	const {
 		control,
 		handleSubmit,
-		setValue,
 		formState: { errors },
+		reset,
 	} = useForm({
 		defaultValues: {
-			title: '',
-			description: '',
-			file: [],
-			startDateTime: dayjs('2022-04-17T15:35') as unknown as Date,
-			endDateTime: dayjs('2022-04-17T15:35') as unknown as Date,
+			title_en: data?.title_en || '',
+			description_en: data?.description_en || '',
+			image: [data?.image] || [],
+			start_at: dayjs(data?.start_at, 'YYYY-MM-DD hh:mm:ss') || null,
+			end_at: dayjs(data?.end_at, 'YYYY-MM-DD hh:mm:ss') || null,
 		},
 		resolver: yupResolver(schema),
 	});
+	const handleEdit = () => {
+		if (ID && data) {
+			reset({
+				...data,
+				image: [data?.image] || [],
+				start_at: dayjs(data?.start_at, 'YYYY-MM-DD hh:mm:ss'),
+				end_at: dayjs(data?.end_at, 'YYYY-MM-DD hh:mm:ss'),
+			});
+		}
+	};
+
+	useEffect(() => {
+		handleEdit();
+	}, [ID, data]);
+
 	const onSubmit = (data: any) => {
-		console.log('form data shreyas', data);
+		console.log(data);
+		if (data?.image?.length) {
+			let payload = {
+				...data,
+				title_ar: data?.title_en,
+				description_ar: data?.description_en,
+				start_at: dayjs(data?.start_at).format('YYYY-MM-DD hh:mm:ss'),
+				end_at: dayjs(data?.end_at).format('YYYY-MM-DD hh:mm:ss'),
+				image: data?.image[0],
+				is_active: 1,
+			};
+			createEditAdvertisement(payload, ID ? 'PUT' : 'POST', ID)
+				.then((response) => {
+					globalToast(response?.message || 'Record Updated successfully.', 'success');
+					push('/advertisement');
+				})
+				.catch((err) => {
+					console.log(err);
+					globalToast(err?.response?.data?.message || 'Please try later', 'error');
+				});
+		}
 	};
 	return (
 		<>
@@ -55,7 +110,7 @@ export default function CreateAdvertisement() {
 									<TextInputController
 										placeholder="Enter Advertisement Title"
 										label={'Title'}
-										name={'title'}
+										name={'title_en'}
 										control={control}
 									/>
 								</Item>
@@ -63,7 +118,7 @@ export default function CreateAdvertisement() {
 									<TextInputController
 										label={'Description'}
 										multiline
-										name={'description'}
+										name={'description_en'}
 										rows={4}
 										placeholder="Write Description"
 										control={control}
@@ -73,19 +128,21 @@ export default function CreateAdvertisement() {
 									<Text variant="h5">Banner</Text>{' '}
 								</Item>
 								<Item xs={10}>
-									<DragDropController name="file" control={control} errors={errors} />
+									<DragDropController name="image" control={control} errors={errors} />
 								</Item>
 								<Item xs={5}>
 									<DateTimePickerController
-										name="startDateTime"
+										name="start_at"
 										control={control}
 										errors={errors}
 										label="Start Date & Time"
+										disablePast
 									/>
 								</Item>
 								<Item xs={5}>
 									<DateTimePickerController
-										name="endDateTime"
+										disablePast
+										name="end_at"
 										control={control}
 										errors={errors}
 										label="End Date & Time"

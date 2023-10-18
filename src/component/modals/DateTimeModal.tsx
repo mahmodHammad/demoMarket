@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Button, Text } from '@/wrappers';
 import { Modal } from '@mui/material';
 import StaticDateTimePicker from '../forms/StaticDateTimePicker';

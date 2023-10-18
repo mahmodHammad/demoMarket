@@ -5,7 +5,7 @@ import { Button, ButtonProps, Grid, IconButton } from '@mui/material';
 import { useRef, useState } from 'react';
 import Delete from '@/assets/icons/Delete';
 
-const DragDropFile = ({ name, onChange, setValue }: { name: string; value?: any; onChange?: any; setValue?: any }) => {
+const DragDropFile = ({ name, onChange, value }: { name: string; value?: any; onChange?: any }) => {
 	const [files, setFiles] = useState([]);
 	const inputFile = useRef<HTMLInputElement | null>(null);
 	const onButtonClick = () => {
@@ -18,8 +18,7 @@ const DragDropFile = ({ name, onChange, setValue }: { name: string; value?: any;
 		const { files } = event.dataTransfer;
 		if (files.length > 0) {
 			setFiles([...files]);
-			// setValue('file', [...files]);
-			onChange([...files])
+			onChange([...files]);
 		}
 	};
 
@@ -27,8 +26,7 @@ const DragDropFile = ({ name, onChange, setValue }: { name: string; value?: any;
 		const { files } = event.target;
 		if (files.length > 0) {
 			setFiles([...files]);
-			// setValue('file', [...files]);
-			onChange([...files])
+			onChange([...files]);
 			return [...files];
 		}
 	};
@@ -37,6 +35,7 @@ const DragDropFile = ({ name, onChange, setValue }: { name: string; value?: any;
 		let temp = files;
 		temp.splice(index, 1);
 		setFiles([...temp]);
+		onChange([...temp]);
 	};
 
 	const handleDragOver = (event) => {
@@ -101,6 +100,25 @@ const DragDropFile = ({ name, onChange, setValue }: { name: string; value?: any;
 					</Grid>
 				</Grid>
 			))}
+			{typeof value?.[0] === 'string' && (
+				<>
+					<Grid container alignItems="center">
+						<Grid item xs={10}>
+							Image{' '}
+							<IconButton
+								aria-label="Remove"
+								onClick={() => {
+									{
+										setFiles([]);
+										onChange([]);
+									}
+								}}>
+								<Delete sx={{ fill: '#FF4242' }} />
+							</IconButton>
+						</Grid>
+					</Grid>
+				</>
+			)}
 		</>
 	);
 };

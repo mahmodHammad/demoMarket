@@ -6,7 +6,6 @@ import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
-import { get } from '@/utils/http';
 import ConfirmAction from '@/component/modals/ConfirmAction';
 import { globalToast } from '@/utils/toast';
 import { getMyBookings, changeStatusBooking } from './booking-service';
@@ -21,9 +20,6 @@ export default function AdminBookings() {
 	const [status, setStatus] = useState<number[]>([]);
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
-	// useEffect( ()=>{
-	// 	 get('bookings');
-	// },[])
 	const handleSearch = (v: string) => setSearch(v);
 	const handlePagination = (v: number) => setCurrentPage(v);
 	const handleStatusChange = (v: number[]) => setStatus(v);
@@ -33,8 +29,8 @@ export default function AdminBookings() {
 	const [modalOptions, setModalOptions] = useState({});
 
 	const { data, isLoading, refetch } = useQuery({
-		queryKey: [keys.ADMINBOOKINGS],
-		queryFn: () => getMyBookings(),
+		queryKey: [keys.ADMINBOOKINGS, { search, currentPage, status, filter, sort }],
+		queryFn: () => getMyBookings({ search, currentPage, status, filter, sort }),
 	});
 	useEffect(() => {
 		console.log('payment table state changed', {

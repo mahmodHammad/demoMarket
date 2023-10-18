@@ -4,11 +4,13 @@ import { Box, Button, Text } from '@/wrappers';
 import React from 'react';
 import Image from 'next/image';
 import { ButtonBase } from '@mui/material';
+import photo1 from '@/assets/images/photo1.png';
+import dayjs from 'dayjs';
 
 interface Props {
 	img: string;
 	title: string;
-	duration: string;
+	duration: []; // 1st element is start and 2nd is end
 }
 const AdvertisementsCard = (props: Props) => {
 	return (
@@ -19,19 +21,29 @@ const AdvertisementsCard = (props: Props) => {
 					width: '100%',
 					borderRadius: '16px',
 				}}>
-				<Box
-					sx={{
+				<div
+					style={{
 						width: '100%',
-						height: { xs: '88px', md: '88px' },
+						height: '88px',
 						borderRadius: '16px 16px 0 0',
-						objectFit: 'cover',
-					}}
-					component={Image}
-					src={props.img}
-				/>
+						position: 'relative',
+					}}>
+					{props?.img && (
+						<Image
+							style={{
+								objectFit: 'cover',
+								position: 'absolute',
+								borderRadius: '16px 16px 0 0',
+							}}
+							layout="fill"
+							alt={'ssss'}
+							src={props?.img}
+						/>
+					)}
+				</div>
 				<Box column sx={{ p: ' 16px' }}>
 					<Box xstart>
-						<Text variant="h5">{props.title} </Text>
+						<Text variant="h5">{props?.title} </Text>
 					</Box>
 
 					<Box row ycenter mt={'22px'}>
@@ -40,7 +52,9 @@ const AdvertisementsCard = (props: Props) => {
 							<Box xstart>
 								<Text variant="caption">ADs duration</Text>
 							</Box>
-							<Text variant="label">{props.duration}</Text>
+							<Text variant="label">
+								{dayjs(props?.duration[0]).format('ll')} - {dayjs(props?.duration[1]).format('ll')}
+							</Text>
 						</Box>
 					</Box>
 				</Box>
