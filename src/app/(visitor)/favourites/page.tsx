@@ -32,12 +32,14 @@ const favourites = () => {
 		queryKey: [keys.FAV],
 		queryFn: getFav,
 	});
-	const queryClient = useQueryClient()
+	const queryClient = useQueryClient();
 	const handleToggleLike = (id) => {
 		toggleLike({
 			property_id: id,
 		});
-		queryClient.invalidateQueries({ queryKey: [keys.FAV] })
+		queryClient.invalidateQueries({ queryKey: [keys.FAV] });
+		queryClient.invalidateQueries({ queryKey: [keys.MOSTVIEWED] });
+		queryClient.invalidateQueries({ queryKey: [keys.RECENTLYADDED] });
 	};
 	console.log('datadatadata', data);
 	return (

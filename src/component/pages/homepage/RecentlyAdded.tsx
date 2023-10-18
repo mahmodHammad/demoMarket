@@ -8,6 +8,7 @@ import HomeCardsContainer from './HomeCardsContainer';
 import { GET, get } from '@/utils/http';
 import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { keys } from '@/utils/keys';
 
 const getRecentlyAdded = (payload: any = {}) => {
 	return GET(`/properties`);
@@ -20,14 +21,16 @@ export default function RecentlyAdded() {
 	// const dataArray = response?.data?.list; // Get the array of objects
 	const queryClient = useQueryClient();
 	const { data, isLoading: filtersLoading } = useQuery({
-		queryKey: ['RecentlyAdded'],
+		queryKey: [keys.RECENTLYADDED],
 		queryFn: getRecentlyAdded,
 	});
 	const handleToggleLike = (id) => {
 		toggleLike({
 			property_id: id,
 		});
-		queryClient.invalidateQueries({ queryKey: ['RecentlyAdded'] });
+		queryClient.invalidateQueries({ queryKey: [keys.FAV] });
+		queryClient.invalidateQueries({ queryKey: [keys.MOSTVIEWED] });
+		queryClient.invalidateQueries({ queryKey: [keys.RECENTLYADDED] });
 	};
 
 	return (

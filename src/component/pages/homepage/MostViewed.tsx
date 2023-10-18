@@ -4,8 +4,9 @@ import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import HomeCardsContainer from './HomeCardsContainer';
 import { GET, get } from '@/utils/http';
 import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query';
-import { keys } from '@mui/system';
+
 import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
+import { keys } from '@/utils/keys';
 
 const getMostViewed = (payload: any = {}) => {
 	return GET(`/properties/most-view`);
@@ -18,7 +19,7 @@ export default function MostViewed() {
 	const queryClient = useQueryClient();
 
 	const { data, isLoading: filtersLoading } = useQuery({
-		queryKey: ['MostViewed'],
+		queryKey: [keys.MOSTVIEWED],
 		queryFn: getMostViewed,
 	});
 
@@ -26,7 +27,9 @@ export default function MostViewed() {
 		toggleLike({
 			property_id: id,
 		});
-		queryClient.invalidateQueries({ queryKey: ['MostViewed'] });
+		queryClient.invalidateQueries({ queryKey: [keys.FAV] });
+		queryClient.invalidateQueries({ queryKey: [keys.MOSTVIEWED] });
+		queryClient.invalidateQueries({ queryKey: [keys.RECENTLYADDED] });
 	};
 	return (
 		<HomeCardsContainer
