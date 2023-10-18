@@ -77,7 +77,7 @@ const AdvertismentDetails = () => {
 							borderRadius: '16px 16px 0 0',
 							position: 'relative',
 						}}>
-						{data?.img && (
+						{data?.image && (
 							<Image
 								style={{
 									objectFit: 'cover',
