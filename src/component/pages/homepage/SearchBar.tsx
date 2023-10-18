@@ -1,85 +1,79 @@
 'use client';
-import { Box, Button, Text } from '@/wrappers';
-import React, { useState } from 'react';
+
+import { Box, Text } from '@/wrappers';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
 	Autocomplete,
 	ButtonBase,
 	Checkbox,
 	Divider,
-	FormControl,
 	IconButton,
-	InputLabel,
 	ListItemText,
 	MenuItem,
 	OutlinedInput,
 	Select,
 	SelectChangeEvent,
-	Slider,
 	TextField,
 } from '@mui/material';
 import { Location, SearchIcon } from '@/assets';
 import theme from '@/ThemeRegistry/theme';
-
-function valuetext(value: number) {
-	return `${value}°C`;
-}
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-	PaperProps: {
-		style: {
-			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-			width: 250,
-		},
-	},
-};
-
-const names = ['Residential Apartment', 'Residential Land', 'Independent House/Villa'];
+import { useQuery } from '@tanstack/react-query';
+import { keys } from '@/utils/keys';
+import { getFilters } from '@/app/(landing)/listingpage/listing-service';
 
 const SearchBar = () => {
-	const [age, setAge] = React.useState('');
+	const [isRent, setIsRent] = useState(false);
 
-	const handleChangee = (event: SelectChangeEvent) => {
-		setAge(event.target.value);
-	};
+	const [propertyTypes, setPropertyTypes] = useState<any>([]);
+	const [locations, setLocations] = useState<any>([]);
 
-	const [values, setValues] = React.useState<number[]>([20, 37]);
+	const [selectedPropertyTypes, setSelectedPropertyTypes] = React.useState<string[]>([]);
+	const [selectedLocation, setSelectedLocation] = React.useState<string[]>([]);
 
-	const handleChanges = (event: Event, newValue: number | number[]) => {
-		setValues(newValue as number[]);
-	};
-	const [personName, setPersonName] = React.useState<string[]>([]);
+	const { data: filtersData } = useQuery({
+		queryKey: [keys.FILTERS2],
+		queryFn: getFilters,
+	});
 
-	const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+	useEffect(() => {
+		console.log('filtersData in homepage', filtersData);
+
+		if (filtersData?.property_type)
+			setPropertyTypes(
+				Object.entries(filtersData?.property_type).map(([label, id]: any) => ({
+					id,
+					label,
+				})),
+			);
+
+		if (filtersData?.locations)
+			setLocations(
+				filtersData?.locations.map((location: any) => ({
+					id: location.id,
+					label: location.name,
+				})),
+			);
+	}, [filtersData]);
+
+	const handlePropertyTypeFilterChange = (event: SelectChangeEvent<typeof selectedPropertyTypes>) => {
 		const {
 			target: { value },
 		} = event;
-		setPersonName(
-			// On autofill we get a stringified value.
-			typeof value === 'string' ? value.split(',') : value,
-		);
+
+		setSelectedPropertyTypes(typeof value === 'string' ? value.split(',') : value);
 	};
 
-	const defaultProps = {
-		options: Locations,
-		getOptionLabel: (option: FilmOptionType) => option.title,
-	};
-	const flatProps = {
-		options: Locations.map((option) => option.title),
-	};
-	const [value, setValue] = React.useState<FilmOptionType | null>(null);
+	const handleLocationsFilterChange = (event: SelectChangeEvent<typeof selectedLocation>) => {
+		const {
+			target: { value },
+		} = event;
 
-	const [isRent, setIsRent] = useState(false);
-
-	const handleClick = () => {
-		setIsRent(false);
+		setSelectedLocation(typeof value === 'string' ? value.split(',') : value);
 	};
 
-	const handleClickRent = () => {
-		setIsRent(true);
-	};
+	const handleClick = () => setIsRent(false);
+	const handleClickRent = () => setIsRent(true);
 
 	return (
 		<Box sx={{ mt: { xs: '20px ', md: '60px' }, width: { xs: '100%', md: 'initial' } }}>
@@ -135,7 +129,9 @@ const SearchBar = () => {
 					p: { xs: '12px', md: '24px' },
 				}}>
 				<Box xbetween width={'100%'}>
+					{/* // TODO: implement mobile */}
 					<Box center width={'100%'} sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'space-around' }}>
+						{/* location */}
 						<Box width={'100%'}>
 							<Autocomplete
 								{...defaultProps}
@@ -166,6 +162,7 @@ const SearchBar = () => {
 							/>
 						</Box>
 
+						{/* property type */}
 						<Box column width={'100%'}>
 							<Autocomplete
 								{...defaultProps}
@@ -194,6 +191,8 @@ const SearchBar = () => {
 								)}
 							/>
 						</Box>
+
+						{/* price range */}
 						<Box column width={'100%'}>
 							<Autocomplete
 								{...defaultProps}
@@ -224,71 +223,41 @@ const SearchBar = () => {
 						</Box>
 					</Box>
 
-					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
-						<Box column mr={'30px'} width={'100%'}>
-							<Text variant="label">Location</Text>
-							<Autocomplete
-								popupIcon={null}
-								{...defaultProps}
-								id="disable-close-on-select"
-								disableCloseOnSelect
-								renderInput={(params) => (
-									<TextField
-										{...params}
-										InputProps={{
-											...params.InputProps,
-											disableUnderline: true,
-										}}
-										variant="standard"
-										placeholder="Select Your City"
-									/>
-								)}
-							/>
-						</Box>
-						<Location />
-						<Box center ml={'10px'} mr={'35px'}>
-							<Divider
-								orientation="vertical"
-								sx={{
-									width: '2px',
-									background: 'rgba(255, 66, 66, 0.08)',
-									border: '0px',
-									height: '46px',
-								}}
-							/>
-						</Box>
-					</Box>
+					{/* new location types filter web */}
 					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box column mr={'20px'} width={'100%'}>
-							<Text variant="label">Property Type</Text>
+							<Text variant="label">Location</Text>
 
 							<Select
 								sx={{
 									'& fieldset': { border: 'none' },
 									height: '32px',
+									maxWidth: '250px',
+									marginLeft: '-15px'
 								}}
 								labelId="demo-multiple-checkbox-label"
-								placeholder="Choose Property Type"
+								placeholder="Select Your City"
 								id="demo-multiple-checkbox"
 								displayEmpty
 								multiple
-								value={personName}
-								onChange={handleChange}
+								value={selectedLocation}
+								onChange={handleLocationsFilterChange}
 								input={<OutlinedInput />}
 								renderValue={(selected) => {
-									if (selected.length === 0) {
-										return <Text sx={{ opacity: 0.5 }}> Choose Property Type</Text>;
-									}
-									if (selected.length > 1) {
-										return selected.at(0) + '...';
-									}
-									return selected;
+									const selectedFilters = locations
+										.filter((t: any) => selected.includes(t.id))
+										.map((t: any) => t.label);
+
+									if (!!!selected.length) return 'Select Your City';
+									else if (selected.length === 1) return selectedFilters[0];
+									else return selectedFilters.map((t: any) => `${t.substring(0, 8)}...`).join(' , ');
 								}}
+								disabled={!!!locations.length}
 								MenuProps={MenuProps}>
-								{names.map((name) => (
-									<MenuItem key={name} value={name}>
-										<Checkbox checked={personName.indexOf(name) > -1} />
-										<ListItemText primary={name} />
+								{locations?.map(({ id, label }: any) => (
+									<MenuItem key={id} value={id}>
+										<ListItemText primary={label} />
+										<Checkbox checked={selectedLocation.includes(id)} />
 									</MenuItem>
 								))}
 							</Select>
@@ -305,12 +274,66 @@ const SearchBar = () => {
 							/>
 						</Box>
 					</Box>
+
+					{/* property types filter web */}
+					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
+						<Box column mr={'20px'} width={'100%'}>
+							<Text variant="label">Property Type</Text>
+							<Select
+								sx={{
+									'& fieldset': { border: 'none' },
+									height: '32px',
+									maxWidth: '250px',
+									marginLeft: '-15px'
+								}}
+								labelId="demo-multiple-checkbox-label"
+								placeholder="Choose Property Type"
+								id="demo-multiple-checkbox"
+								displayEmpty
+								multiple
+								value={selectedPropertyTypes}
+								onChange={handlePropertyTypeFilterChange}
+								input={<OutlinedInput />}
+								renderValue={(selected) => {
+									const selectedFilters = propertyTypes
+										.filter((t: any) => selected.includes(t.id))
+										.map((t: any) => t.label);
+
+									if (!!!selected.length) return 'Choose Property Type';
+									else if (selected.length === 1) return selectedFilters[0];
+									else return selectedFilters.map((t: any) => `${t.substring(0, 8)}...`).join(' , ');
+								}}
+								disabled={!!!propertyTypes.length}
+								MenuProps={MenuProps}>
+								{propertyTypes?.map(({ id, label }: any) => (
+									<MenuItem key={id} value={id}>
+										<Checkbox checked={selectedPropertyTypes.includes(id)} />
+										<ListItemText primary={label} />
+									</MenuItem>
+								))}
+							</Select>
+						</Box>
+						<Box center mr={'35px'}>
+							<Divider
+								orientation="vertical"
+								sx={{
+									width: '2px',
+									background: 'rgba(255, 66, 66, 0.08)',
+									border: '0px',
+									height: '46px',
+								}}
+							/>
+						</Box>
+					</Box>
+
+					{/* price range filter web */}
 					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box column width={'100%'}>
 							<Text variant="label">Price Range</Text>
 							<Autocomplete
 								popupIcon={null}
-								{...defaultProps}
+								options={locations}
+								getOptionLabel={(option: Option) => option.label}
 								id="disable-close-on-select"
 								disableCloseOnSelect
 								renderInput={(params) => (
@@ -329,13 +352,20 @@ const SearchBar = () => {
 					</Box>
 				</Box>
 
+				{/* search button  */}
 				<Box
 					width={{ xs: '30px', md: '54px' }}
 					height={{ xs: '30px', md: '54px' }}
 					bgcolor={theme.palette.primary.main}
 					borderRadius={{ xs: '8px', md: '15px' }}
 					center>
-					<IconButton component={Link} aria-label="delete" size="small" href="/listingpage">
+					<IconButton
+						component={Link}
+						aria-label="delete"
+						size="small"
+						href={`/listingpage?isRent=${isRent}&${selectedPropertyTypes
+							.map((f) => `type=${f}`)
+							.join('&')}&${selectedLocation.map((f) => `location=${f}`).join('&')}`}>
 						<SearchIcon
 							sx={{
 								stroke: 'white',
@@ -351,13 +381,20 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-interface FilmOptionType {
-	title: string;
-	year: number;
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+	PaperProps: {
+		style: {
+			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+			width: 250,
+		},
+	},
+};
+
+interface Option {
+	label: string;
+	id: number;
 }
 
-const Locations = [
-	{ title: 'Ryiadh', year: 1994 },
-	{ title: 'Khobar', year: 1972 },
-	{ title: 'Mecca', year: 1974 },
-];
+const defaultProps = {};

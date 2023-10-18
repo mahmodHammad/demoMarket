@@ -5,10 +5,20 @@ import ReactSwipe from 'react-swipe';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import photo3 from '@/assets/images/photo3.png';
+import { useQuery } from '@tanstack/react-query';
+import { getAdvertisements } from '@/app/(dash)/advertisement/advertisement-service';
+import { keys } from '@/utils/keys';
 
 export default function ForSale() {
 	let reactSwipeEl;
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: [keys.ADVERTISEMENT],
+		queryFn: () => getAdvertisements(),
+		refetchInterval: false,
+		retry: false,
+	});
 
+	const images = data?.list?.map(d => d?.image)
 	return (
 		<>
 			<Box
@@ -18,7 +28,8 @@ export default function ForSale() {
 					overflow: 'hidden',
 					borderRadius: '16px',
 				}}>
-				<ReactSwipe
+
+				{images?.length ? <ReactSwipe
 					className="carousel"
 					swipeOptions={{
 						auto: 3000,
@@ -27,37 +38,23 @@ export default function ForSale() {
 						disableScroll: true,
 					}}
 					ref={(el) => (reactSwipeEl = el)}>
-					<Box
-						sx={{
-							width: '100%',
-							height: '100%',
-							objectFit: 'cover',
-						}}
-						component={Image}
-						alt="houses and properties for rent"
-						src={neibourhoodcover2}
-					/>
-					<Box
-						sx={{
-							width: '100%',
-							height: '100%',
-							objectFit: 'cover',
-						}}
-						component={Image}
-						alt="houses and properties for rent"
-						src={neigbourhoodCover}
-					/>
-					<Box
-						sx={{
-							width: '100%',
-							height: '100%',
-							objectFit: 'cover',
-						}}
-						component={Image}
-						alt="houses and properties for rent"
-						src={neigbourhoodCover}
-					/>
-				</ReactSwipe>
+					{images?.map(img =>
+						<Box
+							sx={{
+								width: '100%',
+								objectFit: 'cover',
+								background: "red"
+							}}
+							width="100px"
+							component="img"
+							alt="houses and properties for rent"
+							src={img}
+						/>
+
+					)}
+
+				</ReactSwipe> : null}
+
 
 				{/* <Box
 					sx={{

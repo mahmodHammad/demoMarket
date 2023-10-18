@@ -5,18 +5,11 @@ import { ButtonBase, IconButton } from '@mui/material';
 import theme from '@/ThemeRegistry/theme';
 import { SearchIcon, Location } from '@/assets';
 import Link from 'next/link';
+import TextInput from '../forms/TextInput';
 
-export default function SearchBox({}) {
-	const [isRent, setIsRent] = useState(false);
-
-	const handleClick = () => {
-		setIsRent(false);
-	};
-
-	const handleClickRent = () => {
-		setIsRent(true);
-	};
-
+export default function SearchBox({ propertySearch, setPropertySearch, isRent, setIsRent }: any) {
+	const handleClick = () => setIsRent(false);
+	const handleClickRent = () => setIsRent(true);
 	return (
 		<>
 			<Box row mt={'25px'}>
@@ -67,8 +60,15 @@ export default function SearchBox({}) {
 					px: '25px',
 					py: '28px',
 				}}>
-				<Box column>
-					<Text variant="label">Location</Text>
+				<Box row center fullWidth>
+					{/* <Text variant="label">Location</Text> */}
+					{/* // TODO: style search bar */}
+					<TextInput
+						value={propertySearch}
+						onChange={(e) => setPropertySearch(e.target.value)}
+						placeholder="Search"
+						sx={{ width: 0.95, alignSelf: 'center', my: 1 }}
+					/>
 				</Box>
 				<Box row>
 					<Box

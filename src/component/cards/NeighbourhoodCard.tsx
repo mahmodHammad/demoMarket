@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react";
+import { useRouter } from 'next/navigation'
 import { Box, Text } from "@/wrappers";
 import Image from "next/image";
 
@@ -6,10 +9,13 @@ interface proptypes {
   img: string;
   title: string;
   link: string;
+  id: string;
 }
-export default function NeighbourhoodCard({ img, title, link }: proptypes) {
+export default function NeighbourhoodCard({ img, title, link, id }: proptypes) {
+  const router = useRouter()
   return (
     <Box
+			onClick={() => router.push(`/listingpage?location=${id}`)}
       sx={{
         width: "100%",
         height: { xs: "150px", md: "273px" },

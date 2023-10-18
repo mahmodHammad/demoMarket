@@ -1,4 +1,4 @@
-import { http } from '@/utils/http';
+import { GET, http } from '@/utils/http';
 
 export const getProperties = async (options: any = {}) => {
 	try {
@@ -9,6 +9,15 @@ export const getProperties = async (options: any = {}) => {
 	}
 };
 
+export const getFilters = async (options: any = {}) => {
+	try {
+		const res = await http.get(`/get-filters`, options);
+		return res.data.data;
+	} catch (error) {
+		console.log('error in getFilters', error);
+	}
+};
+
 export const toggleLike = async (body: any) => {
 	try {
 		return await http.post(`/favorites`, body);
@@ -16,3 +25,12 @@ export const toggleLike = async (body: any) => {
 		return error.response;
 	}
 };
+
+export const getFav = async (body: any) => {
+	try {
+		return await GET(`/favorites`);
+	} catch (error: any) {
+		return error.response;
+	}
+};
+

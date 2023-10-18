@@ -12,7 +12,7 @@ type Props = {
 	header: string;
 	filterName: string;
 	filters: Filter[];
-	onFilterStateChange: (filterName: string, id: number) => void;
+	onFilterStateChange: (filterName: string, id: number, e: any) => void;
 	defaultExpanded?: boolean;
 	sx?: SxProps;
 	headerContent?: any;
@@ -41,7 +41,7 @@ const AccordionChipsFilter = ({
 							sx={{width: 1}}
 								key={filter.id}
 								control={
-									<Checkbox checked={filter.checked} onChange={() => onFilterStateChange(filterName, filter.id)} />
+									<Checkbox checked={filter.checked} onChange={(e) => onFilterStateChange(filterName, filter.id, e)} />
 								}
 								label={<Chip label={filter.label} checked={filter.checked}  />}
 							/>
