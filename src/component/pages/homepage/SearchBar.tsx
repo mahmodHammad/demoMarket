@@ -23,18 +23,21 @@ import { keys } from '@/utils/keys';
 import { getFilters } from '@/app/(landing)/listingpage/listing-service';
 
 const SearchBar = () => {
-	const [selectedPropertyTypes, setSelectedPropertyTypes] = React.useState<string[]>([]);
 	const [isRent, setIsRent] = useState(false);
+
 	const [propertyTypes, setPropertyTypes] = useState<any>([]);
 	const [locations, setLocations] = useState<any>([]);
 
+	const [selectedPropertyTypes, setSelectedPropertyTypes] = React.useState<string[]>([]);
+	const [selectedLocation, setSelectedLocation] = React.useState<string[]>([]);
+
 	const { data: filtersData } = useQuery({
-		queryKey: [keys.FILTERS],
+		queryKey: [keys.FILTERS2],
 		queryFn: getFilters,
 	});
 
 	useEffect(() => {
-		console.log('filtersData', filtersData);
+		console.log('filtersData in homepage', filtersData);
 
 		if (filtersData?.property_type)
 			setPropertyTypes(
@@ -44,7 +47,7 @@ const SearchBar = () => {
 				})),
 			);
 
-		if (filtersData?.location)
+		if (filtersData?.locations)
 			setLocations(
 				filtersData?.locations.map((location: any) => ({
 					id: location.id,
@@ -54,12 +57,19 @@ const SearchBar = () => {
 	}, [filtersData]);
 
 	const handlePropertyTypeFilterChange = (event: SelectChangeEvent<typeof selectedPropertyTypes>) => {
-		console.log('e', event.target.value);
 		const {
 			target: { value },
 		} = event;
 
 		setSelectedPropertyTypes(typeof value === 'string' ? value.split(',') : value);
+	};
+
+	const handleLocationsFilterChange = (event: SelectChangeEvent<typeof selectedLocation>) => {
+		const {
+			target: { value },
+		} = event;
+
+		setSelectedLocation(typeof value === 'string' ? value.split(',') : value);
 	};
 
 	const handleClick = () => setIsRent(false);
@@ -119,8 +129,9 @@ const SearchBar = () => {
 					p: { xs: '12px', md: '24px' },
 				}}>
 				<Box xbetween width={'100%'}>
-					{/* mobile */}
+					{/* // TODO: implement mobile */}
 					<Box center width={'100%'} sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'space-around' }}>
+						{/* location */}
 						<Box width={'100%'}>
 							<Autocomplete
 								{...defaultProps}
@@ -151,6 +162,7 @@ const SearchBar = () => {
 							/>
 						</Box>
 
+						{/* property type */}
 						<Box column width={'100%'}>
 							<Autocomplete
 								{...defaultProps}
@@ -180,6 +192,7 @@ const SearchBar = () => {
 							/>
 						</Box>
 
+						{/* price range */}
 						<Box column width={'100%'}>
 							<Autocomplete
 								{...defaultProps}
@@ -210,31 +223,46 @@ const SearchBar = () => {
 						</Box>
 					</Box>
 
-					{/* location filter web */}
+					{/* new location types filter web */}
 					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
-						<Box column mr={'30px'} width={'100%'}>
+						<Box column mr={'20px'} width={'100%'}>
 							<Text variant="label">Location</Text>
-							<Autocomplete
-								popupIcon={null}
-								options={locations}
-								getOptionLabel={(option: Option) => option.label}
-								id="disable-close-on-select"
-								disableCloseOnSelect
-								renderInput={(params) => (
-									<TextField
-										{...params}
-										InputProps={{
-											...params.InputProps,
-											disableUnderline: true,
-										}}
-										variant="standard"
-										placeholder="Select Your City"
-									/>
-								)}
-							/>
+
+							<Select
+								sx={{
+									'& fieldset': { border: 'none' },
+									height: '32px',
+									maxWidth: '250px',
+									marginLeft: '-15px'
+								}}
+								labelId="demo-multiple-checkbox-label"
+								placeholder="Select Your City"
+								id="demo-multiple-checkbox"
+								displayEmpty
+								multiple
+								value={selectedLocation}
+								onChange={handleLocationsFilterChange}
+								input={<OutlinedInput />}
+								renderValue={(selected) => {
+									const selectedFilters = locations
+										.filter((t: any) => selected.includes(t.id))
+										.map((t: any) => t.label);
+
+									if (!!!selected.length) return 'Select Your City';
+									else if (selected.length === 1) return selectedFilters[0];
+									else return selectedFilters.map((t: any) => `${t.substring(0, 8)}...`).join(' , ');
+								}}
+								disabled={!!!locations.length}
+								MenuProps={MenuProps}>
+								{locations?.map(({ id, label }: any) => (
+									<MenuItem key={id} value={id}>
+										<ListItemText primary={label} />
+										<Checkbox checked={selectedLocation.includes(id)} />
+									</MenuItem>
+								))}
+							</Select>
 						</Box>
-						<Location />
-						<Box center ml={'10px'} mr={'35px'}>
+						<Box center mr={'35px'}>
 							<Divider
 								orientation="vertical"
 								sx={{
@@ -251,11 +279,12 @@ const SearchBar = () => {
 					<Box row yend width={'100%'} sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box column mr={'20px'} width={'100%'}>
 							<Text variant="label">Property Type</Text>
-
 							<Select
 								sx={{
 									'& fieldset': { border: 'none' },
 									height: '32px',
+									maxWidth: '250px',
+									marginLeft: '-15px'
 								}}
 								labelId="demo-multiple-checkbox-label"
 								placeholder="Choose Property Type"
@@ -334,7 +363,9 @@ const SearchBar = () => {
 						component={Link}
 						aria-label="delete"
 						size="small"
-						href={`/listingpage?isRent=${isRent}&${selectedPropertyTypes.map((f) => `type=${f}`).join('&')}`}>
+						href={`/listingpage?isRent=${isRent}&${selectedPropertyTypes
+							.map((f) => `type=${f}`)
+							.join('&')}&${selectedLocation.map((f) => `location=${f}`).join('&')}`}>
 						<SearchIcon
 							sx={{
 								stroke: 'white',
