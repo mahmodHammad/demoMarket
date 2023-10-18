@@ -10,19 +10,15 @@ export default async function Home() {
 	const response = await get(url);
 	const dataArray = response?.data?.list; // Get the array of objects
 
-	const data = dataArray?.map((item) => {
-		return { title: item.name, img: neigbourhoodCover, link: '/' };
-	});
-
 	return (
-		<Box xcenter p={2}>
+		<Box xcenter p={2} sx={{minHeight:"75vh"}}>
 			<Container maxWidth="xl" column xstart>
 				<Box sx={{ mt: '30px' }}></Box>
 				<Box xbetween sx={{ mt: '25px' }}>
 					<Text variant="h3">
 						Neighbourhoods
 						<Text variant="body" component="span" sx={{ display: 'inline' }}>
-							({data?.length})
+							({dataArray?.length})
 						</Text>
 					</Text>
 				</Box>
@@ -34,9 +30,9 @@ export default async function Home() {
 						mt: { md: '53px', xs: '22px' },
 						px: { md: '0px', xs: '12px' },
 					}}>
-					{data?.map((d, index) => (
+					{dataArray?.map((d, index) => (
 						<Item md={4} xs={6} key={index}>
-							<NeighbourhoodCard title={d.title} img={d.img} link={d.link} />
+							<NeighbourhoodCard data={d} />
 						</Item>
 					))}
 				</GridContainer>
