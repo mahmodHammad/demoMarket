@@ -27,9 +27,51 @@ import { get } from '@/utils/http';
 import { AcTypes, FurnishedTypes, ParkingTypes, stringifyNumber } from '@/component/unitDetails/PropertySpecification';
 import { useParams } from 'next/navigation';
 import { keys } from '@/utils/keys';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import UnitSpecifications from '@/component/unitDetails/UnitSpecifications';
-
+import { toggleLike } from '../../listingpage/listing-service';
+export const generateImgList = (images) => {
+	if (images?.length === 1) {
+		return [
+			{
+				img: images[0].url,
+				rows: 4,
+				cols: 12,
+			},
+		];
+	} else if (images?.length === 2) {
+		return [
+			{
+				img: images[0].url,
+				rows: 4,
+				cols: 6,
+			},
+			{
+				img: images[1].url,
+				rows: 4,
+				cols: 6,
+			},
+		];
+	} else if (images?.length >= 3) {
+		return [
+			{
+				img: images[0].url,
+				rows: 8,
+				cols: 6,
+			},
+			{
+				img: images[1].url,
+				rows: 4,
+				cols: 6,
+			},
+			{
+				img: images[2].url,
+				rows: 4,
+				cols: 6,
+			},
+		];
+	}
+};
 interface Props {
 	id?: string;
 	photos?: any;
@@ -50,6 +92,8 @@ interface Props {
 
 export default function Unitdetails({ photos, location, rentType }: Props) {
 	const [index, setIndex] = useState(-1);
+	const queryClient = useQueryClient();
+
 	const params = useParams();
 	console.log('params', params);
 	const unitID = params?.unitId;
@@ -59,7 +103,19 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 		queryKey: [keys.UNITDETAILS + unitID],
 		queryFn: () => get(url),
 	});
+
 	const unit = data?.data; // Get the array of objects
+
+	const handleToggleLike = () => {
+		toggleLike({
+			property_id: unit?.id,
+		});
+		queryClient.invalidateQueries({ queryKey: [keys.FAV] });
+		queryClient.invalidateQueries({ queryKey: [keys.MOSTVIEWED] });
+		queryClient.invalidateQueries({ queryKey: [keys.RECENTLYADDED] });
+		queryClient.invalidateQueries({ queryKey: [keys.PROPERTIES] });
+		queryClient.invalidateQueries({ queryKey: [keys.UNITDETAILS + unitID] });
+	};
 
 	const renderLocation = [unit?.city?.name, unit?.district?.name];
 	const newlocation = unit?.city ? renderLocation?.join(', ') : '';
@@ -103,49 +159,8 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 	console.log("unit',", unit);
 
 	const images = unit?.images;
-	const generateImgList = () => {
-		if (images?.length === 1) {
-			return [
-				{
-					img: images[0].url,
-					rows: 4,
-					cols: 12,
-				},
-			];
-		} else if (images?.length === 2) {
-			return [
-				{
-					img: images[0].url,
-					rows: 4,
-					cols: 6,
-				},
-				{
-					img: images[1].url,
-					rows: 4,
-					cols: 6,
-				},
-			];
-		} else if (images?.length >= 3) {
-			return [
-				{
-					img: images[0].url,
-					rows: 8,
-					cols: 6,
-				},
-				{
-					img: images[1].url,
-					rows: 4,
-					cols: 6,
-				},
-				{
-					img: images[2].url,
-					rows: 4,
-					cols: 6,
-				},
-			];
-		}
-	};
-	const imagesList = generateImgList() || [];
+
+	const imagesList = generateImgList(images) || [];
 
 	return (
 		<>
@@ -154,9 +169,9 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 					<Box column center width={'100%'}>
 						<QuiltedImageList
 							imagesList={imagesList}
-							onClick={({ index: current }) => {
-								setIndex(current), console.log(current);
-							}}
+							// onClick={({ index: current }) => {
+							// 	setIndex(current), console.log(current);
+							// }}
 						/>
 						<PhotoAlbum
 							layout="rows"
@@ -179,6 +194,9 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 
 					<Grid item xs={12} md={8} height={'100hv'}>
 						<UnitHeader
+							id={unit?.id}
+							handleToggleLike={handleToggleLike}
+							liked={unit?.is_fav}
 							logo={
 								<AtarColoredLogo
 									sx={{

@@ -22,12 +22,13 @@ import DateTimeModal from '@/component/modals/DateTimeModal';
 import ConfirmAction from '@/component/modals/ConfirmAction';
 import { globalToast } from '@/utils/toast';
 import ReturnQrCode from '@/component/ReturnQrCode';
+import { generateImgList } from '@/app/(landing)/unitdetails/[unitId]/page';
 
 const page = () => {
 	const { push } = useRouter();
 	const params = useParams();
 	const { data, isLoading, refetch } = useQuery({
-		queryKey: [keys.MYBOOKING],
+		queryKey: [keys.MYBOOKING+params?.bookingID],
 		queryFn: () => getMyBooking(params?.bookingID),
 	});
 	const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +64,7 @@ const page = () => {
 				});
 		}
 	};
+	const imagesList = generateImgList(data?.unit?.images) || [];
 	return (
 		<>
 			<>
@@ -82,7 +84,7 @@ const page = () => {
 					<Text variant="h4">Booking Details</Text>
 					<Grid container spacing={3} mb={1}>
 						<Grid item xs={12} md={8} height={'100hv'}>
-							<QuiltedImageList />
+							<QuiltedImageList imagesList={imagesList} />
 							<BookingDetails_uhitHeader
 								logo={
 									<AtarColoredLogo

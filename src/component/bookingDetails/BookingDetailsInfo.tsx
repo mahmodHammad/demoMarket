@@ -4,11 +4,11 @@ import React from 'react';
 
 const BookingDetailsInfo = ({ data }: { data: {} }) => {
 	const mapData = [
-		{ title: 'Booking Number', data: data?.id || '' },
-		{ title: 'Booking status', data: data?.booking_status || '' },
-		{ title: 'Community Name', data: data?.community?.name || '' },
-		{ title: 'Building Name', data: data?.building?.name || '' },
-		{ title: 'Unit Name', data: data?.unit?.name || '' },
+		{ title: 'Booking Number', data: data?.id || '--' },
+		{ title: 'Booking status', data: data?.booking_status || '--' },
+		{ title: 'Community Name', data: data?.community?.name || '--' },
+		{ title: 'Building Name', data: data?.building?.name || '--' },
+		{ title: 'Unit Name', data: data?.unit?.name || '--' },
 	];
 	return (
 		<>

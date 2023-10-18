@@ -17,7 +17,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 		<>
 			<Grid container item xs={12} sx={{ display: { xs: 'none', md: 'block' } }}>
 				<ImageList sx={{ width: '100%' }} variant="quilted" cols={12} rowHeight={121}>
-					{imagesList.map((item, index) => (
+					{imagesList?.map((item, index) => (
 						<ImageListItem
 							key={item?.img}
 							cols={item?.cols || 1}
