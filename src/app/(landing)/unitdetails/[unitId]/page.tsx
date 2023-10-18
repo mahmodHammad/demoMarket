@@ -20,9 +20,7 @@ import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
-import photo1 from '@/assets/images/photo1.png';
-import photo2 from '@/assets/images/photo2.png';
-import photo3 from '@/assets/images/photo3.png';
+
 import PhotoAlbum from 'react-photo-album';
 import { Box } from '@/wrappers';
 import { get } from '@/utils/http';
@@ -48,8 +46,6 @@ interface Props {
 	floorFeatures?: any;
 	map?: string;
 }
-
-const photos = [photo1, photo2, photo3];
 
 export default function Unitdetails({
 	id,
@@ -118,12 +114,60 @@ export default function Unitdetails({
 			value: unit?.features?.is_furnished?.toString() && FurnishedTypes[unit?.features?.is_furnished] + ' ' + '',
 		},
 	];
+	console.log("unit',", unit);
+
+	const images = unit?.images;
+	const generateImgList = () => {
+		if (images?.length === 1) {
+			return [
+				{
+					img: images[0].url,
+					rows: 4,
+					cols: 12,
+				},
+			];
+		} else if (images?.length === 2) {
+			return [
+				{
+					img: images[0].url,
+					rows: 4,
+					cols: 6,
+				},
+				{
+					img: images[1].url,
+					rows: 4,
+					cols: 6,
+				},
+			];
+		} else if (images?.length >= 3) {
+			return [
+				{
+					img: images[0].url,
+					rows: 8,
+					cols: 6,
+				},
+				{
+					img: images[1].url,
+					rows: 4,
+					cols: 6,
+				},
+				{
+					img: images[2].url,
+					rows: 4,
+					cols: 6,
+				},
+			];
+		}
+	};
+	const imagesList = generateImgList() || [];
+
 	return (
 		<>
 			<Container maxWidth="xl">
 				<Grid container spacing={3} sx={{ mt: '5px', pt: '26px' }} mb={1}>
 					<Box column center width={'100%'}>
 						<QuiltedImageList
+							imagesList={imagesList}
 							onClick={({ index: current }) => {
 								setIndex(current), console.log(current);
 							}}

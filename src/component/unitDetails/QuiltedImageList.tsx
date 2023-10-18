@@ -12,54 +12,31 @@ import { Grid, ImageListItemBar } from '@mui/material';
 import Carousel from '../Carousel';
 import { Label } from '../table/Table';
 
-const photos = [photo1, photo2, photo3];
-
-export default function QuiltedImageList(props: any) {
-	const itemData = [
-		{
-			img: photo1,
-			rows: 4,
-			cols: 8,
-		},
-		{
-			img: photo2,
-			rows: 2,
-			cols: 4,
-		},
-		{
-			img: photo3,
-			rows: 2,
-			cols: 4,
-		},
-	];
-
-	const imagesLength = [1, 2, 3];
-
+export default function QuiltedImageList({ imagesList }: any) {
 	return (
 		<>
 			<Grid container item xs={12} sx={{ display: { xs: 'none', md: 'block' } }}>
 				<ImageList sx={{ width: '100%' }} variant="quilted" cols={12} rowHeight={121}>
-					{[1, 2, 3].map((item, index) => (
+					{imagesList.map((item, index) => (
 						<ImageListItem
-							key={itemData[index]?.img}
-							cols={itemData[index].cols || 1}
-							rows={itemData[index].rows || 1}
+							key={item?.img}
+							cols={item?.cols || 1}
+							rows={item?.rows || 1}
 							sx={{
 								p: '10px',
 							}}>
 							<Box
-								onClick={props}
-								component={Image}
-								src={itemData[index].img}
+								component="img"
+								src={item.img}
 								sx={{
 									width: '100%',
 									height: '100%',
 									borderRadius: '8px',
 									objectFit: 'cover',
 								}}
-								alt={itemData[index].title}
+								alt={item.title}
 							/>
-							{index === imagesLength?.length - 1 && (
+							{index === imagesList?.length - 1 && (
 								<ImageListItemBar
 									sx={{ background: 'transparent', margin: '25px 15px' }}
 									actionIcon={
@@ -84,11 +61,11 @@ export default function QuiltedImageList(props: any) {
 
 			<Box sx={{ width: '100vw', display: { xs: 'block', md: 'none' } }}>
 				<Carousel
-					items={itemData.map((d: any, index: number) => (
+					items={imagesList.map((d: any, index: number) => (
 						<Box
 							key={index}
 							sx={{
-								// background: "red",
+								background:"red",
 								width: '330px',
 								height: { xs: '240px', md: '273px' },
 								position: 'relative',
