@@ -12,7 +12,9 @@ import { Grid, ImageListItemBar } from '@mui/material';
 import Carousel from '../Carousel';
 import { Label } from '../table/Table';
 
-export default function QuiltedImageList() {
+const photos = [photo1, photo2, photo3];
+
+export default function QuiltedImageList(props: any) {
 	const itemData = [
 		{
 			img: photo1,
@@ -46,6 +48,7 @@ export default function QuiltedImageList() {
 								p: '10px',
 							}}>
 							<Box
+								onClick={props}
 								component={Image}
 								src={itemData[index].img}
 								sx={{

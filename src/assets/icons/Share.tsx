@@ -4,7 +4,7 @@ interface Props {
 }
 export default function Share({ props, color }: any) {
 	return (
-		<SvgIcon {...props} inheritViewBox>
+		<SvgIcon {...props} inheritViewBox sx={{ color: 'none', fill: 'none', strock: 'none' }}>
 			<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_29902_58111)">
 					<path

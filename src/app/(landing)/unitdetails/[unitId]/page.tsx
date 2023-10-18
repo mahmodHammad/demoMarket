@@ -6,12 +6,13 @@ import {
 	ConstructionStatus,
 	Features,
 	FloorPlans,
+	LocationCard,
 	QuiltedImageList,
 	UnitHeader,
 	UnitMap,
 } from '@/component';
 import { Container, Grid } from '@mui/material';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
@@ -47,6 +48,9 @@ interface Props {
 	floorFeatures?: any;
 	map?: string;
 }
+
+const photos = [photo1, photo2, photo3];
+
 export default function Unitdetails({
 	id,
 	logo,
@@ -63,7 +67,7 @@ export default function Unitdetails({
 	floorFeatures,
 	map,
 }: Props) {
-	// const [index, setIndex] = useState(-1);
+	const [index, setIndex] = useState(-1);
 	const params = useParams();
 	console.log('params', params);
 	const unitID = params?.unitId;
@@ -118,26 +122,29 @@ export default function Unitdetails({
 		<>
 			<Container maxWidth="xl">
 				<Grid container spacing={3} sx={{ mt: '5px', pt: '26px' }} mb={1}>
-					<Box column>
-						<QuiltedImageList />
-
-						{/* <PhotoAlbum
+					<Box column center width={'100%'}>
+						<QuiltedImageList
+							onClick={({ index: current }) => {
+								setIndex(current), console.log(current);
+							}}
+						/>
+						<PhotoAlbum
 							layout="rows"
-							photos={images}
+							photos={photos}
 							targetRowHeight={150}
 							onClick={({ index: current }) => setIndex(current)}
 						/>
-
+						{/* unit?.images && unit.images?.url ? unit.images.url : */}
 						<Lightbox
 							styles={{
 								container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
 							}}
 							plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
 							index={index}
-							slides={images}
+							slides={photos}
 							open={index >= 0}
 							close={() => setIndex(-1)}
-						/> */}
+						/>
 					</Box>
 
 					<Grid item xs={12} md={8} height={'100hv'}>
@@ -174,6 +181,7 @@ export default function Unitdetails({
 
 						<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
 						<Features Feature={amenityData} />
+
 						<UnitMap location={location} />
 					</Grid>
 
