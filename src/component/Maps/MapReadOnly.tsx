@@ -1,61 +1,50 @@
 'use client';
+import React, { useCallback, useState } from 'react';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
-import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import { CircularProgress } from '@mui/material';
-import './maps.css';
-
-type Props = {};
-const MapReadOnly = ({ viewOnly = true, google, latLng }: Props) => {
-	const fetchPlaces = (mapProps, map) => {
-		// const { google } = mapProps;
-		// const service = new google.maps.places.PlacesService(map);
-		// console.log("service",service)
-		// // ...
-	};
-	const ReyadCenter = { lat: 24.774265, lng: 46.738586 };
-	const initialCenter = viewOnly ? { lat: latLng?.latitude, lng: latLng?.longitude } : ReyadCenter;
-	return (
-		latLng?.lat &&
-		latLng?.lng && (
-			<Map
-				onReady={fetchPlaces}
-				bootstrapURLKeys={{ key: process.env.GOOGLE_MAP_KEY }}
-				google={google}
-				center={{ lat: latLng?.lat, lng: latLng?.lng }}
-				mapTypeControlOptions={{
-					style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-					position: google.maps.ControlPosition.TOP_RIGHT,
-				}}
-				zoom={14} // Initial zoom level
-				initialCenter={ReyadCenter} // Initial map center coordinates
-				// onClick={handleMapClick}
-			>
-				<Marker
-					lat={latLng?.lat}
-					lng={latLng?.lng}
-					position={{ lat: latLng?.lat, lng: latLng?.lng }}
-					draggable={true}></Marker>
-			</Map>
-		)
-	);
+const containerStyle = {
+	width: '100%',
+	height: '100%',
 };
-const LoadingContainer = (props) => (
-	<div
-		style={{
-			height: '50vh',
-			width: '100%',
-			alignContent: 'center',
-			display: 'flex',
-			justifyContent: 'center',
-			top: '50%',
-			alignItems: 'center',
-		}}>
-		<CircularProgress />
-	</div>
-);
 
-export default GoogleApiWrapper({
-	apiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
-	LoadingContainer: LoadingContainer,
-})(MapReadOnly);
+const center = {
+	lat: -3.745,
+	lng: -38.523,
+};
+
+function MapReadOnly({ viewOnly = true, latLng = center }: Props) {
+	const { isLoaded } = useJsApiLoader({
+		id: 'google-map-script',
+		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
+	});
+
+	const [map, setMap] = useState(null);
+
+	const onLoad = useCallback(function callback(map) {
+		// const bounds = new window.google.maps.LatLngBounds(center);
+		// map.fitBounds(bounds);
+		// setMap(map);
+	}, []);
+
+	const onUnmount = useCallback(function callback(map) {
+		setMap(null);
+	}, []);
+
+	return isLoaded ? (
+		<GoogleMap
+			mapContainerStyle={containerStyle}
+			center={latLng}
+			zoom={10}
+			onLoad={onLoad}
+			onUnmount={onUnmount}>
+			<Marker
+				position={latLng}
+				draggable={false} // Set draggable to false to make it view-only
+			/>
+		</GoogleMap>
+	) : (
+		<></>
+	);
+}
+
+export default React.memo(MapReadOnly);
