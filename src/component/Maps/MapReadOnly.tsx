@@ -12,7 +12,7 @@ const center = {
 	lng: -38.523,
 };
 
-function MapReadOnly({ viewOnly = true, latLng = center }: Props) {
+function MapReadOnly({ latLng = center }: Props) {
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -31,12 +31,7 @@ function MapReadOnly({ viewOnly = true, latLng = center }: Props) {
 	}, []);
 
 	return isLoaded ? (
-		<GoogleMap
-			mapContainerStyle={containerStyle}
-			center={latLng}
-			zoom={10}
-			onLoad={onLoad}
-			onUnmount={onUnmount}>
+		<GoogleMap mapContainerStyle={containerStyle} center={latLng} zoom={17} onLoad={onLoad} onUnmount={onUnmount}>
 			<Marker
 				position={latLng}
 				draggable={false} // Set draggable to false to make it view-only
