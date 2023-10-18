@@ -57,15 +57,6 @@ export default function MyBookings() {
 		enabled: value === 1,
 	});
 
-	useEffect(() => {
-		console.log('bookings table state changed', {
-			search,
-			currentPage,
-			status,
-			filter,
-			sort,
-		});
-	}, [search, currentPage, status, filter, sort, data]);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);

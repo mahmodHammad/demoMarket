@@ -1,4 +1,4 @@
-import { http } from '@/utils/http';
+import { GET, http } from '@/utils/http';
 
 export const getProperties = async (options: any = {}) => {
 	try {
@@ -25,3 +25,12 @@ export const toggleLike = async (body: any) => {
 		return error.response;
 	}
 };
+
+export const getFav = async (body: any) => {
+	try {
+		return await GET(`/favorites`);
+	} catch (error: any) {
+		return error.response;
+	}
+};
+
