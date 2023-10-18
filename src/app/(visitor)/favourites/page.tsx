@@ -1,3 +1,4 @@
+'use client';
 import { Box, Button, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
 import React from 'react';
@@ -7,25 +8,10 @@ import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import { UnitsCard } from '@/component';
 import { Delete } from '@/assets';
+import { useQuery } from '@tanstack/react-query';
+import { getFav } from '@/app/(landing)/listingpage/listing-service';
+import { keys } from '@/utils/keys';
 
-const data = [
-	{
-		title: 'Al-Arid District',
-		img: neibourhoodcover2,
-		link: '/',
-		price: 'SAR 60,000',
-		area: '120 sqm',
-		location: 'Riyadh',
-		liked: true,
-	},
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/', liked: true },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/', liked: true },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
-	{ title: 'Al-Arid District', img: neibourhoodcover2, link: '/', liked: true },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/', liked: true },
-];
 
 // interface proptypes {
 //   data: [
@@ -40,7 +26,16 @@ const data = [
 //   ];
 // }
 // const listingBodey = ({ data }: proptypes) => {
+// { console.log("dataffffff", data) }
+
+
 const favourites = () => {
+	const { data, isLoading: filtersLoading } = useQuery({
+		queryKey: [keys.FAV],
+		queryFn: getFav,
+	});
+
+	console.log("datadatadata", data)
 	return (
 		<>
 			<Box column p={'35px'} width={'100%'}>
@@ -48,7 +43,7 @@ const favourites = () => {
 					<Text variant="h4">Favourites</Text>
 					<Box>
 						<Button
-							startIcon={<Delete />}
+							startIcon={<Delete sx={{ fill: "#FF4242" }} />}
 							variant="dangerOutlined"
 							component={Link}
 							color="warning"
@@ -65,15 +60,16 @@ const favourites = () => {
 				</Box>
 
 				<Grid container mt={'25px'} spacing={'28px'}>
-					{data?.map((d, index) => (
+					{data?.list?.map((d, index) => (
 						<Grid item xs={4} key={index}>
 							<UnitsCard
-								title={d?.title}
-								img={d?.img}
+								title={d?.name || ""}
+								img={d?.images ? d?.images[0] : null}
 								// link={d?.link}
+								id={d?.id}
 								price={d?.price}
-								area={d?.area}
-								location={d?.location}
+								area={d?.unit_size}
+								location={d?.city?.name + " - " + d?.district?.name}
 								liked={d?.liked}
 							/>
 						</Grid>

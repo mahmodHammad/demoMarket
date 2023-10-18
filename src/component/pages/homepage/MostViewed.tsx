@@ -13,11 +13,12 @@ export default async function MostViewed() {
 		const newlocation = item?.city ? renderLocation?.join(', ') : '';
 		return {
 			title: item?.name || '--',
-			location: newlocation || '--',
-			img: item?.images && item.images[0]?.url ? item.images[0].url : neigbourhoodCover,
+			city: item?.city?.name || '--',
+			district: item?.district?.name || '--',
+			img: item?.images,
 			area: item?.unit_size || '--',
 			price: item?.price || '--',
-			link: '/',
+			id:  item?.id 
 		};
 	});
 	return (

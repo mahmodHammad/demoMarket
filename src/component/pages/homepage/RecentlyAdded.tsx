@@ -14,18 +14,19 @@ export default async function RecentlyAdded() {
 	const slicedDataArray = dataArray;
 
 	const data = slicedDataArray?.map((item) => {
-		const renderLocation = [item?.city?.name, item?.district?.name];
-		const newlocation = item?.city ? renderLocation?.join(', ') : '';
-
 		return {
+			id: item?.id,
 			title: item?.name || '--',
-			location: newlocation || '--',
-			img: item?.images && item.images[0]?.url ? item.images[0].url : neigbourhoodCover,
+			img: item?.images,
 			area: item?.unit_size || '--',
 			price: item?.price || '--',
-			link: '/',
+			city: item?.city?.name || '--',
+			district: item?.district?.name || '--',
 		};
 	});
 
-	return <HomeCardsContainer data={data} title="Recently Added" body="Discover our exclusive selection " link="/" />;
+	return <HomeCardsContainer data={data} title="Recently Added" body="Discover our exclusive selection " 
+	link="/listingpage?sort=3"
+	
+	/>;
 }
