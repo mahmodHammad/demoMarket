@@ -3,6 +3,7 @@ import MostViewed from '@/component/pages/homepage/MostViewed';
 import RecentlyAdded from '@/component/pages/homepage/RecentlyAdded';
 import { Box } from '@/wrappers';
 import { Container } from '@mui/material';
+import Map from './maps/page';
 
 export default async function Home() {
 	return (
@@ -13,6 +14,9 @@ export default async function Home() {
 				<RecentlyAdded />
 				<MostViewed />
 			</Container>
+			<div style={{ marginBottom: '30px' }}>
+				<Map inLandingPage={true} />
+			</div>
 		</Box>
 	);
 }

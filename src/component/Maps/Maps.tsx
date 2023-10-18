@@ -31,7 +31,7 @@ const infoWindowOffset = {
 	lng: 0, // Keep the longitude unchanged
 };
 
-function MyComponent({ center, setCenter, markersList, setRadius }: Props) {
+function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
 	let mapRef = null;
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
@@ -51,9 +51,9 @@ function MyComponent({ center, setCenter, markersList, setRadius }: Props) {
 		if (mapRef) {
 			const bounds = mapRef?.getBounds();
 			if (bounds) {
-				const sw = bounds?.getSouthWest().toJSON();
-				const center = bounds?.getCenter().toJSON();
-				const ne = bounds?.getNorthEast().toJSON();
+				const sw = bounds?.getSouthWest()?.toJSON();
+				const center = bounds?.getCenter()?.toJSON();
+				const ne = bounds?.getNorthEast()?.toJSON();
 				const newRadius = window?.google?.maps?.geometry?.spherical?.computeDistanceBetween(sw, ne);
 				const radiusInKilometers = newRadius / 1000;
 				setRadius(Math.ceil(radiusInKilometers));
@@ -89,7 +89,7 @@ function MyComponent({ center, setCenter, markersList, setRadius }: Props) {
 					center={center}
 					zoom={14}
 					options={{
-						gestureHandling: 'greedy',
+						gestureHandling: inLandingPage ? null : 'greedy',
 						zoomControlOptions: { position: 9 },
 						streetViewControl: false,
 						fullscreenControl: false,

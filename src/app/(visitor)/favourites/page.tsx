@@ -8,10 +8,9 @@ import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import { UnitsCard } from '@/component';
 import { Delete } from '@/assets';
-import { useQuery } from '@tanstack/react-query';
-import { getFav } from '@/app/(landing)/listingpage/listing-service';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getFav, toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { keys } from '@/utils/keys';
-
 
 // interface proptypes {
 //   data: [
@@ -28,14 +27,19 @@ import { keys } from '@/utils/keys';
 // const listingBodey = ({ data }: proptypes) => {
 // { console.log("dataffffff", data) }
 
-
 const favourites = () => {
 	const { data, isLoading: filtersLoading } = useQuery({
 		queryKey: [keys.FAV],
 		queryFn: getFav,
 	});
-
-	console.log("datadatadata", data)
+	const queryClient = useQueryClient()
+	const handleToggleLike = (id) => {
+		toggleLike({
+			property_id: id,
+		});
+		queryClient.invalidateQueries({ queryKey: [keys.FAV] })
+	};
+	console.log('datadatadata', data);
 	return (
 		<>
 			<Box column p={'35px'} width={'100%'}>
@@ -43,7 +47,7 @@ const favourites = () => {
 					<Text variant="h4">Favourites</Text>
 					<Box>
 						<Button
-							startIcon={<Delete sx={{ fill: "#FF4242" }} />}
+							startIcon={<Delete sx={{ fill: '#FF4242' }} />}
 							variant="dangerOutlined"
 							component={Link}
 							color="warning"
@@ -62,16 +66,7 @@ const favourites = () => {
 				<Grid container mt={'25px'} spacing={'28px'}>
 					{data?.list?.map((d, index) => (
 						<Grid item xs={4} key={index}>
-							<UnitsCard
-								title={d?.name || ""}
-								img={d?.images ? d?.images[0] : null}
-								// link={d?.link}
-								id={d?.id}
-								price={d?.price}
-								area={d?.unit_size}
-								location={d?.city?.name + " - " + d?.district?.name}
-								liked={d?.liked}
-							/>
+							<UnitsCard data={d} toggleLike={handleToggleLike} />
 						</Grid>
 					))}
 				</Grid>
