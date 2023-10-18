@@ -84,11 +84,13 @@ export default function page() {
 	const { data: filtersData, isLoading: filtersLoading } = useQuery({
 		queryKey: [keys.FILTERS],
 		queryFn: getFilters,
+		cacheTime: 0
 	});
 
 	const {
 		data: properties,
 		isLoading: propertiesLoading,
+		isFetching,
 		refetch,
 	} = useQuery({
 		queryKey: [keys.PROPERTIES],
@@ -255,6 +257,7 @@ export default function page() {
 		petFriendly,
 		locationSearch,
 		filteredLocationFilters,
+		locationFilters,
 		availabilityFilters,
 		propertyTypeFilters,
 		amenitiesFilters,
@@ -331,7 +334,7 @@ export default function page() {
 					<ListingBody
 						data={renderedData}
 						setRenderedData={setRenderedData}
-						isLoading={propertiesLoading}
+						isLoading={propertiesLoading || isFetching}
 						isMobileView={isMobileView}
 						openFilterOnMobileView={() => setShowFiltersOnMob(true)}
 						page={page}
