@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { GoogleMap, InfoWindow, Marker, LoadScript, useJsApiLoader } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
+import { Loading } from '@/wrappers';
 
 const containerStyle = {
 	width: '100%',
@@ -18,20 +19,20 @@ function debounce(func: { (nextValue: any): void; apply?: any }, timeout = 300) 
 		}, timeout);
 	};
 }
-
 interface Props {
 	center: {};
 	setCenter: any;
 	markersList: [];
+	setRadius: any;
 }
+
 const infoWindowOffset = {
-	lat: 0.0002, // Latitude offset to move it above the marker
+	lat: 0.00022, // Latitude offset to move it above the marker
 	lng: 0, // Keep the longitude unchanged
 };
 
-function MyComponent({ center, setCenter, markersList }: Props) {
+function MyComponent({ center, setCenter, markersList, setRadius }: Props) {
 	let mapRef = null;
-
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -43,41 +44,44 @@ function MyComponent({ center, setCenter, markersList }: Props) {
 			setIsMapLoaded(true);
 		}
 	}, []);
+
 	const [infoWindowPosition, setInfoWindowPosition] = useState(null);
+
 	const calculateViewportRadius = debounce(() => {
 		if (mapRef) {
 			const bounds = mapRef?.getBounds();
 			if (bounds) {
-				const sw = bounds.getSouthWest().toJSON();
-				const center = bounds.center().toJSON();
-				const ne = bounds.getNorthEast().toJSON();
-				const newRadius = window.google.maps.geometry.spherical.computeDistanceBetween(sw, ne);
+				const sw = bounds?.getSouthWest().toJSON();
+				const center = bounds?.getCenter().toJSON();
+				const ne = bounds?.getNorthEast().toJSON();
+				const newRadius = window?.google?.maps?.geometry?.spherical?.computeDistanceBetween(sw, ne);
 				const radiusInKilometers = newRadius / 1000;
-				console.log(radiusInKilometers,center, 'shreyas radiusInKilometers');
+				setRadius(Math.ceil(radiusInKilometers));
+				setCenter(center);
 			}
 		}
 	}, 1000);
+
 	const onLoad = useCallback(function callback(map) {
 		mapRef = map;
-		// mapRef?.addListener('zoom_changed', handleChange);
-		// mapRef?.addListener('dragend', handleChange);
-		window.google.maps.event.addListener(mapRef, 'bounds_changed', () => {
-			calculateViewportRadius();
-		});
+		// keep this commented. this keeps on calling function as bounds changes internally.
+		// window.google.maps.event.addListener(mapRef, 'bounds_changed', () => {
+		// 	calculateViewportRadius();
+		// });
+		mapRef?.addListener('zoom_changed', calculateViewportRadius);
+		mapRef?.addListener('dragend', calculateViewportRadius);
 	}, []);
+
 	const onUnmount = useCallback(function callback(map) {
 		if (mapRef.removeListener) {
-			// mapRef?.removeListener('zoom_changed', handleChange);
-			// mapRef?.removeListener('dragend', handleChange);
-			window.google.maps.event.removeListener(mapRef, 'bounds_changed');
+			// window.google.maps.event.removeListener(mapRef, 'bounds_changed');
+			mapRef?.removeListener('zoom_changed', calculateViewportRadius);
+			mapRef?.removeListener('dragend', calculateViewportRadius);
 		}
 	}, []);
 
-	const handleChange = () => {
-		console.log(mapRef?.center.lat(), mapRef?.center.lng(), 'shreyas');
-	};
 	return (
-		<LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ">
+		<LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
 			{isMapLoaded ? (
 				<GoogleMap
 					mapContainerStyle={containerStyle}
@@ -117,10 +121,12 @@ function MyComponent({ center, setCenter, markersList }: Props) {
 					{infoWindowPosition && (
 						<InfoWindow
 							position={{
-								lat: infoWindowPosition?.map?.latitude + infoWindowOffset.lat,
-								lng: infoWindowPosition?.map?.longitude + infoWindowOffset.lng,
+								lat: infoWindowPosition?.map?.latitude,
+								lng: infoWindowPosition?.map?.longitude,
 							}}
-							pixelOffset={new window.google.maps.Size(0, -50)}
+							options={{
+								pixelOffset: new window.google.maps.Size(0, -20),
+							}}
 							onCloseClick={() => setInfoWindowPosition(null)}>
 							<UnitsCard
 								imgHeight="180px"
