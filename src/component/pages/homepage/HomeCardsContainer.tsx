@@ -20,8 +20,7 @@ interface types {
 	hasneighbourhoods?: boolean;
 }
 
-export default function HomeCardsContainer({ title, body, link, data, hasneighbourhoods }: types) {
-	console.log("NEIENEN",data)
+export default function HomeCardsContainer({ title, body, link, data, hasneighbourhoods, handleToggleLike }: types) {
 	return (
 		<Box
 			sx={{
@@ -45,7 +44,7 @@ export default function HomeCardsContainer({ title, body, link, data, hasneighbo
 							{hasneighbourhoods ? (
 								<NeighbourhoodCard data={d} />
 							) : (
-								<UnitsCard data={d}/>
+								<UnitsCard data={d} toggleLike={handleToggleLike} />
 							)}
 						</Box>
 					))}
