@@ -8,24 +8,12 @@ export default async function MostViewed() {
 	const response = await get(url);
 	const dataArray = response?.data?.list; // Get the array of objects
 	const slicedDataArray = dataArray;
-	const data = slicedDataArray?.map((item) => {
-		const renderLocation = [item?.city?.name, item?.district?.name];
-		const newlocation = item?.city ? renderLocation?.join(', ') : '';
-		return {
-			title: item?.name || '--',
-			city: item?.city?.name || '--',
-			district: item?.district?.name || '--',
-			img: item?.images,
-			area: item?.unit_size || '--',
-			price: item?.price || '--',
-			id:  item?.id 
-		};
-	});
+	 
 	return (
 		<HomeCardsContainer
-			data={data}
+			data={slicedDataArray}
 			title="Most Viewed Properties"
-			body="Discover our most viewed exclusive selection in properties  "
+			body="Discover our most viewed Properties"
 			link="/listingpage?sort=5"
 		/>
 	);

@@ -9,23 +9,11 @@ import { get } from '@/utils/http';
 export default async function RecentlyAdded() {
 	const url = '/properties';
 	const response = await get(url);
+	console.log("response",response?.data?.list)
 	const dataArray = response?.data?.list; // Get the array of objects
 
-	const slicedDataArray = dataArray;
-
-	const data = slicedDataArray?.map((item) => {
-		return {
-			id: item?.id,
-			title: item?.name || '--',
-			img: item?.images,
-			area: item?.unit_size || '--',
-			price: item?.price || '--',
-			city: item?.city?.name || '--',
-			district: item?.district?.name || '--',
-		};
-	});
-
-	return <HomeCardsContainer data={data} title="Recently Added" body="Discover our exclusive selection " 
+  
+	return <HomeCardsContainer data={dataArray} title="Recently Added" body="Check out our latest Properties " 
 	link="/listingpage?sort=3"
 	
 	/>;

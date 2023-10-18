@@ -47,9 +47,8 @@ export default function Hero() {
 							color: '#fff',
 							textAlign: 'center',
 						}}>
-						Lorem ipsum dolor sit amet consectetur. Neque augue dictum nullam sollicitudin morbi mauris ornare bibendum
-						condimentum.Lorem ipsum dolor sit amet consectetur. Neque augue dictum nullam sollicitudin morbi mauris
-						ornare bibendum condimentum.
+						Discover properties available for sale and rent, view all property details, book a visit with a sales
+						consultant, and complete the payment process with ease and flexibility in one platform.
 					</Text>
 				</Box>
 				<Box center width={'100%'} px={1}>

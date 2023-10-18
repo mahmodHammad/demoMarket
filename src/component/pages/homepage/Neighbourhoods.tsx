@@ -15,16 +15,12 @@ export default async function Neighbourhoods() {
 	// console.log('Data from server:', response); // check data at terminal
 	const dataArray = response?.data?.list; // Get the array of objects
 
-	const slicedDataArray = dataArray?.slice(0, 6);
-	const data = slicedDataArray?.map((item) => {
-		return { id: item.id, title: item?.name, img: neigbourhoodCover, link: '/' };
-	});
 
 	return (
 		<HomeCardsContainer
-			data={data}
+			data={dataArray}
 			title="Neighbourhoods"
-			body="There is something everyday"
+			body="Explore properties in different neighborhoods and regions"
 			link="/neighbourhoods"
 			hasneighbourhoods
 		/>

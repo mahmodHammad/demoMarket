@@ -34,3 +34,6 @@ export { default as SearchLine } from './icons/SearchLine';
 export { default as SearcSuccesgreenhLine } from './icons/Succesgreen';
 export { default as FilterIcon } from './icons/FilterIcon';
 export { default as slides } from './images/slides';
+export { default as defaultimg } from './images/defaultimg.jpeg';
+export { default as defaultNeighbour } from './images/defaultNeighbour.jpg';
+export { default as defaultNeighbourd2 } from './images/defaultNeighbourd2.jpeg';

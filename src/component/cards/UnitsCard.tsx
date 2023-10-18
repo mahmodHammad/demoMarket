@@ -4,47 +4,43 @@ import { Box, Button, Text } from '@/wrappers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from '@mui/material';
-import { FilledHeart, OutlineHeart } from '@/assets';
-import neibourhoodcover1 from '@/assets/images/Rectangle 4535.png';
+import { FilledHeart, OutlineHeart, defaultimg } from '@/assets';
+import neibourhoodcover1 from '@/assets/images/Rectangle 4535.png'; 
 
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
+interface data {
+	id: String;
+	name: String;
+	unit_size: String;
+	map: any;
+	images: any;
+	price: String;
+	city: any;
+	district: any;
+	is_fav: Boolean;
+}
+
 interface Props {
-	id: number;
-	img: string;
-	title: string;
-	link?: string;
-	price: string;
-	area: string;
-	location: string;
-	liked: boolean;
 	height?: string;
 	width?: string;
 	imgHeight?: string;
 	toggleLike: (id: number) => void;
 	buttonName?: string;
 	onClick?: () => void;
+	data: data;
 }
 export default function UnitsCard({
-	id,
-	liked,
-	img,
-	title,
-	link = '/unitdetails',
-	price,
-	area,
-	location,
 	toggleLike,
 	imgHeight = '237px',
 	width = '100%',
 	height = 'inherit',
 	buttonName = 'View Details',
 	onClick,
-	city, 
-	district
+	data,
 }: Props) {
-	const image = img && img[0]?.url ? img[0].url : neigbourhoodCover
- 
-	const renderLocation = [city, district];
+	const { id, name: title, unit_size: area, images, price, city, district, is_fav: liked } = data;
+	const image = images && images[0]?.url ? images[0].url : defaultimg;
+
+	const renderLocation = [city?.name, district?.name];
 	const newlocation = city ? renderLocation?.join(', ') : '--';
 	return (
 		<Box
@@ -52,8 +48,6 @@ export default function UnitsCard({
 			sx={{
 				width: width,
 				height: { xs: height, md: height },
-				// position: "relative",
-				// overflow: "hidden",
 				borderRadius: '16px',
 
 				boxShadow: '0px 6px 12px 0px rgba(28, 39, 49, 0.05)',
@@ -104,12 +98,12 @@ export default function UnitsCard({
 					position: 'relative',
 					overflow: 'hidden',
 				}}
-			// component={Image}
-			// loader={imageLoader}
-			// alt="houses and properties for rent"
-			// src={img}
-			// width={500}
-			// height={500}
+				// component={Image}
+				// loader={imageLoader}
+				// alt="houses and properties for rent"
+				// src={img}
+				// width={500}
+				// height={500}
 			>
 				<Image src={image || neibourhoodcover1} alt="Picture of the author" fill />
 			</Box>

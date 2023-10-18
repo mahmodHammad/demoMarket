@@ -106,14 +106,7 @@ const listingBody = ({
 					{data?.list?.map((d: any, index: number) => (
 						<Grid item xs={12} md={6} key={index}>
 							<UnitsCard
-								id={d?.id}
-								title={d?.name}
-								img={neibourhoodcover2}
-								// link={d?.link}
-								price={d?.price || '--'}
-								area={d?.maps?.districtName || '--'}
-								location={d?.maps?.formattedAddress || '--'}
-								liked={d?.is_fav}
+								data={d}
 								toggleLike={handleLikeToggle}
 							/>
 						</Grid>
