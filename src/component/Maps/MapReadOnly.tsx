@@ -12,7 +12,7 @@ const center = {
 	lng: -38.523,
 };
 
-function MapReadOnly({ latLng = center }: Props) {
+function MapReadOnly({ latLng }: Props) {
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -30,7 +30,7 @@ function MapReadOnly({ latLng = center }: Props) {
 		setMap(null);
 	}, []);
 
-	return isLoaded ? (
+	return isLoaded && latLng ? (
 		<GoogleMap mapContainerStyle={containerStyle} center={latLng} zoom={17} onLoad={onLoad} onUnmount={onUnmount}>
 			<Marker
 				position={latLng}

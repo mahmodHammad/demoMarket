@@ -27,9 +27,8 @@ export default function UnitMap({ location }: proptypes) {
 					loading="lazy"
 					// referrerpolicy="no-referrer-when-downgrade"
 				></iframe>
-				<Button variant="contained" component={Link} href="/" sx={{}}>
-					Open in Google Map
-				</Button> */}
+			*/}
+			
 			<LocationCard location={location} />
 		</Box>
 	);
