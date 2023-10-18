@@ -2,19 +2,19 @@
 
 import React, { ChangeEvent } from 'react';
 import { AccordionChipsFilter, Switch, CounterFilter, SliderFilter, TextInput } from '@/component';
-import { Box, Text, Button, Accordion } from '@/wrappers';
+import { Box, Text, Button, Accordion, Loading } from '@/wrappers';
 import { IconButton } from '@mui/material';
 import { Close } from '@/assets';
 import { useTheme } from '@emotion/react';
 
 type Props = {
+	isLoading?: boolean;
 	isMobileView?: boolean;
 	closeFilterOnMobileView?: () => void;
-	// TODO: type states
+	// TODO: type props
+	filtersInfo: any;
 	budgetSliderValues: any;
 	setBudgetSliderValues: any;
-	AccordionFilters: any;
-	setAccordionFilters: any;
 	locationSearch: any;
 	setLocationSearch: any;
 	noOfBedrooms: any;
@@ -29,15 +29,25 @@ type Props = {
 	setAreaSliderValues: any;
 	availabilityFilters: any;
 	setAvailabilityFilters: any;
+	filteredLocationFilters: any;
+	setFilteredLocationFilters: any;
+	propertyTypeFilters: any;
+	setPropertyTypeFilters: any;
+	amenitiesFilters: any;
+	setAmenitiesFilters: any;
+	dateFilters: any;
+	setDateFilters: any;
+	furnishingStatusFilters: any;
+	setFurnishingStatusFilters: any;
 };
 
 const PropertyFilters = ({
+	isLoading = false,
 	isMobileView = false,
+	filtersInfo,
 	closeFilterOnMobileView,
 	budgetSliderValues,
 	setBudgetSliderValues,
-	AccordionFilters,
-	setAccordionFilters,
 	locationSearch,
 	setLocationSearch,
 	noOfBedrooms,
@@ -52,14 +62,20 @@ const PropertyFilters = ({
 	setAreaSliderValues,
 	availabilityFilters,
 	setAvailabilityFilters,
+	filteredLocationFilters,
+	setFilteredLocationFilters,
+	propertyTypeFilters,
+	setPropertyTypeFilters,
+	amenitiesFilters,
+	setAmenitiesFilters,
+	dateFilters,
+	setDateFilters,
+	furnishingStatusFilters,
+	setFurnishingStatusFilters,
 }: Props) => {
 	const theme: any = useTheme();
 
-	const handleFiltersState = (filter: string, id: number) =>
-		setAccordionFilters((prev: any) => ({
-			...prev,
-			[filter]: prev[filter].map((f: any) => (f.id === id ? { ...f, checked: !f.checked } : f)),
-		}));
+	if (isLoading) return <Loading />;
 
 	return (
 		<Box
@@ -95,8 +111,8 @@ const PropertyFilters = ({
 						<SliderFilter
 							label="Budget"
 							sliderValues={budgetSliderValues}
-							min={0}
-							max={2000}
+							min={+filtersInfo?.budget.min || 0}
+							max={+filtersInfo?.budget.max || 10000000000}
 							handleSliderChange={(value: number[]) => setBudgetSliderValues(value)}
 						/>
 					)}
@@ -106,8 +122,12 @@ const PropertyFilters = ({
 					defaultExpanded={!isMobileView}
 					header="Location"
 					filterName="location"
-					filters={[...AccordionFilters.location, ...AccordionFilters.location, ...AccordionFilters.location]}
-					onFilterStateChange={handleFiltersState}
+					filters={filteredLocationFilters}
+					onFilterStateChange={(_, v) =>
+						setFilteredLocationFilters((prev: any) =>
+							prev.map((f: any) => (+f.id === +v ? { ...f, checked: !f.checked } : f)),
+						)
+					}
 					headerContent={
 						<TextInput
 							value={locationSearch}
@@ -123,8 +143,12 @@ const PropertyFilters = ({
 					defaultExpanded={!isMobileView}
 					header="Property Type"
 					filterName="propertyType"
-					filters={AccordionFilters.propertyType}
-					onFilterStateChange={handleFiltersState}
+					filters={propertyTypeFilters}
+					onFilterStateChange={(_, v) =>
+						setPropertyTypeFilters((prev: any) =>
+							prev.map((f: any) => (+f.id === +v ? { ...f, checked: !f.checked } : f)),
+						)
+					}
 				/>
 
 				<Accordion
@@ -173,8 +197,8 @@ const PropertyFilters = ({
 						<SliderFilter
 							label="Area"
 							sliderValues={areaSliderValues}
-							min={0}
-							max={200}
+							min={+filtersInfo?.area.min || 0}
+							max={+filtersInfo?.area.max || 10000}
 							handleSliderChange={(value: number[]) => setAreaSliderValues(value)}
 						/>
 					)}
@@ -184,8 +208,10 @@ const PropertyFilters = ({
 					defaultExpanded={!isMobileView}
 					header="Amenities"
 					filterName="amenities"
-					filters={AccordionFilters.amenities}
-					onFilterStateChange={handleFiltersState}
+					filters={amenitiesFilters}
+					onFilterStateChange={(_, v) =>
+						setAmenitiesFilters((prev: any) => prev.map((f: any) => (+f.id === +v ? { ...f, checked: !f.checked } : f)))
+					}
 				/>
 
 				<Box fullWidth row ycenter xbetween>
@@ -202,16 +228,24 @@ const PropertyFilters = ({
 					defaultExpanded={!isMobileView}
 					header="Furnishing Status"
 					filterName="furnishingStatus"
-					filters={AccordionFilters.furnishingStatus}
-					onFilterStateChange={handleFiltersState}
+					filters={furnishingStatusFilters}
+					onFilterStateChange={(_, v) =>
+						setFurnishingStatusFilters((prev: any) =>
+							prev.map((f: any) => (+f.id === +v ? { ...f, checked: !f.checked } : f)),
+						)
+					}
 				/>
 
 				<AccordionChipsFilter
 					defaultExpanded={!isMobileView}
 					header="Date Listed"
 					filterName="dateListed"
-					filters={AccordionFilters.dateListed}
-					onFilterStateChange={handleFiltersState}
+					filters={dateFilters}
+					onFilterStateChange={(_, v, e) =>
+						setDateFilters((prev: any) =>
+							prev.map((f: any) => (+f.id === +v ? { ...f, checked: e.target.checked } : { ...f, checked: false })),
+						)
+					}
 				/>
 
 				<AccordionChipsFilter

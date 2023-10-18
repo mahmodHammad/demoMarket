@@ -20,8 +20,8 @@ const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 				alignItems: 'center',
 			}}>
 			<Avatar
-				alt={name.toUpperCase()}
-				src="https://mui.com/static/images/avatar/2.jpg"
+				alt={name?.toUpperCase()}
+				src={image}
 				sx={{ width: 80, height: 80 }}
 			/>
 			<Text variant="h5" sx={{ mt: '8px', textTransform: 'capitalize' }}>
@@ -64,11 +64,10 @@ const OptionLink = ({ label, href = '', startIcon, onClick }: { label: string; h
 };
 
 const ProfileDropDown = () => {
-	const { logout } = useAuth();
+	const { logout, user } = useAuth();
 	const [open, setOpen] = useState(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const myRef = React.useRef<HTMLDivElement>(null);
-	const { user } = useAuth();
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -84,7 +83,7 @@ const ProfileDropDown = () => {
 	return (
 		<Box ref={myRef}>
 			<ButtonBase aria-describedby={id} className="rounded-full" onClick={handleClick}>
-				<Avatar alt={'Image'} src={user?.profile_image} sx={{ width: 40, height: 40 }} />
+				<Avatar alt={'User Avatar'} src={user?.profile_image} sx={{ width: 40, height: 40 }} />
 			</ButtonBase>
 			{open && (
 				<ClickAwayListener onClickAway={handleClickAway}>
@@ -116,7 +115,7 @@ const ProfileDropDown = () => {
 										sx={{
 											padding: '21px 24px 21px 24px',
 										}}>
-										<PopupDetails image={''} name={'Mohammad Abdullah'} />
+										<PopupDetails image={user?.profile_image} name={user?.name} />
 										{/* options */}
 										<Box
 											sx={{

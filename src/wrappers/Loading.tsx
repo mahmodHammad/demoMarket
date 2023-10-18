@@ -4,7 +4,7 @@ import { Box } from './layouts';
 export default function Loading() {
 	return (
 		<Box fullWidth center sx={{ height: '100vh' }}>
-			<CircularProgress color="primary" />;
+			<CircularProgress color="primary" />
 		</Box>
 	);
 }

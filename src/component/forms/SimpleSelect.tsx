@@ -7,12 +7,20 @@ type Item = {
 
 type SimpleSelectProps = SelectProps & {
 	items: Item[];
+	placeholder?: string;
 };
 
-const SimpleSelect = ({ items, ...otherProps }: SimpleSelectProps) => {
-	// TODO: customize style
+const SimpleSelect = ({ items, placeholder = 'Select', ...otherProps }: SimpleSelectProps) => {
 	return (
-		<Select {...otherProps}>
+		<Select
+			displayEmpty
+			MenuProps={{
+				disableScrollLock: true,
+			}}
+			{...otherProps}>
+			<MenuItem disabled value="">
+				{placeholder}
+			</MenuItem>
 			{items?.map((i, index) => (
 				<MenuItem key={index} value={i.value}>
 					{i.item}
