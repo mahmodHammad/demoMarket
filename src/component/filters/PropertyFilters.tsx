@@ -17,6 +17,8 @@ type Props = {
 	setBudgetSliderValues: any;
 	locationSearch: any;
 	setLocationSearch: any;
+	neighbourhoodSearch: any;
+	setNeighbourhoodSearch: any;
 	noOfBedrooms: any;
 	setNoOfBedrooms: any;
 	noOfBathrooms: any;
@@ -39,6 +41,8 @@ type Props = {
 	setDateFilters: any;
 	furnishingStatusFilters: any;
 	setFurnishingStatusFilters: any;
+	filteredNeighbourhoodFilters: any;
+	setFilteredNeighbourhoodFilters: any;
 };
 
 const PropertyFilters = ({
@@ -50,6 +54,8 @@ const PropertyFilters = ({
 	setBudgetSliderValues,
 	locationSearch,
 	setLocationSearch,
+	neighbourhoodSearch,
+	setNeighbourhoodSearch,
 	noOfBedrooms,
 	setNoOfBedrooms,
 	noOfBathrooms,
@@ -72,6 +78,8 @@ const PropertyFilters = ({
 	setDateFilters,
 	furnishingStatusFilters,
 	setFurnishingStatusFilters,
+	filteredNeighbourhoodFilters,
+	setFilteredNeighbourhoodFilters,
 }: Props) => {
 	const theme: any = useTheme();
 
@@ -132,6 +140,27 @@ const PropertyFilters = ({
 						<TextInput
 							value={locationSearch}
 							onChange={(e) => setLocationSearch(e.target.value)}
+							placeholder="Search"
+							sx={{ width: 0.98, alignSelf: 'center', my: 1 }}
+						/>
+					}
+					sx={locationContainerStyle(theme)}
+				/>
+
+				<AccordionChipsFilter
+					defaultExpanded={!isMobileView}
+					header="Neighborhoods"
+					filterName="neighborhood"
+					filters={filteredNeighbourhoodFilters}
+					onFilterStateChange={(_, v) =>
+						setFilteredNeighbourhoodFilters((prev: any) =>
+							prev.map((f: any) => (+f.id === +v ? { ...f, checked: !f.checked } : f)),
+						)
+					}
+					headerContent={
+						<TextInput
+							value={neighbourhoodSearch}
+							onChange={(e) => setNeighbourhoodSearch(e.target.value)}
 							placeholder="Search"
 							sx={{ width: 0.98, alignSelf: 'center', my: 1 }}
 						/>
