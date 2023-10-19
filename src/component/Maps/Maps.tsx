@@ -73,7 +73,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 	}, []);
 
 	const onUnmount = useCallback(function callback(map) {
-		if (mapRef.removeListener) {
+		if (mapRef?.removeListener) {
 			// window.google.maps.event.removeListener(mapRef, 'bounds_changed');
 			mapRef?.removeListener('zoom_changed', calculateViewportRadius);
 			mapRef?.removeListener('dragend', calculateViewportRadius);
@@ -96,28 +96,30 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					}}
 					onLoad={onLoad}
 					onUnmount={onUnmount}>
-					{typeof markersList ==='object' && markersList?.length && markersList?.map(
-						(item, index) =>
-							item?.map && (
-								<Marker
-									key={index}
-									position={{
-										lat: item?.map?.latitude,
-										lng: item?.map?.longitude,
-									}}
-									icon={{
-										url: `${
-											infoWindowPosition?.id === item?.id
-												? 'http://193.122.88.9/static/activemap.svg'
-												: 'http://193.122.88.9/static/notactivemap.svg'
-										}`,
-										scaledSize: new window.google.maps.Size(25, 25),
-									}}
-									onClick={() => setInfoWindowPosition(item)}
-									draggable={false} // Set draggable to false to make it view-only
-								/>
-							),
-					)}
+					{typeof markersList === 'object' &&
+						markersList?.length &&
+						markersList?.map(
+							(item, index) =>
+								item?.map && (
+									<Marker
+										key={index}
+										position={{
+											lat: item?.map?.latitude,
+											lng: item?.map?.longitude,
+										}}
+										icon={{
+											url: `${
+												infoWindowPosition?.id === item?.id
+													? 'http://193.122.88.9/static/activemap.svg'
+													: 'http://193.122.88.9/static/notactivemap.svg'
+											}`,
+											scaledSize: new window.google.maps.Size(25, 25),
+										}}
+										onClick={() => setInfoWindowPosition(item)}
+										draggable={false} // Set draggable to false to make it view-only
+									/>
+								),
+						)}
 					{infoWindowPosition && (
 						<InfoWindow
 							position={{
@@ -132,12 +134,13 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 								imgHeight="180px"
 								height="400px"
 								width="250px"
-								title={infoWindowPosition?.name}
-								img={infoWindowPosition?.images?.length ? infoWindowPosition?.images[0]?.url : neigbourhoodCover}
-								id={infoWindowPosition?.id}
-								price={infoWindowPosition?.price}
-								area={infoWindowPosition?.unit_size}
-								location={infoWindowPosition?.city?.name}
+								data={infoWindowPosition}
+								// title={infoWindowPosition?.name}
+								// img={infoWindowPosition?.images?.length ? infoWindowPosition?.images[0]?.url : neigbourhoodCover}
+								// id={infoWindowPosition?.id}
+								// price={infoWindowPosition?.price}
+								// area={infoWindowPosition?.unit_size}
+								// location={infoWindowPosition?.city?.name}
 							/>
 						</InfoWindow>
 					)}
