@@ -95,10 +95,11 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					mapContainerStyle={containerStyle}
 					defa
 					center={center}
-					zoom={inLandingPage ? 17 : 14}
+					zoom={inLandingPage ? 16 : 14}
 					options={{
 						gestureHandling: inLandingPage ? null : 'greedy',
 						zoomControlOptions: { position: 9 },
+						scaleControl: true,
 						streetViewControl: false,
 						fullscreenControl: false,
 					}}
@@ -114,17 +115,26 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 											lat: item?.map?.latitude,
 											lng: item?.map?.longitude,
 										}}
-										icon={{
-											url: `${
-												infoWindowPosition?.id === item?.id
-													? 'http://193.122.88.9/static/activemap.svg'
-													: 'http://193.122.88.9/static/notactivemap.svg'
-											}`,
-											scaledSize: new window.google.maps.Size(25, 25),
-										}}
+										// icon={{
+										// 	url: 'http://193.122.88.9/static/activemap.svg',
+										// 	scaledSize: new window.google.maps.Size(30, 30),
+										// }}
+										// icon={{
+										// 	url: `${
+										// infoWindowPosition?.id === item?.id
+										// 	? 'http://193.122.88.9/static/activemap.svg'
+										// 	: 'http://193.122.88.9/static/notactivemap.svg'
+										// 	}`,
+										// 	scaledSize: new window.google.maps.Size(30, 30),
+										// }}
 										options={{
 											title: `Custom marker ${index}`,
+											icon: {
+												url: 'http://193.122.88.9/static/activemap.svg',
+												scaledSize: new window.google.maps.Size(30, 30),
+											},
 										}}
+										title={`Custom marker ${index}`}
 										onClick={() => setInfoWindowPosition(item)}
 										draggable={false} // Set draggable to false to make it view-only
 									/>
@@ -140,18 +150,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 								pixelOffset: new window.google.maps.Size(0, -20),
 							}}
 							onCloseClick={() => setInfoWindowPosition(null)}>
-							<UnitsCard
-								imgHeight="180px"
-								height="400px"
-								width="250px"
-								data={infoWindowPosition}
-								// title={infoWindowPosition?.name}
-								// img={infoWindowPosition?.images?.length ? infoWindowPosition?.images[0]?.url : neigbourhoodCover}
-								// id={infoWindowPosition?.id}
-								// price={infoWindowPosition?.price}
-								// area={infoWindowPosition?.unit_size}
-								// location={infoWindowPosition?.city?.name}
-							/>
+							<UnitsCard imgHeight="180px" height="400px" width="250px" data={infoWindowPosition} />
 						</InfoWindow>
 					)}
 				</GoogleMap>
