@@ -13,6 +13,7 @@ import { bookingHistory, getMyBookings } from './booking-service';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
 import { Tab, Tabs } from '@mui/material';
+import EmptyUpcomingVisits from '@/component/cards/EmptyUpcomingVisits';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -56,7 +57,6 @@ export default function MyBookings() {
 		retry: false,
 		enabled: value === 1,
 	});
-
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
@@ -110,12 +110,13 @@ export default function MyBookings() {
 						<Text variant="h5" sx={{ mb: '10px' }}>
 							Upcoming Visits
 						</Text>
-						<UpcomingVisitsCard
+						<EmptyUpcomingVisits />
+						{/* <UpcomingVisitsCard
 							title={'Property 1'}
 							img={neibourhoodcover2}
 							dateTime={'01/01/2023,10:00 AM'}
 							location={'Pune'}
-						/>
+						/> */}
 					</Box>
 				</Box>
 				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
