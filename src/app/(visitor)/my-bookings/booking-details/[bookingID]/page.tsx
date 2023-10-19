@@ -28,7 +28,7 @@ const page = () => {
 	const { push } = useRouter();
 	const params = useParams();
 	const { data, isLoading, refetch } = useQuery({
-		queryKey: [keys.MYBOOKING+params?.bookingID],
+		queryKey: [keys.MYBOOKING + params?.bookingID],
 		queryFn: () => getMyBooking(params?.bookingID),
 	});
 	const [isOpen, setIsOpen] = useState(false);
@@ -106,7 +106,8 @@ const page = () => {
 										}}
 									/>
 								}
-								title={''}
+								title={data?.unit?.name}
+								description={data?.unit?.info}
 								date={dayjs(data?.booking_date).format('llll')}
 							/>
 							<BookingDetailsInfo data={data} />
@@ -124,7 +125,7 @@ const page = () => {
 								</Box>
 							</Box>
 							<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
-								<LocationCard data={data} />
+								<LocationCard location={data?.unit?.map} />
 							</Grid>
 							{data?.booking_status !== 'cancel' && (
 								<Box row gap={'40px'} my="25px">
@@ -156,7 +157,7 @@ const page = () => {
 							)}
 						</Grid>
 						<Grid item contaier xs={12} md={4} display={{ xs: 'none', md: 'flex' }}>
-							<LocationCard data={data} />
+							<LocationCard location={data?.unit?.map} />
 						</Grid>
 					</Grid>
 					<DateTimeModal

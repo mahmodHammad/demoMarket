@@ -52,7 +52,7 @@ export default function MyBookings() {
 		refetch,
 	} = useQuery({
 		queryKey: [keys.MYBOOKINGSHISTORY, { search, currentPage, status, filter, sort }],
-		queryFn: () => bookingHistory({ type: 'history' }),
+		queryFn: () => bookingHistory({ type: 'history',search, currentPage, status, filter, sort }),
 		refetchInterval: false,
 		retry: false,
 		enabled: value === 1,
@@ -142,6 +142,7 @@ export default function MyBookings() {
 						handleFilter={handleFilter}
 						sort={sort}
 						handleSort={handleSort}
+						lastPage={upcomingList?.paginator?.last_page}
 					/>
 				</CustomTabPanel>
 				<CustomTabPanel value={value} index={1}>
@@ -161,6 +162,7 @@ export default function MyBookings() {
 						handleFilter={handleFilter}
 						sort={sort}
 						handleSort={handleSort}
+						lastPage={completedList?.paginator?.last_page}
 					/>
 				</CustomTabPanel>
 			</Box>

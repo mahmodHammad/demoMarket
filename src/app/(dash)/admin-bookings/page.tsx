@@ -141,6 +141,7 @@ export default function AdminBookings() {
 					handleFilter={handleFilter}
 					sort={sort}
 					handleSort={handleSort}
+					lastPage={data?.paginator?.last_page}
 				/>
 			</Box>
 			<ConfirmAction
