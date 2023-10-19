@@ -23,7 +23,7 @@ import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 
 import PhotoAlbum from 'react-photo-album';
 import { Box, Loading } from '@/wrappers';
-import { get } from '@/utils/http';
+import { GET } from '@/utils/http';
 import { AcTypes, FurnishedTypes, ParkingTypes, stringifyNumber } from '@/component/unitDetails/PropertySpecification';
 import { useParams } from 'next/navigation';
 import { keys } from '@/utils/keys';
@@ -101,10 +101,10 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [keys.UNITDETAILS + unitID],
-		queryFn: () => get(url),
+		queryFn: () => GET(url),
 	});
 
-	const unit = data?.data; // Get the array of objects
+	const unit = data; // Get the array of objects
 
 	const handleToggleLike = () => {
 		toggleLike({
