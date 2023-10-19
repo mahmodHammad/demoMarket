@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GoogleMap, InfoWindow, Marker, LoadScript, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, MarkerF, LoadScript, useJsApiLoader } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import { Loading } from '@/wrappers';
@@ -96,10 +96,10 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					}}
 					onLoad={onLoad}
 					onUnmount={onUnmount}>
-					{typeof markersList ==='object' && markersList?.length && markersList?.map(
+					{ markersList?.length && markersList?.map(
 						(item, index) =>
 							item?.map && (
-								<Marker
+								<MarkerF
 									key={index}
 									position={{
 										lat: item?.map?.latitude,
@@ -132,12 +132,13 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 								imgHeight="180px"
 								height="400px"
 								width="250px"
-								title={infoWindowPosition?.name}
-								img={infoWindowPosition?.images?.length ? infoWindowPosition?.images[0]?.url : neigbourhoodCover}
-								id={infoWindowPosition?.id}
-								price={infoWindowPosition?.price}
-								area={infoWindowPosition?.unit_size}
-								location={infoWindowPosition?.city?.name}
+								data={infoWindowPosition}
+								// title={infoWindowPosition?.name}
+								// img={infoWindowPosition?.images?.length ? infoWindowPosition?.images[0]?.url : neigbourhoodCover}
+								// id={infoWindowPosition?.id}
+								// price={infoWindowPosition?.price}
+								// area={infoWindowPosition?.unit_size}
+								// location={infoWindowPosition?.city?.name}
 							/>
 						</InfoWindow>
 					)}
