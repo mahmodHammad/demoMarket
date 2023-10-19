@@ -344,19 +344,13 @@ const SearchBar = () => {
 						{/* price range filter web */}
 						<Box row yend width={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
 							<Box column width={1}>
-								<Text variant="label">Price Range</Text>
-								<TextField
-									InputProps={{
-										disableUnderline: true,
-									}}
-									variant="standard"
-									placeholder="Choose Price Range"
-									onFocus={() => setIsExpanded(true)}
-									// onBlur={() => {
-									// 	setContentVisible(false);
-									// 	setIsExpanded(false);
-									// }}
-								/>
+								<Text variant="label" mb={0.6}>
+									Price Range
+								</Text>
+
+								<Text onClick={() => setIsExpanded(true)} sx={{ cursor: 'pointer' }}>
+									Choose Price Range
+								</Text>
 							</Box>
 						</Box>
 					</Box>
