@@ -41,9 +41,8 @@ export default function Properties() {
 
 	const [value, setValue] = React.useState(0);
 
-	const handleDeleteUnit =  (row) => {
-		console.log('id', row);
-		 DeleteUnit(row?.id)
+	const handleDeleteUnit = (row) => {
+		DeleteUnit(row?.id)
 			.then((response) => {
 				globalToast('Unit Deleted Successful', 'success');
 				queryClient.invalidateQueries({ queryKey: ['LISTEDPROPERTIES'] });
@@ -58,8 +57,8 @@ export default function Properties() {
 		setValue(newValue);
 	};
 	const { data, isLoading: filtersLoading } = useQuery({
-		queryKey: ['LISTEDPROPERTIES'],
-		queryFn: getAllProperties,
+		queryKey: ['LISTEDPROPERTIES', { search, currentPage, status, filter, sort }],
+		queryFn: () => getAllProperties({ search, currentPage, status, filter, sort }),
 	});
 	console.log('HELLLLLO', data);
 	const queryClient = useQueryClient();
@@ -165,6 +164,7 @@ export default function Properties() {
 							handleFilter={handleFilter}
 							sort={sort}
 							handleSort={handleSort}
+							lastPage={data?.paginator?.last_page}
 						/>
 					</CustomTabPanel>
 				</Box>

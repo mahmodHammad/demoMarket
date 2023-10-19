@@ -14,9 +14,10 @@ export default function page({ inLandingPage }) {
 	useQuery({
 		queryKey: [keys.NEARBYPOINTERS, { center, radius }],
 		queryFn: () =>
-			getNerabyPlaces({ latitude: center?.lat, longitude: center?.lng, radius: radius || 5 }).then((response) =>
-				setMarkersList(response),
-			),
+			getNerabyPlaces({ latitude: center?.lat, longitude: center?.lng, radius: radius || 5 }).then((response) => {
+				setMarkersList(response);
+				return response;
+			}),
 		refetchInterval: false,
 		retry: false,
 		enabled: center ? true : false,

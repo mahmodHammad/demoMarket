@@ -1,5 +1,5 @@
-import { GET } from "@/utils/http";
+import { GET } from '@/utils/http';
 
-export const getAllProperties = () => {
-	return GET(`/dashboard/properties`);
+export const getAllProperties = (options: any = {}) => {
+	return GET(`/dashboard/properties`, options);
 };

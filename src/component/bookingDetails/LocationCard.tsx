@@ -10,7 +10,8 @@ const LocationCard = ({ location }: { location: {} }) => {
 			{location && (
 				<Box
 					sx={{
-						// height: '471px',
+						height: { xs: 'inherit', md: '400px' },
+						width: { xs: '300px', md: '100%' },
 						p: '12px',
 						borderRadius: '16px',
 						boxShadow: '0px 25px 60px -10px rgba(28, 39, 49, 0.12)',
@@ -28,7 +29,10 @@ const LocationCard = ({ location }: { location: {} }) => {
 							borderRadius: '16px',
 							overflow: 'hidden',
 						}}>
-						<MapReadOnly viewOnly={true} latLng={{ lat: location?.latitude, lng: location?.longitude }} />
+						<MapReadOnly
+							viewOnly={true}
+							latLng={{ lat: Number(location?.latitude), lng: Number(location?.longitude) }}
+						/>
 					</Box>
 					<Button
 						size="small"

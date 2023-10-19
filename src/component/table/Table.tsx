@@ -27,6 +27,7 @@ type TableProps = {
 	handleFilter?: (value: string) => void;
 	sort: string;
 	handleSort?: (value: string) => void;
+	lastPage: any;
 };
 
 export default function Table({
@@ -45,6 +46,7 @@ export default function Table({
 	handleFilter = () => null,
 	sort,
 	handleSort = () => null,
+	lastPage
 }: TableProps) {
 	const getPropByString = (obj, propString) => {
 		if (!propString) return obj;
@@ -77,7 +79,7 @@ export default function Table({
 						isLoading={loading}
 						isEmpty={!data?.length}
 						Pagination={() => (
-							<PaginationWrapper count={data?.paginator?.last_page} page={currentPage} handler={handlePagination} />
+							<PaginationWrapper count={lastPage} page={currentPage} handler={handlePagination} />
 						)}
 						Filters={() => (
 							<>
@@ -106,12 +108,12 @@ const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 			<StyledTableRow key={row?.id}>
 				{cellsTypes?.map((c: any, i: number) => (
 					<StyledTableCell key={i}>
-						{c.type === TYPES.STRING && <>{c?.dataKey && getPropByString(row, c?.dataKey)||"--"} </>}
-						{c.type === TYPES.DATE && <>{c?.dataKey && getPropByString(row, c?.dataKey)||"--"}</>}
+						{c.type === TYPES.STRING && <>{(c?.dataKey && getPropByString(row, c?.dataKey)) || '--'} </>}
+						{c.type === TYPES.DATE && <>{(c?.dataKey && getPropByString(row, c?.dataKey)) || '--'}</>}
 						{c.type === TYPES.LABEL && (
 							<Label status={c?.dataKey && getPropByString(row, c?.dataKey)} labelPalette={c.options?.colorPalette} />
 						)}
-						{c.type === TYPES.ENUM_STRING && <>{c?.dataKey && c.options[getPropByString(row, c?.dataKey)]||"--"}</>}
+						{c.type === TYPES.ENUM_STRING && <>{(c?.dataKey && c.options[getPropByString(row, c?.dataKey)]) || '--'}</>}
 						{c.type === TYPES.BUTTON && (
 							<Button
 								variant={c.options?.variant}

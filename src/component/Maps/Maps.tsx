@@ -96,7 +96,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					}}
 					onLoad={onLoad}
 					onUnmount={onUnmount}>
-					{markersList?.map(
+					{typeof markersList ==='object' && markersList?.length && markersList?.map(
 						(item, index) =>
 							item?.map && (
 								<Marker

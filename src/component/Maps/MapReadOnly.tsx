@@ -1,6 +1,7 @@
 'use client';
-import React, { useCallback, useState } from 'react';
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import React from 'react';
+import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
+import { Loading } from '@/wrappers';
 
 const containerStyle = {
 	width: '100%',
@@ -8,32 +9,27 @@ const containerStyle = {
 };
 
 const center = {
-	lat: -3.745,
-	lng: -38.523,
+	lat: -4.745,
+	lng: -48.523,
 };
 
-function MapReadOnly({ latLng }: Props) {
+function MapReadOnly({ latLng }: any) {
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
 	});
-
-	const [map, setMap] = useState(null);
-
-	const onLoad = useCallback(function callback(map) {
-		// const bounds = new window.google.maps.LatLngBounds(center);
-		// map.fitBounds(bounds);
-		// setMap(map);
-	}, []);
-
-	const onUnmount = useCallback(function callback(map) {
-		setMap(null);
-	}, []);
-
-	return isLoaded && latLng ? (
-		<GoogleMap mapContainerStyle={containerStyle} center={latLng} zoom={17} onLoad={onLoad} onUnmount={onUnmount}>
-			<Marker
-				position={latLng}
+	return isLoaded && latLng?.lat ? (
+		<GoogleMap
+			mapContainerStyle={containerStyle}
+			options={{ draggable: false }}
+			center={{ lat: latLng?.lat, lng: latLng?.lng }}
+			zoom={10}>
+			<MarkerF
+				position={{ lat: latLng?.lat, lng: latLng?.lng }}
+				icon={{
+					url: 'http://193.122.88.9/static/activemap.svg',
+					scaledSize: new window.google.maps.Size(25, 25),
+				}}
 				draggable={false} // Set draggable to false to make it view-only
 			/>
 		</GoogleMap>
