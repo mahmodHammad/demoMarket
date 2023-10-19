@@ -1,13 +1,16 @@
 'use client';
 
-import { Box, Button, Text } from '@/wrappers';
+import { Box, Text } from '@/wrappers';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
-import { Plus } from '@/assets';
-import Link from 'next/link';
+
 import { Tab, Tabs } from '@mui/material';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getAllProperties } from './properties-service';
+import { DELETE } from '@/utils/http';
+import { globalToast } from '@/utils/toast';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -15,8 +18,15 @@ interface TabPanelProps {
 	value: number;
 }
 
+const DeleteUnit = (id) => {
+	console.log('id', id);
+
+	return DELETE(`/dashboard/properties/${id}`);
+};
+
 export default function Properties() {
 	const [loading, setLoading] = useState<boolean>(false);
+
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [status, setStatus] = useState<number[]>([]);
@@ -31,18 +41,28 @@ export default function Properties() {
 
 	const [value, setValue] = React.useState(0);
 
+	const handleDeleteUnit =  (row) => {
+		console.log('id', row);
+		 DeleteUnit(row?.id)
+			.then((response) => {
+				globalToast('Unit Deleted Successful', 'success');
+				queryClient.invalidateQueries({ queryKey: ['LISTEDPROPERTIES'] });
+				queryClient.invalidateQueries({ queryKey: ['PROPERTIES'] });
+			})
+			.catch((err) => {
+				globalToast('Please try later', 'error');
+			});
+	};
+
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
-	useEffect(() => {
-		console.log('properties table state changed', {
-			search,
-			currentPage,
-			status,
-			filter,
-			sort,
-		});
-	}, [search, currentPage, status, filter, sort]);
+	const { data, isLoading: filtersLoading } = useQuery({
+		queryKey: ['LISTEDPROPERTIES'],
+		queryFn: getAllProperties,
+	});
+	console.log('HELLLLLO', data);
+	const queryClient = useQueryClient();
 
 	function CustomTabPanel(props: TabPanelProps) {
 		const { children, value, index, ...other } = props;
@@ -70,6 +90,43 @@ export default function Properties() {
 		};
 	}
 
+	const CELLS_TYPES = [
+		{
+			type: TYPES.STRING, // Type of cell
+			dataKey: 'name', // data access key of cell
+		},
+		{
+			type: TYPES.STRING,
+			dataKey: 'unit_size',
+		},
+		{
+			type: TYPES.DATE,
+			dataKey: 'price',
+		},
+
+		{
+			type: TYPES.BUTTON,
+			options: {
+				title: 'View Details',
+				variant: 'text', // OPTIONAL: buttons variants, default is text
+				textColor: 'primary', // OPTIONAL, either semantic or hexa, default is black
+				isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
+				href: '/unitdetails', // OPTIONAL: pass it in case it's link,
+				appendID: true, // OPTIONAL: pass it with true value if you want the button to be a link
+				sx: { py: 2 },
+			},
+		},
+		{
+			type: TYPES.BUTTON,
+			options: {
+				title: 'Remove ',
+				variant: 'text', // OPTIONAL: buttons variants, default is text
+				textColor: '#FF4242', // OPTIONAL, either semantic or hexa, default is black
+				onClick: (row) => handleDeleteUnit(row), // pass it in case it's not link,
+				sx: { py: 2 },
+			},
+		},
+	];
 	return (
 		<>
 			<Box>
@@ -81,47 +138,21 @@ export default function Properties() {
 						mb: '40px',
 					}}>
 					<Text variant="h4">My Properties</Text>
-					<Button
+					{/* <Button
 						component={Link}
 						href="/properties/addUnit"
 						startIcon={<Plus sx={{ fill: '#fff' }} />}
 						variant="contained"
 						sx={{ mr: '40px' }}>
 						Add unit to market place
-					</Button>
+					</Button> */}
 				</Box>
 				<Box>
-					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-						<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-							<Tab label="Rent" {...a11yProps(0)} />
-							<Tab label="Buy" {...a11yProps(1)} />
-						</Tabs>
-					</Box>
-
 					<CustomTabPanel value={value} index={0}>
 						<Table
 							headers={HEADERS}
 							cellsTypes={CELLS_TYPES}
-							data={DATA}
-							filterValues={FilterValues}
-							loading={loading}
-							search={search}
-							handleSearch={handleSearch}
-							currentPage={currentPage}
-							handlePagination={handlePagination}
-							status={status}
-							handleStatusChange={handleStatusChange}
-							filter={filter}
-							handleFilter={handleFilter}
-							sort={sort}
-							handleSort={handleSort}
-						/>
-					</CustomTabPanel>
-					<CustomTabPanel value={value} index={1}>
-						<Table
-							headers={HEADERS}
-							cellsTypes={CELLS_TYPES}
-							data={DATA2}
+							data={data?.list}
 							filterValues={FilterValues}
 							loading={loading}
 							search={search}
@@ -137,6 +168,14 @@ export default function Properties() {
 						/>
 					</CustomTabPanel>
 				</Box>
+				{/* <ConfirmAction
+					handleClose={() => setIsOpen(false)}
+					title={'Delete Advertisement.'}
+					body={'Are you sure you want to delete this Advertisement.'}
+					isOpen={isOpen}
+					isPrimary={false}
+					confirmFunc={handleDeleteUnit}
+				/> */}
 			</Box>
 		</>
 	);
@@ -147,62 +186,20 @@ export default function Properties() {
 // actual table data
 const DATA = [
 	{ id: 1, type: 'Rent Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 13500' },
-	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2024', status: 'Pay Down', amount: 'SAR 45100' },
-	{ id: 1, type: 'Rent Unit', method: 'UPI', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 154100' },
-	{ id: 1, type: 'Rent Unit', method: 'Net Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-	{ id: 1, type: 'Rent Unit', method: 'UPI', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
 ];
 
-const DATA2 = [
-	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2024', status: 'Pay Down', amount: 'SAR 45100' },
-	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 18100' },
-	{ id: 1, type: 'Pay down', method: 'Cash Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2024', status: 'Pay Down', amount: 'SAR 5200' },
-];
+const DATA2 = [{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' }];
 
-const HEADERS = ['Payment Type', 'Payment Method', 'Date', 'Amount', 'Status', ''];
-
-const CELLS_TYPES = [
-	{
-		type: TYPES.STRING, // Type of cell
-		dataKey: 'type', // data access key of cell
-	},
-	{
-		type: TYPES.STRING,
-		dataKey: 'method',
-	},
-	{
-		type: TYPES.DATE,
-		dataKey: 'date',
-	},
-	{
-		type: TYPES.STRING,
-		dataKey: 'amount',
-	},
-	{
-		type: TYPES.LABEL,
-		dataKey: 'status',
-		options: {
-			// label colors based on value, key is the label text (from data column), value is the colors
-			colorPalette: {
-				Pending: { color: '#8A6A16', bg: '#FCEDC7' },
-				'Pay Down': { color: '#0A9458', bg: '#EDFAF4' },
-			},
-		},
-	},
-	{
-		type: TYPES.BUTTON,
-		options: {
-			title: 'View Details',
-			variant: 'text', // OPTIONAL: buttons variants, default is text
-			textColor: 'primary', // OPTIONAL, either semantic or hexa, default is black
-			isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
-			href: '/admin-payments/payment-details', // OPTIONAL: pass it in case it's link,
-			onClick: () => console.log('clicked'), // pass it in case it's not link,
-			sx: { py: 2 },
-		},
-	},
+const HEADERS = [
+	'Unit Number',
+	'Unit size',
+	'Price',
+	// 'City',
+	// 'Status',
+	// 'No. of Favourite',
+	// 'No. of Booking',
+	'',
+	'',
 ];
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
