@@ -47,7 +47,7 @@ const favourites = () => {
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Favourites</Text>
-					<Box>
+					{/* <Box>
 						<Button
 							startIcon={<Delete sx={{ fill: '#FF4242' }} />}
 							variant="dangerOutlined"
@@ -62,7 +62,7 @@ const favourites = () => {
 							}}>
 							Remove All
 						</Button>
-					</Box>
+					</Box> */}
 				</Box>
 
 				<Grid container mt={'25px'} spacing={'28px'}>
