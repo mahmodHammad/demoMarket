@@ -1,13 +1,16 @@
 import { Slider as MUISlider, SliderProps } from '@mui/material';
 
-const Slider = (props: SliderProps) => {
+interface SliderInterface extends SliderProps {
+	isSearchBar?: boolean;
+}
+const Slider = ({ isSearchBar = false, ...rest }: SliderInterface) => {
 	return (
 		<MUISlider
 			disableSwap
 			size="medium"
 			valueLabelFormat={formatNumber}
 			sx={{
-				width: 0.91,
+				width: isSearchBar ? 0.965 : 0.91,
 				'& .MuiSlider-valueLabel': {
 					backgroundColor: 'primary.main',
 					borderRadius: '4px',
@@ -16,7 +19,7 @@ const Slider = (props: SliderProps) => {
 				},
 			}}
 			valueLabelDisplay="on"
-			{...props}
+			{...rest}
 		/>
 	);
 };
