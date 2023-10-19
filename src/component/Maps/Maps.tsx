@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GoogleMap, InfoWindow, MarkerF, LoadScript, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, MarkerF,Marker, LoadScript, useJsApiLoader } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import { Loading } from '@/wrappers';
@@ -87,7 +87,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					mapContainerStyle={containerStyle}
 					defa
 					center={center}
-					zoom={14}
+					zoom={17}
 					options={{
 						gestureHandling: inLandingPage ? null : 'greedy',
 						zoomControlOptions: { position: 9 },
@@ -99,7 +99,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					{ markersList?.length && markersList?.map(
 						(item, index) =>
 							item?.map && (
-								<MarkerF
+								<Marker
 									key={index}
 									position={{
 										lat: item?.map?.latitude,
