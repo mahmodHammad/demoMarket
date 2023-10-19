@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GoogleMap, InfoWindow, MarkerF,Marker, LoadScript, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, MarkerF, Marker, LoadScript, useJsApiLoader } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import { Loading } from '@/wrappers';
@@ -24,6 +24,7 @@ interface Props {
 	setCenter: any;
 	markersList: [];
 	setRadius: any;
+	inLandingPage: any;
 }
 
 const infoWindowOffset = {
@@ -70,10 +71,17 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 		// });
 		mapRef?.addListener('zoom_changed', calculateViewportRadius);
 		mapRef?.addListener('dragend', calculateViewportRadius);
+		mapRef.set('styles', [
+			{
+				featureType: 'poi',
+				elementType: 'labels',
+				stylers: [{ visibility: 'off' }],
+			},
+		]);
 	}, []);
 
 	const onUnmount = useCallback(function callback(map) {
-		if (mapRef.removeListener) {
+		if (mapRef?.removeListener) {
 			// window.google.maps.event.removeListener(mapRef, 'bounds_changed');
 			mapRef?.removeListener('zoom_changed', calculateViewportRadius);
 			mapRef?.removeListener('dragend', calculateViewportRadius);
@@ -87,7 +95,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					mapContainerStyle={containerStyle}
 					defa
 					center={center}
-					zoom={17}
+					zoom={inLandingPage ? 17 : 14}
 					options={{
 						gestureHandling: inLandingPage ? null : 'greedy',
 						zoomControlOptions: { position: 9 },
@@ -96,28 +104,32 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					}}
 					onLoad={onLoad}
 					onUnmount={onUnmount}>
-					{ markersList?.length && markersList?.map(
-						(item, index) =>
-							item?.map && (
-								<Marker
-									key={index}
-									position={{
-										lat: item?.map?.latitude,
-										lng: item?.map?.longitude,
-									}}
-									icon={{
-										url: `${
-											infoWindowPosition?.id === item?.id
-												? 'http://193.122.88.9/static/activemap.svg'
-												: 'http://193.122.88.9/static/notactivemap.svg'
-										}`,
-										scaledSize: new window.google.maps.Size(25, 25),
-									}}
-									onClick={() => setInfoWindowPosition(item)}
-									draggable={false} // Set draggable to false to make it view-only
-								/>
-							),
-					)}
+					{markersList?.length &&
+						markersList?.map(
+							(item, index) =>
+								item?.map && (
+									<Marker
+										key={index}
+										position={{
+											lat: item?.map?.latitude,
+											lng: item?.map?.longitude,
+										}}
+										icon={{
+											url: `${
+												infoWindowPosition?.id === item?.id
+													? 'http://193.122.88.9/static/activemap.svg'
+													: 'http://193.122.88.9/static/notactivemap.svg'
+											}`,
+											scaledSize: new window.google.maps.Size(25, 25),
+										}}
+										options={{
+											title: `Custom marker ${index}`,
+										}}
+										onClick={() => setInfoWindowPosition(item)}
+										draggable={false} // Set draggable to false to make it view-only
+									/>
+								),
+						)}
 					{infoWindowPosition && (
 						<InfoWindow
 							position={{
