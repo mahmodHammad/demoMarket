@@ -33,7 +33,7 @@ const Carousel = ({ items }: Props) => {
   );
 
   const slideNext = () => {
-    if (!thumbAnimation && thumbIndex < thumbs.length - 1) {
+    if (!thumbAnimation && thumbIndex < thumbs?.length - 1) {
       setThumbAnimation(true);
       setThumbIndex(thumbIndex + 1);
     }

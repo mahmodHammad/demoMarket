@@ -19,7 +19,7 @@ export default function NeighbourhoodCard({ data }: proptypes) {
 	const router = useRouter();
 	return (
 		<Box
-			onClick={() => router.push(`/listingpage?location=${id}`)}
+			onClick={() => router.push(`/listingpage?neighborhood=${id}`)}
 			sx={{
 				width: '100%',
 				height: { xs: '150px', md: '273px' },

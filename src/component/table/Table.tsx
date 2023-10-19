@@ -106,12 +106,12 @@ const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 			<StyledTableRow key={row?.id}>
 				{cellsTypes?.map((c: any, i: number) => (
 					<StyledTableCell key={i}>
-						{c.type === TYPES.STRING && <>{c?.dataKey && getPropByString(row, c?.dataKey)} </>}
-						{c.type === TYPES.DATE && <>{c?.dataKey && getPropByString(row, c?.dataKey)}</>}
+						{c.type === TYPES.STRING && <>{c?.dataKey && getPropByString(row, c?.dataKey)||"--"} </>}
+						{c.type === TYPES.DATE && <>{c?.dataKey && getPropByString(row, c?.dataKey)||"--"}</>}
 						{c.type === TYPES.LABEL && (
 							<Label status={c?.dataKey && getPropByString(row, c?.dataKey)} labelPalette={c.options?.colorPalette} />
 						)}
-						{c.type === TYPES.ENUM_STRING && <>{c?.dataKey && c.options[getPropByString(row, c?.dataKey)]}</>}
+						{c.type === TYPES.ENUM_STRING && <>{c?.dataKey && c.options[getPropByString(row, c?.dataKey)]||"--"}</>}
 						{c.type === TYPES.BUTTON && (
 							<Button
 								variant={c.options?.variant}
@@ -119,7 +119,7 @@ const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 								href={c.options?.isLink && `${c.options?.href}${c.options?.appendID && '/' + row?.id}`}
 								onClick={() => {
 									!c.options?.isLink && !c.options?.passParams
-										? c.options?.onClick()
+										? c.options?.onClick(row)
 										: !c.options?.isLink && c.options?.passParams && c.options?.onClick(row?.id, c.options?.title);
 								}}
 								fullWidth={false}

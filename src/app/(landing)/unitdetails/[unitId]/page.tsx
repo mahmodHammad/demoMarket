@@ -20,17 +20,58 @@ import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
-import photo1 from '@/assets/images/photo1.png';
-import photo2 from '@/assets/images/photo2.png';
-import photo3 from '@/assets/images/photo3.png';
+
 import PhotoAlbum from 'react-photo-album';
-import { Box } from '@/wrappers';
+import { Box, Loading } from '@/wrappers';
 import { get } from '@/utils/http';
 import { AcTypes, FurnishedTypes, ParkingTypes, stringifyNumber } from '@/component/unitDetails/PropertySpecification';
 import { useParams } from 'next/navigation';
 import { keys } from '@/utils/keys';
-import { useQuery } from '@tanstack/react-query';
-
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import UnitSpecifications from '@/component/unitDetails/UnitSpecifications';
+import { toggleLike } from '../../listingpage/listing-service';
+export const generateImgList = (images) => {
+	if (images?.length === 1) {
+		return [
+			{
+				img: images[0].url,
+				rows: 4,
+				cols: 12,
+			},
+		];
+	} else if (images?.length === 2) {
+		return [
+			{
+				img: images[0].url,
+				rows: 4,
+				cols: 6,
+			},
+			{
+				img: images[1].url,
+				rows: 4,
+				cols: 6,
+			},
+		];
+	} else if (images?.length >= 3) {
+		return [
+			{
+				img: images[0].url,
+				rows: 8,
+				cols: 6,
+			},
+			{
+				img: images[1].url,
+				rows: 4,
+				cols: 6,
+			},
+			{
+				img: images[2].url,
+				rows: 4,
+				cols: 6,
+			},
+		];
+	}
+};
 interface Props {
 	id?: string;
 	photos?: any;
@@ -49,25 +90,10 @@ interface Props {
 	map?: string;
 }
 
-const photos = [photo1, photo2, photo3];
-
-export default function Unitdetails({
-	id,
-	logo,
-	photos,
-	propertyName,
-	location,
-	constructionStatus,
-	managedBy,
-	rentPrice,
-	rentType,
-	aboutUnit,
-	floorPlansCard,
-	featuresAmenities,
-	floorFeatures,
-	map,
-}: Props) {
+export default function Unitdetails({ photos, location, rentType }: Props) {
 	const [index, setIndex] = useState(-1);
+	const queryClient = useQueryClient();
+
 	const params = useParams();
 	console.log('params', params);
 	const unitID = params?.unitId;
@@ -77,7 +103,19 @@ export default function Unitdetails({
 		queryKey: [keys.UNITDETAILS + unitID],
 		queryFn: () => get(url),
 	});
+
 	const unit = data?.data; // Get the array of objects
+
+	const handleToggleLike = () => {
+		toggleLike({
+			property_id: unit?.id,
+		});
+		queryClient.invalidateQueries({ queryKey: [keys.FAV] });
+		queryClient.invalidateQueries({ queryKey: [keys.MOSTVIEWED] });
+		queryClient.invalidateQueries({ queryKey: [keys.RECENTLYADDED] });
+		queryClient.invalidateQueries({ queryKey: [keys.PROPERTIES] });
+		queryClient.invalidateQueries({ queryKey: [keys.UNITDETAILS + unitID] });
+	};
 
 	const renderLocation = [unit?.city?.name, unit?.district?.name];
 	const newlocation = unit?.city ? renderLocation?.join(', ') : '';
@@ -118,82 +156,95 @@ export default function Unitdetails({
 			value: unit?.features?.is_furnished?.toString() && FurnishedTypes[unit?.features?.is_furnished] + ' ' + '',
 		},
 	];
-	return (
-		<>
-			<Container maxWidth="xl">
-				<Grid container spacing={3} sx={{ mt: '5px', pt: '26px' }} mb={1}>
-					<Box column center width={'100%'}>
-						<QuiltedImageList
-							onClick={({ index: current }) => {
-								setIndex(current), console.log(current);
-							}}
-						/>
-						<PhotoAlbum
-							layout="rows"
-							photos={photos}
-							targetRowHeight={150}
-							onClick={({ index: current }) => setIndex(current)}
-						/>
-						{/* unit?.images && unit.images?.url ? unit.images.url : */}
-						<Lightbox
-							styles={{
-								container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
-							}}
-							plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-							index={index}
-							slides={photos}
-							open={index >= 0}
-							close={() => setIndex(-1)}
-						/>
-					</Box>
+	console.log("unit',", unit);
 
-					<Grid item xs={12} md={8} height={'100hv'}>
-						<UnitHeader
-							logo={
-								<AtarColoredLogo
-									sx={{
-										height: '52px',
-										width: { xs: '75px', md: '121px' },
-									}}
-								/>
-							}
-							title={unit?.name || '--'}
-							location={newlocation}
-						/>
-						<ConstructionStatus
-							logo={
-								<AtarColoredLogo
-									sx={{
-										height: '14px',
-										width: '35px',
-									}}
-								/>
-							}
-							title={''}
-							status={unit?.status.description || '--'}
-							managedBy={unit?.managed_by || '--'}
-						/>
-						<AboutUnit description={aboutUnit || '--'} />
+	const images = unit?.images;
 
-						<Grid item xs={12} md={4} display={{ xs: 'flex', md: 'none' }} mt={3}>
-							<BuyNowCard price={'SAR ' + unit?.price || '--'} PriceType={rentType || 'monthly'} />
+	const imagesList = generateImgList(images) || [];
+
+	if (isLoading) {
+		return <Loading />;
+	} else
+		return (
+			<>
+				<Container maxWidth="xl">
+					<Grid container spacing={3} sx={{ mt: '5px', pt: '26px' }} mb={1}>
+						<Box column center width={'100%'}>
+							<QuiltedImageList
+								imagesList={imagesList}
+								// onClick={({ index: current }) => {
+								// 	setIndex(current), console.log(current);
+								// }}
+							/>
+							<PhotoAlbum
+								layout="rows"
+								photos={photos}
+								targetRowHeight={150}
+								onClick={({ index: current }) => setIndex(current)}
+							/>
+							{/* unit?.images && unit.images?.url ? unit.images.url : */}
+							<Lightbox
+								styles={{
+									container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
+								}}
+								plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+								index={index}
+								slides={photos}
+								open={index >= 0}
+								close={() => setIndex(-1)}
+							/>
+						</Box>
+
+						<Grid item xs={12} md={8} height={'100hv'}>
+							<UnitHeader
+								id={unit?.id}
+								handleToggleLike={handleToggleLike}
+								liked={unit?.is_fav}
+								logo={
+									<AtarColoredLogo
+										sx={{
+											height: '52px',
+											width: { xs: '75px', md: '121px' },
+										}}
+									/>
+								}
+								title={unit?.name || '--'}
+								location={newlocation}
+							/>
+							<ConstructionStatus
+								logo={
+									<AtarColoredLogo
+										sx={{
+											height: '14px',
+											width: '35px',
+										}}
+									/>
+								}
+								title={''}
+								status={'Ready To Move'}
+								managedBy={unit?.managed_by || '--'}
+							/>
+							<AboutUnit description={unit?.info || '--'} />
+
+							<Grid item xs={12} md={4} display={{ xs: 'flex', md: 'none' }} mt={3}>
+								<BuyNowCard price={'SAR ' + unit?.price || '--'} PriceType={rentType || 'monthly'} />
+							</Grid>
+
+							<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
+							{/* <Features Feature={amenityData} /> */}
+							<UnitSpecifications Feature={amenityData} />
+							<UnitMap location={unit?.map} />
 						</Grid>
 
-						<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
-						<Features Feature={amenityData} />
-
-						<UnitMap location={location} />
+						<Grid item xs={12} md={4} height={'518px'} display={{ xs: 'none', md: 'flex' }}>
+							<BuyNowCard
+								unitId={unit?.id || undefined}
+								price={'SAR ' + unit?.price || '--'}
+								PriceType={rentType || 'monthly'}
+							/>
+						</Grid>
 					</Grid>
-
-					<Grid item xs={12} md={4} height={'518px'} display={{ xs: 'none', md: 'flex' }}>
-						<BuyNowCard
-							unitId={unit?.id || undefined}
-							price={'SAR ' + unit?.price || '--'}
-							PriceType={rentType || 'monthly'}
-						/>
-					</Grid>
-				</Grid>
-			</Container>
-		</>
-	);
+				</Container>
+			</>
+		);
 }

@@ -64,6 +64,7 @@ export default function UnitsCard({
 					borderRadius: 18,
 					bgcolor: '#00425630',
 					cursor: 'pointer',
+					zIndex: 9999,
 					transition: 'transform 0.2s',
 					'&:hover': {
 						transform: 'scale(1.15)',

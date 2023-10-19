@@ -18,95 +18,35 @@ export default function ForSale() {
 		retry: false,
 	});
 
-	const images = data?.list?.map(d => d?.image)
+	const images = data?.list?.map((d) => d?.image);
 	return (
 		<>
-			<Box
-				sx={{
-					width: '100%',
-					height: '290px',
-					overflow: 'hidden',
-					borderRadius: '16px',
-				}}>
-
-				{images?.length ? <ReactSwipe
-					className="carousel"
-					swipeOptions={{
-						auto: 3000,
-						speed: 2000,
-						continuous: true,
-						disableScroll: true,
-					}}
-					ref={(el) => (reactSwipeEl = el)}>
-					{images?.map(img =>
-						<Box
-							sx={{
-								width: '100%',
-								objectFit: 'cover',
-								background: "red"
-							}}
-							width="100px"
-							component="img"
-							alt="houses and properties for rent"
-							src={img}
-						/>
-
-					)}
-
-				</ReactSwipe> : null}
-
-
-				{/* <Box
-					sx={{
-						// background: 'orange',
-						height: '100%',
-						position: 'absolute',
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'flex-start',
-						pl: '30px',
-						width: '100%',
-					}}
-					column>
-					{/* <Text
-						variant="small"
+			<ReactSwipe
+				className="carousel"
+				swipeOptions={{
+					auto: 5000,
+					speed: 500,
+					continuous: true,
+					disableScroll: false,
+					// widthOfSiblingSlidePreview: 60,
+				}}
+				ref={(el) => (reactSwipeEl = el)}>
+				{images?.map((img) => (
+					<Box
 						sx={{
-							color: '#fff',
-							fontSize: '14px',
-						}}>
-						Dream House
-					</Text>
-					<Text
-						variant="h4"
-						sx={{
-							color: '#fff',
-							fontSize: '68px',
-							mt: '10px',
-						}}>
-						For Sale
-					</Text>
-					<Text
-						variant="label"
-						sx={{
-							color: '#fff',
-							mt: '18px',
-							fontSize: '16px',
-						}}>
-						SAR 29,000.00
-					</Text>
-					<Button
-						variant="contained"
-						color="secondary"
-						size="medium"
-						sx={{
-							color: '#fff',
-							mt: '28px',
-							fontWeight: '700',
-						}}>
-						Schedule a Visit
-					</Button> 
-				</Box> */}
-			</Box>
+							width: '100%',
+							objectFit: 'cover',
+							height: '290px',
+							borderRadius:"8px"
+						}}
+						component="img"
+						alt="houses and properties for rent"
+						src={img}
+					/>
+				))}
+			</ReactSwipe>
 		</>
 	);
 }
+
+

@@ -12,7 +12,7 @@ export default function BuildingSchemeIcons({ icon, title, value }: Props) {
 	return (
 		<Box row gap={'8px'} sx={{ mt: { xs: '5px', md: '10px' } }}>
 			<Box row center>
-				{icon}
+				<Box sx={{ mr: '6px' }}>{icon}</Box>
 				<Box column ml={'1px'}>
 					<Text variant="label" gray>
 						{title}

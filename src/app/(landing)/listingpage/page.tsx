@@ -33,7 +33,11 @@ export default function page() {
 
 	const [locationFilters, setLocationFilters] = useState([]);
 
+	const [neighbourhoodFilters, setNeighbourhoodFilters] = useState([]);
+
 	const [filteredLocationFilters, setFilteredLocationFilters] = useState([]);
+
+	const [filteredNeighbourhoodFilters, setFilteredNeighbourhoodFilters] = useState([]);
 
 	const [propertyTypeFilters, setPropertyTypeFilters] = useState<any>([]);
 
@@ -51,6 +55,10 @@ export default function page() {
 
 	const [locationSearch, setLocationSearch] = useState<string>(
 		(searchParams?.get('locationSearch') as unknown as string) || '',
+	);
+
+	const [neighbourhoodSearch, setNeighbourhoodSearch] = useState<string>(
+		(searchParams?.get('neighbourhoodSearch') as unknown as string) || '',
 	);
 
 	const [propertySearch, setPropertySearch] = useState<string>(
@@ -84,7 +92,7 @@ export default function page() {
 	const { data: filtersData, isLoading: filtersLoading } = useQuery({
 		queryKey: [keys.FILTERS],
 		queryFn: getFilters,
-		cacheTime: 0
+		cacheTime: 0,
 	});
 
 	const {
@@ -109,6 +117,7 @@ export default function page() {
 					budgeRange: budgetSliderValues,
 					areaRange: areaSliderValues,
 					location: filteredLocationFilters.filter((f: any) => f.checked).map((f: any) => f.id),
+					neighbourhood: filteredNeighbourhoodFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					propertyType: propertyTypeFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					amenities: amenitiesFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					sort: !!!currentSortFilter ? null : currentSortFilter,
@@ -124,6 +133,7 @@ export default function page() {
 		setFiltersInfo(filtersData);
 
 		const locationsParams = searchParams?.getAll('location');
+		const neighborhoodsParams = searchParams?.getAll('neighborhood');
 		const typesParams = searchParams?.getAll('type');
 		const amenitiesParams = searchParams?.getAll('amenities');
 		const availabilityParams = searchParams?.getAll('availability');
@@ -153,6 +163,35 @@ export default function page() {
 					id: location.id,
 					label: location.name,
 					checked: locationsParams?.includes(location.id.toString()),
+				})),
+			);
+
+		setNeighbourhoodFilters(
+			filtersData?.neighborhoods.map((neighborhood: any) => ({
+				id: neighborhood.id,
+				label: neighborhood.name,
+				checked: neighborhoodsParams?.includes(neighborhood.id.toString()),
+			})),
+		);
+
+		if (!!neighbourhoodSearch)
+			setFilteredNeighbourhoodFilters(
+				filtersData?.neighborhoods
+					.map((neighborhood: any) => ({
+						id: neighborhood.id,
+						label: neighborhood.name,
+						checked: neighborhoodsParams?.includes(neighborhood.id.toString()),
+					}))
+					.filter((neighborhood: any) =>
+						neighborhood.label.toLowerCase().startsWith(neighbourhoodSearch.toLowerCase()),
+					),
+			);
+		else
+			setFilteredNeighbourhoodFilters(
+				filtersData?.neighborhoods.map((neighborhood: any) => ({
+					id: neighborhood.id,
+					label: neighborhood.name,
+					checked: neighborhoodsParams?.includes(neighborhood.id.toString()),
 				})),
 			);
 
@@ -215,6 +254,7 @@ export default function page() {
 		newSearchParams.set('maxArea', areaSliderValues[1].toString());
 		newSearchParams.set('pet', petFriendly ? '1' : '0');
 		newSearchParams.set('locationSearch', locationSearch.toString());
+		newSearchParams.set('neighborhoodSearch', neighbourhoodSearch.toString());
 		newSearchParams.set('propertySearch', propertySearch.toString());
 		newSearchParams.set('sort', currentSortFilter.toString());
 		newSearchParams.set(
@@ -227,6 +267,11 @@ export default function page() {
 		newSearchParams.delete('location');
 		filteredLocationFilters?.forEach((f: any) =>
 			f.checked ? newSearchParams.append('location', f.id.toString()) : null,
+		);
+
+		newSearchParams.delete('neighborhood');
+		filteredNeighbourhoodFilters?.forEach((f: any) =>
+			f.checked ? newSearchParams.append('neighborhood', f.id.toString()) : null,
 		);
 
 		newSearchParams.delete('type');
@@ -256,7 +301,9 @@ export default function page() {
 		areaSliderValues,
 		petFriendly,
 		locationSearch,
+		neighbourhoodSearch,
 		filteredLocationFilters,
+		filteredNeighbourhoodFilters,
 		locationFilters,
 		availabilityFilters,
 		propertyTypeFilters,
@@ -283,6 +330,16 @@ export default function page() {
 	}, [locationSearch]);
 
 	useEffect(() => {
+		if (!!!neighbourhoodSearch) setFilteredNeighbourhoodFilters(neighbourhoodFilters);
+		else
+		setFilteredNeighbourhoodFilters(
+				neighbourhoodFilters.filter((neighbourhood: any) =>
+					neighbourhood.label.toLowerCase().startsWith(neighbourhoodSearch.toLowerCase()),
+				),
+			);
+	}, [neighbourhoodSearch]);
+
+	useEffect(() => {
 		const dateId = searchParams?.get('date');
 		if (!!dateId)
 			setDateFilters((prev: any) =>
@@ -304,6 +361,8 @@ export default function page() {
 							setBudgetSliderValues={setBudgetSliderValues}
 							locationSearch={locationSearch}
 							setLocationSearch={setLocationSearch}
+							neighbourhoodSearch={neighbourhoodSearch}
+							setNeighbourhoodSearch={setNeighbourhoodSearch}
 							noOfBedrooms={noOfBedrooms}
 							setNoOfBedrooms={setNoOfBedrooms}
 							noOfBathrooms={noOfBathrooms}
@@ -318,6 +377,8 @@ export default function page() {
 							setAvailabilityFilters={setAvailabilityFilters}
 							filteredLocationFilters={filteredLocationFilters}
 							setFilteredLocationFilters={setFilteredLocationFilters}
+							filteredNeighbourhoodFilters={filteredNeighbourhoodFilters}
+							setFilteredNeighbourhoodFilters={setFilteredNeighbourhoodFilters}
 							propertyTypeFilters={propertyTypeFilters}
 							setPropertyTypeFilters={setPropertyTypeFilters}
 							amenitiesFilters={amenitiesFilters}

@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
 import { getNerabyPlaces } from './maps-service';
 
-export default function page() {
+export default function page({ inLandingPage }) {
 	const [center, setCenter] = useState({ lat: 24.71811100316436, lng: 46.68666506186128 });
 	const [radius, setRadius] = useState(5);
 	const [markersList, setMarkersList] = useState([]);
@@ -28,10 +28,16 @@ export default function page() {
 				<Item
 					sx={{
 						position: 'relative',
-						height: '80vh',
+						height: inLandingPage ? '50vh' : '80vh',
 						width: '100%',
 					}}>
-					<MapContainer center={center} setCenter={setCenter} setRadius={setRadius} markersList={markersList} />
+					<MapContainer
+						inLandingPage={inLandingPage}
+						center={center}
+						setCenter={setCenter}
+						setRadius={setRadius}
+						markersList={markersList}
+					/>
 				</Item>
 			</Grid>
 		</>

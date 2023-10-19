@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Item, Text } from '@/wrappers';
 import UpcomingVisitPlaceholder from '@/assets/icons/UpcomingVisitPlaceholder';
+import Link from 'next/link';
 
 export default function EmptyUpcomingVisits() {
 	return (
@@ -25,9 +26,11 @@ export default function EmptyUpcomingVisits() {
 			<Item xs={12} center sx={{ textAlign: 'center' }} mt={'16px'}>
 				<Button
 					variant="outlined"
+					component={Link}
+					href="/listingpage"
 					sx={{
 						fontWeight: 700,
-						width:'50%'
+						width: '50%',
 					}}>
 					Book Visit
 				</Button>

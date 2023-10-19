@@ -12,7 +12,7 @@ interface proptypes {
 export default function Features({ Feature }: proptypes) {
 	return (
 		<>
-			<Text variant="h5" mt={'40px'}>
+			<Text variant="h4" mt={'40px'}>
 				Features & amenities
 			</Text>
 			<Grid container>
