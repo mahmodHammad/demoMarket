@@ -123,7 +123,7 @@ export default function UnitsCard({
 						sx={{
 							fontSize: { xs: '14px', md: '18px' },
 						}}>
-						{title.slice(0, 20)}
+						{title?.slice(0, 20)}
 					</Text>
 					{/* <Text
 						variant="small"

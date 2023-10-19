@@ -6,11 +6,13 @@ import React, { useState } from 'react';
 import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
 
-import { Tab, Tabs } from '@mui/material';
+import { Button, Tab, Tabs } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getAllProperties } from './properties-service';
 import { DELETE } from '@/utils/http';
 import { globalToast } from '@/utils/toast';
+import { Plus } from '@/assets';
+import Link from 'next/link';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -137,14 +139,15 @@ export default function Properties() {
 						mb: '40px',
 					}}>
 					<Text variant="h4">My Properties</Text>
-					{/* <Button
+					<Button
 						component={Link}
 						href="/properties/addUnit"
+						addUnit
 						startIcon={<Plus sx={{ fill: '#fff' }} />}
 						variant="contained"
 						sx={{ mr: '40px' }}>
 						Add unit to market place
-					</Button> */}
+					</Button>
 				</Box>
 				<Box>
 					<CustomTabPanel value={value} index={0}>
