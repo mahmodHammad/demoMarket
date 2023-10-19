@@ -5,7 +5,6 @@ export default function UpcomingVisitPlaceholder(props: any) {
 		<SvgIcon
 			{...props}
 			inheritViewBox
-			style={{ transform: 'scaleY(-1)' }} // Flip the icon vertically
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="53" height="38" viewBox="0 0 53 38" fill="none">
 				<path

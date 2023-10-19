@@ -7,8 +7,9 @@ interface proptypes {
 	title: string;
 	dateTime: string;
 	location: string;
+	setIsOpen: any;
 }
-export default function UpcomingVisitsCard({ img, title, location, dateTime }: proptypes) {
+export default function UpcomingVisitsCard({ img, title, location, dateTime, setIsOpen }: proptypes) {
 	return (
 		<Container
 			sx={{
@@ -17,7 +18,28 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
 				boxShadow: '0px 6px 12px 0px rgba(28, 39, 49, 0.05)',
 			}}>
 			<Item xs={5} sx={{ padding: '12px 15px 11px 14px' }}>
-				<Box
+				<div
+					style={{
+						width: '100%',
+						height: '224px',
+						borderRadius: '16px',
+						objectFit: 'cover',
+						position: 'relative',
+					}}>
+					{img && (
+						<Image
+							style={{
+								objectFit: 'cover',
+								position: 'absolute',
+								borderRadius: '16px 16px 0 0',
+							}}
+							layout="fill"
+							alt={'ssss'}
+							src={img}
+						/>
+					)}
+				</div>
+				{/* <Box
 					sx={{
 						width: '100%',
 						height: { xs: '150px', md: '224px' },
@@ -29,7 +51,7 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
 					placeholder="blur"
 					alt="houses and properties for rent"
 					src={img}
-				/>
+				/> */}
 			</Item>
 			<Item xs={7}>
 				<Box
@@ -69,11 +91,10 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime }: p
 						}}>
 						<Button
 							variant="dangerOutlined"
+							onClick={() => setIsOpen(true)}
 							sx={{
-								
-                                fontWeight:700,
-                             	}}
-							>
+								fontWeight: 700,
+							}}>
 							Cancel Visit
 						</Button>
 					</Box>
