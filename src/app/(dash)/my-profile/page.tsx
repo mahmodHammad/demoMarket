@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Item, Text } from '@/wrappers';
 import TextInputController from '@/component/forms/controlled/TextInputController';
 import { useForm } from 'react-hook-form';
@@ -75,15 +75,24 @@ export default function MyProfile() {
 				});
 		}
 	}, [image]);
-
+	const [loading, setLoading] = useState(false);
 	const onSubmit = async (data: any) => {
-		await editProfile(data)
+		let payload = {
+			...data,
+			phone_country_code: user?.phone_country_code,
+			interested: user?.interested,
+			phone_number: user?.phone_number,
+		};
+		setLoading(true);
+		await editProfile(payload)
 			.then(() => {
 				globalToast('Profile updated successfully', 'success');
+				getUserInfo();
 			})
 			.catch((err) => {
 				globalToast('Please try later', 'error');
-			});
+			})
+			.finally(() => setLoading(false));
 	};
 	const readFileData = (fl: any) => {
 		const file = URL.createObjectURL(fl);
@@ -138,7 +147,7 @@ export default function MyProfile() {
 							</Container>
 						</Item>
 						<Item xs={12}>
-							<Button type="submit" variant="contained">
+							<Button type="submit" variant="contained" loading={loading}>
 								Save Changes
 							</Button>
 						</Item>
