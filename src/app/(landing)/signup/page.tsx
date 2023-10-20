@@ -174,7 +174,7 @@ const Signup = () => {
 									/>
 								</Item>
 
-								<Item xs={6}>
+								<Item xs={12}>
 									<Container column>
 										<Item>
 											<Text variant="caption" sx={{ float: 'left' }}>

@@ -71,16 +71,7 @@ export default function Properties() {
 					{/* <AdminPropertiesList /> */}
 					{data?.map((d, index) => (
 						<Grid item xs={4} key={index}>
-							<UnitsCard
-								title={d?.title || '--'}
-								img={d?.img}
-								// link={d?.link}
-								price={d?.price || '--'}
-								area={d?.area || '--'}
-								location={d?.location || '--'}
-								buttonName="add"
-								onClick={handleClickOpen}
-							/>
+							<UnitsCard buttonName="add" data={d} onClick={handleClickOpen} />
 						</Grid>
 					))}
 				</Grid>
