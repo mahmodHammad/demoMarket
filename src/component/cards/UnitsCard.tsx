@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from '@mui/material';
 import { FilledHeart, OutlineHeart, defaultimg } from '@/assets';
-import neibourhoodcover1 from '@/assets/images/Rectangle 4535.png'; 
+import neibourhoodcover1 from '@/assets/images/Rectangle 4535.png';
 
 interface data {
 	id: String;
@@ -25,7 +25,7 @@ interface Props {
 	imgHeight?: string;
 	toggleLike: (id: number) => void;
 	buttonName?: string;
-	onClick?: () => void;
+	onClick?: (id: any) => void;
 	data: data;
 }
 export default function UnitsCard({
@@ -64,7 +64,7 @@ export default function UnitsCard({
 					borderRadius: 18,
 					bgcolor: '#00425630',
 					cursor: 'pointer',
-					zIndex: 9999,
+					zIndex: 2,
 					transition: 'transform 0.2s',
 					'&:hover': {
 						transform: 'scale(1.15)',
@@ -220,6 +220,7 @@ export default function UnitsCard({
 				{onClick ? (
 					<Button
 						variant="outlined"
+						onClick={() => onClick(id)}
 						sx={{
 							height: '20px',
 							padding: '16px 24px',

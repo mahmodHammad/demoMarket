@@ -27,7 +27,7 @@ export default function EmptyUpcomingVisits() {
 				<Button
 					variant="outlined"
 					component={Link}
-					href="/listingpage"
+					href="/favourites"
 					sx={{
 						fontWeight: 700,
 						width: '50%',

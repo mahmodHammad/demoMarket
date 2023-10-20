@@ -47,7 +47,7 @@ export default function MyBookings() {
 		refetch: upcomingListRefetch,
 	} = useQuery({
 		queryKey: [keys.MYBOOKINGS, { search, currentPage, status, filter, sort }],
-		queryFn: () => getMyBookings({ search, currentPage, status, filter, sort }),
+		queryFn: () => getMyBookings({  query: search, currentPage, status, filter, sort }),
 		refetchInterval: false,
 		retry: false,
 		enabled: value === 0,
@@ -59,7 +59,7 @@ export default function MyBookings() {
 		refetch,
 	} = useQuery({
 		queryKey: [keys.MYBOOKINGSHISTORY, { search, currentPage, status, filter, sort }],
-		queryFn: () => bookingHistory({ type: 'history', search, currentPage, status, filter, sort }),
+		queryFn: () => bookingHistory({ type: 'history', query: search, currentPage, status, filter, sort }),
 		refetchInterval: false,
 		retry: false,
 		enabled: value === 1,
@@ -272,8 +272,9 @@ const CELLS_TYPES = [
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {
-	'Filter by status': [
-		{ name: 'Cancel', value: true, id: 'Cancel', status: 18 },
-		{ name: 'Pending', value: true, id: 'Pending', status: 3 },
+	Status: [
+		{ name: 'Cancel', value: true, id: 'Cancel', status: 'cancel' },
+		{ name: 'Pending', value: true, id: 'Pending', status: 'pending' },
+		{ name: 'Approved', value: true, id: 'Approved', status: 'approved' },
 	],
 };

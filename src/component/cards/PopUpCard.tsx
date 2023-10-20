@@ -12,30 +12,19 @@ interface prop {
 	body: string;
 	button1: string;
 	button2: string;
-	openPopup: boolean;
-	setopenPopup: boolean;
+	handleClose: any;
+	setopenPopup: any;
+	handleButton1: any;
+	handleButton2: any;
+	isOpen: boolean;
 }
 
-export default function PopUpCard({ openPopup, setopenPopup, color, title, body, button1, button2, icon }: prop) {
-	const [open, setOpen] = useState(false);
-
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
-
-	const handleClose = () => {
-		setOpen(false);
-	};
-
+export default function PopUpCard({ handleClose, handleButton1,handleButton2, isOpen, color, title, body, button1, button2, icon }: prop) {
 	return (
 		<div>
-			<Button variant="outlined" onClick={handleClickOpen}>
-				Open alert dialogg
-			</Button>
-
 			<Dialog
 				sx={{ borderRadius: '16px' }}
-				open={open}
+				open={isOpen}
 				onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description">
@@ -46,9 +35,9 @@ export default function PopUpCard({ openPopup, setopenPopup, color, title, body,
 					<Text mt={'10px'} variant="h4">
 						{title || 'Unit list Successful!'}
 					</Text>
-					<Text variant="body1">{body || 'bodybodybody!'}</Text>
+					<Text variant="body1">{body || ''}</Text>
 					<Button
-						onClick={handleClose}
+						onClick={handleButton1}
 						sx={{
 							color: 'white',
 							background: color,
@@ -62,7 +51,7 @@ export default function PopUpCard({ openPopup, setopenPopup, color, title, body,
 						{button1}
 					</Button>
 					<Button
-						onClick={handleClose}
+						onClick={handleButton2}
 						sx={{
 							mt: '20px',
 							fontSize: '16px',

@@ -30,7 +30,7 @@ export default function AdminBookings() {
 
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [keys.ADMINBOOKINGS, { search, currentPage, status, filter, sort }],
-		queryFn: () => getMyBookings({ search, currentPage, status, filter, sort }),
+		queryFn: () => getMyBookings({  query: search, currentPage, status, filter, sort }),
 	});
 	useEffect(() => {
 		console.log('payment table state changed', {
@@ -208,8 +208,9 @@ const CELLS_TYPES = [
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {
-	'Filter by status': [
-		{ name: 'Pay Down', value: true, id: 'Pay Down', status: 18 },
-		{ name: 'Pending', value: true, id: 'Completed', status: 3 },
+	Status: [
+		{ name: 'Cancel', value: true, id: 'Cancel', status: 'cancel' },
+		{ name: 'Pending', value: true, id: 'Pending', status: 'pending' },
+		{ name: 'Approved', value: true, id: 'Approved', status: 'approved' },
 	],
 };

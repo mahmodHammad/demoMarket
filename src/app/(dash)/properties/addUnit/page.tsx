@@ -6,70 +6,96 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import React, { useState } from 'react';
 import { AdminPropertiesList, PopUpCard, UnitsCard } from '@/component';
 import Succesgreen from '@/assets/icons/Succesgreen';
+import { useQuery } from '@tanstack/react-query';
+import { addPropertyToMarketplace, getAllAvailableProperties } from '../properties-service';
+import PaginationWrapper from '@/component/table/Resources/Components/PaginationWrapper';
+import FilterPopup from '@/component/table/Resources/Components/FilterPopup';
+import Search from '@/component/table/Resources/Components/Search';
+import { globalToast } from '@/utils/toast';
 
-const data = [
-	{
-		title: 'Yarmouk Neighbourhood',
-		location: 'AL-khobar',
-		area: '132',
-		price: '250000',
-		img: neibourhoodcover2,
-		link: '/',
-	},
-	{
-		title: 'Yarmouk Neighbourhood',
-		location: 'AL-khobar',
-		area: '132',
-		price: '250000',
-		img: neibourhoodcover2,
-		link: '/',
-	},
-	{
-		title: 'Yarmouk Neighbourhood',
-		location: 'AL-khobar',
-		area: '132',
-		price: '250000',
-		img: neibourhoodcover2,
-		link: '/',
-	},
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-	{ title: 'Yarmouk Neighbourhood', img: neigbourhoodCover, link: '/' },
-];
 export default function Properties() {
 	const [openPopup, setopenPopup] = useState(false);
-	const handleClickOpen = () => {
-		setopenPopup(true);
+	const handleClickOpen = async (id) => {
+		await addPropertyToMarketplace(id)
+			.then(() => {
+				setopenPopup(true);
+				refetch();
+			})
+			.catch(() => {
+				globalToast('Please try later.', 'error');
+			});
 	};
 
 	const handleClose = () => {
 		setopenPopup(false);
 	};
+	const [search, setSearch] = useState<string>('');
+	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [status, setStatus] = useState<number[]>([]);
+	const [filter, setFilter] = useState('0');
+
+	const handleSearch = (v: string) => setSearch(v);
+	const handlePagination = (v: number) => setCurrentPage(v);
+	const handleStatusChange = (v: number[]) => setStatus(v);
+	const handleFilter = (id: string) => setFilter(id);
+	const {
+		data,
+		isLoading: filtersLoading,
+		refetch,
+	} = useQuery({
+		queryKey: ['LISTEDPROPERTIES', { search, currentPage, status, filter }],
+		queryFn: () => getAllAvailableProperties({ search, currentPage, status, filter }),
+	});
 
 	return (
 		<>
 			<PopUpCard
+				handleButton2={() => setopenPopup(false)}
+				handleButton1={() => setopenPopup(false)}
 				color={'green'}
 				icon={<Succesgreen />}
-				title={'title'}
-				body={'body'}
-				button1={'hi'}
-				button2={'hi2'}
-				openPopup={openPopup}
+				title={'Unit List Successful'}
+				body={''}
+				button1={'Done'}
+				button2={'View on MarketPlace'}
+				isOpen={openPopup}
+				setopenPopup={setopenPopup}
 			/>
 			<Box column p={'35px'} width={'100%'}>
 				<Box center width={'100%'} xbetween row>
 					<Text variant="h4">Properties List</Text>
-					<Box row>
-						{/* <Button variant="outlined" component={Link} href="/properties">
-							Select Multiple
-						</Button> */}
+					<Box row></Box>
+				</Box>
+				<Box
+					alignItems={'center'}
+					sx={{
+						display: 'grid',
+						gridTemplateColumns: '1fr 1fr',
+						marginTop: '20px',
+						background: '#FFF',
+						padding: '16px 32px',
+					}}>
+					<Box
+						sx={{
+							display: 'flex',
+							alignItems: 'center',
+						}}>
+						<Search search={search} handleSearch={handleSearch} />
+						<FilterPopup
+							filtering
+							filterValues={FilterValues}
+							handleFilter={handleFilter}
+							status={status}
+							setStatus={handleStatusChange}
+						/>
+					</Box>
+					<Box>
+						<PaginationWrapper count={data?.paginator?.last_page} page={currentPage} handler={handlePagination} />
 					</Box>
 				</Box>
 
 				<Grid container mt={'25px'} spacing={'28px'}>
-					{/* <AdminPropertiesList /> */}
-					{data?.map((d, index) => (
+					{data?.list?.map((d, index) => (
 						<Grid item xs={4} key={index}>
 							<UnitsCard buttonName="add" data={d} onClick={handleClickOpen} />
 						</Grid>
@@ -79,3 +105,9 @@ export default function Properties() {
 		</>
 	);
 }
+const FilterValues = {
+	'Filter by status': [
+		{ name: 'Pay Down', value: true, id: 'Pay Down', status: 18 },
+		{ name: 'Pending', value: true, id: 'Completed', status: 3 },
+	],
+};
