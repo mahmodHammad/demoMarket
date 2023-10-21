@@ -156,7 +156,24 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 			value: unit?.features?.is_furnished?.toString() && FurnishedTypes[unit?.features?.is_furnished] + ' ' + '',
 		},
 	];
-	console.log("unit',", unit);
+	const amenities = [
+		{
+			title: 'Parking',
+			icon: <GroundFloor />,
+			value: true,
+		},
+		{
+			title: 'Fireplace',
+			icon: <FrontSide />,
+			value: true,
+		},
+		{
+			title: 'Pool',
+			icon: <Room />,
+			value: true,
+		},
+	];
+	console.log("heyunit',", unit);
 
 	const images = unit?.images;
 
@@ -231,8 +248,8 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 							</Grid>
 
 							<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
-							{/* <Features Feature={amenityData} /> */}
 							<UnitSpecifications Feature={amenityData} />
+							<Features Feature={amenities} />
 							<UnitMap location={unit?.map} />
 						</Grid>
 
