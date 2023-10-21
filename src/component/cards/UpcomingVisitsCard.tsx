@@ -31,7 +31,7 @@ export default function UpcomingVisitsCard({ img, title, location, dateTime, set
 							style={{
 								objectFit: 'cover',
 								position: 'absolute',
-								borderRadius: '16px 16px 0 0',
+								borderRadius: '16px',
 							}}
 							layout="fill"
 							alt={'ssss'}

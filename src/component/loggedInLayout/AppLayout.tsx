@@ -119,7 +119,7 @@ export default function AppLayout({ children, type }: Props) {
 						maxWidth: '1600px',
 						borderRadius: '4px',
 						marginTop: { xs: '70px', sm: '70px', md: '90px' },
-						p:"32px",
+						p: '32px',
 						overflow: 'auto',
 						position: 'relative',
 						minHeight: '80vh',
