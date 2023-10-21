@@ -101,17 +101,9 @@ export default function MyPayments({ isadmin }) {
 // -------------------HOW TO DESCRIBE THE TABLE AND ITS FUNCTIONALITY---------------------------
 
 // actual table data
-const DATA = [
-	{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Rent Unit', method: 'Card', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 12100' },
-	{ id: 1, type: 'Pay down', method: 'Net Banking', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-	{ id: 1, type: 'Buy Unit', method: 'UPI', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' },
-];
+const DATA = [];
 
 const HEADERS = ['Payment Type', 'Payment Method', 'Date', 'Amount', 'Status', ''];
-
-
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {
