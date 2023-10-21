@@ -19,8 +19,9 @@ export default function ForSale() {
 	});
 
 	const images = data?.list?.map((d) => d?.image);
-	return (
-		<>
+	if (isLoading) return <Box loading={true} center></Box>;
+	else
+		return (
 			<ReactSwipe
 				className="carousel"
 				swipeOptions={{
@@ -33,11 +34,12 @@ export default function ForSale() {
 				ref={(el) => (reactSwipeEl = el)}>
 				{images?.map((img) => (
 					<Box
+						loading={isLoading}
 						sx={{
 							width: '100%',
 							objectFit: 'cover',
 							height: '290px',
-							borderRadius:"8px"
+							borderRadius: '8px',
 						}}
 						component="img"
 						alt="houses and properties for rent"
@@ -45,8 +47,5 @@ export default function ForSale() {
 					/>
 				))}
 			</ReactSwipe>
-		</>
-	);
+		);
 }
-
-

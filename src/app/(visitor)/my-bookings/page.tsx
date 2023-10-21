@@ -47,7 +47,7 @@ export default function MyBookings() {
 		refetch: upcomingListRefetch,
 	} = useQuery({
 		queryKey: [keys.MYBOOKINGS, { search, currentPage, status, filter, sort }],
-		queryFn: () => getMyBookings({  query: search, currentPage, status, filter, sort }),
+		queryFn: () => getMyBookings({ query: search, currentPage, status, filter, sort }),
 		refetchInterval: false,
 		retry: false,
 		enabled: value === 0,
@@ -151,17 +151,19 @@ export default function MyBookings() {
 						<Text variant="h5" sx={{ mb: '10px' }}>
 							Upcoming Visits
 						</Text>
-						{upcomingBooking ? (
-							<UpcomingVisitsCard
-								title={upcomingBooking?.unit?.name}
-								img={upcomingBooking?.unit?.images[0]?.url || neibourhoodcover2}
-								dateTime={upcomingBooking?.booking_date}
-								location={upcomingBooking?.unit?.city?.name}
-								setIsOpen={setIsOpen}
-							/>
-						) : (
-							<EmptyUpcomingVisits />
-						)}
+						<Box loading={upcomingListLoading}>
+							{upcomingBooking ? (
+								<UpcomingVisitsCard
+									title={upcomingBooking?.unit?.name}
+									img={upcomingBooking?.unit?.images[0]?.url || neibourhoodcover2}
+									dateTime={upcomingBooking?.booking_date}
+									location={upcomingBooking?.unit?.city?.name}
+									setIsOpen={setIsOpen}
+								/>
+							) : (
+								<EmptyUpcomingVisits />
+							)}
+						</Box>
 					</Box>
 				</Box>
 				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
