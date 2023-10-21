@@ -8,7 +8,7 @@ import {
 	LocationCard,
 	QuiltedImageList,
 } from '@/component';
-import { Box, Button } from '@/wrappers';
+import { Box, Button, Loading } from '@/wrappers';
 import { Container, Grid } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -23,6 +23,14 @@ import ConfirmAction from '@/component/modals/ConfirmAction';
 import { globalToast } from '@/utils/toast';
 import ReturnQrCode from '@/component/ReturnQrCode';
 import { generateImgList } from '@/app/(landing)/unitdetails/[unitId]/page';
+import Lightbox from 'yet-another-react-lightbox';
+
+import 'yet-another-react-lightbox/styles.css';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
+import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 
 const page = () => {
 	const { push } = useRouter();
@@ -34,6 +42,7 @@ const page = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [cancelConfirmOpen, setCancelConfirmOpen] = useState(false);
 	const [bookingDate, setBookingDate] = useState(null);
+	const [index, setIndex] = useState(-1);
 
 	const cancelBookings = async () => {
 		await cancelBooking(params?.bookingID)
@@ -64,12 +73,21 @@ const page = () => {
 				});
 		}
 	};
+	const images = data?.unit?.images;
+	const liteBoxImages = images?.map((img) => {
+		return {
+			src: img.url,
+		};
+	});
 	const imagesList = generateImgList(data?.unit?.images) || [];
-	return (
-		<>
+	if (isLoading) {
+		return <Loading />;
+	} else
+		return (
 			<>
-				<Container maxWidth="xl" sx={{ mt: '20px' }}>
-					{/* <Box sx={{ mt: "30px" }}>
+				<>
+					<Container maxWidth="xl" sx={{ mt: '20px' }}>
+						{/* <Box sx={{ mt: "30px" }}>
           <Button
             component={Link}
             href="/"
@@ -81,104 +99,123 @@ const page = () => {
             Back
           </Button>
         </Box> */}
-					<Text variant="h4">Booking Details</Text>
-					<Grid container spacing={3} mb={1}>
-						<Grid item xs={12} md={8} height={'100hv'}>
-							<QuiltedImageList imagesList={imagesList} />
-							<BookingDetails_uhitHeader
-								logo={
-									<AtarColoredLogo
-										sx={{
-											height: '52px',
-											width: { xs: '75px', md: '121px' },
+						<Text variant="h4">Booking Details</Text>
+						<Grid container spacing={3} mb={1}>
+							<Grid item xs={12} md={8} height={'100hv'}>
+								<QuiltedImageList
+									imagesList={imagesList}
+									onClick={(index) => {
+										setIndex(index);
+									}}
+								/>
+
+								{/* unit?.images && unit.images?.url ? unit.images.url : */}
+								{index !== -1 ? (
+									<Lightbox
+										styles={{
+											container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
 										}}
+										plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+										index={index}
+										slides={liteBoxImages}
+										open={true}
+										close={() => setIndex(-1)}
 									/>
-								}
-								title={data?.unit?.name || 'Property Name'}
-								location={data?.unit?.locationable?.name_en || 'Location'}
-							/>
-							<BookingDetails_timedate
-								logo={
-									<AtarColoredLogo
+								) : null}
+								<BookingDetails_uhitHeader
+									logo={
+										<AtarColoredLogo
+											sx={{
+												height: '52px',
+												width: { xs: '75px', md: '121px' },
+											}}
+										/>
+									}
+									title={data?.unit?.name || 'Property Name'}
+									location={data?.unit?.locationable?.name_en || 'Location'}
+								/>
+								<BookingDetails_timedate
+									logo={
+										<AtarColoredLogo
+											sx={{
+												height: '14px',
+												width: '35px',
+											}}
+										/>
+									}
+									title={data?.unit?.name}
+									description={data?.unit?.info}
+									date={dayjs(data?.booking_date).format('llll')}
+								/>
+								<BookingDetailsInfo data={data} />
+								<Box column mt={'24px'}>
+									<Text variant="h5">QR Code</Text>
+									<Text variant="body1">Scan QR Code to get booking details</Text>
+									<Box
+										mt={'16px'}
 										sx={{
-											height: '14px',
-											width: '35px',
-										}}
-									/>
-								}
-								title={data?.unit?.name}
-								description={data?.unit?.info}
-								date={dayjs(data?.booking_date).format('llll')}
-							/>
-							<BookingDetailsInfo data={data} />
-							<Box column mt={'24px'}>
-								<Text variant="h5">QR Code</Text>
-								<Text variant="body1">Scan QR Code to get booking details</Text>
-								<Box
-									mt={'16px'}
-									sx={{
-										width: '200px',
-										height: '200px',
-										objectFit: 'cover',
-									}}>
-									<ReturnQrCode text={`http://localhost:3000/my-bookings/booking-details/${params?.bookingID}`} />
+											width: '200px',
+											height: '200px',
+											objectFit: 'cover',
+										}}>
+										<ReturnQrCode text={`http://localhost:3000/my-bookings/booking-details/${params?.bookingID}`} />
+									</Box>
 								</Box>
-							</Box>
-							<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
+								<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
+									<LocationCard location={data?.unit?.map} />
+								</Grid>
+								{data?.booking_status !== 'cancel' && (
+									<Box row gap={'40px'} my="25px">
+										<Button
+											variant="dangerOutlined"
+											onClick={() => setCancelConfirmOpen(true)}
+											sx={{
+												mt: '24px',
+												height: '52px',
+												padding: '12px 24px',
+												width: '255px',
+												borderRadius: '8px',
+											}}>
+											Cancel Booking
+										</Button>
+										<Button
+											variant="contained"
+											onClick={() => setIsOpen(true)}
+											sx={{
+												mt: '24px',
+												height: '52px',
+												padding: '12px 24px',
+												width: '255px',
+												borderRadius: '8px',
+											}}>
+											Edit Booking
+										</Button>
+									</Box>
+								)}
+							</Grid>
+							<Grid item contaier xs={12} md={4} display={{ xs: 'none', md: 'flex' }}>
 								<LocationCard location={data?.unit?.map} />
 							</Grid>
-							{data?.booking_status !== 'cancel' && (
-								<Box row gap={'40px'} my="25px">
-									<Button
-										variant="dangerOutlined"
-										onClick={() => setCancelConfirmOpen(true)}
-										sx={{
-											mt: '24px',
-											height: '52px',
-											padding: '12px 24px',
-											width: '255px',
-											borderRadius: '8px',
-										}}>
-										Cancel Booking
-									</Button>
-									<Button
-										variant="contained"
-										onClick={() => setIsOpen(true)}
-										sx={{
-											mt: '24px',
-											height: '52px',
-											padding: '12px 24px',
-											width: '255px',
-											borderRadius: '8px',
-										}}>
-										Edit Booking
-									</Button>
-								</Box>
-							)}
 						</Grid>
-						<Grid item contaier xs={12} md={4} display={{ xs: 'none', md: 'flex' }}>
-							<LocationCard location={data?.unit?.map} />
-						</Grid>
-					</Grid>
-					<DateTimeModal
-						setDate={setBookingDate}
-						date={bookingDate}
-						setIsOpen={setIsOpen}
-						isOpen={isOpen}
-						successFunc={editBookings}
-					/>
-					<ConfirmAction
-						handleClose={() => setCancelConfirmOpen(false)}
-						title={'Confirm Cancel Action'}
-						body={'Please confirm to cancel this booking.'}
-						isOpen={cancelConfirmOpen}
-						isPrimary={false}
-						confirmFunc={cancelBookings}
-					/>
-				</Container>
+						<DateTimeModal
+							setDate={setBookingDate}
+							date={bookingDate}
+							setIsOpen={setIsOpen}
+							isOpen={isOpen}
+							successFunc={editBookings}
+						/>
+						<ConfirmAction
+							handleClose={() => setCancelConfirmOpen(false)}
+							title={'Confirm Cancel Action'}
+							body={'Please confirm to cancel this booking.'}
+							isOpen={cancelConfirmOpen}
+							isPrimary={false}
+							confirmFunc={cancelBookings}
+						/>
+					</Container>
+				</>
 			</>
-		</>
-	);
+		);
 };
 
 export default page;
