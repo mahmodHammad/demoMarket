@@ -46,7 +46,7 @@ export default function Table({
 	handleFilter = () => null,
 	sort,
 	handleSort = () => null,
-	lastPage
+	lastPage,
 }: TableProps) {
 	const getPropByString = (obj, propString) => {
 		if (!propString) return obj;
@@ -78,9 +78,7 @@ export default function Table({
 						headerData={headers}
 						isLoading={loading}
 						isEmpty={!data?.length}
-						Pagination={() => (
-							<PaginationWrapper count={lastPage} page={currentPage} handler={handlePagination} />
-						)}
+						Pagination={() => <PaginationWrapper count={lastPage} page={currentPage} handler={handlePagination} />}
 						Filters={() => (
 							<>
 								<Search search={search} handleSearch={handleSearch} />
@@ -118,7 +116,7 @@ const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 							<Button
 								variant={c.options?.variant}
 								component={c.options?.isLink ? Link : 'button'}
-								href={c.options?.isLink && `${c.options?.href}${c.options?.appendID && '/' + row?.id}`}
+								href={c.options?.isLink && `${c.options?.href}${(c.options?.appendID && '/' + row?.id) || ''}`}
 								onClick={() => {
 									!c.options?.isLink && !c.options?.passParams
 										? c.options?.onClick(row)
