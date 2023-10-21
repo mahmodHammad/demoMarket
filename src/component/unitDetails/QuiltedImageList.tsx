@@ -8,7 +8,7 @@ import { Box } from '@/wrappers';
 import { Grid, ImageListItemBar } from '@mui/material';
 import Carousel from '../Carousel';
 
-export default function QuiltedImageList({ imagesList }: any) {
+export default function QuiltedImageList({ imagesList, onClick }: any) {
 	return (
 		<>
 			<Grid container item xs={12} sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -16,6 +16,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 					{imagesList?.map((item, index) => (
 						<ImageListItem
 							key={item?.img}
+							onClick={() => onClick(index)}
 							cols={item?.cols || 1}
 							rows={item?.rows || 1}
 							sx={{
@@ -34,6 +35,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 							/>
 							{index === 2 && imagesList?.length > 3 && (
 								<ImageListItemBar
+									onClick={() => onClick(3)}
 									sx={{ background: 'transparent', margin: '25px 15px' }}
 									actionIcon={
 										<span

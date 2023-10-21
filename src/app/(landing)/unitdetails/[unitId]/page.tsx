@@ -35,7 +35,7 @@ export const generateImgList = (images) => {
 		return [
 			{
 				img: images[0].url,
-				rows: 2,
+				rows: 4,
 				cols: 12,
 			},
 		];
@@ -90,7 +90,11 @@ interface Props {
 	map?: string;
 }
 
-export default function Unitdetails({ photos, location, rentType }: Props) {
+export default function Unitdetails({ location, rentType }: Props) {
+	const photos = [
+		{ src: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg', width: 800, height: 600 },
+		{ src: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg', width: 1600, height: 900 },
+	];
 	const [index, setIndex] = useState(-1);
 	const queryClient = useQueryClient();
 
@@ -176,6 +180,13 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 	console.log("heyunit',", unit);
 
 	const images = unit?.images;
+	console.log('images:', images);
+
+	const liteBoxImages = images?.map((img) => {
+		return {
+			src: img.url,
+		};
+	});
 
 	const imagesList = generateImgList(images) || [];
 
@@ -189,27 +200,24 @@ export default function Unitdetails({ photos, location, rentType }: Props) {
 						<Box column center width={'100%'}>
 							<QuiltedImageList
 								imagesList={imagesList}
-								// onClick={({ index: current }) => {
-								// 	setIndex(current), console.log(current);
-								// }}
-							/>
-							<PhotoAlbum
-								layout="rows"
-								photos={photos}
-								targetRowHeight={150}
-								onClick={({ index: current }) => setIndex(current)}
-							/>
-							{/* unit?.images && unit.images?.url ? unit.images.url : */}
-							<Lightbox
-								styles={{
-									container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
+								onClick={(index) => {
+									setIndex(index);
 								}}
-								plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-								index={index}
-								slides={photos}
-								open={index >= 0}
-								close={() => setIndex(-1)}
 							/>
+
+							{/* unit?.images && unit.images?.url ? unit.images.url : */}
+							{index !== -1 ? (
+								<Lightbox
+									styles={{
+										container: { backgroundColor: 'rgba(0, 0, 0, .8)' },
+									}}
+									plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+									index={index}
+									slides={liteBoxImages}
+									open={true}
+									close={() => setIndex(-1)}
+								/>
+							) : null}
 						</Box>
 
 						<Grid item xs={12} md={8} height={'100hv'}>
