@@ -3,14 +3,10 @@
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import photo1 from '@/assets/images/photo1.png';
-import photo2 from '@/assets/images/photo2.png';
-import photo3 from '@/assets/images/photo3.png';
 import Image from 'next/image';
 import { Box } from '@/wrappers';
 import { Grid, ImageListItemBar } from '@mui/material';
 import Carousel from '../Carousel';
-import { Label } from '../table/Table';
 
 export default function QuiltedImageList({ imagesList }: any) {
 	return (
@@ -36,7 +32,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 								}}
 								alt={item.title}
 							/>
-							{/* {index === imagesList?.length >3 && (
+							{index === 2 && imagesList?.length > 3 && (
 								<ImageListItemBar
 									sx={{ background: 'transparent', margin: '25px 15px' }}
 									actionIcon={
@@ -53,7 +49,7 @@ export default function QuiltedImageList({ imagesList }: any) {
 										</span>
 									}
 								/>
-							)} */}
+							)}
 						</ImageListItem>
 					))}
 				</ImageList>
@@ -65,7 +61,6 @@ export default function QuiltedImageList({ imagesList }: any) {
 						<Box
 							key={index}
 							sx={{
-								background: 'red',
 								width: '330px',
 								height: { xs: '240px', md: '273px' },
 								position: 'relative',

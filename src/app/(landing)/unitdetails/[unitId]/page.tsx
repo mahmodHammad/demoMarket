@@ -35,7 +35,7 @@ export const generateImgList = (images) => {
 		return [
 			{
 				img: images[0].url,
-				rows: 4,
+				rows: 2,
 				cols: 12,
 			},
 		];
@@ -43,12 +43,12 @@ export const generateImgList = (images) => {
 		return [
 			{
 				img: images[0].url,
-				rows: 4,
+				rows: 2,
 				cols: 6,
 			},
 			{
 				img: images[1].url,
-				rows: 4,
+				rows: 2,
 				cols: 6,
 			},
 		];
@@ -56,17 +56,17 @@ export const generateImgList = (images) => {
 		return [
 			{
 				img: images[0].url,
-				rows: 8,
+				rows: 4,
 				cols: 6,
 			},
 			{
 				img: images[1].url,
-				rows: 4,
+				rows: 2,
 				cols: 6,
 			},
 			{
 				img: images[2].url,
-				rows: 4,
+				rows: 2,
 				cols: 6,
 			},
 		];
