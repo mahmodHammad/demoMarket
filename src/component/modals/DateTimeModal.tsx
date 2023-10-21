@@ -1,13 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Text } from '@/wrappers';
 import { Modal } from '@mui/material';
-import StaticDateTimePicker from '../forms/StaticDateTimePicker';
+import StaticDatePicker from '../forms/StaticDatePicker';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
 import { getBookingSettings } from '@/app/(dash)/admin-bookings/booking-service';
 import dayjs from 'dayjs';
+import TimeSlot from '../TimeSlot';
 
 interface Props {
 	isOpen: boolean;
@@ -42,17 +43,21 @@ const DateTimeModal = ({ isOpen, setDate, date, setIsOpen, successFunc }: Props)
 		}
 	};
 
-	const disbaleTime = (time) => {
-		if (
-			time?.hour() >= dayjs('2023-11-22' + data?.start_time)?.hour() &&
-			time?.hour() <= dayjs('2023-11-22' + data?.end_time)?.hour()
-		)
-			return false;
-		return true;
+	// const disbaleTime = (time) => {
+	// 	if (
+	// 		time?.hour() >= dayjs('2023-11-22' + data?.start_time)?.hour() &&
+	// 		time?.hour() <= dayjs('2023-11-22' + data?.end_time)?.hour()
+	// 	)
+	// 		return false;
+	// 	return true;
+	// };
+	const [selectedHours, setSelectedHours] = useState([]);
+	const handleTimeSelect = (time) => {
+		setDate(dayjs(date).format('L') + ' ' + dayjs(time).format('HH:mm:ss'));
 	};
-
 	const handleConfirm = async () => {
-		if (date) {
+		if (date && selectedHours?.length) {
+			await setDate(dayjs(date).format('L') + ' ' + dayjs(selectedHours[0]).format('HH:mm:ss'));
 			await successFunc();
 		} else {
 			setIsOpen(true);
@@ -77,20 +82,28 @@ const DateTimeModal = ({ isOpen, setDate, date, setIsOpen, successFunc }: Props)
 					{data?.days?.length && (
 						<>
 							<Box>
-								<StaticDateTimePicker
+								<StaticDatePicker
 									shouldDisableDate={(date) => disbaleDate(date)}
-									shouldDisableTime={(date) => disbaleTime(date)}
 									disablePast
-									// onClose={handleClose}
 									slotProps={{
 										actionBar: {
 											actions: [],
 										},
 									}}
 									onChange={(e) => setDate(e)}
-									// onAccept={handleConfirm}
 								/>
 							</Box>
+							{date && (
+								<Box>
+									<TimeSlot
+										startTime={data?.start_time}
+										endTime={data?.end_time}
+										setSelectedHours={setSelectedHours}
+										handleTimeSelect={handleTimeSelect}
+										selectedHours={selectedHours}
+									/>
+								</Box>
+							)}
 
 							<Box row gap={'10px'}>
 								<Button onClick={() => handleClose()} variant="text" fullWidth size="large" sx={{ mt: '24px' }}>

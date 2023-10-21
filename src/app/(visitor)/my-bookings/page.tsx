@@ -14,7 +14,11 @@ import { useQuery } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
 import { Tab, Tabs } from '@mui/material';
 import EmptyUpcomingVisits from '@/component/cards/EmptyUpcomingVisits';
-
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import ConfirmAction from '@/component/modals/ConfirmAction';
+import { changeStatusBooking } from '@/app/(dash)/admin-bookings/booking-service';
+import { globalToast } from '@/utils/toast';
 interface TabPanelProps {
 	children?: React.ReactNode;
 	index: number;
@@ -22,17 +26,20 @@ interface TabPanelProps {
 }
 
 export default function MyBookings() {
+	dayjs.extend(utc);
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [status, setStatus] = useState<number[]>([]);
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
 	const [value, setValue] = React.useState(0);
+	const [upcomingBooking, setUpcomingBooking] = useState(undefined);
 	const handleSearch = (v: string) => setSearch(v);
 	const handlePagination = (v: number) => setCurrentPage(v);
 	const handleStatusChange = (v: number[]) => setStatus(v);
 	const handleFilter = (id: string) => setFilter(id);
 	const handleSort = (id: string) => setSort(id);
+	const [isOpen, setIsOpen] = useState(false);
 
 	const {
 		data: upcomingList,
@@ -40,7 +47,7 @@ export default function MyBookings() {
 		refetch: upcomingListRefetch,
 	} = useQuery({
 		queryKey: [keys.MYBOOKINGS, { search, currentPage, status, filter, sort }],
-		queryFn: () => getMyBookings({ search, currentPage, status, filter, sort }),
+		queryFn: () => getMyBookings({  query: search, currentPage, status, filter, sort }),
 		refetchInterval: false,
 		retry: false,
 		enabled: value === 0,
@@ -52,7 +59,7 @@ export default function MyBookings() {
 		refetch,
 	} = useQuery({
 		queryKey: [keys.MYBOOKINGSHISTORY, { search, currentPage, status, filter, sort }],
-		queryFn: () => bookingHistory({ type: 'history',search, currentPage, status, filter, sort }),
+		queryFn: () => bookingHistory({ type: 'history', query: search, currentPage, status, filter, sort }),
 		refetchInterval: false,
 		retry: false,
 		enabled: value === 1,
@@ -68,6 +75,29 @@ export default function MyBookings() {
 		if (Number(newValue)) refetch();
 		else upcomingListRefetch();
 	};
+
+	const returnUpcomingVisit = () => {
+		let date: any = undefined;
+		upcomingList?.list?.forEach((element) => {
+			if (date) {
+				if (
+					dayjs(element?.booking_date, 'YYYY-MM-DD hh:mm a')
+						.utc()
+						?.isBefore(dayjs(date).utc())
+				) {
+					date = dayjs(element?.booking_date, 'YYYY-MM-DD hh:mm a').utc();
+					setUpcomingBooking(element);
+				}
+			} else {
+				date = dayjs(element?.booking_date, 'YYYY-MM-DD hh:mm a').utc();
+				setUpcomingBooking(element);
+			}
+		});
+	};
+
+	useEffect(() => {
+		returnUpcomingVisit();
+	}, [upcomingList]);
 
 	function a11yProps(index: number) {
 		return {
@@ -93,6 +123,17 @@ export default function MyBookings() {
 			</div>
 		);
 	}
+	const acceptOrRejectBookings = async () => {
+		await changeStatusBooking(upcomingBooking?.id, { status: 'cancel' })
+			.then((response) => {
+				globalToast('Cancelled Successful', 'success');
+				setIsOpen(false);
+				upcomingListRefetch();
+			})
+			.catch((err) => {
+				globalToast('Please try later', 'error');
+			});
+	};
 	return (
 		<>
 			<Box pb={8}>
@@ -110,13 +151,17 @@ export default function MyBookings() {
 						<Text variant="h5" sx={{ mb: '10px' }}>
 							Upcoming Visits
 						</Text>
-						<EmptyUpcomingVisits />
-						{/* <UpcomingVisitsCard
-							title={'Property 1'}
-							img={neibourhoodcover2}
-							dateTime={'01/01/2023,10:00 AM'}
-							location={'Pune'}
-						/> */}
+						{upcomingBooking ? (
+							<UpcomingVisitsCard
+								title={upcomingBooking?.unit?.name}
+								img={upcomingBooking?.unit?.images[0]?.url || neibourhoodcover2}
+								dateTime={upcomingBooking?.booking_date}
+								location={upcomingBooking?.unit?.city?.name}
+								setIsOpen={setIsOpen}
+							/>
+						) : (
+							<EmptyUpcomingVisits />
+						)}
 					</Box>
 				</Box>
 				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -165,6 +210,14 @@ export default function MyBookings() {
 						lastPage={completedList?.paginator?.last_page}
 					/>
 				</CustomTabPanel>
+				<ConfirmAction
+					handleClose={() => setIsOpen(false)}
+					title={'Cancel Booking'}
+					body={'Are you sure you want to Cancel this Booking.'}
+					isOpen={isOpen}
+					isPrimary={false}
+					confirmFunc={acceptOrRejectBookings}
+				/>
 			</Box>
 		</>
 	);
@@ -198,6 +251,7 @@ const CELLS_TYPES = [
 			colorPalette: {
 				pending: { color: '#8A6A16', bg: '#FCEDC7' },
 				cancel: { color: '#FF4242', bg: '#FFE5E5' },
+				approved: { bg: 'rgba(0, 142, 165, 0.08)', color: 'rgba(0, 142, 165, 1)' },
 			},
 		},
 	},
@@ -218,8 +272,9 @@ const CELLS_TYPES = [
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {
-	'Filter by status': [
-		{ name: 'Cancel', value: true, id: 'Cancel', status: 18 },
-		{ name: 'Pending', value: true, id: 'Pending', status: 3 },
+	Status: [
+		{ name: 'Cancel', value: true, id: 'Cancel', status: 'cancel' },
+		{ name: 'Pending', value: true, id: 'Pending', status: 'pending' },
+		{ name: 'Approved', value: true, id: 'Approved', status: 'approved' },
 	],
 };

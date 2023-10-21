@@ -49,8 +49,8 @@ const page = () => {
 	const editBookings = async () => {
 		if (bookingDate) {
 			let payload = {
-				day: dayjs(bookingDate).format('L'),
-				time: dayjs(bookingDate).format('HH:mm:ss'),
+				day: dayjs(bookingDate, 'MM/DD/YYYY HH:mm:ss').format('L'),
+				time: dayjs(bookingDate, 'MM/DD/YYYY HH:mm:ss').format('HH:mm:ss'),
 				message: 'Static message',
 			};
 			await editBooking(params?.bookingID, payload)

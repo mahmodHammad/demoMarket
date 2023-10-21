@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Divider, ListItem } from '@mui/material';
 import { Text } from '@/wrappers';
 
@@ -9,6 +9,7 @@ import { visitorNavLinks, adminNavLinks } from '@/component/loggedInLayout/Sideb
 
 export default function Sidebar({ type }) {
 	const pathname = usePathname();
+	console.log(pathname.split('/').includes('admin-bookings'), 'shreyas');
 
 	const links = type === 'visitor' ? visitorNavLinks : adminNavLinks;
 	return (
@@ -28,7 +29,8 @@ export default function Sidebar({ type }) {
 						}}>
 						<Icon
 							sx={{
-								fill: (theme) => (pathname === to ? theme.palette.primary.main : "#232425"),
+								fill: (theme) =>
+									pathname === to || pathname?.split('/')?.includes(to.substring(1)) ? theme.palette.primary.main : '#232425',
 							}}
 						/>
 						<Text
@@ -36,7 +38,8 @@ export default function Sidebar({ type }) {
 							sx={{
 								pl: '16px',
 								fontWeight: 700,
-								color: (theme) => (pathname === to ? theme.palette.primary.main : "#232425"),
+								color: (theme) =>
+									pathname === to || pathname?.split('/')?.includes(to.substring(1)) ? theme.palette.primary.main : '#232425',
 							}}>
 							{text}
 						</Text>
