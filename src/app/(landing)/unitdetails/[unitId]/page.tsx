@@ -21,7 +21,6 @@ import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 
-import PhotoAlbum from 'react-photo-album';
 import { Box, Loading } from '@/wrappers';
 import { GET } from '@/utils/http';
 import { AcTypes, FurnishedTypes, ParkingTypes, stringifyNumber } from '@/component/unitDetails/PropertySpecification';
