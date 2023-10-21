@@ -23,12 +23,12 @@ function MapReadOnly({ latLng }: any) {
 			mapContainerStyle={containerStyle}
 			options={{ draggable: false }}
 			center={{ lat: latLng?.lat, lng: latLng?.lng }}
-			zoom={10}>
+			zoom={17}>
 			<MarkerF
 				position={{ lat: latLng?.lat, lng: latLng?.lng }}
 				icon={{
 					url: 'http://193.122.88.9/static/activemap.svg',
-					scaledSize: new window.google.maps.Size(25, 25),
+					scaledSize: new window.google.maps.Size(40, 40),
 				}}
 				draggable={false} // Set draggable to false to make it view-only
 			/>

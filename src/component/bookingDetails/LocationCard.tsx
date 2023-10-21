@@ -10,19 +10,17 @@ const LocationCard = ({ location }: { location: {} }) => {
 			{location && (
 				<Box
 					sx={{
-						height: { xs: 'inherit', md: '400px' },
+						// height: { xs: 'inherit', md: '300px' },
+						mt: '52px',
 						width: { xs: '300px', md: '100%' },
-						p: '12px',
+						// pt: '12px',
 						borderRadius: '16px',
-						boxShadow: '0px 25px 60px -10px rgba(28, 39, 49, 0.12)',
+						// boxShadow: '0px 25px 60px -10px rgba(28, 39, 49, 0.12)',
 						mb: '120px',
 					}}>
-					<Text variant="h4" mt={'40px'} mb={'16px'}>
-						Map
-					</Text>
 					<Box
 						sx={{
-							height: '245px',
+							height: '400px',
 							width: '100%',
 							position: 'relative',
 							mt: '12px',
@@ -43,11 +41,6 @@ const LocationCard = ({ location }: { location: {} }) => {
 						sx={{ position: 'absolute', mt: '-32px' }}>
 						Open in Google Map
 					</Button>
-					{/* <MapAdress
-				title={'Riyadh saudi arabia'}
-				body={'As Sahafah, Olaya St. 6531, 3059 Riyadh 13321'}
-				mapsLink={'unitData?.maps?.mapsLink'}
-			/> */}
 				</Box>
 			)}
 		</>
