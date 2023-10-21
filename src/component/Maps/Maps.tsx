@@ -115,10 +115,10 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 											lat: item?.map?.latitude,
 											lng: item?.map?.longitude,
 										}}
-										// icon={{
-										// 	url: 'http://193.122.88.9/static/activemap.svg',
-										// 	scaledSize: new window.google.maps.Size(30, 30),
-										// }}
+										icon={{
+											url: 'http://193.122.88.9/static/activemap.svg',
+											scaledSize: new window.google.maps.Size(30, 30),
+										}}
 										// icon={{
 										// 	url: `${
 										// infoWindowPosition?.id === item?.id
