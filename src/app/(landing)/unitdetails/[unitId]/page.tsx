@@ -43,12 +43,12 @@ export const generateImgList = (images) => {
 		return [
 			{
 				img: images[0].url,
-				rows: 2,
+				rows: 3,
 				cols: 6,
 			},
 			{
 				img: images[1].url,
-				rows: 2,
+				rows: 3,
 				cols: 6,
 			},
 		];
