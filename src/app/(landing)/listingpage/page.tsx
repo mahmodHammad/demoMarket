@@ -116,8 +116,8 @@ export default function page() {
 					furnishingStatus: furnishingStatusFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					budgeRange: budgetSliderValues,
 					areaRange: areaSliderValues,
-					location: filteredLocationFilters.filter((f: any) => f.checked).map((f: any) => f.id),
-					cities: filteredNeighbourhoodFilters.filter((f: any) => f.checked).map((f: any) => f.id),
+					cities: filteredLocationFilters.filter((f: any) => f.checked).map((f: any) => f.id),
+					location: filteredNeighbourhoodFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					propertyType: propertyTypeFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					amenities: amenitiesFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					sort: !!!currentSortFilter ? null : currentSortFilter,
@@ -332,7 +332,7 @@ export default function page() {
 	useEffect(() => {
 		if (!!!neighbourhoodSearch) setFilteredNeighbourhoodFilters(neighbourhoodFilters);
 		else
-		setFilteredNeighbourhoodFilters(
+			setFilteredNeighbourhoodFilters(
 				neighbourhoodFilters.filter((neighbourhood: any) =>
 					neighbourhood.label.toLowerCase().startsWith(neighbourhoodSearch.toLowerCase()),
 				),
