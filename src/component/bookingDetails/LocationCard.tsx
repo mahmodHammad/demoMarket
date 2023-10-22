@@ -3,7 +3,7 @@ import React from 'react';
 import MapReadOnly from '../Maps/MapReadOnly';
 import { LocationIcon } from '@/assets';
 
-const LocationCard = ({ location, hasLayout = false }: { location: any; hasLayout: boolean }) => {
+const LocationCard = ({ location, hasLayout = false }: { location: any; hasLayout?: boolean }) => {
 	return (
 		<>
 			{location && (
@@ -17,11 +17,12 @@ const LocationCard = ({ location, hasLayout = false }: { location: any; hasLayou
 					<Box
 						sx={{
 							width: '100%',
+							height: !hasLayout ? '400px' : null,
 							position: 'relative',
 							mt: '12px',
 							borderRadius: '16px',
 						}}>
-						<LocationCardLayout hasLayout location={location}>
+						<LocationCardLayout hasLayout={hasLayout} location={location}>
 							<MapReadOnly viewOnly latLng={{ lat: Number(location?.latitude), lng: Number(location?.longitude) }} />
 						</LocationCardLayout>
 					</Box>
@@ -41,7 +42,6 @@ const LocationCardLayout = ({
 	hasLayout: boolean;
 }) => {
 	if (!hasLayout) return <>{children}</>;
-
 	return (
 		<Box
 			column
