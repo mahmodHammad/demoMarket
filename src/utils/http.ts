@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = process.env.BASE_URL;
+const baseUrl = 'https://marketplace.goatar.com';
 
 type Options = {
 	onSuccess?: (data: any) => void;
@@ -7,7 +7,6 @@ type Options = {
 };
 
 export const get = async (url: string, options: Options = {}) => {
-	const baseUrl = "http://193.122.88.9/api";
 	// const xTenant = process.env.X_TENANT
 	const xTenant = "testDemoOne"
 	try {
@@ -28,7 +27,6 @@ export const get = async (url: string, options: Options = {}) => {
 };
 
 export const post = async (url: string, payload: {}) => {
-	const baseUrl = process.env.BASE_URL;
 	try {
 		const requestOptions = {
 			'Access-Control-Allow-Origin': '*',
@@ -43,7 +41,7 @@ export const post = async (url: string, payload: {}) => {
 			'X-Tenant': 'testDemoOne',
 			body: JSON.stringify(payload),
 		};
-		const response = await fetch(`http://193.122.88.9/api${url}`, requestOptions);
+		const response = await fetch(`${baseUrl}${url}`, requestOptions);
 		if (response.status === 404) {
 			throw new Error('Api not found');
 		} else if (response.status === 500) {
@@ -64,7 +62,7 @@ export const post = async (url: string, payload: {}) => {
 
 // TODO: get base and xTenant from env
 export const http = axios.create({
-	baseURL: 'http://193.122.88.9/api',
+	baseURL: baseUrl,
 	timeout: 10000,
 });
 
