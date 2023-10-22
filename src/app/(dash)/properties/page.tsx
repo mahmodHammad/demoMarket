@@ -2,11 +2,11 @@
 
 import { Box, Text } from '@/wrappers';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from '@/component';
 import TYPES from '@/component/table/dataTypes';
 
-import { Button, Tab, Tabs } from '@mui/material';
+import { Button } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getAllProperties } from './properties-service';
 import { DELETE } from '@/utils/http';
@@ -20,14 +20,10 @@ interface TabPanelProps {
 	value: number;
 }
 
-const DeleteUnit = (id) => {
-	console.log('id', id);
-
-	return DELETE(`/dashboard/properties/${id}`);
-};
+const DeleteUnit = (id: number | string) => DELETE(`/dashboard/properties/${id}`);
 
 export default function Properties() {
-	const [loading, setLoading] = useState<boolean>(false);
+	const [renderedList, setRenderedList] = useState<any>([]);
 
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
@@ -43,7 +39,7 @@ export default function Properties() {
 
 	const [value, setValue] = React.useState(0);
 
-	const handleDeleteUnit = (row) => {
+	const handleDeleteUnit = (row: any) => {
 		DeleteUnit(row?.id)
 			.then((response) => {
 				globalToast('Unit Deleted Successful', 'success');
@@ -58,11 +54,25 @@ export default function Properties() {
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
+	
 	const { data, isLoading: filtersLoading } = useQuery({
 		queryKey: ['LISTEDPROPERTIES', { search, currentPage, status, filter, sort }],
 		queryFn: () => getAllProperties({ search, currentPage, status, filter, sort }),
 	});
-	console.log('HELLLLLO', data);
+
+	useEffect(() => {
+		if (!!data?.list.length)
+			setRenderedList(
+				data?.list.map((i: any) => ({
+					...i,
+					statusName: i?.status?.description || '',
+					statusValue: i?.status?.value || '',
+					complexName: i?.complex?.name || '',
+					buildingName: i?.building?.name || '',
+				})),
+			);
+	}, [data]);
+
 	const queryClient = useQueryClient();
 
 	function CustomTabPanel(props: TabPanelProps) {
@@ -98,13 +108,32 @@ export default function Properties() {
 		},
 		{
 			type: TYPES.STRING,
-			dataKey: 'unit_size',
+			dataKey: 'complexName',
 		},
 		{
-			type: TYPES.DATE,
-			dataKey: 'price',
+			type: TYPES.STRING,
+			dataKey: 'buildingName',
 		},
-
+		{
+			type: TYPES.LABEL,
+			dataKey: 'statusName',
+			options: {
+				// label colors based on value, key is the label text (from data column), value is the colors
+				colorPalette: {
+					Sold: { color: '#0A9458', bg: '#EDFAF4' },
+					Vacant: { color: '#FF4242', bg: '#FFE5E5' },
+					'Sold and lease': { color: 'rgba(0, 142, 165, 1)', bg: 'rgba(0, 142, 165, 0.08)' },
+				},
+			},
+		},
+		{
+			type: TYPES.NUMBER,
+			dataKey: 'noFavProperty',
+		},
+		{
+			type: TYPES.NUMBER,
+			dataKey: 'noBooking',
+		},
 		{
 			type: TYPES.BUTTON,
 			options: {
@@ -123,7 +152,7 @@ export default function Properties() {
 				title: 'Remove ',
 				variant: 'text', // OPTIONAL: buttons variants, default is text
 				textColor: '#FF4242', // OPTIONAL, either semantic or hexa, default is black
-				onClick: (row) => handleDeleteUnit(row), // pass it in case it's not link,
+				onClick: (row: any) => handleDeleteUnit(row), // pass it in case it's not link,
 				sx: { py: 2 },
 			},
 		},
@@ -154,9 +183,9 @@ export default function Properties() {
 						<Table
 							headers={HEADERS}
 							cellsTypes={CELLS_TYPES}
-							data={data?.list}
+							data={renderedList}
 							filterValues={FilterValues}
-							loading={loading}
+							loading={filtersLoading}
 							search={search}
 							handleSearch={handleSearch}
 							currentPage={currentPage}
@@ -186,21 +215,13 @@ export default function Properties() {
 
 // -------------------HOW TO DESCRIBE THE TABLE AND ITS FUNCTIONALITY---------------------------
 
-// actual table data
-const DATA = [
-	{ id: 1, type: 'Rent Unit', method: 'Cash', date: '12-10-2022', status: 'Pay Down', amount: 'SAR 13500' },
-];
-
-const DATA2 = [{ id: 1, type: 'Buy Unit', method: 'Cash', date: '12-10-2022', status: 'Pending', amount: 'SAR 12100' }];
-
 const HEADERS = [
 	'Unit Number',
-	'Unit size',
-	'Price',
-	// 'City',
-	// 'Status',
-	// 'No. of Favourite',
-	// 'No. of Booking',
+	'Community',
+	'Building',
+	'Status',
+	'No. of Favourites',
+	'No. of Bookings',
 	'',
 	'',
 ];

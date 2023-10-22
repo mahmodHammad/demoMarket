@@ -1,5 +1,6 @@
 const TYPES = {
 	STRING: 'string',
+	NUMBER: 'number',
 	DATE: 'date',
 	LABEL: 'label',
 	BUTTON: 'button',

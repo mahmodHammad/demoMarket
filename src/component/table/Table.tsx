@@ -107,6 +107,7 @@ const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 				{cellsTypes?.map((c: any, i: number) => (
 					<StyledTableCell key={i}>
 						{c.type === TYPES.STRING && <>{(c?.dataKey && getPropByString(row, c?.dataKey)) || '--'} </>}
+						{c.type === TYPES.NUMBER && <>{(c?.dataKey && getPropByString(row, c?.dataKey)) || 0} </>}
 						{c.type === TYPES.DATE && <>{(c?.dataKey && getPropByString(row, c?.dataKey)) || '--'}</>}
 						{c.type === TYPES.LABEL && (
 							<Label status={c?.dataKey && getPropByString(row, c?.dataKey)} labelPalette={c.options?.colorPalette} />
