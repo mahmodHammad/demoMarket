@@ -3,6 +3,7 @@ import AtarColoredLogo from '@/assets/icons/AtarColoredLogo';
 import { Box } from '@/wrappers/layouts';
 import MuiDrawer from '@mui/material/Drawer';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
+import Link from 'next/link';
 
 const drawerWidth: number = 240;
 const open = true;
@@ -56,6 +57,8 @@ const DrawerContainer = ({ type }) => {
 				display: { xs: 'none', sm: 'block' },
 			}}>
 			<Box
+				component={Link}
+				href="/"
 				sx={{
 					paddingLeft: '24px',
 					marginTop: '24px',
