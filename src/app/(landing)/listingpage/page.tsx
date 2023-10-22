@@ -117,7 +117,7 @@ export default function page() {
 					budgeRange: budgetSliderValues,
 					areaRange: areaSliderValues,
 					location: filteredLocationFilters.filter((f: any) => f.checked).map((f: any) => f.id),
-					neighbourhood: filteredNeighbourhoodFilters.filter((f: any) => f.checked).map((f: any) => f.id),
+					cities: filteredNeighbourhoodFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					propertyType: propertyTypeFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					amenities: amenitiesFilters.filter((f: any) => f.checked).map((f: any) => f.id),
 					sort: !!!currentSortFilter ? null : currentSortFilter,
