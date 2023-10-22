@@ -119,9 +119,13 @@ export default function Properties() {
 			dataKey: 'statusName',
 			options: {
 				// label colors based on value, key is the label text (from data column), value is the colors
+				// TODO: map new labels colors
 				colorPalette: {
+					Leased: { color: '#0A9458', bg: '#EDFAF4' },
+					Renovation: { color: '#0A9458', bg: '#EDFAF4' },
 					Sold: { color: '#0A9458', bg: '#EDFAF4' },
 					Vacant: { color: '#FF4242', bg: '#FFE5E5' },
+					Unavailable: { color: '#FF4242', bg: '#FFE5E5' },
 					'Sold and lease': { color: 'rgba(0, 142, 165, 1)', bg: 'rgba(0, 142, 165, 0.08)' },
 				},
 			},
