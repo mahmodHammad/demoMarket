@@ -71,7 +71,7 @@ function ResponsiveAppBar() {
 					</Box>
 					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box>
-							<Button
+							{/* <Button
 								component={Link}
 								href="/dashboard"
 								sx={{ color: '#fff', fontSize: '18px', mr: '12px' }}
@@ -84,7 +84,7 @@ function ResponsiveAppBar() {
 								sx={{ color: '#fff', fontSize: '18px', mr: '12px' }}
 								size="medium">
 								Visitor
-							</Button>
+							</Button> */}
 							{!isAuthed ? (
 								<>
 									<Button
