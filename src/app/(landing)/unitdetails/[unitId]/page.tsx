@@ -171,6 +171,21 @@ export default function Unitdetails({ location, rentType }: Props) {
 			value: true,
 		},
 		{
+			title: 'BBq Grill',
+			icon: <FrontSide />,
+			value: true,
+		},
+		{
+			title: 'Shower',
+			icon: <FrontSide />,
+			value: true,
+		},
+		{
+			title: 'Patio',
+			icon: <FrontSide />,
+			value: true,
+		},
+		{
 			title: 'Pool',
 			icon: <Room />,
 			value: true,
@@ -255,7 +270,7 @@ export default function Unitdetails({ location, rentType }: Props) {
 							</Grid>
 
 							<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
-							<UnitSpecifications Feature={amenityData} />
+							{/* <UnitSpecifications Feature={amenityData} /> */}
 							<Features Feature={amenities} />
 							<UnitMap location={unit?.map} />
 						</Grid>
