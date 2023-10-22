@@ -6,14 +6,18 @@ import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import React, { useState } from 'react';
 import { AdminPropertiesList, PopUpCard, UnitsCard } from '@/component';
 import Succesgreen from '@/assets/icons/Succesgreen';
+import successImg from '@/assets/images/success.png';
 import { useQuery } from '@tanstack/react-query';
 import { addPropertyToMarketplace, getAllAvailableProperties } from '../properties-service';
 import PaginationWrapper from '@/component/table/Resources/Components/PaginationWrapper';
 import FilterPopup from '@/component/table/Resources/Components/FilterPopup';
 import Search from '@/component/table/Resources/Components/Search';
 import { globalToast } from '@/utils/toast';
+import { useRouter } from 'next/navigation';
 
 export default function Properties() {
+	const { push } = useRouter();
+
 	const [openPopup, setopenPopup] = useState(false);
 	const handleClickOpen = async (id) => {
 		await addPropertyToMarketplace(id)
@@ -50,14 +54,17 @@ export default function Properties() {
 	return (
 		<>
 			<PopUpCard
-				handleButton2={() => setopenPopup(false)}
 				handleButton1={() => setopenPopup(false)}
-				color={'green'}
-				icon={<Succesgreen />}
-				title={'Unit List Successful'}
+				handleButton2={() => {
+					push('/listingpage');
+					setopenPopup(false);
+				}}
+				color={'#1EC27B'}
+				icon={<Succesgreen sx={{ width: 50, height: 50 }} />}
+				title={'Unit list Successful!'}
 				body={''}
 				button1={'Done'}
-				button2={'View on MarketPlace'}
+				button2={'View On Market'}
 				isOpen={openPopup}
 				setopenPopup={setopenPopup}
 			/>

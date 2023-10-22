@@ -32,7 +32,7 @@ export default function PopUpCard({ handleClose, handleButton1,handleButton2, is
 					<Box center height={'80px'} width={'80px'} borderRadius={'50%'} bgcolor={color}>
 						{icon}
 					</Box>
-					<Text mt={'10px'} variant="h4">
+					<Text mt={'16px'} variant="h4">
 						{title || 'Unit list Successful!'}
 					</Text>
 					<Text variant="body1">{body || ''}</Text>
@@ -55,7 +55,7 @@ export default function PopUpCard({ handleClose, handleButton1,handleButton2, is
 						sx={{
 							mt: '20px',
 							fontSize: '16px',
-
+							fontWeight: 'bold',
 							color: 'black',
 							'&.MuiButtonBase-root:hover': {
 								bgcolor: 'transparent',
