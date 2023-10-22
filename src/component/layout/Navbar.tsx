@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 
 function ResponsiveAppBar() {
-	const { openLoginModal } = useAuth();
+	const { openLoginModal, isAuthed } = useAuth();
 
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
@@ -85,18 +85,35 @@ function ResponsiveAppBar() {
 								size="medium">
 								Visitor
 							</Button>
-							<Button onClick={handleLoginClicked} sx={{ color: '#fff', fontSize: '20px', mr: '12px' }} size="medium">
-								Login
-							</Button>
-							<Button
-								component={Link}
-								href="/signup"
-								size="medium"
-								variant="outlined"
-								whiteborder
-								sx={{ fontSize: '20px' }}>
-								Signup
-							</Button>
+							{!isAuthed ? (
+								<>
+									<Button
+										onClick={handleLoginClicked}
+										sx={{ color: '#fff', fontSize: '20px', mr: '12px' }}
+										size="medium">
+										Login
+									</Button>
+									<Button
+										component={Link}
+										href="/signup"
+										size="medium"
+										variant="outlined"
+										whiteborder
+										sx={{ fontSize: '20px' }}>
+										Signup
+									</Button>
+								</>
+							) : (
+								<Button
+									component={Link}
+									href="/my-profile"
+									size="medium"
+									variant="outlined"
+									whiteborder
+									sx={{ fontSize: '20px' }}>
+									My Account
+								</Button>
+							)}
 						</Box>
 					</Box>
 
