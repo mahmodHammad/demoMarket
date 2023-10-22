@@ -59,7 +59,7 @@ const listingBody = ({
 		};
 		toggleLike(body);
 	};
-
+	
 	return (
 		<Box column fullWidth>
 			<Text variant="h4">Properties in Saudi Arabia</Text>
@@ -105,10 +105,7 @@ const listingBody = ({
 				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
 					{data?.list?.map((d: any, index: number) => (
 						<Grid item xs={12} md={6} key={index}>
-							<UnitsCard
-								data={d}
-								toggleLike={handleLikeToggle}
-							/>
+							<UnitsCard data={d} toggleLike={handleLikeToggle} />
 						</Grid>
 					))}
 				</Grid>

@@ -20,7 +20,7 @@ export default function RecentlyAdded() {
 	// console.log("response",response?.data?.list)
 	// const dataArray = response?.data?.list; // Get the array of objects
 	const queryClient = useQueryClient();
-	const { data, isLoading: filtersLoading } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: [keys.RECENTLYADDED],
 		queryFn: getRecentlyAdded,
 	});
@@ -40,6 +40,7 @@ export default function RecentlyAdded() {
 			title="Recently Added"
 			body="Check out our latest Properties "
 			link="/listingpage?sort=3"
+			isLoading={isLoading}
 		/>
 	);
 }
