@@ -6,6 +6,7 @@ import NeighbourhoodCard from '@/component/cards/NeighbourhoodCard';
 import Carousel from '@/component/Carousel';
 import { NeighbourhoodSkeleton, UnitsCard } from '@/component';
 import CardSkeleton from '@/component/cards/CardSkeleton';
+import { Grid } from '@mui/material';
 
 interface datatyle {
 	title: string;
@@ -46,7 +47,13 @@ export default function HomeCardsContainer({
 					mt: { md: '34px', xs: '22px', width: '100%' },
 				}}>
 				{isLoading ? (
-					<CardSkeleton height={'inherit'} />
+					<Grid container spacing={'28px'}>
+						{Array.from({ length: 4 }).map((_, index: number) => (
+							<Grid item xs={6} md={3} key={index}>
+								<CardSkeleton height={'inherit'} />
+							</Grid>
+						))}
+					</Grid>
 				) : (
 					<Carousel
 						items={data?.map((d: any, index: number) => (
