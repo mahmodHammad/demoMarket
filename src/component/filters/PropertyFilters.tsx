@@ -149,7 +149,7 @@ const PropertyFilters = ({
 
 				<AccordionChipsFilter
 					defaultExpanded={!isMobileView}
-					header="Neighborhoods"
+					header="Neighbourhoods"
 					filterName="neighborhood"
 					filters={filteredNeighbourhoodFilters}
 					onFilterStateChange={(_, v) =>

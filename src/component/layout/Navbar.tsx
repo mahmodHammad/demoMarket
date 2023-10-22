@@ -107,7 +107,7 @@ function ResponsiveAppBar() {
 								<Button
 									component={Link}
 									href="/my-bookings"
-									size="medium"
+									size="small"
 									variant="outlined"
 									whiteborder
 									sx={{ fontSize: '20px' }}>
