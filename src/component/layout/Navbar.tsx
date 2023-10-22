@@ -106,7 +106,7 @@ function ResponsiveAppBar() {
 							) : (
 								<Button
 									component={Link}
-									href="/my-profile"
+									href="/my-bookings"
 									size="medium"
 									variant="outlined"
 									whiteborder
