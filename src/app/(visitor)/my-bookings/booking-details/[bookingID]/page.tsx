@@ -194,7 +194,7 @@ const page = () => {
 								)}
 							</Grid>
 							<Grid item contaier xs={12} md={4} display={{ xs: 'none', md: 'flex' }}>
-								<LocationCard location={data?.unit?.map} />
+								<LocationCard location={data?.unit?.map} hasLayout />
 							</Grid>
 						</Grid>
 						<DateTimeModal

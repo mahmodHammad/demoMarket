@@ -1,49 +1,80 @@
 import { Box, Button, Text } from '@/wrappers';
 import React from 'react';
-import MapsView from '../Maps/MapsView';
-import MapAdress from '../Maps/MapAdress';
 import MapReadOnly from '../Maps/MapReadOnly';
+import { LocationIcon } from '@/assets';
 
-const LocationCard = ({ location }: { location: {} }) => {
+const LocationCard = ({ location, hasLayout = false }: { location: any; hasLayout: boolean }) => {
 	return (
 		<>
 			{location && (
 				<Box
 					sx={{
-						// height: { xs: 'inherit', md: '300px' },
 						mt: '52px',
 						width: { xs: '300px', md: '100%' },
-						// pt: '12px',
 						borderRadius: '16px',
-						// boxShadow: '0px 25px 60px -10px rgba(28, 39, 49, 0.12)',
 						mb: '120px',
 					}}>
 					<Box
 						sx={{
-							height: '400px',
 							width: '100%',
 							position: 'relative',
 							mt: '12px',
 							borderRadius: '16px',
-							overflow: 'hidden',
 						}}>
-						<MapReadOnly
-							viewOnly={true}
-							latLng={{ lat: Number(location?.latitude), lng: Number(location?.longitude) }}
-						/>
+						<LocationCardLayout hasLayout location={location}>
+							<MapReadOnly viewOnly latLng={{ lat: Number(location?.latitude), lng: Number(location?.longitude) }} />
+						</LocationCardLayout>
 					</Box>
-					<Button
-						size="small"
-						variant="contained"
-						component="a"
-						target="_blank"
-						href={location?.mapsLink}
-						sx={{ position: 'absolute', mt: '-32px' }}>
-						Open in Google Map
-					</Button>
 				</Box>
 			)}
 		</>
+	);
+};
+
+const LocationCardLayout = ({
+	children,
+	location,
+	hasLayout = false,
+}: {
+	children: React.ReactNode;
+	location: any;
+	hasLayout: boolean;
+}) => {
+	if (!hasLayout) return <>{children}</>;
+
+	return (
+		<Box
+			column
+			ycenter
+			sx={{
+				padding: '16px',
+				boxShadow: '0px 25px 60px -10px rgba(28, 39, 49, 0.12)',
+				borderRadius: '16px',
+			}}>
+			<Text variant="h5" mb={'12px'} alignSelf={'flex-start'}>
+				Location
+			</Text>
+			<Box fullWidth height={'245px'} sx={{ borderRadius: '16px', overflow: 'hidden' }}>
+				{children}
+			</Box>
+			<Box fullWidth row ycenter mt={'37px'}>
+				<LocationIcon sx={{ width: '24px', height: '24px', marginRight: '8px' }} />
+				<Box column>
+					<Text variant="h6">{location?.districtName}</Text>
+					<Text variant="body1">{location?.formattedAddress}</Text>
+				</Box>
+			</Box>
+
+			<Button
+				size="large"
+				variant="text"
+				component="a"
+				target="_blank"
+				href={location?.mapsLink}
+				sx={{ marginTop: '16px' }}>
+				View on Google Maps
+			</Button>
+		</Box>
 	);
 };
 
