@@ -32,7 +32,7 @@ export default function HomeCardsContainer({
 	isLoading,
 }: types) {
 	console.log('home1', isLoading);
-	isLoading = true;
+	// isLoading = true;
 	console.log('hoem2', isLoading);
 
 	return (
@@ -45,30 +45,34 @@ export default function HomeCardsContainer({
 				sx={{
 					mt: { md: '34px', xs: '22px', width: '100%' },
 				}}>
-				<Carousel
-					items={data?.map((d: any, index: number) => (
-						<Box
-							key={index}
-							sx={{
-								pr: '20px',
-								display: 'flex',
-								width: { xs: '235px', md: '373px' },
-								mb: '15px',
-							}}>
-							{hasneighbourhoods ? (
-								isLoading ? (
-									<NeighbourhoodSkeleton height={'inherit'} />
+				{isLoading ? (
+					<CardSkeleton height={'inherit'} />
+				) : (
+					<Carousel
+						items={data?.map((d: any, index: number) => (
+							<Box
+								key={index}
+								sx={{
+									pr: '20px',
+									display: 'flex',
+									width: { xs: '235px', md: '373px' },
+									mb: '15px',
+								}}>
+								{hasneighbourhoods ? (
+									isLoading ? (
+										<NeighbourhoodSkeleton height={'inherit'} />
+									) : (
+										<NeighbourhoodCard data={d} />
+									)
+								) : isLoading ? (
+									<CardSkeleton height={'inherit'} />
 								) : (
-									<NeighbourhoodCard data={d} />
-								)
-							) : isLoading ? (
-								<CardSkeleton height={'inherit'} />
-							) : (
-								<UnitsCard data={d} toggleLike={handleToggleLike} />
-							)}
-						</Box>
-					))}
-				/>
+									<UnitsCard data={d} toggleLike={handleToggleLike} />
+								)}
+							</Box>
+						))}
+					/>
+				)}
 			</Box>
 		</Box>
 	);
