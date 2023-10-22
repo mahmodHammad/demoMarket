@@ -4,7 +4,8 @@ import React from 'react';
 import HomeTitleBody from './HomeTitleBody';
 import NeighbourhoodCard from '@/component/cards/NeighbourhoodCard';
 import Carousel from '@/component/Carousel';
-import { UnitsCard } from '@/component';
+import { NeighbourhoodSkeleton, UnitsCard } from '@/component';
+import CardSkeleton from '@/component/cards/CardSkeleton';
 
 interface datatyle {
 	title: string;
@@ -18,9 +19,22 @@ interface types {
 	link: string;
 	data: any;
 	hasneighbourhoods?: boolean;
+	isLoading: boolean;
 }
 
-export default function HomeCardsContainer({ title, body, link, data, hasneighbourhoods, handleToggleLike }: types) {
+export default function HomeCardsContainer({
+	title,
+	body,
+	link,
+	data,
+	hasneighbourhoods,
+	handleToggleLike,
+	isLoading,
+}: types) {
+	console.log('home1', isLoading);
+	isLoading = true;
+	console.log('hoem2', isLoading);
+
 	return (
 		<Box
 			sx={{
@@ -42,7 +56,13 @@ export default function HomeCardsContainer({ title, body, link, data, hasneighbo
 								mb: '15px',
 							}}>
 							{hasneighbourhoods ? (
-								<NeighbourhoodCard data={d} />
+								isLoading ? (
+									<NeighbourhoodSkeleton height={'inherit'} />
+								) : (
+									<NeighbourhoodCard data={d} />
+								)
+							) : isLoading ? (
+								<CardSkeleton height={'inherit'} />
 							) : (
 								<UnitsCard data={d} toggleLike={handleToggleLike} />
 							)}

@@ -71,3 +71,4 @@ export { default as PopUpCard } from './cards/PopUpCard';
 export { default as AdminPropertiesList } from './admin/AdminPropertiesList';
 export { default as AdminVisitors } from './dashboard/AdminVisitors';
 export * as PropertySpecification from './unitDetails/PropertySpecification';
+export { default as NeighbourhoodSkeleton } from './cards/NeighbourhoodSkeleton';

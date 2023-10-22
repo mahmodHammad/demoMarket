@@ -18,7 +18,7 @@ export default function MostViewed() {
 	// const dataArray = response?.data?.list; // Get the array of objects
 	const queryClient = useQueryClient();
 
-	const { data, isLoading: filtersLoading } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: [keys.MOSTVIEWED],
 		queryFn: getMostViewed,
 	});
@@ -31,6 +31,8 @@ export default function MostViewed() {
 		queryClient.invalidateQueries({ queryKey: [keys.MOSTVIEWED] });
 		queryClient.invalidateQueries({ queryKey: [keys.RECENTLYADDED] });
 	};
+
+
 	return (
 		<HomeCardsContainer
 			data={data?.list}
@@ -38,6 +40,7 @@ export default function MostViewed() {
 			body="Discover our most viewed Properties"
 			link="/listingpage?sort=5"
 			handleToggleLike={handleToggleLike}
+			isLoading={isLoading}
 		/>
 	);
 }
