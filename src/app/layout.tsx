@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body>
-			<Script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ&libraries=places,geometry" />
+			{/* <Script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ&libraries=places,geometry" /> */}
 				<AuthProvider>
 					<ToastContainer />
 					<TanstackProvider>{children}</TanstackProvider>
