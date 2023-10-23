@@ -35,7 +35,7 @@ export default function Properties() {
 	};
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [status, setStatus] = useState<number[]>([]);
+	const [status, setStatus] = useState({});
 	const [filter, setFilter] = useState('0');
 
 	const handleSearch = (v: string) => setSearch(v);
@@ -48,7 +48,7 @@ export default function Properties() {
 		refetch,
 	} = useQuery({
 		queryKey: ['LISTEDPROPERTIES', { search, currentPage, status, filter }],
-		queryFn: () => getAllAvailableProperties({ search, currentPage, status, filter }),
+		queryFn: () => getAllAvailableProperties({ search, currentPage, status: status?.['Filter by status']?.join(', '), filter }),
 	});
 
 	return (

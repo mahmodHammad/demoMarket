@@ -33,15 +33,20 @@ export default function TimeSlot({ startTime, endTime, setSelectedHours, handleT
 		<div
 			style={{
 				width: '100%',
-				overflowX: 'auto',
-				overflowY: 'hidden',
-				height: '100%',
+				// overflowX: 'auto',
+				overflowY: 'auto',
+				maxHeight: '150px',
+				'::-webkit-scrollbar':{
+					display:'none'
+				}
 			}}>
 			<ul
 				style={{
 					display: 'flex',
+					flexFlow: 'row wrap',
+					rowGap: '10px',
 					listStyle: 'none',
-					padding: 0,
+					// padding: 0,
 				}}>
 				{hoursBetween.map((hour, index) => {
 					return (
