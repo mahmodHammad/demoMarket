@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'https://marketplace.goatar.com';
+const baseUrl = 'https://marketplace.goatar.com/api';
 
 type Options = {
 	onSuccess?: (data: any) => void;
