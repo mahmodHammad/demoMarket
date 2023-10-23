@@ -118,7 +118,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 									}}
 									icon={{
 										url: 'http://193.122.88.9/static/activemap.svg',
-										scaledSize: new window.google.maps.Size(30, 30),
+										scaledSize: new window.google?.maps?.Size(30, 30),
 									}}
 									// icon={{
 									// 	url: `${
@@ -132,7 +132,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 										title: `Custom marker ${index}`,
 										icon: {
 											url: 'http://193.122.88.9/static/activemap.svg',
-											scaledSize: new window.google.maps.Size(30, 30),
+											scaledSize: new window.google?.maps?.Size(30, 30),
 										},
 									}}
 									title={`Custom marker ${index}`}
@@ -148,7 +148,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 							lng: infoWindowPosition?.map?.longitude,
 						}}
 						options={{
-							pixelOffset: new window.google.maps.Size(0, -20),
+							pixelOffset: new window.google?.maps?.Size(0, -20),
 						}}
 						onCloseClick={() => setInfoWindowPosition(null)}>
 						<UnitsCard imgHeight="180px" height="400px" width="250px" data={infoWindowPosition} />
