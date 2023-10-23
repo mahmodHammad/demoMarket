@@ -9,7 +9,7 @@ const LocationCard = ({ location, hasLayout = false }: { location: any; hasLayou
 			{location && (
 				<Box
 					sx={{
-						mt: '52px',
+						mt: '26px',
 						width: { xs: '300px', md: '100%' },
 						borderRadius: '16px',
 						mb: '120px',
