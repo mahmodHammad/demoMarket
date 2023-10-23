@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Box, Text } from '@/wrappers';
 import { ButtonBase, IconButton } from '@mui/material';
 import theme from '@/ThemeRegistry/theme';
-import { SearchIcon, Location } from '@/assets';
+import { SearchIcon, GPS } from '@/assets';
 import Link from 'next/link';
 import TextInput from '../forms/TextInput';
 
@@ -53,6 +53,7 @@ export default function SearchBox({ propertySearch, setPropertySearch, isRent, s
 			<Box
 				row
 				xbetween
+				ycenter
 				sx={{
 					height: '102px',
 					borderRadius: '0px, 20px, 20px, 20px',
@@ -61,7 +62,6 @@ export default function SearchBox({ propertySearch, setPropertySearch, isRent, s
 					py: '28px',
 				}}>
 				<Box row center fullWidth>
-					{/* <Text variant="label">Location</Text> */}
 					{/* // TODO: style search bar */}
 					<TextInput
 						value={propertySearch}
@@ -81,8 +81,14 @@ export default function SearchBox({ propertySearch, setPropertySearch, isRent, s
 						center
 						sx={{ cursor: 'pointer' }}
 						mr={'18px'}>
-						<Location color="primary" sx={{ color: theme.palette.primary.main, fill: theme.palette.primary.main }} />
+						<GPS
+							sx={{
+								color: theme.palette.primary.main,
+								fill: theme.palette.primary.main,
+							}}
+						/>
 					</Box>
+
 					<Box
 						width={{ md: '54px' }}
 						height={{ md: '54px' }}
@@ -92,6 +98,8 @@ export default function SearchBox({ propertySearch, setPropertySearch, isRent, s
 						<IconButton size="large">
 							<SearchIcon
 								sx={{
+									width: '25px',
+									height: '25px',
 									stroke: 'white',
 									color: 'white',
 								}}
