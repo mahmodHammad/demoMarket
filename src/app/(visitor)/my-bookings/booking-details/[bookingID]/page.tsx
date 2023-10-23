@@ -158,7 +158,7 @@ const page = () => {
 											height: '200px',
 											objectFit: 'cover',
 										}}>
-										<ReturnQrCode text={`http://localhost:3000/my-bookings/booking-details/${params?.bookingID}`} />
+										<ReturnQrCode text={`https://atarmarket.vercel.app/my-bookings/booking-details/${params?.bookingID}`} />
 									</Box>
 								</Box>
 								<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>

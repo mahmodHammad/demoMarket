@@ -76,7 +76,7 @@ export default function UnitHeader({ id, logo, title, location, liked, handleTog
 					sites={['copy', 'whatsapp', 'facebook', 'twitter', 'telegram', 'linkedin', 'mail']}
 					data={{
 						text: 'unit details',
-						url: `http://localhost:3000/unitdetails/${id}`,
+						url: `https://atarmarket.vercel.app/unitdetails/${id}`,
 						title: 'unit details',
 					}}
 					// onClick={() => console.log('shared successfully!')}
