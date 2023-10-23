@@ -14,6 +14,7 @@ const center = {
 };
 
 function MapReadOnly({ latLng }: any) {
+	console.log('refresh nounce');
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
