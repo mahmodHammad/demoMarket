@@ -33,10 +33,12 @@ const infoWindowOffset = {
 };
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
+	console.log('shreyas main push')
 	let mapRef = null;
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
+		libraries: ['places', 'geometry'],
 	});
 	const [isMapLoaded, setIsMapLoaded] = useState(false);
 
@@ -89,74 +91,74 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 	}, []);
 
 	return (
-		<LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
-			{isMapLoaded && isLoaded ? (
-				<GoogleMap
-					mapContainerStyle={containerStyle}
-					center={center}
-					zoom={inLandingPage ? 16 : 14}
-					options={{
-						gestureHandling: inLandingPage ? null : 'greedy',
-						zoomControlOptions: { position: 9 },
-						scaleControl: true,
-						streetViewControl: false,
-						fullscreenControl: false,
-					}}
-					onLoad={onLoad}
-					onUnmount={onUnmount}>
-					{markersList?.length &&
-						markersList?.map(
-							(item, index) =>
-								item?.map && (
-									<MarkerF
-										key={index}
-										position={{
-											lat: item?.map?.latitude,
-											lng: item?.map?.longitude,
-										}}
-										icon={{
+		// <LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
+		isMapLoaded && isLoaded ? (
+			<GoogleMap
+				mapContainerStyle={containerStyle}
+				center={center}
+				zoom={inLandingPage ? 16 : 14}
+				options={{
+					gestureHandling: inLandingPage ? null : 'greedy',
+					zoomControlOptions: { position: 9 },
+					scaleControl: true,
+					streetViewControl: false,
+					fullscreenControl: false,
+				}}
+				onLoad={onLoad}
+				onUnmount={onUnmount}>
+				{markersList?.length &&
+					markersList?.map(
+						(item, index) =>
+							item?.map && (
+								<MarkerF
+									key={index}
+									position={{
+										lat: item?.map?.latitude,
+										lng: item?.map?.longitude,
+									}}
+									icon={{
+										url: 'http://193.122.88.9/static/activemap.svg',
+										scaledSize: new window.google.maps.Size(30, 30),
+									}}
+									// icon={{
+									// 	url: `${
+									// infoWindowPosition?.id === item?.id
+									// 	? 'http://193.122.88.9/static/activemap.svg'
+									// 	: 'http://193.122.88.9/static/notactivemap.svg'
+									// 	}`,
+									// 	scaledSize: new window.google.maps.Size(30, 30),
+									// }}
+									options={{
+										title: `Custom marker ${index}`,
+										icon: {
 											url: 'http://193.122.88.9/static/activemap.svg',
 											scaledSize: new window.google.maps.Size(30, 30),
-										}}
-										// icon={{
-										// 	url: `${
-										// infoWindowPosition?.id === item?.id
-										// 	? 'http://193.122.88.9/static/activemap.svg'
-										// 	: 'http://193.122.88.9/static/notactivemap.svg'
-										// 	}`,
-										// 	scaledSize: new window.google.maps.Size(30, 30),
-										// }}
-										options={{
-											title: `Custom marker ${index}`,
-											icon: {
-												url: 'http://193.122.88.9/static/activemap.svg',
-												scaledSize: new window.google.maps.Size(30, 30),
-											},
-										}}
-										title={`Custom marker ${index}`}
-										onClick={() => setInfoWindowPosition(item)}
-										draggable={false} // Set draggable to false to make it view-only
-									/>
-								),
-						)}
-					{infoWindowPosition && (
-						<InfoWindow
-							position={{
-								lat: infoWindowPosition?.map?.latitude,
-								lng: infoWindowPosition?.map?.longitude,
-							}}
-							options={{
-								pixelOffset: new window.google.maps.Size(0, -20),
-							}}
-							onCloseClick={() => setInfoWindowPosition(null)}>
-							<UnitsCard imgHeight="180px" height="400px" width="250px" data={infoWindowPosition} />
-						</InfoWindow>
+										},
+									}}
+									title={`Custom marker ${index}`}
+									onClick={() => setInfoWindowPosition(item)}
+									draggable={false} // Set draggable to false to make it view-only
+								/>
+							),
 					)}
-				</GoogleMap>
-			) : (
-				<></>
-			)}
-		</LoadScript>
+				{infoWindowPosition && (
+					<InfoWindow
+						position={{
+							lat: infoWindowPosition?.map?.latitude,
+							lng: infoWindowPosition?.map?.longitude,
+						}}
+						options={{
+							pixelOffset: new window.google.maps.Size(0, -20),
+						}}
+						onCloseClick={() => setInfoWindowPosition(null)}>
+						<UnitsCard imgHeight="180px" height="400px" width="250px" data={infoWindowPosition} />
+					</InfoWindow>
+				)}
+			</GoogleMap>
+		) : (
+			<></>
+		)
+		// </LoadScript>
 	);
 }
 export default React.memo(MyComponent);
