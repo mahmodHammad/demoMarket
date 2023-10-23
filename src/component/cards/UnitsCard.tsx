@@ -15,7 +15,7 @@ interface data {
 	images: any;
 	price: String;
 	city: any;
-	district: any;
+	complex: any;
 	is_fav: Boolean;
 }
 
@@ -37,10 +37,10 @@ export default function UnitsCard({
 	onClick,
 	data,
 }: Props) {
-	const { id, name: title, unit_size: area, images, price, city, district, is_fav: liked } = data;
+	const { id, name: title, unit_size: area, images, price, city, is_fav: liked, complex } = data;
 	const image = images && images[0]?.url ? images[0].url : defaultimg;
 
-	const renderLocation = [city?.name, district?.name];
+	const renderLocation = [city?.name, complex?.name];
 	const newlocation = city ? renderLocation?.join(', ') : '--';
 	return (
 		<Box
