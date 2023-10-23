@@ -16,36 +16,36 @@ import NotificationIcon from '@/assets/icons/Notifications';
 import NotificationCard from '../cards/NotificationCard';
 
 const data = [
-	{
-		title: 'Titile',
-		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
-		read: true,
-		date: 'Today at 10:00 AM',
-	},
-	{
-		title: 'Titile',
-		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
-		read: false,
-		date: 'Today at 10:00 AM',
-	},
-	{
-		title: 'Titile',
-		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
-		read: false,
-		date: 'Today at 10:00 AM',
-	},
-	{
-		title: 'Titile',
-		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
-		read: false,
-		date: 'Today at 10:00 AM',
-	},
-	{
-		title: 'Titile',
-		content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
-		read: false,
-		date: 'Today at 10:00 AM',
-	},
+	// {
+	// 	title: 'Titile',
+	// 	content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+	// 	read: true,
+	// 	date: 'Today at 10:00 AM',
+	// },
+	// {
+	// 	title: 'Titile',
+	// 	content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+	// 	read: false,
+	// 	date: 'Today at 10:00 AM',
+	// },
+	// {
+	// 	title: 'Titile',
+	// 	content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+	// 	read: false,
+	// 	date: 'Today at 10:00 AM',
+	// },
+	// {
+	// 	title: 'Titile',
+	// 	content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+	// 	read: false,
+	// 	date: 'Today at 10:00 AM',
+	// },
+	// {
+	// 	title: 'Titile',
+	// 	content: 'Refrigerator is not cooling for the past two days and there is a bad smell coming ',
+	// 	read: false,
+	// 	date: 'Today at 10:00 AM',
+	// },
 ];
 
 const PopupDetails = ({ name, image }: { name: string; image: string }) => {
@@ -114,7 +114,7 @@ const Notifications = () => {
 		<Box ref={myRef}>
 			<ButtonBase aria-describedby={id} className="rounded-full" onClick={handleClick}>
 				<Badge
-					badgeContent={2}
+					badgeContent={0}
 					color="error"
 					style={{ cursor: 'pointer' }}
 					anchorOrigin={{
