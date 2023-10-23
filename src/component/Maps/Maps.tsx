@@ -2,7 +2,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { GoogleMap, InfoWindow, MarkerF, Marker, LoadScript, useJsApiLoader, MarkerClustererF } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import { Loading } from '@/wrappers';
 
 const containerStyle = {
@@ -34,12 +33,10 @@ const infoWindowOffset = {
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
 	let mapRef = null;
-	console.log('marker chrome shr111')
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
 		libraries: ['places', 'geometry'],
-		// nonce: 'nonce-single-value',
 	});
 	const [isMapLoaded, setIsMapLoaded] = useState(false);
 	useEffect(() => {
@@ -91,7 +88,6 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 	}, []);
 
 	return (
-		// <LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
 		isMapLoaded && isLoaded && window?.google?.maps ? (
 			<GoogleMap
 				mapContainerStyle={containerStyle}
@@ -158,7 +154,6 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 		) : (
 			<></>
 		)
-		// </LoadScript>
 	);
 }
 export default React.memo(MyComponent);
