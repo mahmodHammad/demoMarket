@@ -34,6 +34,7 @@ const infoWindowOffset = {
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
 	let mapRef = null;
+	console.log('nonce-single-value')
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -41,7 +42,6 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 		nonce: 'nonce-single-value',
 	});
 	const [isMapLoaded, setIsMapLoaded] = useState(false);
-	console.log('nonce-single-value')
 	useEffect(() => {
 		if (window.google && window.google.maps) {
 			setIsMapLoaded(true);
