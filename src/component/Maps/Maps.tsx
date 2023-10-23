@@ -33,15 +33,15 @@ const infoWindowOffset = {
 };
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
-	console.log('shreyas main push');
 	let mapRef = null;
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
 		libraries: ['places', 'geometry'],
+		nonce: 'nonce-single-value',
 	});
 	const [isMapLoaded, setIsMapLoaded] = useState(false);
-
+	console.log('nonce-single-value')
 	useEffect(() => {
 		if (window.google && window.google.maps) {
 			setIsMapLoaded(true);
