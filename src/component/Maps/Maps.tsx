@@ -33,7 +33,7 @@ const infoWindowOffset = {
 };
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
-	console.log('shreyas main push')
+	console.log('shreyas main push');
 	let mapRef = null;
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
@@ -92,7 +92,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 
 	return (
 		// <LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
-		isMapLoaded && isLoaded ? (
+		isMapLoaded && isLoaded&& window.?google.?maps ? (
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={center}
