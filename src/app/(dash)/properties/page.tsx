@@ -27,7 +27,7 @@ export default function Properties() {
 
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [status, setStatus] = useState<number[]>([]);
+	const [status, setStatus] = useState({});
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
 
@@ -54,10 +54,11 @@ export default function Properties() {
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
-	
+
 	const { data, isLoading: filtersLoading } = useQuery({
 		queryKey: ['LISTEDPROPERTIES', { search, currentPage, status, filter, sort }],
-		queryFn: () => getAllProperties({ search, currentPage, status, filter, sort }),
+		queryFn: () =>
+			getAllProperties({ search, currentPage, status: status?.['Filter by status']?.join(', '), filter, sort }),
 	});
 
 	useEffect(() => {
@@ -123,8 +124,8 @@ export default function Properties() {
 				colorPalette: {
 					Leased: { color: '#0A9458', bg: '#EDFAF4' },
 					Renovation: { color: '#0A9458', bg: '#EDFAF4' },
-					Sold: { color: '#0A9458', bg: '#EDFAF4' },
-					Vacant: { color: '#FF4242', bg: '#FFE5E5' },
+					Sold: { color: '#FF4242', bg: '#FFE5E5' },
+					Vacant: { color: '#0A9458', bg: '#EDFAF4' },
 					Unavailable: { color: '#FF4242', bg: '#FFE5E5' },
 					'Sold and lease': { color: 'rgba(0, 142, 165, 1)', bg: 'rgba(0, 142, 165, 0.08)' },
 				},
@@ -145,7 +146,7 @@ export default function Properties() {
 				variant: 'text', // OPTIONAL: buttons variants, default is text
 				textColor: 'primary', // OPTIONAL, either semantic or hexa, default is black
 				isLink: true, // OPTIONAL: pass it with true value if you want the button to be a link
-				href: '/unitdetails', // OPTIONAL: pass it in case it's link,
+				href: '/admin-unitdetails', // OPTIONAL: pass it in case it's link,
 				appendID: true, // OPTIONAL: pass it with true value if you want the button to be a link
 				sx: { py: 2 },
 			},
@@ -219,16 +220,7 @@ export default function Properties() {
 
 // -------------------HOW TO DESCRIBE THE TABLE AND ITS FUNCTIONALITY---------------------------
 
-const HEADERS = [
-	'Unit Number',
-	'Community',
-	'Building',
-	'Status',
-	'No. of Favourites',
-	'No. of Bookings',
-	'',
-	'',
-];
+const HEADERS = ['Unit Number', 'Community', 'Building', 'Status', 'No. of Favourites', 'No. of Bookings', '', ''];
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {

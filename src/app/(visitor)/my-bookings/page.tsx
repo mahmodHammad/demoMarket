@@ -29,10 +29,9 @@ export default function MyBookings() {
 	dayjs.extend(utc);
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [status, setStatus] = useState<number[]>([]);
+	const [status, setStatus] = useState({});
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
-	const [value, setValue] = React.useState(0);
 	const [upcomingBooking, setUpcomingBooking] = useState(undefined);
 	const handleSearch = (v: string) => setSearch(v);
 	const handlePagination = (v: number) => setCurrentPage(v);
@@ -47,34 +46,17 @@ export default function MyBookings() {
 		refetch: upcomingListRefetch,
 	} = useQuery({
 		queryKey: [keys.MYBOOKINGS, { search, currentPage, status, filter, sort }],
-		queryFn: () => getMyBookings({ query: search, currentPage, status, filter, sort }),
+		queryFn: () =>
+			getMyBookings({
+				query: search,
+				currentPage,
+				status: status?.['Status']?.join(', '),
+				type: status?.['Booking Type']?.join(', '),
+				sort,
+			}),
 		refetchInterval: false,
 		retry: false,
-		enabled: value === 0,
 	});
-
-	const {
-		data: completedList,
-		isLoading,
-		refetch,
-	} = useQuery({
-		queryKey: [keys.MYBOOKINGSHISTORY, { search, currentPage, status, filter, sort }],
-		queryFn: () => bookingHistory({ type: 'history', query: search, currentPage, status, filter, sort }),
-		refetchInterval: false,
-		retry: false,
-		enabled: value === 1,
-	});
-
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue);
-		setSearch('');
-		setCurrentPage(1);
-		setStatus([]);
-		setFilter('0');
-		setSort('');
-		if (Number(newValue)) refetch();
-		else upcomingListRefetch();
-	};
 
 	const returnUpcomingVisit = () => {
 		let date: any = undefined;
@@ -99,30 +81,6 @@ export default function MyBookings() {
 		returnUpcomingVisit();
 	}, [upcomingList]);
 
-	function a11yProps(index: number) {
-		return {
-			id: `simple-tab-${index}`,
-			'aria-controls': `simple-tabpanel-${index}`,
-		};
-	}
-	function CustomTabPanel(props: TabPanelProps) {
-		const { children, value, index, ...other } = props;
-
-		return (
-			<div
-				role="tabpanel"
-				hidden={value !== index}
-				id={`simple-tabpanel-${index}`}
-				aria-labelledby={`simple-tab-${index}`}
-				{...other}>
-				{value === index && (
-					<Box sx={{ p: 3 }}>
-						<Text>{children}</Text>
-					</Box>
-				)}
-			</div>
-		);
-	}
 	const acceptOrRejectBookings = async () => {
 		await changeStatusBooking(upcomingBooking?.id, { status: 'cancel' })
 			.then((response) => {
@@ -166,52 +124,24 @@ export default function MyBookings() {
 						</Box>
 					</Box>
 				</Box>
-				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-					<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-						<Tab value={0} label="Upcoming" {...a11yProps(0)} />
-						<Tab value={1} label="Completed" {...a11yProps(1)} />
-					</Tabs>
-				</Box>
-				<CustomTabPanel value={value} index={0}>
-					<Table
-						headers={HEADERS}
-						cellsTypes={CELLS_TYPES}
-						data={upcomingList?.list}
-						filterValues={FilterValues}
-						loading={upcomingListLoading}
-						search={search}
-						handleSearch={handleSearch}
-						currentPage={currentPage}
-						handlePagination={handlePagination}
-						status={status}
-						handleStatusChange={handleStatusChange}
-						filter={filter}
-						handleFilter={handleFilter}
-						sort={sort}
-						handleSort={handleSort}
-						lastPage={upcomingList?.paginator?.last_page}
-					/>
-				</CustomTabPanel>
-				<CustomTabPanel value={value} index={1}>
-					<Table
-						headers={HEADERS}
-						cellsTypes={CELLS_TYPES}
-						data={completedList?.list}
-						filterValues={FilterValues}
-						loading={isLoading}
-						search={search}
-						handleSearch={handleSearch}
-						currentPage={currentPage}
-						handlePagination={handlePagination}
-						status={status}
-						handleStatusChange={handleStatusChange}
-						filter={filter}
-						handleFilter={handleFilter}
-						sort={sort}
-						handleSort={handleSort}
-						lastPage={completedList?.paginator?.last_page}
-					/>
-				</CustomTabPanel>
+				<Table
+					headers={HEADERS}
+					cellsTypes={CELLS_TYPES}
+					data={upcomingList?.list}
+					filterValues={FilterValues}
+					loading={upcomingListLoading}
+					search={search}
+					handleSearch={handleSearch}
+					currentPage={currentPage}
+					handlePagination={handlePagination}
+					status={status}
+					handleStatusChange={handleStatusChange}
+					filter={filter}
+					handleFilter={handleFilter}
+					sort={sort}
+					handleSort={handleSort}
+					lastPage={upcomingList?.paginator?.last_page}
+				/>
 				<ConfirmAction
 					handleClose={() => setIsOpen(false)}
 					title={'Cancel Booking'}
@@ -274,6 +204,10 @@ const CELLS_TYPES = [
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {
+	'Booking Type': [
+		{ name: 'Upcoming', value: true, id: 'Upcoming', status: 'upcoming' },
+		{ name: 'Completed', value: true, id: 'Completed', status: 'history' },
+	],
 	Status: [
 		{ name: 'Cancel', value: true, id: 'Cancel', status: 'cancel' },
 		{ name: 'Pending', value: true, id: 'Pending', status: 'pending' },

@@ -8,7 +8,7 @@ type Options = {
 
 export const get = async (url: string, options: Options = {}) => {
 	// const xTenant = process.env.X_TENANT
-	const xTenant = "testDemoOne"
+	const xTenant = "marketDev"
 	try {
 		const requestOptions: any = {
 			headers: {
@@ -34,11 +34,11 @@ export const post = async (url: string, payload: {}) => {
 			headers: {
 				'Content-Type': 'application/json',
 				Accept: 'application/json',
-				'X-Tenant': 'testDemoOne',
+				'X-Tenant': 'marketDev',
 				'Access-Control-Allow-Origin': '*',
 				'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
 			},
-			'X-Tenant': 'testDemoOne',
+			'X-Tenant': 'marketDev',
 			body: JSON.stringify(payload),
 		};
 		const response = await fetch(`${baseUrl}${url}`, requestOptions);
@@ -68,7 +68,7 @@ export const http = axios.create({
 
 http.interceptors.request.use(
 	(config) => {
-		config.headers['X-Tenant'] = 'testDemoOne';
+		config.headers['X-Tenant'] = 'marketDev';
 		config.headers['Access-Control-Allow-Origin'] = '*';
 		config.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
 		return config;

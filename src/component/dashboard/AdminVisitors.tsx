@@ -13,7 +13,7 @@ const AdminVisitors = ({ data }: props) => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [status, setStatus] = useState<number[]>([]);
+	const [status, setStatus] = useState({});
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
 
