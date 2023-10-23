@@ -21,13 +21,15 @@ import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
 
 import { Box, Button, Loading } from '@/wrappers';
-import { GET } from '@/utils/http';
+import { DELETE, GET } from '@/utils/http';
 import { AcTypes, FurnishedTypes, ParkingTypes, stringifyNumber } from '@/component/unitDetails/PropertySpecification';
 import { useParams } from 'next/navigation';
 import { keys } from '@/utils/keys';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Delete from '@/assets/icons/Delete';
 import { toggleLike } from '../../../(landing)/listingpage/listing-service';
+import { globalToast } from '@/utils/toast';
+import { useRouter } from 'next/navigation';
 
 export const generateImgList = (images: any) => {
 	if (images?.length === 1) {
@@ -90,7 +92,11 @@ interface Props {
 	map?: string;
 }
 
+const deleteUnit = (id: number | string) => DELETE(`/dashboard/properties/${id}`);
+
 export default function Unitdetails({ location, rentType }: Props) {
+	const { push } = useRouter();
+
 	const photos = [
 		{ src: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg', width: 800, height: 600 },
 		{ src: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg', width: 1600, height: 900 },
@@ -203,6 +209,19 @@ export default function Unitdetails({ location, rentType }: Props) {
 
 	const imagesList = generateImgList(images) || [];
 
+	const handleDeleteUnit = () => {
+		deleteUnit(unitID as string)
+			.then(() => {
+				globalToast('Unit Deleted Successful', 'success');
+				queryClient.invalidateQueries({ queryKey: ['LISTEDPROPERTIES'] });
+				queryClient.invalidateQueries({ queryKey: ['PROPERTIES'] });
+				push('/properties');
+			})
+			.catch(() => {
+				globalToast('Please try later', 'error');
+			});
+	};
+
 	if (isLoading) {
 		return <Loading />;
 	} else
@@ -268,7 +287,6 @@ export default function Unitdetails({ location, rentType }: Props) {
 							</Grid>
 
 							<FloorPlans floorFeatures={amenityData} area={unit?.features?.unit_size || '--'} />
-							{/* <UnitSpecifications Feature={amenityData} /> */}
 							<Features Feature={amenities} />
 							<UnitMap location={unit?.map} />
 						</Grid>
@@ -276,7 +294,7 @@ export default function Unitdetails({ location, rentType }: Props) {
 						<Grid item xs={12} md={4} display={{ xs: 'none', md: 'flex', position: 'relative' }}>
 							<Box sx={{ position: 'absolute', top: '30px', right: '10px' }}>
 								<Button
-									onClick={() => console.log('Remove from Marketplace ')}
+									onClick={handleDeleteUnit}
 									startIcon={<Delete sx={{ fill: '#FF4242' }} />}
 									variant="outlined"
 									color="error">
