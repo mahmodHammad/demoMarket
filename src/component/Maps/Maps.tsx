@@ -92,7 +92,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 
 	return (
 		// <LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
-		isMapLoaded && isLoaded&& window.?google.?maps ? (
+		isMapLoaded && isLoaded && window?.google?.maps ? (
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={center}
