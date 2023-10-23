@@ -34,12 +34,12 @@ const infoWindowOffset = {
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
 	let mapRef = null;
-	console.log('nonce-single-value')
+	console.log('nonce-single-value shr')
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
 		libraries: ['places', 'geometry'],
-		nonce: 'nonce-single-value',
+		// nonce: 'nonce-single-value',
 	});
 	const [isMapLoaded, setIsMapLoaded] = useState(false);
 	useEffect(() => {
