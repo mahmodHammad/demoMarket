@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GoogleMap, InfoWindow, MarkerF, Marker, LoadScript, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, MarkerF, Marker, LoadScript, useJsApiLoader, MarkerClustererF } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import { Loading } from '@/wrappers';
@@ -34,7 +34,7 @@ const infoWindowOffset = {
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
 	let mapRef = null;
-	console.log('marker chrome shr')
+	console.log('marker chrome shr111')
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -110,7 +110,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					markersList?.map(
 						(item, index) =>
 							item?.map && (
-								<Marker
+								<MarkerF
 									key={index}
 									position={{
 										lat: item?.map?.latitude,
@@ -118,7 +118,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 									}}
 									icon={{
 										url: 'http://193.122.88.9/static/activemap.svg',
-										scaledSize: new window.google?.maps?.Size(30, 30),
+										// scaledSize: new window.google.maps.Size(30, 30),
 									}}
 									// icon={{
 									// 	url: `${
@@ -132,7 +132,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 										title: `Custom marker ${index}`,
 										icon: {
 											url: 'http://193.122.88.9/static/activemap.svg',
-											scaledSize: new window.google?.maps?.Size(30, 30),
+											// scaledSize: new window.google.maps.Size(30, 30),
 										},
 									}}
 									title={`Custom marker ${index}`}
@@ -148,7 +148,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 							lng: infoWindowPosition?.map?.longitude,
 						}}
 						options={{
-							pixelOffset: new window.google?.maps?.Size(0, -20),
+							pixelOffset: new window.google.maps.Size(0, -20),
 						}}
 						onCloseClick={() => setInfoWindowPosition(null)}>
 						<UnitsCard imgHeight="180px" height="400px" width="250px" data={infoWindowPosition} />

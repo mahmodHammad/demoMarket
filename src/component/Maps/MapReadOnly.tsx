@@ -14,7 +14,7 @@ const center = {
 };
 
 function MapReadOnly({ latLng }: any) {
-	console.log('marker chrome shre');
+	console.log('marker chrome shre22');
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -27,11 +27,11 @@ function MapReadOnly({ latLng }: any) {
 			options={{ draggable: false }}
 			center={{ lat: latLng?.lat, lng: latLng?.lng }}
 			zoom={17}>
-			<Marker
+			<MarkerF
 				position={{ lat: latLng?.lat, lng: latLng?.lng }}
 				icon={{
 					url: 'http://193.122.88.9/static/activemap.svg',
-					scaledSize: new window.google.maps.Size(40, 40),
+					// scaledSize: new window.google.maps.Size(40, 40),
 				}}
 				draggable={false} // Set draggable to false to make it view-only
 			/>
