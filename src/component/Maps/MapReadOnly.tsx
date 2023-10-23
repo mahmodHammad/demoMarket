@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, MarkerF,Marker } from '@react-google-maps/api';
 import { Loading } from '@/wrappers';
 
 const containerStyle = {
@@ -14,7 +14,7 @@ const center = {
 };
 
 function MapReadOnly({ latLng }: any) {
-	console.log('refresh nounce');
+	console.log('marker chrome shre');
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -27,7 +27,7 @@ function MapReadOnly({ latLng }: any) {
 			options={{ draggable: false }}
 			center={{ lat: latLng?.lat, lng: latLng?.lng }}
 			zoom={17}>
-			<MarkerF
+			<Marker
 				position={{ lat: latLng?.lat, lng: latLng?.lng }}
 				icon={{
 					url: 'http://193.122.88.9/static/activemap.svg',
