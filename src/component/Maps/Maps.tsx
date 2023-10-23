@@ -34,7 +34,7 @@ const infoWindowOffset = {
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
 	let mapRef = null;
-	console.log('nonce-single-value shr')
+	console.log('marker chrome shr')
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
@@ -110,7 +110,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 					markersList?.map(
 						(item, index) =>
 							item?.map && (
-								<MarkerF
+								<Marker
 									key={index}
 									position={{
 										lat: item?.map?.latitude,
