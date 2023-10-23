@@ -17,6 +17,8 @@ function MapReadOnly({ latLng }: any) {
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
+		nonce: 'nonce-single-value',
+
 	});
 	return isLoaded && latLng?.lat ? (
 		<GoogleMap
