@@ -108,7 +108,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 						markersList?.map(
 							(item, index) =>
 								item?.map && (
-									<Marker
+									<MarkerF
 										key={index}
 										position={{
 											lat: item?.map?.latitude,
