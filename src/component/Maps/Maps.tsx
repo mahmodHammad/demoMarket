@@ -90,10 +90,9 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
-			{isMapLoaded ? (
+			{isMapLoaded && isLoaded ? (
 				<GoogleMap
 					mapContainerStyle={containerStyle}
-					defa
 					center={center}
 					zoom={inLandingPage ? 16 : 14}
 					options={{
