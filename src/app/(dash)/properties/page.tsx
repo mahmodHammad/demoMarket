@@ -27,7 +27,7 @@ export default function Properties() {
 
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [status, setStatus] = useState<number[]>([]);
+	const [status, setStatus] = useState({});
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
 
@@ -54,10 +54,11 @@ export default function Properties() {
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
-	
+
 	const { data, isLoading: filtersLoading } = useQuery({
 		queryKey: ['LISTEDPROPERTIES', { search, currentPage, status, filter, sort }],
-		queryFn: () => getAllProperties({ search, currentPage, status, filter, sort }),
+		queryFn: () =>
+			getAllProperties({ search, currentPage, status: status?.['Filter by status']?.join(', '), filter, sort }),
 	});
 
 	useEffect(() => {
@@ -219,16 +220,7 @@ export default function Properties() {
 
 // -------------------HOW TO DESCRIBE THE TABLE AND ITS FUNCTIONALITY---------------------------
 
-const HEADERS = [
-	'Unit Number',
-	'Community',
-	'Building',
-	'Status',
-	'No. of Favourites',
-	'No. of Bookings',
-	'',
-	'',
-];
+const HEADERS = ['Unit Number', 'Community', 'Building', 'Status', 'No. of Favourites', 'No. of Bookings', '', ''];
 
 //Filter values for filtering Requests. 1st level is accordion name. 2nd level is key-value for filters.
 const FilterValues = {

@@ -17,7 +17,7 @@ export default function AdminBookings() {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [status, setStatus] = useState<number[]>([]);
+	const [status, setStatus] = useState({});
 	const [filter, setFilter] = useState('0');
 	const [sort, setSort] = useState('');
 	const handleSearch = (v: string) => setSearch(v);
@@ -30,7 +30,7 @@ export default function AdminBookings() {
 
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [keys.ADMINBOOKINGS, { search, currentPage, status, filter, sort }],
-		queryFn: () => getMyBookings({  query: search, currentPage, status, filter, sort }),
+		queryFn: () => getMyBookings({ query: search, currentPage, status: status?.['Status']?.join(', '), filter, sort }),
 	});
 	useEffect(() => {
 		console.log('payment table state changed', {
