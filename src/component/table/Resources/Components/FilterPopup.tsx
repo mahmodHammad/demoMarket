@@ -9,10 +9,8 @@ import {
 	Dialog,
 	DialogTitle,
 	FormControlLabel,
-	Menu,
-	MenuItem,
 } from '@mui/material';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { FilterIcon } from '@/assets';
 type Props = {
 	filtering?: boolean;
@@ -32,14 +30,24 @@ const FilterPopup: React.FC<Props> = ({ filtering, handleFilter, filterValues, s
 		handleFilter!(id);
 		setFilterTitle(filterValues[id]?.title ? filterValues[id]?.title : filterValues[id]);
 	};
-	const handleCheck = (e, id) => {
+	useEffect(() => {
+		let temp = tempStatus;
+		Object.keys(fliters).map((element, id) => {
+			if (temp?.[element]) {
+			} else {
+				temp[element] = [];
+			}
+		});
+		setTempStatus(temp);
+	}, []);
+	const handleCheck = (e, id, element) => {
 		let temp = tempStatus;
 		if (e) {
-			temp.push(id);
-			setTempStatus([...temp]);
+			temp?.[element]?.push(id);
+			setTempStatus({ ...temp });
 		} else {
-			temp = temp.filter((item) => item !== id);
-			setTempStatus([...temp]);
+			temp = temp?.[element]?.filter((item) => item !== id);
+			setTempStatus({ ...temp });
 		}
 	};
 	const handleClose = () => {
@@ -79,7 +87,15 @@ const FilterPopup: React.FC<Props> = ({ filtering, handleFilter, filterValues, s
 							/>
 						</>
 					</Button>
-					<Dialog onClose={handleClose} open={open} sx={{ minWidth: '400px' }}>
+					<Dialog
+						onClose={handleClose}
+						open={open}
+						sx={{
+							minWidth: '400px',
+							'& .MuiPaper-root': {
+								borderRadius: '16px !important',
+							},
+						}}>
 						<DialogTitle sx={{ minWidth: '400px' }}>
 							<Container justifyContent="space-between" alignItems={'center'}>
 								<Text
@@ -99,7 +115,7 @@ const FilterPopup: React.FC<Props> = ({ filtering, handleFilter, filterValues, s
 										cursor: 'pointer',
 									}}
 									onClick={applyFilter}>
-									{'Apply'}
+									{'Apply Filter'}
 								</Text>
 							</Container>
 						</DialogTitle>
@@ -112,7 +128,7 @@ const FilterPopup: React.FC<Props> = ({ filtering, handleFilter, filterValues, s
 										style={{
 											boxShadow: 'none',
 											margin: 0,
-											padding: '10px',
+											// padding: '10px',
 										}}>
 										<AccordionSummary
 											expandIcon={<ExpandMoreIcon />}
@@ -131,9 +147,9 @@ const FilterPopup: React.FC<Props> = ({ filtering, handleFilter, filterValues, s
 															}}
 															control={
 																<Checkbox
-																	checked={tempStatus.includes(ele?.status)}
+																	checked={tempStatus?.[element]?.includes(ele?.status)}
 																	onChange={(e) => {
-																		handleCheck(e?.target?.checked, ele?.status);
+																		handleCheck(e?.target?.checked, ele?.status, element);
 																	}}
 																	name={ele.id}
 																	value={'sdfg'}
