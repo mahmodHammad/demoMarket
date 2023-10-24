@@ -92,7 +92,7 @@ export default function AppLayout({ children, type }: Props) {
 							<Box
 								xcenter
 								sx={{
-									mr: '20px',
+									mr: '-5px',
 									alignItems: 'end',
 								}}>
 								<Notifications />

@@ -73,7 +73,7 @@ export default function Properties() {
 					<Text variant="h4">Properties List</Text>
 					<Box row></Box>
 				</Box>
-				<Box
+				{/* <Box
 					alignItems={'center'}
 					sx={{
 						display: 'grid',
@@ -99,7 +99,7 @@ export default function Properties() {
 					<Box>
 						<PaginationWrapper count={data?.paginator?.last_page} page={currentPage} handler={handlePagination} />
 					</Box>
-				</Box>
+				</Box> */}
 
 				<Grid container mt={'25px'} spacing={'28px'}>
 					{data?.list?.map((d, index) => (
