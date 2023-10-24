@@ -11,24 +11,12 @@ import { Delete } from '@/assets';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getFav, toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { keys } from '@/utils/keys';
+import EmptyFavList from '@/component/favourite/EmptyFavList';
 
-// interface proptypes {
-//   data: [
-//     {
-//       title: string;
-//       img: string;
-//       link: string;
-//       price: string;
-//       area: string;
-//       location: string;
-//     }
-//   ];
-// }
-// const listingBodey = ({ data }: proptypes) => {
-// { console.log("dataffffff", data) }
+
 
 const favourites = () => {
-	const { data, isLoading: filtersLoading } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: [keys.FAV],
 		queryFn: getFav,
 	});
@@ -66,11 +54,15 @@ const favourites = () => {
 				</Box>
 
 				<Grid container mt={'25px'} spacing={'28px'}>
-					{data?.list?.map((d, index) => (
-						<Grid item xs={4} key={index}>
-							<UnitsCard data={d} toggleLike={handleToggleLike} />
-						</Grid>
-					))}
+					{data?.list?.length ? (
+						data?.list?.map((d, index) => (
+							<Grid item xs={4} key={index}>
+								<UnitsCard data={d} toggleLike={handleToggleLike} />
+							</Grid>
+						))
+					) : (
+						<EmptyFavList />
+					)}
 				</Grid>
 			</Box>
 		</>

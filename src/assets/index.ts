@@ -38,3 +38,5 @@ export { default as slides } from './images/slides';
 export { default as defaultimg } from './images/defaultimg.jpeg';
 export { default as defaultNeighbour } from './images/defaultNeighbour.jpg';
 export { default as defaultNeighbourd2 } from './images/defaultNeighbourd2.jpeg';
+export { default as NoSearchResults } from './icons/NoSearchResults';
+export { default as EmptyFavPage } from './icons/EmptyFavPage';
