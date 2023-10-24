@@ -5,11 +5,12 @@ import { Grid, Pagination } from '@mui/material';
 import UnitsCard from '../cards/UnitsCard';
 import SearchBox from './SearchBox';
 import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
-import { Filter } from '@/assets';
+import { Filter, NoSearchResults } from '@/assets';
 import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { useAuth } from '@/contexts/AuthContext';
 import CardSkeleton from '../cards/CardSkeleton';
 import SimpleSelect from '../forms/SimpleSelect';
+import EmptyListingPage from './ِEmptyListingPage';
 
 type Props = {
 	isMobileView?: boolean;
@@ -59,7 +60,7 @@ const listingBody = ({
 		};
 		toggleLike(body);
 	};
-	
+
 	return (
 		<Box column fullWidth>
 			<Text variant="h4">Properties in Saudi Arabia</Text>
@@ -93,7 +94,7 @@ const listingBody = ({
 			/>
 
 			{/* // TODO: map data to UI card */}
-			{isLoading ? (
+			{isLoading || !data?.list ? (
 				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
 					{Array.from({ length: 8 }).map((_, index: number) => (
 						<Grid item xs={12} md={6} key={index}>
@@ -101,7 +102,7 @@ const listingBody = ({
 						</Grid>
 					))}
 				</Grid>
-			) : (
+			) : data?.list?.length ? (
 				<Grid container mt={isMobileView ? '0px' : '47px'} spacing={'28px'}>
 					{data?.list?.map((d: any, index: number) => (
 						<Grid item xs={12} md={6} key={index}>
@@ -109,23 +110,27 @@ const listingBody = ({
 						</Grid>
 					))}
 				</Grid>
+			) : (
+				<EmptyListingPage />
 			)}
 
-			{data?.paginator && (
-				<Pagination
-					page={+page}
-					onChange={(_, value) => {
-						window.scrollTo({
-							top: 0,
-							behavior: 'smooth',
-						});
-						setPage(value);
-					}}
-					count={+data.paginator.last_page}
-					color="primary"
-					sx={{ mt: 5, alignSelf: 'center' }}
-				/>
-			)}
+			{data?.list?.length
+				? data?.paginator && (
+						<Pagination
+							page={+page}
+							onChange={(_, value) => {
+								window.scrollTo({
+									top: 0,
+									behavior: 'smooth',
+								});
+								setPage(value);
+							}}
+							count={+data.paginator.last_page}
+							color="primary"
+							sx={{ mt: 5, alignSelf: 'center' }}
+						/>
+				  )
+				: null}
 		</Box>
 	);
 };
