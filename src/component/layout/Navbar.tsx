@@ -67,12 +67,15 @@ function ResponsiveAppBar() {
 							mr: 2,
 							display: { xs: 'flex', md: 'none' },
 						}}>
-						<AtarWhiteLogo
+						<SvgIcon
 							sx={{
 								height: '40px',
 								width: '103px',
+								filter: ' brightness(0) invert(1)',
 							}}
-						/>
+							inheritViewBox>
+							{xtenants.dashboardIcon}
+						</SvgIcon>
 					</Box>
 					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 						<Box>
