@@ -1,5 +1,7 @@
 import { Box, Container, Text } from '@/wrappers';
 import MultiLineChart from '../charts/multiLineChart';
+import { xtenants } from '@/utils/xtenants';
+import theme from '@/ThemeRegistry/theme';
 
 export default function SalesTarget() {
 	const data = {
@@ -75,7 +77,7 @@ export default function SalesTarget() {
 		})
 		.filter(Boolean);
 
-	let color = ['#FF8484', '#FF8383', '#008EA5', '#FF8381', '#009EA9'];
+	let color = ['', '', xtenants.primaryPalette.main, '#FF8381'];
 	const dataset = Object.keys(data)
 		?.map((item: string, index) => {
 			if (Array.isArray(data[item])) {
@@ -105,7 +107,8 @@ export default function SalesTarget() {
 				<Box row ycenter>
 					<Box
 						sx={{
-							background: '#008EA5',
+							background: xtenants.primaryPalette.main,
+
 							width: '18px',
 							height: '8px',
 							borderRadius: '8px',

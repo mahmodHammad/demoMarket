@@ -12,7 +12,7 @@ export default function EmptyFavList() {
 				mb: '90px',
 			}}>
 			<Item xs={12} center>
-				<EmptyFavPage sx={{ height: '190px', width: '100%' }} />
+				<EmptyFavPage sx={{ height: '190px', width: '100%' ,filter:"grayscale(0.9)"}} />
 			</Item>
 			<Item xs={12} center mt={'36px'}>
 				<Text variant="h4">No favourites yet</Text>

@@ -15,6 +15,7 @@ import { register, sendVerificationSignup } from './signup-services';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import { globalToast } from '@/utils/toast';
+import { xtenants } from '@/utils/xtenants';
 
 const schema = yup.object().shape({
 	name: yup.string().required('Full Name is required'),
@@ -138,7 +139,7 @@ const Signup = () => {
 						}}
 						component={Image}
 						alt="houses and properties for rent"
-						src={signupimg}
+						src={xtenants?.landingBackground}
 					/>
 				</Item>
 				<Item md={6} center>
@@ -156,7 +157,7 @@ const Signup = () => {
 							Welcome to
 							<Box component="span" sx={{ color: theme.palette.primary.main }}>
 								{' '}
-								Atar
+								{xtenants?.name}
 							</Box>
 						</Text>
 						<Text variant="small" gray mt="16px">
@@ -214,15 +215,15 @@ const Signup = () => {
 							</Container>
 						</Box>
 
-						<Container>
+						<Container center sx={{ mt: '18px' }}>
 							<Item xs={12} md={7}>
-								<Text variant="small" gray align="left" mt="18px">
+								<Text variant="small" gray align="left">
 									By proceeding to create your account, you are agreeing to our
 									<b> Terms of Use </b> and <b> Privacy Policy</b>
 								</Text>
 							</Item>
-							<Item xs={12} md={12}>
-								<Button type="submit" variant="contained" fullWidth size="large" sx={{ mt: '24px' }}>
+							<Item xs={12} md={5}>
+								<Button type="submit" variant="contained" fullWidth size="large">
 									sign up
 								</Button>
 							</Item>

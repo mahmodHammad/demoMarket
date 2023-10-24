@@ -1,17 +1,11 @@
 'use client';
-import { Box, Button, Text } from '@/wrappers';
+import { Box, Text } from '@/wrappers';
 import { Grid } from '@mui/material';
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
-import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 import React, { useState } from 'react';
-import { AdminPropertiesList, PopUpCard, UnitsCard } from '@/component';
+import { PopUpCard, UnitsCard } from '@/component';
 import Succesgreen from '@/assets/icons/Succesgreen';
-import successImg from '@/assets/images/success.png';
 import { useQuery } from '@tanstack/react-query';
 import { addPropertyToMarketplace, getAllAvailableProperties } from '../properties-service';
-import PaginationWrapper from '@/component/table/Resources/Components/PaginationWrapper';
-import FilterPopup from '@/component/table/Resources/Components/FilterPopup';
-import Search from '@/component/table/Resources/Components/Search';
 import { globalToast } from '@/utils/toast';
 import { useRouter } from 'next/navigation';
 
@@ -37,18 +31,10 @@ export default function Properties() {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [status, setStatus] = useState({});
 	const [filter, setFilter] = useState('0');
-
-	const handleSearch = (v: string) => setSearch(v);
-	const handlePagination = (v: number) => setCurrentPage(v);
-	const handleStatusChange = (v: number[]) => setStatus(v);
-	const handleFilter = (id: string) => setFilter(id);
-	const {
-		data,
-		isLoading: filtersLoading,
-		refetch,
-	} = useQuery({
+	const { data, isLoading, refetch } = useQuery({
 		queryKey: ['LISTEDPROPERTIES', { search, currentPage, status, filter }],
-		queryFn: () => getAllAvailableProperties({ search, currentPage, status: status?.['Filter by status']?.join(', '), filter }),
+		queryFn: () =>
+			getAllAvailableProperties({ search, currentPage, status: status?.['Filter by status']?.join(', '), filter }),
 	});
 
 	return (
@@ -112,9 +98,3 @@ export default function Properties() {
 		</>
 	);
 }
-const FilterValues = {
-	'Filter by status': [
-		{ name: 'Pay Down', value: true, id: 'Pay Down', status: 18 },
-		{ name: 'Pending', value: true, id: 'Completed', status: 3 },
-	],
-};

@@ -1,5 +1,7 @@
 import { Box, Container, Text } from '@/wrappers';
 import BarChart from '../charts/barChart';
+import theme from '@/ThemeRegistry/theme';
+import { xtenants } from '@/utils/xtenants';
 
 export default function SalesByAgent() {
 	const data = {
@@ -15,7 +17,7 @@ export default function SalesByAgent() {
 		<Box row ycenter>
 			<Box
 				sx={{
-					background: '#008EA5',
+					background: xtenants.primaryPalette.main,
 					width: '18px',
 					height: '8px',
 					borderRadius: '8px',

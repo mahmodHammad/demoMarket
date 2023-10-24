@@ -89,7 +89,7 @@ const SearchBar = () => {
 							width: { xs: '50px', md: '102px' },
 							height: { xs: '25px', md: '39px' },
 
-							backgroundColor: isRent ? null : '#FFFFFF',
+							backgroundColor: isRent ? null : '#FFFFFFee',
 							borderRadius: {
 								xs: '8px 8px 0px 0px',
 								md: '15px 15px 0px 0px',
@@ -107,7 +107,7 @@ const SearchBar = () => {
 						sx={{
 							width: { xs: '50px', md: '102px' },
 							height: { xs: '25px', md: '39px' },
-							backgroundColor: isRent ? '#FFFFFF' : null,
+							backgroundColor: isRent ? '#FFFFFFee' : null,
 							borderRadius: {
 								xs: '8px 8px 0px 0px',
 								md: '15px 15px 0px 0px',
@@ -130,7 +130,7 @@ const SearchBar = () => {
 					transition: 'height 0.3s ease-in-out',
 					borderRadius: { xs: ' 0px 16px 16px 16px', md: ' 0px 20px 20px 20px' },
 					boxShadow: ' 0px 30px 60px -15px #8F90BC26',
-					backgroundColor: '#FFFFFFCC',
+					backgroundColor: '#FFFFFFaa',
 					backdropFilter: 'blur(10px)',
 					p: { xs: '12px', md: '24px' },
 				}}>

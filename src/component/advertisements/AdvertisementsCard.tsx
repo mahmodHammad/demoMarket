@@ -47,7 +47,7 @@ const AdvertisementsCard = (props: Props) => {
 					</Box>
 
 					<Box row ycenter mt={'22px'}>
-						<Calendar bgcolor={'red'} />
+						<Calendar  />
 						<Box column xstart>
 							<Box xstart>
 								<Text variant="caption">ADs duration</Text>

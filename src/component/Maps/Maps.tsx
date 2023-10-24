@@ -1,8 +1,17 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GoogleMap, InfoWindow, MarkerF, Marker, LoadScript, useJsApiLoader, MarkerClustererF } from '@react-google-maps/api';
+import {
+	GoogleMap,
+	InfoWindow,
+	MarkerF,
+	Marker,
+	LoadScript,
+	useJsApiLoader,
+	MarkerClustererF,
+} from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import { Loading } from '@/wrappers';
+import { xtenants } from '@/utils/xtenants';
 
 const containerStyle = {
 	width: '100%',
@@ -87,73 +96,71 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 		}
 	}, []);
 
-	return (
-		isMapLoaded && isLoaded && window?.google?.maps ? (
-			<GoogleMap
-				mapContainerStyle={containerStyle}
-				center={center}
-				zoom={inLandingPage ? 16 : 14}
-				options={{
-					gestureHandling: inLandingPage ? null : 'greedy',
-					zoomControlOptions: { position: 9 },
-					scaleControl: true,
-					streetViewControl: false,
-					fullscreenControl: false,
-				}}
-				onLoad={onLoad}
-				onUnmount={onUnmount}>
-				{markersList?.length &&
-					markersList?.map(
-						(item, index) =>
-							item?.map && (
-								<MarkerF
-									key={index}
-									position={{
-										lat: item?.map?.latitude,
-										lng: item?.map?.longitude,
-									}}
-									icon={{
-										url: 'https://marketplace.goatar.com/static/activemap.svg',
+	return isMapLoaded && isLoaded && window?.google?.maps ? (
+		<GoogleMap
+			mapContainerStyle={containerStyle}
+			center={center}
+			zoom={inLandingPage ? 16 : 14}
+			options={{
+				gestureHandling: inLandingPage ? null : 'greedy',
+				zoomControlOptions: { position: 9 },
+				scaleControl: true,
+				streetViewControl: false,
+				fullscreenControl: false,
+			}}
+			onLoad={onLoad}
+			onUnmount={onUnmount}>
+			{markersList?.length &&
+				markersList?.map(
+					(item, index) =>
+						item?.map && (
+							<MarkerF
+								key={index}
+								position={{
+									lat: item?.map?.latitude,
+									lng: item?.map?.longitude,
+								}}
+								// icon={{
+								// 	url: 'https://marketplace.goatar.com/static/activemap.svg',
+								// 	scaledSize: new window.google.maps.Size(30, 30),
+								// }}
+								// icon={{
+								// 	url: `${
+								// infoWindowPosition?.id === item?.id
+								// 	? 'http://193.122.88.9/static/activemap.svg'
+								// 	: 'http://193.122.88.9/static/notactivemap.svg'
+								// 	}`,
+								// 	scaledSize: new window.google.maps.Size(30, 30),
+								// }}
+								options={{
+									title: `Custom marker ${index}`,
+									icon: {
+										url: xtenants.mapsIcon,
 										scaledSize: new window.google.maps.Size(30, 30),
-									}}
-									// icon={{
-									// 	url: `${
-									// infoWindowPosition?.id === item?.id
-									// 	? 'http://193.122.88.9/static/activemap.svg'
-									// 	: 'http://193.122.88.9/static/notactivemap.svg'
-									// 	}`,
-									// 	scaledSize: new window.google.maps.Size(30, 30),
-									// }}
-									options={{
-										title: `Custom marker ${index}`,
-										icon: {
-											url: 'https://marketplace.goatar.com/static/activemap.svg',
-											scaledSize: new window.google.maps.Size(30, 30),
-										},
-									}}
-									title={`Custom marker ${index}`}
-									onClick={() => setInfoWindowPosition(item)}
-									draggable={false} // Set draggable to false to make it view-only
-								/>
-							),
-					)}
-				{infoWindowPosition && (
-					<InfoWindow
-						position={{
-							lat: infoWindowPosition?.map?.latitude,
-							lng: infoWindowPosition?.map?.longitude,
-						}}
-						options={{
-							pixelOffset: new window.google.maps.Size(0, -20),
-						}}
-						onCloseClick={() => setInfoWindowPosition(null)}>
-						<UnitsCard imgHeight="180px" height="400px" width="250px" data={infoWindowPosition} />
-					</InfoWindow>
+									},
+								}}
+								title={`Custom marker ${index}`}
+								onClick={() => setInfoWindowPosition(item)}
+								draggable={false} // Set draggable to false to make it view-only
+							/>
+						),
 				)}
-			</GoogleMap>
-		) : (
-			<></>
-		)
+			{infoWindowPosition && (
+				<InfoWindow
+					position={{
+						lat: infoWindowPosition?.map?.latitude,
+						lng: infoWindowPosition?.map?.longitude,
+					}}
+					options={{
+						pixelOffset: new window.google.maps.Size(0, -20),
+					}}
+					onCloseClick={() => setInfoWindowPosition(null)}>
+					<UnitsCard imgHeight="180px" height="400px" width="250px" data={infoWindowPosition} />
+				</InfoWindow>
+			)}
+		</GoogleMap>
+	) : (
+		<></>
 	);
 }
 export default React.memo(MyComponent);
