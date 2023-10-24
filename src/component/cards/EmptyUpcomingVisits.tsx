@@ -13,7 +13,7 @@ export default function EmptyUpcomingVisits() {
 				padding: '16px 31px',
 			}}>
 			<Item xs={12} center>
-				<UpcomingVisitPlaceholder sx={{ height: '40px', width: '55px' }} />
+				<UpcomingVisitPlaceholder sx={{ height: '40px', width: '55px' ,filter:"grayscale(1)"}} />
 			</Item>
 			<Item xs={12} center mt={'16px'}>
 				<Text variant="label">No Upcoming Visit</Text>

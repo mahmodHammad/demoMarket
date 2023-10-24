@@ -46,8 +46,8 @@ export default function Sidebar({ type }) {
 					</ListItem>
 				</>
 			))}
-			<Divider variant="middle" />
-			<ListItem
+			{/* <Divider variant="middle" /> */}
+			{/* <ListItem
 				sx={{
 					pb: '24px',
 					pt: '24px',
@@ -61,7 +61,7 @@ export default function Sidebar({ type }) {
 					}}>
 					Support
 				</Text>
-			</ListItem>
+			</ListItem> */}
 		</div>
 	);
 }

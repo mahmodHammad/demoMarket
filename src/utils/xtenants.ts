@@ -1,6 +1,7 @@
 export const xtenants = {
 	primaryPalette: {
-		main: '#b58341',
-		dark: '#955321',
+		main: '#d79130',
+		dark: '#4a918d',
 	},
+	mapsIcon: 'https://marketplace.goatar.com/static/activemap.svg',
 };

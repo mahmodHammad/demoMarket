@@ -12,7 +12,7 @@ export default function EmptyListingPage() {
 				mb: '90px',
 			}}>
 			<Item xs={12} center>
-				<NoSearchResults sx={{ height: '190px', width: '100%' }} />
+				<NoSearchResults sx={{ height: '190px', width: '100%', filter:"grayscale(1)" }} />
 			</Item>
 			<Item xs={12} center mt={'36px'}>
 				<Text variant="h4">No result found</Text>

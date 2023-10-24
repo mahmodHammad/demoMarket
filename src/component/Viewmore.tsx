@@ -14,7 +14,6 @@ export default function Viewmore({ link }: Viewmore) {
 			component={Link}
 			href={link}
 			size="small"
-			
 			endIcon={<Rightrounded sx={{ fill:theme.palette.primary.dark }} />}
 			sx={{
 				fontWeight: { xs: '400', md: '700' },
