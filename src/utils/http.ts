@@ -8,7 +8,7 @@ type Options = {
 
 export const get = async (url: string, options: Options = {}) => {
 	// const xTenant = process.env.X_TENANT
-	const xTenant = "marketDev"
+	const xTenant = 'marketDev';
 	try {
 		const requestOptions: any = {
 			headers: {
@@ -78,6 +78,16 @@ http.interceptors.request.use(
 	},
 );
 
+http.interceptors.response.use(
+	(response) => {
+		if (+response.status === 401) window.location.href = `${window.location.origin}/401`;
+		return response;
+	},
+	(error) => {
+		Promise.reject(error);
+	},
+);
+
 export const PUT = async (URI: string, payload?: any) => {
 	try {
 		const res = await http.put(URI, payload);
@@ -104,6 +114,7 @@ export const GET = async (URI: string, payload?: any) => {
 		return handleError(error);
 	}
 };
+
 export const DELETE = async (URI: string, payload?: any) => {
 	try {
 		const res = await http.delete(URI, { params: payload });
