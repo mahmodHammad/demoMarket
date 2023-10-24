@@ -76,17 +76,12 @@ export default function SearchBox({ propertySearch, setPropertySearch, isRent, s
 						href="/maps"
 						width={{ md: '54px' }}
 						height={{ md: '54px' }}
-						bgcolor={'#EBF6F8'}
+						bgcolor={theme.palette.primary.main + "11"}
 						borderRadius={'15px'}
 						center
 						sx={{ cursor: 'pointer' }}
 						mr={'18px'}>
-						<GPS
-							sx={{
-								color: theme.palette.primary.main,
-								fill: theme.palette.primary.main,
-							}}
-						/>
+						<GPS />
 					</Box>
 
 					<Box
