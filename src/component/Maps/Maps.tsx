@@ -1,8 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GoogleMap, InfoWindow, MarkerF, Marker, LoadScript, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, MarkerF, Marker, LoadScript, useJsApiLoader, MarkerClustererF } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import { Loading } from '@/wrappers';
 
 const containerStyle = {
@@ -34,12 +33,10 @@ const infoWindowOffset = {
 
 function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage }: Props) {
 	let mapRef = null;
-	console.log('nonce-single-value shr')
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
 		libraries: ['places', 'geometry'],
-		// nonce: 'nonce-single-value',
 	});
 	const [isMapLoaded, setIsMapLoaded] = useState(false);
 	useEffect(() => {
@@ -91,7 +88,6 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 	}, []);
 
 	return (
-		// <LoadScript googleMapsApiKey="AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ" loadingElement={<Loading />}>
 		isMapLoaded && isLoaded && window?.google?.maps ? (
 			<GoogleMap
 				mapContainerStyle={containerStyle}
@@ -117,7 +113,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 										lng: item?.map?.longitude,
 									}}
 									icon={{
-										url: 'http://193.122.88.9/static/activemap.svg',
+										url: 'https://marketplace.goatar.com/static/activemap.svg',
 										scaledSize: new window.google.maps.Size(30, 30),
 									}}
 									// icon={{
@@ -131,7 +127,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 									options={{
 										title: `Custom marker ${index}`,
 										icon: {
-											url: 'http://193.122.88.9/static/activemap.svg',
+											url: 'https://marketplace.goatar.com/static/activemap.svg',
 											scaledSize: new window.google.maps.Size(30, 30),
 										},
 									}}
@@ -158,7 +154,6 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 		) : (
 			<></>
 		)
-		// </LoadScript>
 	);
 }
 export default React.memo(MyComponent);

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, MarkerF,Marker } from '@react-google-maps/api';
 import { Loading } from '@/wrappers';
 
 const containerStyle = {
@@ -14,11 +14,9 @@ const center = {
 };
 
 function MapReadOnly({ latLng }: any) {
-	console.log('refresh nounce');
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyDEK-oLvhO9QvNn1Ka6nWZ5NUvJqQQRMsQ',
-		// nonce: 'nonce-single-value',
 		libraries: ['places', 'geometry'],
 	});
 	return isLoaded && latLng?.lat ? (
@@ -30,7 +28,7 @@ function MapReadOnly({ latLng }: any) {
 			<MarkerF
 				position={{ lat: latLng?.lat, lng: latLng?.lng }}
 				icon={{
-					url: 'http://193.122.88.9/static/activemap.svg',
+					url: 'https://marketplace.goatar.com/static/activemap.svg',
 					scaledSize: new window.google.maps.Size(40, 40),
 				}}
 				draggable={false} // Set draggable to false to make it view-only

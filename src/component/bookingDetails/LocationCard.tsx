@@ -2,8 +2,10 @@ import { Box, Button, Text } from '@/wrappers';
 import React from 'react';
 import MapReadOnly from '../Maps/MapReadOnly';
 import { LocationIcon } from '@/assets';
+import Link from 'next/link';
 
 const LocationCard = ({ location, hasLayout = false }: { location: any; hasLayout?: boolean }) => {
+	console.log('location', location)
 	return (
 		<>
 			{location && (
@@ -24,6 +26,17 @@ const LocationCard = ({ location, hasLayout = false }: { location: any; hasLayou
 						}}>
 						<LocationCardLayout hasLayout={hasLayout} location={location}>
 							<MapReadOnly viewOnly latLng={{ lat: Number(location?.latitude), lng: Number(location?.longitude) }} />
+							{!hasLayout && (
+								<Button
+									size="small"
+									variant="contained"
+									component={Link}
+									target="_blank"
+									href={location?.mapsLink}
+									sx={{ position: 'absolute', mt: '-32px' }}>
+									Open in Google Map
+								</Button>
+							)}
 						</LocationCardLayout>
 					</Box>
 				</Box>
