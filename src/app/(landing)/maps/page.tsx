@@ -28,7 +28,7 @@ export default function page({ inLandingPage }) {
 				<Item
 					sx={{
 						position: 'relative',
-						height: inLandingPage ? '50vh' : '80vh',
+						height: inLandingPage ? '70vh' : '80vh',
 						width: '100%',
 					}}>
 					<MapContainer

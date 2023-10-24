@@ -136,10 +136,10 @@ export default function MyProfile() {
 								</Item>
 								<Item xs={5}>
 									<DatePicker name="date" control={control} errors={errors} label="Date of birth" />
-									<Text variant="small" sx={{ mt: '8px' }}>
+									{/* <Text variant="small" sx={{ mt: '8px' }}>
 										{' '}
 										<CheckboxController name="Hijari" control={control} errors={errors} /> Hijari{' '}
-									</Text>
+									</Text> */}
 								</Item>
 								<Item xs={5}>
 									<TextInputController label={'Email'} name={'email'} control={control} />

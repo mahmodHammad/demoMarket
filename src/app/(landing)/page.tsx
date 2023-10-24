@@ -14,7 +14,7 @@ export default async function Home() {
 				<RecentlyAdded />
 				<MostViewed />
 			</Container>
-			<div style={{ marginBottom: '30px' }}>
+			<div style={{ marginBottom: '0px' }}>
 				<Map inLandingPage={true} />
 			</div>
 		</Box>
