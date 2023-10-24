@@ -36,7 +36,12 @@ export { default as SearcSuccesgreenhLine } from './icons/Succesgreen';
 export { default as FilterIcon } from './icons/FilterIcon';
 export { default as slides } from './images/slides';
 export { default as defaultimg } from './images/defaultimg.jpeg';
+export { default as roshnLanding } from './images/roshnLanding.jpeg';
+
 export { default as defaultNeighbour } from './images/defaultNeighbour.jpg';
 export { default as defaultNeighbourd2 } from './images/defaultNeighbourd2.jpeg';
+export { default as AtarLanding } from './images/herobg.png';
+
 export { default as NoSearchResults } from './icons/NoSearchResults';
 export { default as EmptyFavPage } from './icons/EmptyFavPage';
+export { default as RoshnIconLanding } from './icons/RoshnIconLanding';

@@ -3,10 +3,11 @@ import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import { Box } from '@/wrappers';
 import { Footer, Navbar, LoginModal } from '@/component';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { xtenants } from '@/utils/xtenants';
 // import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 
 export const metadata = {
-	title: 'Atar Market place',
+	title: `${xtenants.name} Market place`,
 	description:
 		'Property Portal Explore Our Wide Range of Properties for Sale and Rentals in Saudi arabia, Golf, and middle east and more Verified Listings: Apartments, Villas, Houses Find Your Perfect Appartment their',
 	// generator: 'marketplace',

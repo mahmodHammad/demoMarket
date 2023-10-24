@@ -1,14 +1,17 @@
 import { Box, Text } from '@/wrappers';
 import React from 'react';
 import Image from 'next/image';
-import heroBG from '@/assets/images/herobg.png';
 import SearchBar from './SearchBar';
+
+import { xtenants } from '@/utils/xtenants';
 export default function Hero() {
 	return (
 		<Box
+			// height: { xl: '100px', md: '82px', xs: '72px' },
 			sx={{
-				height: { xs: 'calc(100vh - 120px)', md: 'calc(100vh - 100px)' },
+				height: { xs: 'calc(100vh )', md: 'calc(100vh)' },
 				position: 'relative',
+				mt: { xl: '-100px', md: '-82px', xs: '-72px' },
 			}}>
 			<Box
 				sx={{
@@ -21,7 +24,7 @@ export default function Hero() {
 				component={Image}
 				priority
 				alt="houses and properties for rent"
-				src={heroBG}
+				src={xtenants?.landingBackground}
 				quality={100}
 				placeholder="blur"
 			/>
@@ -35,7 +38,11 @@ export default function Hero() {
 				}}
 				center
 				column>
-				<Box sx={{ maxWidth: { xl: '720px', md: '60%', xs: '90%' } }}>
+				<Box
+					sx={{
+						mt: {xl:'100px',md:"85px"},
+						maxWidth: { xl: '720px', md: '60%', xs: '90%' },
+					}}>
 					<Text variant="h2" align="center" sx={{ color: '#fff', fontSize: { md: '48px', xs: '38px' } }} component="h1">
 						Buy, rent, or sell your property easily
 					</Text>

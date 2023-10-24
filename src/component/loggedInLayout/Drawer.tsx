@@ -1,9 +1,11 @@
+import { xtenants } from '@/utils/xtenants';
 import Sidebar from './Sidebar';
 import AtarColoredLogo from '@/assets/icons/AtarColoredLogo';
 import { Box } from '@/wrappers/layouts';
 import MuiDrawer from '@mui/material/Drawer';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
 import Link from 'next/link';
+import { SvgIcon } from '@mui/material';
 
 const drawerWidth: number = 240;
 const open = true;
@@ -67,12 +69,14 @@ const DrawerContainer = ({ type }) => {
 					objectFit: 'contain',
 					cursor: 'pointer',
 				}}>
-				<AtarColoredLogo
+				<SvgIcon
 					sx={{
-						height: '52px',
-						width: '133px',
+						height: '80px',
+						width: '140px',
 					}}
-				/>
+					inheritViewBox>
+					{xtenants.dashboardIcon}
+				</SvgIcon>
 			</Box>
 			<Sidebar type={type} />
 		</Drawer>

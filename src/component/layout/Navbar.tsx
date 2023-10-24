@@ -12,6 +12,8 @@ import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
+import { xtenants } from '@/utils/xtenants';
+import { SvgIcon } from '@mui/material';
 
 function ResponsiveAppBar() {
 	const { openLoginModal, isAuthed } = useAuth();
@@ -32,7 +34,7 @@ function ResponsiveAppBar() {
 	};
 
 	return (
-		<AppBar position="static">
+		<AppBar position="relative" sx={{ background: xtenants.primaryPalette.main + 'aa', zIndex: 1000 }}>
 			<Container maxWidth="xl">
 				<Toolbar
 					disableGutters
@@ -47,12 +49,15 @@ function ResponsiveAppBar() {
 							mr: 2,
 							display: { xs: 'none', md: 'flex' },
 						}}>
-						<AtarWhiteLogo
+						<SvgIcon
 							sx={{
-								height: { md: '40px', xl: '52px' },
+								height: { md: '40px', xl: '62px' },
 								width: '133px',
+								filter: ' brightness(0) invert(1)',
 							}}
-						/>
+							inheritViewBox>
+							{xtenants.dashboardIcon}
+						</SvgIcon>
 					</Box>
 
 					<Box
