@@ -120,7 +120,7 @@ export default function Unitdetails({ location, rentType }: Props) {
 		queryClient.invalidateQueries({ queryKey: [keys.UNITDETAILS + unitID] });
 	};
 
-	const renderLocation = [unit?.city?.name, unit?.district?.name];
+	const renderLocation = [unit?.city?.name, unit?.community?.name];
 	const newlocation = unit?.city ? renderLocation?.join(', ') : '';
 
 	const amenityData = [
