@@ -1,30 +1,26 @@
 'use client';
-import { Box, Container, Item } from '@/wrappers';
 import React from 'react';
-import HomeTitleBody from './HomeTitleBody';
-import NeighbourhoodCard from '@/component/cards/NeighbourhoodCard';
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import HomeCardsContainer from './HomeCardsContainer';
-import { GET, get } from '@/utils/http';
+import { GET } from '@/utils/http';
 import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { keys } from '@/utils/keys';
+import { useAuth } from '@/contexts/AuthContext';
 
-const getRecentlyAdded = (payload: any = {}) => {
-	return GET(`/properties`);
-};
+const getRecentlyAdded = () => GET(`/properties`);
 
 export default function RecentlyAdded() {
-	// const url = '/properties';
-	// const response = await get(url);
-	// console.log("response",response?.data?.list)
-	// const dataArray = response?.data?.list; // Get the array of objects
+	const { isAuthed, openLoginModal } = useAuth();
 	const queryClient = useQueryClient();
 	const { data, isLoading } = useQuery({
 		queryKey: [keys.RECENTLYADDED],
 		queryFn: getRecentlyAdded,
 	});
-	const handleToggleLike = (id) => {
+	const handleToggleLike = (id: any) => {
+		if (!isAuthed) {
+			openLoginModal();
+			return;
+		}
 		toggleLike({
 			property_id: id,
 		});

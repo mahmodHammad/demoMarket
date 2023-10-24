@@ -1,21 +1,16 @@
 'use client';
 import React from 'react';
-import neigbourhoodCover from '@/assets/images/neigbourhoodCover.png';
 import HomeCardsContainer from './HomeCardsContainer';
-import { GET, get } from '@/utils/http';
-import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query';
-
+import { GET } from '@/utils/http';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { toggleLike } from '@/app/(landing)/listingpage/listing-service';
 import { keys } from '@/utils/keys';
+import { useAuth } from '@/contexts/AuthContext';
 
-const getMostViewed = (payload: any = {}) => {
-	return GET(`/properties/most-view`);
-};
+const getMostViewed = () => GET(`/properties/most-view`);
 
 export default function MostViewed() {
-	// const url = '/properties/most-view';
-	// const response = await get(url);
-	// const dataArray = response?.data?.list; // Get the array of objects
+	const { isAuthed, openLoginModal } = useAuth();
 	const queryClient = useQueryClient();
 
 	const { data, isLoading } = useQuery({
@@ -23,7 +18,11 @@ export default function MostViewed() {
 		queryFn: getMostViewed,
 	});
 
-	const handleToggleLike = (id) => {
+	const handleToggleLike = (id: any) => {
+		if (!isAuthed) {
+			openLoginModal();
+			return;
+		}
 		toggleLike({
 			property_id: id,
 		});
@@ -31,7 +30,6 @@ export default function MostViewed() {
 		queryClient.invalidateQueries({ queryKey: [keys.MOSTVIEWED] });
 		queryClient.invalidateQueries({ queryKey: [keys.RECENTLYADDED] });
 	};
-
 
 	return (
 		<HomeCardsContainer
