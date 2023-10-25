@@ -1,7 +1,7 @@
 'use client';
 import theme from '@/ThemeRegistry/theme';
 import { AtarWhiteLogo, FaceBook, LinkedIn, Twitter } from '@/assets';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 import { Box, Text } from '@/wrappers';
 import { Container, Divider, Grid, Link, SvgIcon } from '@mui/material';
 import React from 'react';

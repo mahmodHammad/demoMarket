@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 import { SvgIcon } from '@mui/material';
 
 function ResponsiveAppBar() {

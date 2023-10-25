@@ -1,5 +1,5 @@
 'use client';
-import { AtarColoredLogo, FrontSide, GroundFloor, Room } from '@/assets';
+import { FrontSide, GroundFloor, Room } from '@/assets';
 import {
 	AboutUnit,
 	BuyNowCard,
@@ -10,7 +10,7 @@ import {
 	UnitHeader,
 	UnitMap,
 } from '@/component';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, SvgIcon } from '@mui/material';
 import React, { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
@@ -30,6 +30,7 @@ import Delete from '@/assets/icons/Delete';
 import { toggleLike } from '../../../(landing)/listingpage/listing-service';
 import { globalToast } from '@/utils/toast';
 import { useRouter } from 'next/navigation';
+import xtenant from '@/utils/xtenant';
 
 export const generateImgList = (images: any) => {
 	if (images?.length === 1) {
@@ -257,24 +258,28 @@ export default function Unitdetails({ location, rentType }: Props) {
 								handleToggleLike={handleToggleLike}
 								liked={unit?.is_fav}
 								logo={
-									<AtarColoredLogo
+									<SvgIcon
 										sx={{
 											height: '52px',
 											width: { xs: '75px', md: '121px' },
 										}}
-									/>
+										inheritViewBox>
+										{xtenant.dashboardIcon}
+									</SvgIcon>
 								}
 								title={unit?.name || '--'}
 								location={newlocation}
 							/>
 							<ConstructionStatus
 								logo={
-									<AtarColoredLogo
+									<SvgIcon
 										sx={{
 											height: '14px',
 											width: '35px',
 										}}
-									/>
+										inheritViewBox>
+										{xtenant.dashboardIcon}
+									</SvgIcon>
 								}
 								title={''}
 								status={'Ready To Move'}

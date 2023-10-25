@@ -1,6 +1,5 @@
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 import Sidebar from './Sidebar';
-import AtarColoredLogo from '@/assets/icons/AtarColoredLogo';
 import { Box } from '@/wrappers/layouts';
 import MuiDrawer from '@mui/material/Drawer';
 import { CSSObject, styled, Theme } from '@mui/material/styles';

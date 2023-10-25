@@ -1,7 +1,7 @@
 import { Box, Container, Text } from '@/wrappers';
 import BarChart from '../charts/barChart';
 import theme from '@/ThemeRegistry/theme';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 
 export default function SalesByAgent() {
 	const data = {

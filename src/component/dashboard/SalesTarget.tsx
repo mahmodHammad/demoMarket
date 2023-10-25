@@ -1,6 +1,6 @@
 import { Box, Container, Text } from '@/wrappers';
 import MultiLineChart from '../charts/multiLineChart';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 import theme from '@/ThemeRegistry/theme';
 
 export default function SalesTarget() {

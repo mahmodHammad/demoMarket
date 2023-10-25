@@ -1,4 +1,3 @@
-import { AtarColoredLogo } from '@/assets';
 import {
 	BookingDetails_timedate,
 	BookingDetails_uhitHeader,
@@ -8,13 +7,14 @@ import {
 	QuiltedImageList,
 } from '@/component';
 import { Box, Button, Item } from '@/wrappers';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, SvgIcon } from '@mui/material';
 import Link from 'next/link';
 import QR from '@/assets/images/QR.png';
 
 import React from 'react';
 import { Text } from '@/wrappers';
 import Image from 'next/image';
+import xtenant from '@/utils/xtenant';
 const photos = [{ src: '@/assets/images/photo1.png', width: 800, height: 600 }];
 
 interface Props {
@@ -72,24 +72,28 @@ const BookingDetails = ({
 							<QuiltedImageList />
 							<BookingDetails_uhitHeader
 								logo={
-									<AtarColoredLogo
+									<SvgIcon
 										sx={{
 											height: '52px',
 											width: { xs: '75px', md: '121px' },
 										}}
-									/>
+										inheritViewBox>
+										{xtenant.dashboardIcon}
+									</SvgIcon>
 								}
 								title={propertyName || 'Property Name'}
 								location={location || 'Location'}
 							/>
 							<BookingDetails_timedate
 								logo={
-									<AtarColoredLogo
+									<SvgIcon
 										sx={{
 											height: '14px',
 											width: '35px',
 										}}
-									/>
+										inheritViewBox>
+										{xtenant.dashboardIcon}
+									</SvgIcon>
 								}
 								title={''}
 								date={date || 'Today at 11:00 PM'}

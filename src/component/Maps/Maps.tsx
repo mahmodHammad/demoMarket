@@ -11,7 +11,7 @@ import {
 } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import { Loading } from '@/wrappers';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 
 const containerStyle = {
 	width: '100%',

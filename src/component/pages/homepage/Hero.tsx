@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import SearchBar from './SearchBar';
 
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 export default function Hero() {
 	return (
 		<Box

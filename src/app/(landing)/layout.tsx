@@ -3,7 +3,7 @@ import ThemeRegistry from '@/ThemeRegistry/ThemeRegistry';
 import { Box } from '@/wrappers';
 import { Footer, Navbar, LoginModal } from '@/component';
 import { AuthProvider } from '@/contexts/AuthContext';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 // import neibourhoodcover2 from '@/assets/images/neibourhoodcover2.png';
 
 export const metadata = {

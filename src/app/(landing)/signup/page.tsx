@@ -15,7 +15,7 @@ import { register, sendVerificationSignup } from './signup-services';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import { globalToast } from '@/utils/toast';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 
 const schema = yup.object().shape({
 	name: yup.string().required('Full Name is required'),

@@ -2,7 +2,7 @@
 
 import { Roboto } from 'next/font/google';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {

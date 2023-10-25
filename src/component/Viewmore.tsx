@@ -2,7 +2,7 @@ import React from 'react';
 import { Rightrounded } from '@/assets';
 import { Button } from '@/wrappers';
 import Link from 'next/link';
-import xtenant from '@/utils/xtenants';
+import xtenant from '@/utils/xtenant';
 import theme from '@/ThemeRegistry/theme';
 
 interface Viewmore {

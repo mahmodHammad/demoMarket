@@ -1,6 +1,5 @@
 'use client';
 
-import { AtarColoredLogo } from '@/assets';
 import {
 	BookingDetails_timedate,
 	BookingDetails_uhitHeader,
@@ -9,7 +8,7 @@ import {
 	QuiltedImageList,
 } from '@/component';
 import { Box, Button, Loading } from '@/wrappers';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, SvgIcon } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Text } from '@/wrappers';
@@ -31,6 +30,7 @@ import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen';
 import Slideshow from 'yet-another-react-lightbox/plugins/slideshow';
+import xtenant from '@/utils/xtenant';
 
 const page = () => {
 	const { push } = useRouter();
@@ -124,24 +124,28 @@ const page = () => {
 								) : null}
 								<BookingDetails_uhitHeader
 									logo={
-										<AtarColoredLogo
+										<SvgIcon
 											sx={{
 												height: '52px',
 												width: { xs: '75px', md: '121px' },
 											}}
-										/>
+											inheritViewBox>
+											{xtenant.dashboardIcon}
+										</SvgIcon>
 									}
 									title={data?.unit?.name || 'Property Name'}
 									location={data?.unit?.locationable?.name_en || 'Location'}
 								/>
 								<BookingDetails_timedate
 									logo={
-										<AtarColoredLogo
+										<SvgIcon
 											sx={{
 												height: '14px',
 												width: '35px',
 											}}
-										/>
+											inheritViewBox>
+											{xtenant.dashboardIcon}
+										</SvgIcon>
 									}
 									title={data?.unit?.name}
 									description={data?.unit?.info}
@@ -158,7 +162,9 @@ const page = () => {
 											height: '200px',
 											objectFit: 'cover',
 										}}>
-										<ReturnQrCode text={`https://atarmarket.vercel.app/my-bookings/booking-details/${params?.bookingID}`} />
+										<ReturnQrCode
+											text={`https://atarmarket.vercel.app/my-bookings/booking-details/${params?.bookingID}`}
+										/>
 									</Box>
 								</Box>
 								<Grid item contaier xs={12} md={4} display={{ xs: 'flex', md: 'none' }}>
