@@ -23,6 +23,7 @@ import { keys } from '@/utils/keys';
 import { getFilters } from '@/app/(landing)/listingpage/listing-service';
 import SliderFilter from '@/component/filters/SliderFilter';
 import { Close } from '@/assets';
+import { formatNumber } from '@/component/forms/Slider';
 
 const SearchBar = () => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -36,9 +37,9 @@ const SearchBar = () => {
 	const [selectedLocation, setSelectedLocation] = React.useState<string[]>([]);
 
 	const [filtersInfo, setFiltersInfo] = useState<any>(null);
-	const [budgetSliderValues, setBudgetSliderValues] = useState<number[]>([0, 10000000000]);
+	const [budgetSliderValues, setBudgetSliderValues] = useState<number[]>([]);
 
-	const { data: filtersData } = useQuery({
+	const { data: filtersData, isLoading } = useQuery({
 		queryKey: [keys.FILTERS2],
 		queryFn: getFilters,
 	});
@@ -46,6 +47,7 @@ const SearchBar = () => {
 	useEffect(() => {
 		console.log('filtersData in homepage', filtersData);
 		setFiltersInfo(filtersData);
+		setBudgetSliderValues([+filtersData?.budget.min, +filtersData?.budget.max]);
 
 		if (filtersData?.property_type)
 			setPropertyTypes(
@@ -349,7 +351,11 @@ const SearchBar = () => {
 								</Text>
 
 								<Text onClick={() => setIsExpanded(true)} sx={{ cursor: 'pointer' }}>
-									Choose Price Range
+									{!isLoading &&
+									(+budgetSliderValues[0] !== +filtersInfo?.budget.min ||
+										+budgetSliderValues[1] !== +filtersInfo?.budget.max)
+										? `${formatNumber(+budgetSliderValues[0])} - ${formatNumber(+budgetSliderValues[1])}`
+										: 'Choose Price Range'}
 								</Text>
 							</Box>
 						</Box>
@@ -401,8 +407,8 @@ const SearchBar = () => {
 							isSearchBar
 							label="Budget"
 							sliderValues={budgetSliderValues}
-							min={+filtersInfo?.budget.min || 0}
-							max={+filtersInfo?.budget.max || 10000000000}
+							min={+filtersInfo?.budget.min}
+							max={+filtersInfo?.budget.max}
 							handleSliderChange={(value: number[]) => setBudgetSliderValues(value)}
 						/>
 					</Box>
