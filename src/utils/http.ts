@@ -80,7 +80,10 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
 	(response) => {
-		if (+response.status === 401) window.location.href = `${window.location.origin}/401`;
+		if (+response.status === 401) {
+			window.dispatchEvent(new Event('logout'));
+			window.location.href = `${window.location.origin}/401`;
+		}
 		return response;
 	},
 	(error) => {

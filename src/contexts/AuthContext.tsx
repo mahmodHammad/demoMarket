@@ -45,6 +45,14 @@ export const AuthProvider = ({ children }: any) => {
 		if (storedUser) setUser(JSON.parse(storedUser));
 	}, []);
 
+	useEffect(() => {
+		window.addEventListener('logout', logout);
+		
+		return () => {
+			window.removeEventListener('logout', logout);
+		};
+	}, []);
+
 	const verifyNumber = async (phoneNumber: any) => {
 		const body = {
 			phone_number: phoneNumber.phone_number,
@@ -104,7 +112,7 @@ export const AuthProvider = ({ children }: any) => {
 				login,
 				logout,
 				verifyNumber,
-				getUserInfo
+				getUserInfo,
 			}}>
 			{children}
 		</AuthContext.Provider>
