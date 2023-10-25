@@ -9,9 +9,9 @@ export const getProperties = async (options: any = {}) => {
 	}
 };
 
-export const getFilters = async (options: any = {}) => {
+export const getFilters = async () => {
 	try {
-		const res = await http.get(`/get-filters`, options);
+		const res = await http.get(`/get-filters`, { timeout: 5000 });
 		return res.data.data;
 	} catch (error) {
 		console.log('error in getFilters', error);
