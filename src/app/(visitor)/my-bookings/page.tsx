@@ -27,6 +27,7 @@ interface TabPanelProps {
 
 export default function MyBookings() {
 	dayjs.extend(utc);
+	const [tableList, setTableList] = useState<any>([]);
 	const [search, setSearch] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [status, setStatus] = useState({});
@@ -79,6 +80,8 @@ export default function MyBookings() {
 
 	useEffect(() => {
 		returnUpcomingVisit();
+		if (!!upcomingList?.list.length)
+			setTableList(upcomingList?.list.map((i: any) => ({ ...i, propertyName: i?.unit?.name })));
 	}, [upcomingList]);
 
 	const acceptOrRejectBookings = async () => {
@@ -127,7 +130,7 @@ export default function MyBookings() {
 				<Table
 					headers={HEADERS}
 					cellsTypes={CELLS_TYPES}
-					data={upcomingList?.list}
+					data={tableList}
 					filterValues={FilterValues}
 					loading={upcomingListLoading}
 					search={search}
@@ -162,7 +165,7 @@ const HEADERS = ['Property Name', 'Visit Type', 'Visit Date & Time', 'Status', '
 const CELLS_TYPES = [
 	{
 		type: TYPES.STRING, // Type of cell
-		dataKey: 'id', // data access key of cell
+		dataKey: 'propertyName', // data access key of cell
 	},
 	{
 		type: TYPES.ENUM_STRING,
