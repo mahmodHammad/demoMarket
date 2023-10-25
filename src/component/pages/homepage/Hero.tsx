@@ -18,8 +18,9 @@ export default function Hero() {
 					width: '100%',
 					height: '100%',
 					objectFit: 'cover',
-					objectPosition: 'bottom',
+					objectPosition: 'center',
 					position: 'absolute',
+					filter: 'brightness(0.77)',
 				}}
 				component={Image}
 				priority
@@ -40,7 +41,7 @@ export default function Hero() {
 				column>
 				<Box
 					sx={{
-						mt: {xl:'100px',md:"85px"},
+						mt: { xl: '100px', md: '85px' },
 						maxWidth: { xl: '720px', md: '60%', xs: '90%' },
 					}}>
 					<Text variant="h2" align="center" sx={{ color: '#fff', fontSize: { md: '48px', xs: '38px' } }} component="h1">

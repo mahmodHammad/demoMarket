@@ -53,10 +53,10 @@ function ResponsiveAppBar() {
 							sx={{
 								height: { md: '40px', xl: '62px' },
 								width: '133px',
-								filter: ' brightness(0) invert(1)',
+								filter: !xtenants.landingIcon ? 'brightness(0) invert(1)' : '',
 							}}
 							inheritViewBox>
-							{xtenants.dashboardIcon}
+							{xtenants?.landingIcon || xtenants.dashboardIcon}
 						</SvgIcon>
 					</Box>
 
@@ -74,7 +74,7 @@ function ResponsiveAppBar() {
 								filter: ' brightness(0) invert(1)',
 							}}
 							inheritViewBox>
-							{xtenants.dashboardIcon}
+							{xtenants?.landingIcon || xtenants.dashboardIcon}
 						</SvgIcon>
 					</Box>
 					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
