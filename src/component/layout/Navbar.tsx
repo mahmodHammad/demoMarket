@@ -34,7 +34,7 @@ function ResponsiveAppBar() {
 	};
 
 	return (
-		<AppBar position="relative" sx={{ background: xtenants.primaryPalette.main + 'aa', zIndex: 1000 }}>
+		<AppBar position="relative" sx={{ background: xtenants.primaryPalette.main + 'bb', zIndex: 1000 }}>
 			<Container maxWidth="xl">
 				<Toolbar
 					disableGutters
@@ -51,7 +51,7 @@ function ResponsiveAppBar() {
 						}}>
 						<SvgIcon
 							sx={{
-								height: { md: '40px', xl: '62px' },
+								height: { md: '50px', xl: '62px' },
 								width: '133px',
 								filter: !xtenants.landingIcon ? 'brightness(0) invert(1)' : '',
 							}}

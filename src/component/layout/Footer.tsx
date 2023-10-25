@@ -98,14 +98,15 @@ export default function Footer() {
 							<Box column>
 								<SvgIcon
 									sx={{
-										height: { md: '50px', xl: '50px' },
+										height: { md: '50px', xl: '70px' },
 
-										width: '70px',
-										filter: ' brightness(0) invert(1)',
+										width: '120px',
+										filter: !xtenants.landingIcon ? 'brightness(0) invert(1)' : '',
 									}}
 									inheritViewBox>
-									{xtenants?.dashboardIcon}
+									{xtenants?.landingIcon || xtenants.dashboardIcon}
 								</SvgIcon>
+
 								<Text
 									s={14}
 									bold
