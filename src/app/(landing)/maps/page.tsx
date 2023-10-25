@@ -8,7 +8,7 @@ import { keys } from '@/utils/keys';
 import { getNerabyPlaces } from './maps-service';
 
 export default function page({ inLandingPage }) {
-	const [center, setCenter] = useState({ lat: 24.71811100316436, lng: 46.68666506186128 });
+	const [center, setCenter] = useState({ lat: 24.71582, lng: 46.668 });
 	const [radius, setRadius] = useState(5);
 	const [markersList, setMarkersList] = useState([]);
 	useQuery({

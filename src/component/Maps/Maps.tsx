@@ -11,7 +11,7 @@ import {
 } from '@react-google-maps/api';
 import UnitsCard from '../cards/UnitsCard';
 import { Loading } from '@/wrappers';
-import { xtenants } from '@/utils/xtenants';
+import xtenant from '@/utils/xtenants';
 
 const containerStyle = {
 	width: '100%',
@@ -135,7 +135,7 @@ function MyComponent({ center, setCenter, markersList, setRadius, inLandingPage 
 								options={{
 									title: `Custom marker ${index}`,
 									icon: {
-										url: xtenants.mapsIcon,
+										url: xtenant.mapsIcon,
 										scaledSize: new window.google.maps.Size(30, 30),
 									},
 								}}

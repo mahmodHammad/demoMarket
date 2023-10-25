@@ -1,16 +1,11 @@
 'use client';
 import React from 'react';
-import { GoogleMap, useJsApiLoader, MarkerF,Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, MarkerF, Marker } from '@react-google-maps/api';
 import { Loading } from '@/wrappers';
 
 const containerStyle = {
 	width: '100%',
 	height: '100%',
-};
-
-const center = {
-	lat: -4.745,
-	lng: -48.523,
 };
 
 function MapReadOnly({ latLng }: any) {

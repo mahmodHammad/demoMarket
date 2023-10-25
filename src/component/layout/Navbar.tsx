@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { xtenants } from '@/utils/xtenants';
+import xtenant from '@/utils/xtenants';
 import { SvgIcon } from '@mui/material';
 
 function ResponsiveAppBar() {
@@ -34,7 +34,7 @@ function ResponsiveAppBar() {
 	};
 
 	return (
-		<AppBar position="relative" sx={{ background: xtenants.primaryPalette.main + 'bb', zIndex: 1000 }}>
+		<AppBar position="relative" sx={{ background: xtenant.primaryPalette.main + 'bb', zIndex: 1000 }}>
 			<Container maxWidth="xl">
 				<Toolbar
 					disableGutters
@@ -53,10 +53,10 @@ function ResponsiveAppBar() {
 							sx={{
 								height: { md: '50px', xl: '62px' },
 								width: '133px',
-								filter: !xtenants.landingIcon ? 'brightness(0) invert(1)' : '',
+								filter: !xtenant.landingIcon ? 'brightness(0) invert(1)' : '',
 							}}
 							inheritViewBox>
-							{xtenants?.landingIcon || xtenants.dashboardIcon}
+							{xtenant?.landingIcon || xtenant.dashboardIcon}
 						</SvgIcon>
 					</Box>
 
@@ -74,7 +74,7 @@ function ResponsiveAppBar() {
 								filter: ' brightness(0) invert(1)',
 							}}
 							inheritViewBox>
-							{xtenants?.landingIcon || xtenants.dashboardIcon}
+							{xtenant?.landingIcon || xtenant.dashboardIcon}
 						</SvgIcon>
 					</Box>
 					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>

@@ -44,4 +44,4 @@ const allxtenants = {
 
 const tenant = 'atar';
 
-export const xtenants = allxtenants[tenant];
+export default allxtenants[tenant];

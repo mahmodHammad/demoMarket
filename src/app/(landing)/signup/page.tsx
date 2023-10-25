@@ -15,7 +15,7 @@ import { register, sendVerificationSignup } from './signup-services';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import { globalToast } from '@/utils/toast';
-import { xtenants } from '@/utils/xtenants';
+import xtenant from '@/utils/xtenants';
 
 const schema = yup.object().shape({
 	name: yup.string().required('Full Name is required'),
@@ -139,7 +139,7 @@ const Signup = () => {
 						}}
 						component={Image}
 						alt="houses and properties for rent"
-						src={xtenants?.landingBackground}
+						src={xtenant?.landingBackground}
 					/>
 				</Item>
 				<Item md={6} center>
@@ -157,7 +157,7 @@ const Signup = () => {
 							Welcome to
 							<Box component="span" sx={{ color: theme.palette.primary.main }}>
 								{' '}
-								{xtenants?.name}
+								{xtenant?.name}
 							</Box>
 						</Text>
 						<Text variant="small" gray mt="16px">

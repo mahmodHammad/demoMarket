@@ -1,4 +1,4 @@
-import { xtenants } from '@/utils/xtenants';
+import xtenant from '@/utils/xtenants';
 import Sidebar from './Sidebar';
 import AtarColoredLogo from '@/assets/icons/AtarColoredLogo';
 import { Box } from '@/wrappers/layouts';
@@ -75,7 +75,7 @@ const DrawerContainer = ({ type }) => {
 						width: '140px',
 					}}
 					inheritViewBox>
-					{xtenants.dashboardIcon}
+					{xtenant.dashboardIcon}
 				</SvgIcon>
 			</Box>
 			<Sidebar type={type} />
