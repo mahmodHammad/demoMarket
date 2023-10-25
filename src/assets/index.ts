@@ -41,6 +41,7 @@ export { default as roshnLanding } from './images/roshnLanding.jpeg';
 export { default as defaultNeighbour } from './images/defaultNeighbour.jpg';
 export { default as defaultNeighbourd2 } from './images/defaultNeighbourd2.jpeg';
 export { default as AtarLanding } from './images/herobg.png';
+export { default as BinSalam } from './images/binsalman.png';
 
 export { default as NoSearchResults } from './icons/NoSearchResults';
 export { default as EmptyFavPage } from './icons/EmptyFavPage';

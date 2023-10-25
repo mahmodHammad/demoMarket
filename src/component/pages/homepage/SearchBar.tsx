@@ -130,7 +130,7 @@ const SearchBar = () => {
 					transition: 'height 0.3s ease-in-out',
 					borderRadius: { xs: ' 0px 16px 16px 16px', md: ' 0px 20px 20px 20px' },
 					boxShadow: ' 0px 30px 60px -15px #8F90BC26',
-					backgroundColor: '#FFFFFFaa',
+					backgroundColor: '#FFFFFF88',
 					backdropFilter: 'blur(10px)',
 					p: { xs: '12px', md: '24px' },
 				}}>
