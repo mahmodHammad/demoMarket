@@ -20,7 +20,7 @@ export default function Hero() {
 					objectFit: 'cover',
 					objectPosition: 'center',
 					position: 'absolute',
-					filter: 'brightness(0.77)',
+					filter: 'brightness(0.7)',
 				}}
 				component={Image}
 				priority
@@ -45,7 +45,7 @@ export default function Hero() {
 						maxWidth: { xl: '720px', md: '60%', xs: '90%' },
 					}}>
 					<Text variant="h2" align="center" sx={{ color: '#fff', fontSize: { md: '48px', xs: '38px' } }} component="h1">
-						Buy, rent, or sell your property easily
+						{xtenants.sloganTitle || 'Buy, rent, or sell your property easily'}
 					</Text>
 					<Text
 						variant="body"
@@ -55,8 +55,8 @@ export default function Hero() {
 							color: '#fff',
 							textAlign: 'center',
 						}}>
-						Discover properties available for sale and rent, view all property details, book a visit with a sales
-						consultant, and complete the payment process with ease and flexibility in one platform.
+						{xtenants.sloganBody ||
+							'Discover properties available for sale and rent, view all property details, book a visit with a sales consultant, and complete the payment process with ease and flexibility in one platform.'}
 					</Text>
 				</Box>
 				<Box center width={'100%'} px={1}>
