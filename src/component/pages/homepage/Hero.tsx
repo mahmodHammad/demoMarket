@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import SearchBar from './SearchBar';
 
-import { xtenants } from '@/utils/xtenants';
+import xtenant from '@/utils/xtenants';
 export default function Hero() {
 	return (
 		<Box
@@ -20,12 +20,12 @@ export default function Hero() {
 					objectFit: 'cover',
 					objectPosition: 'center',
 					position: 'absolute',
-					filter: 'brightness(0.7)',
+					filter: 'brightness(0.73)',
 				}}
 				component={Image}
 				priority
 				alt="houses and properties for rent"
-				src={xtenants?.landingBackground}
+				src={xtenant?.landingBackground}
 				quality={100}
 				placeholder="blur"
 			/>
@@ -45,7 +45,7 @@ export default function Hero() {
 						maxWidth: { xl: '720px', md: '60%', xs: '90%' },
 					}}>
 					<Text variant="h2" align="center" sx={{ color: '#fff', fontSize: { md: '48px', xs: '38px' } }} component="h1">
-						{xtenants.sloganTitle || 'Buy, rent, or sell your property easily'}
+						{xtenant.sloganTitle || 'Buy, rent, or sell your property easily'}
 					</Text>
 					<Text
 						variant="body"
@@ -55,7 +55,7 @@ export default function Hero() {
 							color: '#fff',
 							textAlign: 'center',
 						}}>
-						{xtenants.sloganBody ||
+						{xtenant.sloganBody ||
 							'Discover properties available for sale and rent, view all property details, book a visit with a sales consultant, and complete the payment process with ease and flexibility in one platform.'}
 					</Text>
 				</Box>

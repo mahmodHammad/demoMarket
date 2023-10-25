@@ -2,7 +2,7 @@
 
 import { Roboto } from 'next/font/google';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-import { xtenants } from '@/utils/xtenants';
+import xtenant from '@/utils/xtenants';
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {
@@ -23,7 +23,7 @@ const theme = responsiveFontSizes(
 	createTheme({
 		palette: {
 			mode: 'light',
-			primary: xtenants.primaryPalette,
+			primary: xtenant.primaryPalette,
 			error: { main: '#FF4242' },
 		},
 		typography: {

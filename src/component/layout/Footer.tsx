@@ -1,7 +1,7 @@
 'use client';
 import theme from '@/ThemeRegistry/theme';
 import { AtarWhiteLogo, FaceBook, LinkedIn, Twitter } from '@/assets';
-import { xtenants } from '@/utils/xtenants';
+import xtenant from '@/utils/xtenants';
 import { Box, Text } from '@/wrappers';
 import { Container, Divider, Grid, Link, SvgIcon } from '@mui/material';
 import React from 'react';
@@ -101,10 +101,10 @@ export default function Footer() {
 										height: { md: '50px', xl: '70px' },
 
 										width: '120px',
-										filter: !xtenants.landingIcon ? 'brightness(0) invert(1)' : '',
+										filter: !xtenant.landingIcon ? 'brightness(0) invert(1)' : '',
 									}}
 									inheritViewBox>
-									{xtenants?.landingIcon || xtenants.dashboardIcon}
+									{xtenant?.landingIcon || xtenant.dashboardIcon}
 								</SvgIcon>
 
 								<Text
