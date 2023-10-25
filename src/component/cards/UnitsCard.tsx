@@ -27,6 +27,7 @@ interface Props {
 	buttonName?: string;
 	onClick?: (id: any) => void;
 	data: data;
+	admin: Boolean;
 }
 export default function UnitsCard({
 	toggleLike,
@@ -36,6 +37,7 @@ export default function UnitsCard({
 	buttonName = 'View Details',
 	onClick,
 	data,
+	admin = false,
 }: Props) {
 	const { id, name: title, unit_size: area, images, price, city, is_fav: liked, complex } = data;
 	const image = images && images[0]?.url ? images[0].url : defaultimg;
@@ -70,9 +72,11 @@ export default function UnitsCard({
 						transform: 'scale(1.15)',
 					},
 				}}>
-				<Box xcenter ycenter onClick={() => toggleLike(id)}>
-					{liked ? <FilledHeart /> : <OutlineHeart />}
-				</Box>
+				{!admin && (
+					<Box xcenter ycenter onClick={() => toggleLike(id)}>
+						{liked ? <FilledHeart /> : <OutlineHeart />}
+					</Box>
+				)}
 			</Box>
 			{/* <Box
         center

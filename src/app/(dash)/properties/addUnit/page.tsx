@@ -90,7 +90,7 @@ export default function Properties() {
 				<Grid container mt={'25px'} spacing={'28px'}>
 					{data?.list?.map((d, index) => (
 						<Grid item xs={4} key={index}>
-							<UnitsCard buttonName="add" data={d} onClick={handleClickOpen} />
+							<UnitsCard admin buttonName="add" data={d} onClick={handleClickOpen} />
 						</Grid>
 					))}
 				</Grid>
