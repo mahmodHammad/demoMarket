@@ -1,4 +1,4 @@
-import { GET, DELETE, PUT, http, handleError } from '@/utils/http';
+import { GET } from '@/utils/http';
 
 export const getNerabyPlaces = (options: any = {}) => {
 	return GET(`/properties/nearby`, options);
