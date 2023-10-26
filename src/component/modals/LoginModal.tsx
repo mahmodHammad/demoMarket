@@ -1,15 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { Box, Button, Text } from '@/wrappers';
 import { PhoneInput, OTPInput, InfoBox } from '@/component';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Modal, IconButton } from '@mui/material';
 import { Close } from '@/assets';
 
 const LoginModal = () => {
 	const { push } = useRouter();
+	const path = usePathname();
+	const queryClient = useQueryClient();
+
 	const { isLoginModalOpen, closeLoginModal, verifyNumber, login } = useAuth();
 
 	const [loading, setLoading] = useState(false);
@@ -99,7 +103,8 @@ const LoginModal = () => {
 			setLoading(false);
 			setCurrentStep(STEPS.SUCESS);
 			closeLoginModal();
-			push('/my-bookings');
+			queryClient.refetchQueries();
+			push(path === '/' ? '/my-bookings' : path);
 		} else {
 			setLoading(false);
 			console.log('error in otp', res);
