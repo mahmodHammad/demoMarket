@@ -4,7 +4,7 @@ export const verifyNumberReq = async (body: any) => {
 	try {
 		return await http.post(`/login/send-verification`, body);
 	} catch (error: any) {
-		return error.response;
+		throw new Error(error)
 	}
 };
 
@@ -12,7 +12,7 @@ export const loginReq = async (body: any) => {
 	try {
 		return await http.post(`/login`, body);
 	} catch (error: any) {
-		return error.response;
+		throw new Error(error)
 	}
 };
 

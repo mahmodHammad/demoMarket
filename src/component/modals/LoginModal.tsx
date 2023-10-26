@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Modal, IconButton } from '@mui/material';
 import { Close } from '@/assets';
+import { toast } from 'react-toastify';
 
 const LoginModal = () => {
 	const { push } = useRouter();
@@ -83,33 +84,35 @@ const LoginModal = () => {
 
 	const handlePhoneVerification = async () => {
 		setLoading(true);
-		const res = await verifyNumber(phoneNumber);
-		if (+res.status === 200) {
+		try {
+			const res = await verifyNumber(phoneNumber);
+			if (+res.status === 200) {
+				setLoading(false);
+				setVid(res.data.data.id);
+				setCurrentStep(STEPS.VERIFICATION);
+				startTimer();
+			}
+		} catch (error) {
 			setLoading(false);
-			setVid(res.data.data.id);
-			setCurrentStep(STEPS.VERIFICATION);
-			startTimer();
-		} else {
-			setLoading(false);
-			// TODO: handle number error message
-			// console.log('error in verify', res);
+			toast.error('Please enter correct phone number')
+			setPhoneNumber('');
 		}
 	};
 
 	const handleOtpVerification = async () => {
 		setLoading(true);
-		const res = await login(phoneNumber, otpCode, vid);
-		if (+res?.status === 200) {
+		try {
+			const res = await login(phoneNumber, otpCode, vid);
+			if (+res?.status === 200) {
+				setLoading(false);
+				setCurrentStep(STEPS.SUCESS);
+				closeLoginModal();
+				queryClient.refetchQueries();
+				push(path === '/' ? '/my-bookings' : path);
+			}
+		} catch (error) {
 			setLoading(false);
-			setCurrentStep(STEPS.SUCESS);
-			closeLoginModal();
-			queryClient.refetchQueries();
-			push(path === '/' ? '/my-bookings' : path);
-		} else {
-			setLoading(false);
-			console.log('error in otp', res);
 			setOtpCode('');
-			// TODO: handle cases of otp errors
 			setOtpStatus(OTP_STATUS.INCORRECT);
 			// TODO: set count for number of trials
 		}
