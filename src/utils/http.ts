@@ -75,7 +75,7 @@ http.interceptors.request.use(
 		return config;
 	},
 	(error) => {
-		return	Promise.reject(error);
+		return Promise.reject(error);
 	},
 );
 
@@ -88,7 +88,7 @@ http.interceptors.response.use(
 		return response;
 	},
 	(error) => {
-		Promise.reject(error);
+		return Promise.reject(error);
 	},
 );
 
