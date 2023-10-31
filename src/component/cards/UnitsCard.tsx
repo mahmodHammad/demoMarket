@@ -102,6 +102,7 @@ export default function UnitsCard({
 					objectFit: 'cover',
 					position: 'relative',
 					overflow: 'hidden',
+					background: '#eee',
 				}}
 				// component={Image}
 				// loader={imageLoader}
