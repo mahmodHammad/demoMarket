@@ -99,7 +99,7 @@ export default function AppLayout({ children, type }: Props) {
 							</Box>
 
 							<Box>
-								<ProfileDropDown />
+								<ProfileDropDown type={type}/>
 							</Box>
 						</Box>
 					</Box>
