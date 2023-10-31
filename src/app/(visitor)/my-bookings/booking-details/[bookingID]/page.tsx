@@ -127,14 +127,14 @@ const page = () => {
 										<SvgIcon
 											sx={{
 												height: '52px',
-												width: { xs: '75px', md: '121px' },
+												width: { xs: '75px', md: xtenant.smallLogo?.width || '121px' },
 											}}
 											inheritViewBox>
-											{xtenant.dashboardIcon}
+											{xtenant?.smallLogo?.url || xtenant?.landingIcon?.url || xtenant.dashboardIcon?.url}
 										</SvgIcon>
 									}
 									title={data?.unit?.name || 'Property Name'}
-									location={data?.unit?.locationable?.name_en || 'Location'}
+									location={`${data?.unit?.city?.name || ''} , ${data?.unit?.complex?.name || ''}`}
 								/>
 								<BookingDetails_timedate
 									logo={
@@ -144,7 +144,7 @@ const page = () => {
 												width: '35px',
 											}}
 											inheritViewBox>
-											{xtenant.dashboardIcon}
+											{xtenant.dashboardIcon?.url}
 										</SvgIcon>
 									}
 									title={data?.unit?.name}

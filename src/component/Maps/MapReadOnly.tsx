@@ -2,6 +2,7 @@
 import React from 'react';
 import { GoogleMap, useJsApiLoader, MarkerF, Marker } from '@react-google-maps/api';
 import { Loading } from '@/wrappers';
+import xtenant from '@/utils/xtenant';
 
 const containerStyle = {
 	width: '100%',
@@ -23,7 +24,7 @@ function MapReadOnly({ latLng }: any) {
 			<MarkerF
 				position={{ lat: latLng?.lat, lng: latLng?.lng }}
 				icon={{
-					url: 'https://marketplace.goatar.com/static/activemap.svg',
+					url: xtenant.mapsIcon,
 					scaledSize: new window.google.maps.Size(40, 40),
 				}}
 				draggable={false} // Set draggable to false to make it view-only

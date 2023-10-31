@@ -11,6 +11,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import CardSkeleton from '../cards/CardSkeleton';
 import SimpleSelect from '../forms/SimpleSelect';
 import EmptyListingPage from './ِEmptyListingPage';
+import xtenant from '@/utils/xtenant';
 
 type Props = {
 	isMobileView?: boolean;
@@ -64,12 +65,15 @@ const listingBody = ({
 	return (
 		<Box column fullWidth>
 			<Text variant="h4">Properties in Saudi Arabia</Text>
-			<SearchBox
-				propertySearch={propertySearch}
-				setPropertySearch={setPropertySearch}
-				isRent={isRent}
-				setIsRent={setIsRent}
-			/>
+			{!xtenant.rentOnly && (
+				<SearchBox
+					propertySearch={propertySearch}
+					setPropertySearch={setPropertySearch}
+					isRent={isRent}
+					setIsRent={setIsRent}
+				/>
+			)}
+
 			{isMobileView && (
 				<Box fullWidth row xbetween ycenter mt={'30px'}>
 					<Text>Total Properties: {data?.data?.length}</Text>

@@ -9,6 +9,7 @@ import DateTimeModal from '../modals/DateTimeModal';
 import dayjs from 'dayjs';
 import { createBooking } from '@/app/(visitor)/my-bookings/booking-service';
 import { globalToast } from '@/utils/toast';
+import xtenant from '@/utils/xtenant';
 
 interface proptypes {
 	price: string;
@@ -82,7 +83,7 @@ export default function BuyNowCard({ price, PriceType, unitId }: proptypes) {
 				}}
 				sx={{ mt: '24px', height: '52px', width: '100%' }}
 				startIcon={<BuyNowIcon />}>
-				Buy Now
+				{xtenant.rentOnly ? 'Rent Now' : 'Buy Now'}
 			</Button>
 			<Divider sx={{ mt: '24px' }}></Divider>
 			<Text bold s={18} sx={{ mt: '24px' }}>

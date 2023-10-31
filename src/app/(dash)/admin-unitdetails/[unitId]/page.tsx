@@ -264,7 +264,7 @@ export default function Unitdetails({ location, rentType }: Props) {
 											width: { xs: '75px', md: '121px' },
 										}}
 										inheritViewBox>
-										{xtenant.dashboardIcon}
+										{xtenant.dashboardIcon?.url}
 									</SvgIcon>
 								}
 								title={unit?.name || '--'}
@@ -278,7 +278,7 @@ export default function Unitdetails({ location, rentType }: Props) {
 											width: '35px',
 										}}
 										inheritViewBox>
-										{xtenant.dashboardIcon}
+										{xtenant.dashboardIcon?.url}
 									</SvgIcon>
 								}
 								title={''}

@@ -14,7 +14,7 @@ export default function UnitMap({ location }: proptypes) {
 		<Box
 			sx={{
 				borderRadius: '16px',
-				my: '24px',
+				mt: '44px',
 			}}>
 			<LocationCard location={location} />
 		</Box>
