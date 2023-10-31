@@ -51,12 +51,12 @@ function ResponsiveAppBar() {
 						}}>
 						<SvgIcon
 							sx={{
-								height: { md: '50px', xl: '62px' },
-								width: '133px',
-								filter: !xtenant.landingIcon ? 'brightness(0) invert(1)' : '',
+								height: { md: '60px', xl: '62px' },
+								width: xtenant.landingIcon?.width || '133px',
+								filter: !xtenant.landingIcon?.url ? 'brightness(0) invert(1)' : '',
 							}}
 							inheritViewBox>
-							{xtenant?.landingIcon || xtenant.dashboardIcon}
+							{xtenant?.landingIcon?.url || xtenant.dashboardIcon?.url}
 						</SvgIcon>
 					</Box>
 
@@ -71,10 +71,10 @@ function ResponsiveAppBar() {
 							sx={{
 								height: '40px',
 								width: '103px',
-								filter: ' brightness(0) invert(1)',
+								// filter: ' brightness(0) invert(1)',
 							}}
 							inheritViewBox>
-							{xtenant?.landingIcon || xtenant.dashboardIcon}
+							{xtenant?.landingIcon?.url || xtenant.dashboardIcon?.url}
 						</SvgIcon>
 					</Box>
 					<Box sx={{ display: { xs: 'none', md: 'flex' } }}>

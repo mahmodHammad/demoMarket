@@ -128,7 +128,7 @@ const PropertyFilters = ({
 
 				<AccordionChipsFilter
 					defaultExpanded={!isMobileView}
-					header="Location"
+					header="Cities"
 					filterName="location"
 					filters={filteredLocationFilters}
 					onFilterStateChange={(_, v) =>
@@ -211,7 +211,7 @@ const PropertyFilters = ({
 					header="No. of  Guestrooms"
 					Content={() => (
 						<CounterFilter
-							name="Bathrooms"
+							name="Guest rooms"
 							number={noOfGuestrooms}
 							handleIncrement={() => setNoOfGuestrooms((prev: number) => ++prev)}
 							handleDecrement={() => setNoOfGuestrooms((prev: number) => (prev !== 0 ? --prev : prev))}

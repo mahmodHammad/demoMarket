@@ -71,10 +71,10 @@ const DrawerContainer = ({ type }) => {
 				<SvgIcon
 					sx={{
 						height: '80px',
-						width: '140px',
+						width: xtenant?.dashboardIcon?.width || '140px',
 					}}
 					inheritViewBox>
-					{xtenant.dashboardIcon}
+					{xtenant.dashboardIcon?.url}
 				</SvgIcon>
 			</Box>
 			<Sidebar type={type} />

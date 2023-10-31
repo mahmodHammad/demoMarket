@@ -57,12 +57,12 @@ export default function Footer() {
 			link: 'https://www.atarcloud.com/contact',
 		},
 		{
-			name: 'info@goatar.com',
+			name: xtenant?.footer?.email,
 			link: 'mailto:info@goatar.com',
 		},
 		{
-			name: '3504 Imam Saud bin Faisal Rd. Almalqa 6418, Riyadh, Saudi Arabia ',
-			link: 'https://maps.app.goo.gl/t6fw3RsFjvt5uC6R7',
+			name: xtenant?.footer?.address,
+			link: 'https://maps.app.goo.gl/KzzccVUifNMGdE1r6',
 		},
 	];
 
@@ -101,10 +101,10 @@ export default function Footer() {
 										height: { md: '50px', xl: '70px' },
 
 										width: '120px',
-										filter: !xtenant.landingIcon ? 'brightness(0) invert(1)' : '',
+										filter: !xtenant.landingIcon?.url ? 'brightness(0) invert(1)' : '',
 									}}
 									inheritViewBox>
-									{xtenant?.landingIcon || xtenant.dashboardIcon}
+									{xtenant?.landingIcon?.url || xtenant.dashboardIcon?.url}
 								</SvgIcon>
 
 								<Text
@@ -115,11 +115,11 @@ export default function Footer() {
 										mt: { xs: '12px', md: '40px' },
 										width: { xs: '220px', md: '227px' },
 									}}>
-									{description}
+									{xtenant?.footer?.slogan}
 								</Text>
 								<Box row gap={1} sx={{ mt: '24px', display: { xs: 'none', md: 'flex' } }}>
 									{logos.map((item, index) => (
-										<Link key={index} href={item.link} color="inherit" sx={{ mr: '10px' }} target="_blank">
+										<Link key={index} color="inherit" sx={{ mr: '10px' }} target="_blank">
 											{item.icon}
 										</Link>
 									))}
@@ -133,8 +133,8 @@ export default function Footer() {
 								</Text>
 								{column.resources.map((item, index) => (
 									<Link
-										href={item.link}
-										target="_blank"
+										// href={item.link}
+										// target="_blank"
 										color="inherit"
 										key={index}
 										sx={{
@@ -179,8 +179,8 @@ export default function Footer() {
 				<Box>
 					<Text variant="body2" color="#fff" align="center">
 						{'©  '}
-						<Link target="_blank" color="inherit" href="https://www.atarcloud.com/" sx={{ textDecoration: 'none' }}>
-							Atarcloud
+						<Link target="_blank" color="inherit"  sx={{ textDecoration: 'none' }}>
+							{xtenant.name}
 						</Link>
 						. All Right Reserved {new Date().getFullYear()}
 					</Text>
@@ -190,7 +190,7 @@ export default function Footer() {
 						<Link
 							key={index}
 							target="_blank"
-							href={item.link}
+							// href={item.link}
 							color="inherit"
 							sx={{
 								mr: '10px',

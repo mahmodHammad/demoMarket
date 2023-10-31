@@ -24,11 +24,12 @@ import { getFilters } from '@/app/(landing)/listingpage/listing-service';
 import SliderFilter from '@/component/filters/SliderFilter';
 import { Close } from '@/assets';
 import { formatNumber } from '@/component/forms/Slider';
+import xtenant from '@/utils/xtenant';
 
 const SearchBar = () => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [contentVisible, setContentVisible] = useState(false);
-	const [isRent, setIsRent] = useState(false);
+	const [isRent, setIsRent] = useState(xtenant?.rentOnly ? true : false);
 
 	const [propertyTypes, setPropertyTypes] = useState<any>([]);
 	const [locations, setLocations] = useState<any>([]);
@@ -83,44 +84,47 @@ const SearchBar = () => {
 
 	return (
 		<Box sx={{ mt: { xs: '20px ', md: '60px' }, width: { xs: '100%', md: 'initial' } }}>
-			<Box row>
-				<ButtonBase onClick={handleClick}>
-					<Box
-						center
-						sx={{
-							width: { xs: '50px', md: '102px' },
-							height: { xs: '25px', md: '39px' },
+			{!xtenant?.rentOnly && (
+				<Box row>
+					<ButtonBase onClick={handleClick}>
+						<Box
+							center
+							sx={{
+								width: { xs: '50px', md: '102px' },
+								height: { xs: '25px', md: '39px' },
 
-							backgroundColor: isRent ? null : '#FFFFFFee',
-							borderRadius: {
-								xs: '8px 8px 0px 0px',
-								md: '15px 15px 0px 0px',
-							},
-						}}>
-						<Text variant="small" sx={{ color: isRent ? '#FFFFFF' : null }}>
-							Buy
-						</Text>
-					</Box>
-				</ButtonBase>
+								backgroundColor: isRent ? null : '#FFFFFFee',
+								borderRadius: {
+									xs: '8px 8px 0px 0px',
+									md: '15px 15px 0px 0px',
+								},
+							}}>
+							<Text variant="small" sx={{ color: isRent ? '#FFFFFF' : null }}>
+								Buy
+							</Text>
+						</Box>
+					</ButtonBase>
 
-				<ButtonBase onClick={handleClickRent}>
-					<Box
-						center
-						sx={{
-							width: { xs: '50px', md: '102px' },
-							height: { xs: '25px', md: '39px' },
-							backgroundColor: isRent ? '#FFFFFFee' : null,
-							borderRadius: {
-								xs: '8px 8px 0px 0px',
-								md: '15px 15px 0px 0px',
-							},
-						}}>
-						<Text variant="small" sx={{ color: isRent ? null : '#FFFFFF' }}>
-							Rent
-						</Text>
-					</Box>
-				</ButtonBase>
-			</Box>
+					<ButtonBase onClick={handleClickRent}>
+						<Box
+							center
+							sx={{
+								width: { xs: '50px', md: '102px' },
+								height: { xs: '25px', md: '39px' },
+								backgroundColor: isRent ? '#FFFFFFee' : null,
+								borderRadius: {
+									xs: '8px 8px 0px 0px',
+									md: '15px 15px 0px 0px',
+								},
+							}}>
+							<Text variant="small" sx={{ color: isRent ? null : '#FFFFFF' }}>
+								Rent
+							</Text>
+						</Box>
+					</ButtonBase>
+				</Box>
+			)}
+
 			<Box
 				xbetween
 				column
@@ -130,7 +134,10 @@ const SearchBar = () => {
 					width: { xs: '100%', md: '918px' },
 					height: { xs: '70px', md: isExpanded ? '293px' : '102px' },
 					transition: 'height 0.3s ease-in-out',
-					borderRadius: { xs: ' 0px 16px 16px 16px', md: ' 0px 20px 20px 20px' },
+					borderRadius: {
+						xs: ` ${xtenant?.rentOnly ? '16px' : 0} 16px 16px 16px`,
+						md: ` ${xtenant?.rentOnly ? '20px' : 0} 20px 20px 20px`,
+					},
 					boxShadow: ' 0px 30px 60px -15px #8F90BC26',
 					backgroundColor: '#FFFFFF88',
 					backdropFilter: 'blur(10px)',

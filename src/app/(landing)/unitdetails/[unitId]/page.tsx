@@ -29,6 +29,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import UnitSpecifications from '@/component/unitDetails/UnitSpecifications';
 import { toggleLike } from '../../listingpage/listing-service';
 import xtenant from '@/utils/xtenant';
+import SmallLogo from '@/assets/whitelables/misk/SmallLogo';
+
 export const generateImgList = (images) => {
 	if (images?.length === 1) {
 		return [
@@ -243,10 +245,10 @@ export default function Unitdetails({ location, rentType }: Props) {
 									<SvgIcon
 										sx={{
 											height: '52px',
-											width: { xs: '75px', md: '121px' },
+											width: { xs: '75px', md: xtenant?.smallLogo?.width || '121px' },
 										}}
 										inheritViewBox>
-										{xtenant?.landingIcon || xtenant.dashboardIcon}
+										{xtenant?.smallLogo?.url || xtenant?.landingIcon?.url || xtenant.dashboardIcon?.url}
 									</SvgIcon>
 								}
 								title={unit?.name || '--'}
@@ -260,7 +262,7 @@ export default function Unitdetails({ location, rentType }: Props) {
 											width: '35px',
 										}}
 										inheritViewBox>
-										{xtenant?.landingIcon || xtenant.dashboardIcon}
+										{xtenant?.landingIcon?.url || xtenant.dashboardIcon?.url}
 									</SvgIcon>
 								}
 								title={''}
