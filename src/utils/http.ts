@@ -7,7 +7,7 @@ type Options = {
 	onError?: (error: Error) => void;
 };
 
-const xTenant = 'Miskcity';
+const xTenant = 'marketDev';
 export const get = async (url: string, options: Options = {}) => {
 	// const xTenant = process.env.X_TENANT
 	try {
