@@ -98,6 +98,7 @@ const Carousel = ({ items }: Props) => {
           }}
         >
           <LeftIcon sx={{ fontSize: "30px" }} />
+          
         </IconButton>
 
         {thumbIndex < items?.length - 2 && (

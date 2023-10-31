@@ -36,9 +36,9 @@ const roshn = {
 	landingBackground: roshnLanding,
 
 	footer: {
-		address: '3504 Imam Saud bin Faisal Rd. Almalqa 6418, Riyadh, Saudi Arabia ',
-		email: 'info@goatar.com',
-		slogan: 'Our goal is at the heart of all that we do.',
+		address: 'Unit No: 4898, Building No: 2877 King Abdullah, King Fahad Road, Riyadh 13519, Saudi Arabia',
+		email: 'customercare@roshn.sa',
+		slogan: '	',
 	},
 	NoManagedByLogo: true,
 	apiTenent: 'marketDev',
