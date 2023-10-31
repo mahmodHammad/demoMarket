@@ -19,11 +19,7 @@ const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 				width: '100%',
 				alignItems: 'center',
 			}}>
-			<Avatar
-				alt={name?.toUpperCase()}
-				src={image}
-				sx={{ width: 80, height: 80 }}
-			/>
+			<Avatar alt={name?.toUpperCase()} src={image} sx={{ width: 80, height: 80 }} />
 			<Text variant="h5" sx={{ mt: '8px', textTransform: 'capitalize' }}>
 				{name}
 			</Text>
@@ -31,16 +27,25 @@ const PopupDetails = ({ name, image }: { name: string; image: string }) => {
 	);
 };
 
-const OptionLink = ({ label, href = '', startIcon, onClick }: { label: string; href?: string; startIcon: any, onClick?: any }) => {
+const OptionLink = ({
+	label,
+	href = '',
+	startIcon,
+	onClick,
+}: {
+	label: string;
+	href?: string;
+	startIcon: any;
+	onClick?: any;
+}) => {
 	return (
 		<Box
 			component={Link}
 			href={href}
 			onClick={onClick}
 			style={{
-					textDecoration: 'none',
-				}}
-			>
+				textDecoration: 'none',
+			}}>
 			<Box
 				ycenter
 				xbetween
@@ -127,12 +132,7 @@ const ProfileDropDown = () => {
 											<OptionLink component={Link} href="/my-profile" label={'Edit'} startIcon={<Pencilline />} />
 											<OptionLink href="/my-profile" label={'Privacy Policy'} startIcon={<ShieldKeyholeLine />} />
 											<OptionLink href="/my-profile" label={'Terms And Conditions'} startIcon={<InformationLine />} />
-											<OptionLink 
-												onClick={logout}
-												href='/'
-												label={'Logout'}
-												startIcon={<LogoutBoxLine />} 
-											/>
+											<OptionLink onClick={logout} href="/" label={'Logout'} startIcon={<LogoutBoxLine />} />
 										</Box>
 									</Box>
 								</Paper>
