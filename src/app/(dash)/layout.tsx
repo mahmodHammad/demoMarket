@@ -12,9 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeRegistry>
-			<ProtectedPagesWrapper>
+			{/* <ProtectedPagesWrapper> */}
 				<AppLayout>{children}</AppLayout>
-			</ProtectedPagesWrapper>
+			{/* </ProtectedPagesWrapper> */}
 		</ThemeRegistry>
 	);
 }

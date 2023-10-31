@@ -56,7 +56,7 @@ const AdminVisitors = ({ data }: props) => {
 	);
 };
 
-const HEADERS = ['name', 'Phone Number', 'Register Time', 'Progress'];
+const HEADERS = ['name', 'Phone Number', 'Register Time', 'Interest'];
 
 const CELLS_TYPES = [
 	{

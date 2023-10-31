@@ -76,6 +76,6 @@ const allxtenants = {
 	atar,
 };
 
-const tenant = 'roshn';
+const tenant = 'atar';
 
 export default allxtenants[tenant];
