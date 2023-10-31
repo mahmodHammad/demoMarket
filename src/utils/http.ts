@@ -1,4 +1,5 @@
 import axios from 'axios';
+import xtenant from './xtenant';
 const baseUrl = 'https://marketplace.goatar.com/api';
 
 type Options = {
@@ -6,9 +7,9 @@ type Options = {
 	onError?: (error: Error) => void;
 };
 
+const xTenant = 'Miskcity';
 export const get = async (url: string, options: Options = {}) => {
 	// const xTenant = process.env.X_TENANT
-	const xTenant = 'marketDev';
 	try {
 		const requestOptions: any = {
 			headers: {
@@ -34,11 +35,11 @@ export const post = async (url: string, payload: {}) => {
 			headers: {
 				'Content-Type': 'application/json',
 				Accept: 'application/json',
-				'X-Tenant': 'marketDev',
+				'X-Tenant': xTenant,
 				'Access-Control-Allow-Origin': '*',
 				'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
 			},
-			'X-Tenant': 'marketDev',
+			'X-Tenant': xTenant,
 			body: JSON.stringify(payload),
 		};
 		const response = await fetch(`${baseUrl}${url}`, requestOptions);
@@ -68,7 +69,7 @@ export const http = axios.create({
 
 http.interceptors.request.use(
 	(config) => {
-		config.headers['X-Tenant'] = 'marketDev';
+		config.headers['X-Tenant'] = xTenant;
 		config.headers['Access-Control-Allow-Origin'] = '*';
 		config.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
 		return config;

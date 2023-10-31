@@ -18,6 +18,7 @@ const atar = {
 		email: 'info@goatar.com',
 		slogan: 'Our goal is at the heart of all that we do.',
 	},
+	apiTenent: 'marketDev',
 };
 
 const roshn = {
@@ -40,6 +41,7 @@ const roshn = {
 		slogan: 'Our goal is at the heart of all that we do.',
 	},
 	NoManagedByLogo: true,
+	apiTenent: 'marketDev',
 };
 
 const misk = {
@@ -68,6 +70,7 @@ const misk = {
 	NoManagedByLogo: true,
 	smallLogo: { url: SmallLogo, width: '70px' },
 	rentOnly: true,
+	apiTenent: 'Miskcity',
 };
 
 const allxtenants = {
