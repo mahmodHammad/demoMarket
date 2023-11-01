@@ -80,14 +80,12 @@ http.interceptors.request.use(
 );
 
 http.interceptors.response.use(
-	(response) => {
-		if (+response.status === 401) {
+	(response) => response,
+	(error) => {
+		if (+error?.response?.status === 401 || +error?.response?.data?.code === 401) {
 			window.dispatchEvent(new Event('logout'));
 			window.location.href = `${window.location.origin}/401`;
 		}
-		return response;
-	},
-	(error) => {
 		Promise.reject(error);
 	},
 );
