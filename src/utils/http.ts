@@ -7,7 +7,7 @@ type Options = {
 	onError?: (error: Error) => void;
 };
 
-const xTenant = 'Miskcity';
+const xTenant = 'roshn';
 export const get = async (url: string, options: Options = {}) => {
 	// const xTenant = process.env.X_TENANT
 	try {
@@ -75,7 +75,7 @@ http.interceptors.request.use(
 		return config;
 	},
 	(error) => {
-	 Promise.reject(error);
+		Promise.reject(error);
 	},
 );
 
@@ -88,7 +88,7 @@ http.interceptors.response.use(
 		return response;
 	},
 	(error) => {
-		return Promise.reject(error);
+		Promise.reject(error);
 	},
 );
 
