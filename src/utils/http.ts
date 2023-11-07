@@ -7,7 +7,7 @@ type Options = {
 	onError?: (error: Error) => void;
 };
 
-const xTenant = 'Miskcity';
+const xTenant = 'roshn';
 export const get = async (url: string, options: Options = {}) => {
 	// const xTenant = process.env.X_TENANT
 	try {
@@ -75,20 +75,18 @@ http.interceptors.request.use(
 		return config;
 	},
 	(error) => {
-	 Promise.reject(error);
+		Promise.reject(error);
 	},
 );
 
 http.interceptors.response.use(
-	(response) => {
-		if (+response.status === 401) {
+	(response) => response,
+	(error) => {
+		if (+error?.response?.status === 401 || +error?.response?.data?.code === 401) {
 			window.dispatchEvent(new Event('logout'));
 			window.location.href = `${window.location.origin}/401`;
 		}
-		return response;
-	},
-	(error) => {
-		return Promise.reject(error);
+		Promise.reject(error);
 	},
 );
 

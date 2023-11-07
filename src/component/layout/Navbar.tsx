@@ -72,6 +72,7 @@ function ResponsiveAppBar() {
 								height: '40px',
 								width: '103px',
 								// filter: ' brightness(0) invert(1)',
+								filter: !xtenant.landingIcon?.url ? 'brightness(0) invert(1)' : '',
 							}}
 							inheritViewBox>
 							{xtenant?.landingIcon?.url || xtenant.dashboardIcon?.url}

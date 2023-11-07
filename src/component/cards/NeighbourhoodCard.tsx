@@ -26,9 +26,11 @@ export default function NeighbourhoodCard({ data }: proptypes) {
 				position: 'relative',
 				overflow: 'hidden',
 				borderRadius: '16px',
+				cursor: 'pointer',
+				background: '#eee',
 			}}>
 			<Box
-      fill
+				fill
 				sx={{
 					width: '100%',
 					height: '100%',
