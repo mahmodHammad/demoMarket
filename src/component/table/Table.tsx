@@ -23,7 +23,7 @@ type TableProps = {
 	status: number[];
 	handleStatusChange?: (value: number[]) => void;
 	filterValues?: any;
-	filter: string;
+	filter?: string;
 	handleFilter?: (value: string) => void;
 	sort: string;
 	handleSort?: (value: string) => void;
@@ -82,13 +82,15 @@ export default function Table({
 						Filters={() => (
 							<>
 								<Search search={search} handleSearch={handleSearch} />
-								<FilterPopup
-									filtering
-									filterValues={filterValues}
-									handleFilter={handleFilter}
-									status={status}
-									setStatus={handleStatusChange}
-								/>
+								{handleFilter && filterValues && (
+									<FilterPopup
+										filtering
+										filterValues={filterValues}
+										handleFilter={handleFilter}
+										status={status}
+										setStatus={handleStatusChange}
+									/>
+								)}
 								{/* // TODO: implement sort */}
 							</>
 						)}>
@@ -112,6 +114,7 @@ const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 						{c.type === TYPES.LABEL && (
 							<Label status={c?.dataKey && getPropByString(row, c?.dataKey)} labelPalette={c.options?.colorPalette} />
 						)}
+						{c.type === TYPES.CUSTOM && <>{c?.dataKey && c.options?.render(row)}</>}
 						{c.type === TYPES.ENUM_STRING && <>{(c?.dataKey && c.options[getPropByString(row, c?.dataKey)]) || '--'}</>}
 						{c.type === TYPES.BUTTON && (
 							<Button
@@ -140,8 +143,8 @@ const TableBody = ({ data, cellsTypes, getPropByString }: any) => (
 const Label = ({ status, labelPalette }: { status: string; labelPalette: any }) => (
 	<span
 		style={{
-			color: labelPalette?.[status]?.color,
-			backgroundColor: labelPalette?.[status]?.bg,
+			color: labelPalette?.[status]?.color || labelPalette?.color,
+			backgroundColor: labelPalette?.[status]?.bg || labelPalette?.bg,
 			borderRadius: 50,
 			padding: '10px',
 			fontWeight: 500,

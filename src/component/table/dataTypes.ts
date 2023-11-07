@@ -5,6 +5,7 @@ const TYPES = {
 	LABEL: 'label',
 	BUTTON: 'button',
 	ENUM_STRING: 'enum_string',
+	CUSTOM: 'custom',
 };
 
 export default TYPES;
