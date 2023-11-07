@@ -15,6 +15,8 @@ type SimpleSelectControllerProps = Omit<SelectProps, 'name'> &
 		name: string;
 		items: Item[];
 		control: any;
+		addNew?: boolean;
+		addNewText?: string;
 		errors?: UseFormReturn<FieldValues>['formState']['errors'];
 	};
 
@@ -24,6 +26,10 @@ const SimpleSelectController = ({
 	rules,
 	control,
 	errors,
+	label,
+	disabled,
+	addNew,
+	addNewText,
 	...otherProps
 }: SimpleSelectControllerProps) => {
 	return (
@@ -33,7 +39,10 @@ const SimpleSelectController = ({
 			rules={rules}
 			render={({ field }) => (
 				<>
-					<SimpleSelect items={items} {...field} {...otherProps} />
+					<Text variant="caption" sx={{ float: 'left', mb: '8px', color: `${disabled ? '#CACACA' : ''}` }}>
+						{label}
+					</Text>
+					<SimpleSelect addNewText={addNewText} addNew={addNew} items={items} {...field} {...otherProps} />
 					{errors && errors[name] && <Text color="error">{`${errors[name]?.message}`}</Text>}
 				</>
 			)}

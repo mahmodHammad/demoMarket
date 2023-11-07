@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<ThemeRegistry>
 			{/* <ProtectedPagesWrapper> */}
-				<AppLayout>{children}</AppLayout>
+				<AppLayout type={'admin'}>{children}</AppLayout>
 			{/* </ProtectedPagesWrapper> */}
 		</ThemeRegistry>
 	);

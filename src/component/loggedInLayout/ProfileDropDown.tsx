@@ -68,7 +68,7 @@ const OptionLink = ({
 	);
 };
 
-const ProfileDropDown = () => {
+const ProfileDropDown = ({ type }) => {
 	const { logout, user } = useAuth();
 	const [open, setOpen] = useState(false);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -129,9 +129,11 @@ const ProfileDropDown = () => {
 												flexDirection: 'column',
 												gap: '10px',
 											}}>
-											<OptionLink component={Link} href="/my-profile" label={'Edit'} startIcon={<Pencilline />} />
-											<OptionLink href="/my-profile" label={'Privacy Policy'} startIcon={<ShieldKeyholeLine />} />
-											<OptionLink href="/my-profile" label={'Terms And Conditions'} startIcon={<InformationLine />} />
+											{type !== 'admin' && (
+												<OptionLink component={Link} href="/my-profile" label={'Edit'} startIcon={<Pencilline />} />
+											)}
+											<OptionLink href="" label={'Privacy Policy'} startIcon={<ShieldKeyholeLine />} />
+											<OptionLink href="" label={'Terms And Conditions'} startIcon={<InformationLine />} />
 											<OptionLink onClick={logout} href="/" label={'Logout'} startIcon={<LogoutBoxLine />} />
 										</Box>
 									</Box>
